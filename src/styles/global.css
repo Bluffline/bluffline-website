@@ -167,3 +167,49 @@ h1, h2, h3, h4 {
   opacity: 0.8;
   max-width: 650px;
 }
+
+/* Global Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--forest);
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-family: 'Source Sans 3', sans-serif;
+  border-radius: 100px;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.btn:hover {
+  background: var(--navy);
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 2px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--forest);
+  color: var(--forest);
+}
+
+.btn-outline:hover {
+  background: var(--forest);
+  color: white;
+}
+
+.btn-small {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+}
