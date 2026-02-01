@@ -2,18 +2,23 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
+import { getCollection } from 'astro:content';
 
-const plans = [
-  { level: "State of Florida", title: "Florida Greenways & Trails System Plan", description: "The statewide plan identifies priority corridors for trail development. The Bluffline corridor is designated as part of the larger Gulf Coast trail network." },
-  { level: "Regional (FL-AL TPO)", title: "Long Range Transportation Plan 2045", description: "The region's federally-mandated transportation plan identifies multimodal corridors and prioritizes projects that improve safety for people walking and biking." },
-  { level: "Regional (FL-AL TPO)", title: "Bicycle & Pedestrian Master Plan", description: "This regional plan specifically identifies the Bluffline corridor as a priority for investment, with recommendations for facility types and connection points." },
-  { level: "City & County", title: "Reimagine Jackson Street Plan", description: "This joint city-county plan envisions a transformed Jackson Street corridor with improved multimodal connections." },
-  { level: "Escambia County", title: "Warrington CRA Plan", description: "The Warrington Community Redevelopment Area plan outlines the vision for transforming Jackson Lakes into a public park." },
-  { level: "City of Pensacola", title: "Strive to Thrive 2035", description: "The City's strategic plan emphasizes quality of life, connectivity, and neighborhood revitalization." },
-  { level: "City of Pensacola", title: "Waterfront Framework Plan", description: "This plan guides development along Pensacola's waterfront, including connections between downtown and the bay." },
-  { level: "City of Pensacola", title: "Urban Core CRA Plan", description: "The Community Redevelopment Area plan identifies trail connectivity and waterfront access as priorities." },
-  { level: "City of Pensacola", title: "Westside CRA Plan", description: "The Westside CRA plan prioritizes improved connectivity to employment centers and safe routes for residents." },
-];
+const allDocuments = await getCollection('documents');
+const plans = allDocuments
+  .filter(doc => doc.data.documentType === 'plan')
+  .sort((a, b) => {
+    // Sort by level priority: state, regional, county, city
+    const levelOrder = { federal: 0, state: 1, regional: 2, county: 3, city: 4 };
+    const levelDiff = (levelOrder[a.data.level || 'city'] || 4) - (levelOrder[b.data.level || 'city'] || 4);
+    if (levelDiff !== 0) return levelDiff;
+    // Then by year descending
+    return b.data.year - a.data.year;
+  });
+
+// Separate the scenic highway plan for the highlight box
+const scenicHighwayPlan = plans.find(p => p.data.title.includes('Scenic Highway'));
+const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'));
 ---
 
 <BaseLayout 
@@ -41,27 +46,42 @@ const plans = [
         <h2>Adopted Plans</h2>
       </div>
       <div class="plans-grid">
-        {plans.map(plan => (
+        {regularPlans.map(plan => (
           <div class="plan-card">
-            <div class="plan-level">{plan.level}</div>
-            <h3>{plan.title}</h3>
-            <p>{plan.description}</p>
-            <a href="#" class="plan-link">
-              View Plan 
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
+            <div class="plan-level">{plan.data.agency}</div>
+            <h3>{plan.data.title}</h3>
+            <p>{plan.data.description}</p>
+            {(plan.data.file || plan.data.link) ? (
+              <a href={plan.data.file || plan.data.link} class="plan-link" target="_blank" rel="noopener">
+                View Plan
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            ) : (
+              <span class="plan-link disabled">
+                View Plan
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            )}
           </div>
         ))}
 
-        <div class="highlight-box">
-          <div>
-            <h3>Pensacola Bay Scenic Highway Corridor Master Plan</h3>
-            <p>The northeast segment of the Bluffline follows the Pensacola Bay Scenic Highway corridor. This master plan provides a framework for preserving and enhancing the corridor's natural and historic character while improving multimodal access.</p>
+        {scenicHighwayPlan && (
+          <div class="highlight-box">
+            <div>
+              <h3>{scenicHighwayPlan.data.title}</h3>
+              <p>{scenicHighwayPlan.data.description}</p>
+            </div>
+            {(scenicHighwayPlan.data.file || scenicHighwayPlan.data.link) ? (
+              <a href={scenicHighwayPlan.data.file || scenicHighwayPlan.data.link} class="btn" target="_blank" rel="noopener">View Plan</a>
+            ) : (
+              <span class="btn disabled">View Plan</span>
+            )}
           </div>
-          <a href="#" class="btn">View Plan</a>
-        </div>
+        )}
       </div>
     </div>
   </section>
@@ -122,8 +142,17 @@ const plans = [
     margin-top: 1rem;
     transition: gap 0.2s ease;
   }
-  .plan-link:hover { gap: 0.75rem; }
+  .plan-link:hover:not(.disabled) { gap: 0.75rem; }
   .plan-link svg { width: 16px; height: 16px; }
+  .plan-link.disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .btn.disabled {
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+  }
 
   .highlight-box {
     grid-column: 1 / -1;
