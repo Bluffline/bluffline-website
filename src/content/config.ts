@@ -50,9 +50,23 @@ const resourcesCollection = defineCollection({
   }),
 });
 
+const pressReleasesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.date(),
+    summary: z.string(),
+    contactName: z.string().optional(),
+    contactEmail: z.string().email().optional(),
+    contactPhone: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   'updates': updatesCollection,
   'press': pressCollection,
   'documents': documentsCollection,
   'resources': resourcesCollection,
+  'press-releases': pressReleasesCollection,
 };
