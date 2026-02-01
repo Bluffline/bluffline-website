@@ -7,6 +7,8 @@ import { getCollection } from 'astro:content';
 
 const boardMembers = await getCollection('board-members');
 const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.order);
+const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus');
+const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus');
 ---
 
 <BaseLayout 
@@ -190,7 +192,7 @@ const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.ord
         <p>Bluffline, Inc. is governed by a volunteer board of directors who bring expertise in finance, law, environmental stewardship, and community engagement.</p>
       </div>
       <div class="leadership-grid">
-        {sortedBoardMembers.map((member) => (
+        {activeMembers.map((member) => (
           <BoardMemberCard
             name={member.data.name}
             title={member.data.title}
@@ -200,6 +202,26 @@ const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.ord
           />
         ))}
       </div>
+
+      {emeritusMembers.length > 0 && (
+        <div class="emeritus-section">
+          <div class="emeritus-header">
+            <h3>Founders & Emeritus</h3>
+            <p>We honor those whose vision and early leadership made Bluffline, Inc. possible.</p>
+          </div>
+          <div class="emeritus-grid">
+            {emeritusMembers.map((member) => (
+              <BoardMemberCard
+                name={member.data.name}
+                title={member.data.title}
+                role={member.data.role}
+                bio={member.data.bio}
+                photo={member.data.photo}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -425,6 +447,37 @@ const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.ord
   }
   @media (min-width: 1024px) {
     .leadership-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+
+  /* Emeritus Section */
+  .emeritus-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+  }
+  .emeritus-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .emeritus-header h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .emeritus-header p {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.7;
+  }
+  .emeritus-grid {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @media (min-width: 640px) {
+    .emeritus-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* Documents Section */
