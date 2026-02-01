@@ -41,8 +41,18 @@ const documentsCollection = defineCollection({
   }),
 });
 
+const resourcesCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
+    qualities: z.array(z.enum(['Cultural', 'Historical', 'Archaeological', 'Recreational', 'Natural', 'Scenic'])),
+  }),
+});
+
 export const collections = {
   'updates': updatesCollection,
   'press': pressCollection,
   'documents': documentsCollection,
+  'resources': resourcesCollection,
 };
