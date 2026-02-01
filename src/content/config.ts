@@ -63,10 +63,23 @@ const pressReleasesCollection = defineCollection({
   }),
 });
 
+const boardMembersCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    title: z.string(),
+    role: z.enum(['chair', 'vice-president', 'treasurer', 'secretary', 'board-member', 'staff', 'emeritus']),
+    bio: z.string(),
+    photo: z.string().optional(),
+    order: z.number(),
+  }),
+});
+
 export const collections = {
   'updates': updatesCollection,
   'press': pressCollection,
   'documents': documentsCollection,
   'resources': resourcesCollection,
   'press-releases': pressReleasesCollection,
+  'board-members': boardMembersCollection,
 };
