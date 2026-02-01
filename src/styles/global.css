@@ -178,6 +178,7 @@ h1, h2, h3, h4 {
   background: var(--forest);
   color: white;
   text-decoration: none;
+  text-align: center;
   font-weight: 500;
   font-size: 0.95rem;
   font-family: 'Source Sans 3', sans-serif;
