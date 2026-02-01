@@ -60,7 +60,7 @@ const plans = [
             <h3>Pensacola Bay Scenic Highway Corridor Master Plan</h3>
             <p>The northeast segment of the Bluffline follows the Pensacola Bay Scenic Highway corridor. This master plan provides a framework for preserving and enhancing the corridor's natural and historic character while improving multimodal access.</p>
           </div>
-          <a href="#" class="btn">View Master Plan</a>
+          <a href="#" class="btn">View Plan</a>
         </div>
       </div>
     </div>
@@ -76,11 +76,13 @@ const plans = [
 </BaseLayout>
 
 <style>
-  .planning-intro { background: var(--cream); padding: 4rem 0; }
+  .planning-intro { background: var(--cream); padding: 5rem 0; }
+  @media (min-width: 768px) { .planning-intro { padding: 7rem 0; } }
   .intro-content { max-width: 800px; }
   .intro-content p { font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--navy); opacity: 0.85; }
 
-  .plans-section { background: var(--warm-white); }
+  .plans-section { background: var(--warm-white); padding: 5rem 0; }
+  @media (min-width: 768px) { .plans-section { padding: 7rem 0; } }
   .plans-grid {
     display: grid;
     gap: 1.5rem;
