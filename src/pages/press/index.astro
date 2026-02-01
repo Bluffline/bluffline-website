@@ -1,0 +1,372 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import PressCard from '../../components/content/PressCard.astro';
+import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
+import CallToAction from '../../components/ui/CallToAction.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch press coverage (external news)
+const pressItems = await getCollection('press');
+const sortedPress = pressItems.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Group press by year
+const pressByYear = sortedPress.reduce((acc, item) => {
+  const year = item.data.date.getFullYear();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(item);
+  return acc;
+}, {} as Record<number, typeof sortedPress>);
+
+const years = Object.keys(pressByYear).sort((a, b) => Number(b) - Number(a));
+
+// Fetch press releases
+const pressReleases = await getCollection('press-releases', ({ data }) => !data.draft);
+const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title="Press"
+  description="Media coverage, press releases, and press resources for the Bluffline — Pensacola's 20-mile multimodal corridor."
+>
+  <PageHero
+    label="Press"
+    title="News & Press Releases"
+    description="Media coverage and official announcements from the Bluffline."
+  />
+
+  <section class="tabs-section">
+    <div class="section-inner">
+      <div class="tabs" role="tablist" aria-label="Press content">
+        <button
+          role="tab"
+          aria-selected="true"
+          aria-controls="news-panel"
+          id="news-tab"
+          class="tab active"
+        >
+          In the News
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="releases-panel"
+          id="releases-tab"
+          class="tab"
+          tabindex="-1"
+        >
+          Press Releases
+        </button>
+      </div>
+
+      <div
+        role="tabpanel"
+        id="news-panel"
+        aria-labelledby="news-tab"
+        class="tab-panel active"
+      >
+        {years.map(year => (
+          <div class="year-group">
+            <h3 class="year-label">{year}</h3>
+            <div class="articles-grid">
+              {pressByYear[Number(year)].map(item => (
+                <PressCard
+                  outlet={item.data.outlet}
+                  title={item.data.title}
+                  date={item.data.date}
+                  link={item.data.link}
+                  type={item.data.type}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        role="tabpanel"
+        id="releases-panel"
+        aria-labelledby="releases-tab"
+        class="tab-panel"
+        hidden
+      >
+        {sortedReleases.length > 0 ? (
+          <div class="releases-grid">
+            {sortedReleases.map(release => (
+              <PressReleaseCard
+                title={release.data.title}
+                pubDate={release.data.pubDate}
+                summary={release.data.summary}
+                slug={release.slug}
+              />
+            ))}
+          </div>
+        ) : (
+          <p class="empty-state">No press releases available yet.</p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="press-kit-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Press Resources</h2>
+        <p>Everything journalists need to cover the Bluffline.</p>
+      </div>
+      <div class="press-kit-grid">
+        <div class="press-kit-card">
+          <h3>Boilerplate</h3>
+          <div class="boilerplate">
+            <p>Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola. As the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway, the Bluffline is building safe, connected infrastructure for walking, cycling, and water transit that will reconnect communities to Pensacola's waterfront.</p>
+          </div>
+        </div>
+        <div class="press-kit-card">
+          <h3>Logo Downloads</h3>
+          <p>High-resolution logos for print and digital use.</p>
+          <div class="logo-downloads">
+            <a href="#" class="logo-download">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              PNG (Light)
+            </a>
+            <a href="#" class="logo-download">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              PNG (Dark)
+            </a>
+            <a href="#" class="logo-download">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              SVG
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="section-inner">
+      <div class="contact-card">
+        <h3>Media Contact</h3>
+        <p>For press inquiries, interviews, or additional information:</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:press@bluffline.org">press@bluffline.org</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Support the Bluffline"
+    description="Help us build the infrastructure that will transform how Pensacola moves, plays, and connects."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+  />
+</BaseLayout>
+
+<script>
+  function initTabs() {
+    const tabs = document.querySelectorAll('[role="tab"]');
+    const panels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Check for hash in URL
+    const hash = window.location.hash;
+    if (hash === '#releases') {
+      activateTab('releases-tab');
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        activateTab(tab.id);
+      });
+
+      tab.addEventListener('keydown', (event) => {
+        const e = event as KeyboardEvent;
+        const tabsArray = Array.from(tabs);
+        const currentIndex = tabsArray.indexOf(tab);
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const nextIndex = e.key === 'ArrowRight'
+            ? (currentIndex + 1) % tabsArray.length
+            : (currentIndex - 1 + tabsArray.length) % tabsArray.length;
+
+          const nextTab = tabsArray[nextIndex] as HTMLElement;
+          nextTab.focus();
+          activateTab(nextTab.id);
+        }
+      });
+    });
+
+    function activateTab(tabId: string) {
+      tabs.forEach(t => {
+        const isSelected = t.id === tabId;
+        t.setAttribute('aria-selected', String(isSelected));
+        t.classList.toggle('active', isSelected);
+        t.setAttribute('tabindex', isSelected ? '0' : '-1');
+      });
+
+      panels.forEach(panel => {
+        const isActive = panel.getAttribute('aria-labelledby') === tabId;
+        panel.classList.toggle('active', isActive);
+        if (isActive) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+
+      // Update URL hash without scrolling
+      const newHash = tabId === 'releases-tab' ? '#releases' : '#news';
+      history.replaceState(null, '', newHash);
+    }
+  }
+
+  initTabs();
+</script>
+
+<style>
+  .tabs-section { padding: 0 0 4rem; background: var(--cream); }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(45, 48, 71, 0.1);
+  }
+
+  .tab {
+    padding: 1rem 1.5rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(45, 48, 71, 0.6);
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .tab:hover {
+    color: var(--navy);
+  }
+
+  .tab.active {
+    color: var(--forest);
+  }
+
+  .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--forest);
+  }
+
+  .tab:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .year-group { margin-bottom: 3rem; }
+  .year-group:last-child { margin-bottom: 0; }
+  .year-label {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--spring);
+    display: inline-block;
+  }
+  .articles-grid { display: grid; gap: 1rem; }
+
+  .releases-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .releases-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: rgba(45, 48, 71, 0.6);
+    font-size: 1rem;
+  }
+
+  .press-kit-section { padding: 5rem 0; background: var(--warm-white); }
+  .press-kit-grid {
+    display: grid;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .press-kit-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .press-kit-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+  }
+  .press-kit-card h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 1rem; }
+  .press-kit-card p { font-size: 0.95rem; color: var(--navy); opacity: 0.75; margin-bottom: 1.5rem; }
+  .boilerplate {
+    background: var(--mist);
+    border-radius: 8px;
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--navy);
+    line-height: 1.7;
+  }
+  .boilerplate p { margin-bottom: 0; opacity: 1; }
+  .logo-downloads { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .logo-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: var(--mist);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--forest);
+    transition: all 0.2s ease;
+  }
+  .logo-download:hover { background: var(--forest); color: white; }
+  .logo-download svg { width: 16px; height: 16px; }
+
+  .contact-section { padding: 0 0 5rem; background: var(--warm-white); }
+  .contact-card {
+    max-width: 600px;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+  .contact-card h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .contact-card p { font-size: 0.95rem; color: var(--navy); opacity: 0.75; margin-bottom: 1.5rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: var(--navy); }
+  .contact-item svg { width: 20px; height: 20px; color: var(--forest); flex-shrink: 0; }
+  .contact-item a { color: var(--forest); text-decoration: none; font-weight: 500; }
+  .contact-item a:hover { text-decoration: underline; }
+</style>
