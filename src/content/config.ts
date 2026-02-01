@@ -21,7 +21,7 @@ const pressCollection = defineCollection({
   schema: z.object({
     outlet: z.string(),
     title: z.string(),
-    date: z.date(),
+    date: z.coerce.date(),
     link: z.string().url(),
     type: z.enum(['article', 'radio', 'tv', 'podcast']).default('article'),
   }),
