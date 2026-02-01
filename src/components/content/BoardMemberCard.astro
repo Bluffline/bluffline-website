@@ -1,0 +1,100 @@
+---
+interface Props {
+  name: string;
+  title: string;
+  role: 'chair' | 'vice-president' | 'treasurer' | 'secretary' | 'board-member' | 'staff' | 'emeritus';
+  bio: string;
+  photo?: string;
+}
+
+const { name, title, role, bio, photo } = Astro.props;
+
+const initials = name
+  .split(' ')
+  .map(n => n[0])
+  .join('')
+  .toUpperCase()
+  .slice(0, 2);
+---
+
+<article class="board-member-card">
+  <div class="member-photo">
+    {photo ? (
+      <img src={photo} alt={name} />
+    ) : (
+      <div class="member-initials">{initials}</div>
+    )}
+  </div>
+  <div class="member-content">
+    <h3 class="member-name">{name}</h3>
+    <p class="member-title">{title}</p>
+    <p class="member-bio">{bio}</p>
+  </div>
+</article>
+
+<style>
+  .board-member-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.04);
+    border: 1px solid rgba(45, 48, 71, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .member-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    background: var(--mist);
+    flex-shrink: 0;
+  }
+
+  .member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .member-initials {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.75rem;
+    color: var(--forest);
+    background: var(--mist);
+  }
+
+  .member-content {
+    flex: 1;
+  }
+
+  .member-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .member-title {
+    font-size: 0.9rem;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .member-bio {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.5;
+  }
+</style>
