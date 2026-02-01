@@ -100,45 +100,6 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
     </div>
   </section>
 
-  <section class="section building-section">
-    <div class="section-inner">
-      <div class="section-header">
-        <h2>What We're Building Now</h2>
-        <p>With the merger complete and new funding secured, we're advancing the most ambitious phase of the Bluffline yet.</p>
-      </div>
-      <div class="building-grid">
-        <article class="building-card">
-          <div class="building-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <h3>Corridor Extension Application</h3>
-          <p>We've applied to extend the scenic highway designation southwest through downtown and West Pensacola to Jackson Lakes—doubling the corridor's length and connecting underserved neighborhoods to the regional network.</p>
-        </article>
-        <article class="building-card">
-          <div class="building-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
-          </div>
-          <h3>Renaming to Bluffline Scenic Highway</h3>
-          <p>As part of the extension process, the corridor will be renamed the Bluffline Scenic Highway Corridor—a unified identity that reflects the expanded vision and the multimodal infrastructure we're building.</p>
-        </article>
-        <article class="building-card">
-          <div class="building-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-          </div>
-          <h3>$1.2M Master Planning Grant</h3>
-          <p>A Reconnecting Communities grant from the U.S. Department of Transportation is funding the first comprehensive master plan for the full corridor—with extensive community engagement shaping the outcome.</p>
-        </article>
-        <article class="building-card">
-          <div class="building-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <h3>Multimodal Vision</h3>
-          <p>We're not just building a trail. We're building a complete multimodal corridor—protected paths for walking, cycling, and rolling that connect to transit, parks, schools, and employment centers.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <section class="section values-section">
     <div class="section-inner">
       <div class="section-header">
@@ -361,39 +322,6 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
   }
   .merger-stat-label { font-size: 0.9rem; color: var(--navy); opacity: 0.7; }
 
-  .building-section { background: var(--cream); }
-  .building-grid {
-    display: grid;
-    gap: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .building-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-  }
-  .building-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    border: 1px solid rgba(45, 48, 71, 0.06);
-    transition: all 0.3s ease;
-  }
-  .building-card:hover {
-    box-shadow: 0 12px 32px rgba(45, 48, 71, 0.08);
-    transform: translateY(-2px);
-  }
-  .building-card-icon {
-    width: 48px;
-    height: 48px;
-    background: var(--mist);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-  }
-  .building-card-icon svg { width: 24px; height: 24px; color: var(--forest); }
-  .building-card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 0.75rem; }
-  .building-card p { font-size: 0.95rem; color: var(--navy); opacity: 0.75; }
-
   /* Values Section */
   .values-section { background: var(--warm-white); }
   .values-grid {
@@ -456,7 +384,6 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
     border-top: 1px solid rgba(45, 48, 71, 0.1);
   }
   .emeritus-header {
-    text-align: center;
     margin-bottom: 2rem;
   }
   .emeritus-header h3 {
@@ -473,11 +400,12 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
   .emeritus-grid {
     display: grid;
     gap: 1.5rem;
-    max-width: 800px;
-    margin: 0 auto;
   }
   @media (min-width: 640px) {
     .emeritus-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .emeritus-grid { grid-template-columns: repeat(3, 1fr); }
   }
 
   /* Documents Section */
