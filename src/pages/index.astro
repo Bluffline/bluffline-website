@@ -1,0 +1,404 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import CallToAction from '../components/ui/CallToAction.astro';
+---
+
+<BaseLayout title="Home">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Reconnecting Pensacola to its <em>waterfront</em></h1>
+        <p>The Bluffline is a 20-mile multimodal corridor connecting neighborhoods, parks, and the bay—transforming how our region moves, plays, and thrives.</p>
+        <div class="hero-buttons">
+          <Button href="/support">Support the Bluffline</Button>
+          <Button href="/about" variant="outline">Learn More</Button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-image-placeholder">[Aerial view of bay bluffs or trail rendering]</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat"><div class="stat-number">20</div><div class="stat-label">Miles of Corridor</div></div>
+      <div class="stat"><div class="stat-number">$1.2M</div><div class="stat-label">Federal Funding Secured</div></div>
+      <div class="stat"><div class="stat-number">60+</div><div class="stat-label">Years of Advocacy</div></div>
+      <div class="stat"><div class="stat-number">27</div><div class="stat-label">Intrinsic Resources</div></div>
+    </div>
+  </div>
+
+  <section class="section what-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">What We're Building</div>
+        <h2>Safe paths for walking, cycling, and rolling</h2>
+        <p>The Bluffline is a protected multimodal corridor—trails, bike paths, and water transit connections that will link the University of West Florida to Naval Air Station Pensacola.</p>
+      </div>
+      <div class="what-grid">
+        <div class="what-content">
+          <p>We're not just building trails. We're reconnecting communities that have been divided by highways and rail corridors for decades. The Bluffline will provide safe, car-free access to jobs, schools, parks, and the waterfront.</p>
+          <div class="milestone">
+            <div class="milestone-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="milestone-content"><h4>Reconnecting Communities Grant</h4><p>$1.2M federal grant for master planning and preliminary design</p></div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="milestone-content"><h4>Jackson Lakes County Park</h4><p>70-acre park with trails, wetland restoration, and connections to schools</p></div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="milestone-content"><h4>Pensacola Scenic Bluffs Corridor</h4><p>State scenic byway designation for the northeast segment</p></div>
+          </div>
+        </div>
+        <div class="what-image"><div class="what-image-placeholder">[Construction progress or planning meeting]</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section why-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Why It Matters</div>
+        <h2>Infrastructure that changes lives</h2>
+        <p>The Bluffline isn't just about recreation. It's about equity, safety, and economic opportunity for every neighborhood along the corridor.</p>
+      </div>
+      <div class="why-cards">
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <span class="stat-highlight">4,400</span>
+          <h3>Households without cars</h3>
+          <p>Families in the corridor area who depend on safe walking and biking infrastructure for daily transportation.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <span class="stat-highlight">17.8%</span>
+          <h3>Park access in Ferry Pass</h3>
+          <p>Only 17.8% of residents live within a 10-minute walk of a park. The Bluffline will change that.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <span class="stat-highlight">Zero</span>
+          <h3>Protected routes today</h3>
+          <p>There are no protected bike lanes connecting West Pensacola to the downtown waterfront. We're building the first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section route-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">The Route</div>
+        <h2>From Corry Station to UWF—and everywhere in between</h2>
+        <p>The Bluffline begins at Corry Station in West Pensacola, travels through Jackson Lakes, connects to the downtown waterfront, then continues northeast along the bay bluffs to the University of West Florida.</p>
+      </div>
+      <div class="route-grid">
+        <div class="route-map">[Interactive corridor map]</div>
+        <div class="route-segments">
+          <div class="segment"><h3>West Pensacola / Jackson Lakes</h3><p>70-acre county park with trails, wetland restoration, boat launch, and protected connections to schools and Corry Station.</p></div>
+          <div class="segment"><h3>Downtown Waterfront</h3><p>Connecting West Pensacola to the urban core via Bayou Chico and the waterfront promenade.</p></div>
+          <div class="segment"><h3>Scenic Bluffs to UWF</h3><p>Following the historic bay bluffs northeast through established neighborhoods to campus.</p></div>
+          <div class="route-cta"><a href="/about/corridor" class="btn">Explore the Full Route</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section planning-teaser-section">
+    <div class="section-inner">
+      <div class="planning-teaser">
+        <div class="planning-teaser-content">
+          <h3>Integrated with regional plans</h3>
+          <p>The Bluffline aligns with adopted plans from the City, County, and State—from the Community Redevelopment Area plans to Florida's Statewide Greenways and Trails System Plan.</p>
+        </div>
+        <a href="/progress/planning" class="btn">View Planning Integration</a>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Shape the future of the corridor"
+    description="The Bluffline is entering a master planning phase—and community participation will directly shape outcomes. Join us as a supporting member, volunteer, or planning participant."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+    secondaryLabel="Volunteer With Us"
+    secondaryHref="/support#get-involved"
+  />
+</BaseLayout>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--mist) 0%, var(--water) 50%, var(--cream) 100%);
+    padding-top: 73px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 20% 80%, rgba(153, 204, 99, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(201, 251, 255, 0.4), transparent);
+    pointer-events: none;
+  }
+  .hero-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  @media (min-width: 768px) {
+    .hero-content { padding: 6rem 3rem; }
+  }
+  @media (min-width: 1024px) {
+    .hero-content { grid-template-columns: 1fr 1fr; gap: 5rem; }
+  }
+  .hero-text h1 {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero-text h1 em {
+    font-style: italic;
+    color: var(--forest);
+  }
+  .hero-text p {
+    font-size: 1.15rem;
+    color: var(--navy);
+    opacity: 0.8;
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hero-image {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -20px rgba(45, 48, 71, 0.2), 0 20px 40px -10px rgba(65, 82, 31, 0.1);
+  }
+  .hero-image-placeholder, .what-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--forest) 0%, #5a7329 50%, var(--spring) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .stats-bar {
+    background: var(--navy);
+    padding: 2rem 0;
+  }
+  @media (min-width: 768px) {
+    .stats-bar { padding: 3rem 0; }
+  }
+  .stats-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .stats-inner { padding: 0 3rem; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+  }
+  .stat { text-align: center; color: white; }
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--spring);
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+  }
+
+  .what-section { background: var(--cream); }
+  .what-grid {
+    display: grid;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .what-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  }
+  .what-content p { font-size: 1.05rem; margin-bottom: 1.5rem; color: var(--navy); }
+  .what-image {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    box-shadow: 0 20px 60px -20px rgba(45, 48, 71, 0.2);
+  }
+  .milestone {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+  .milestone-marker {
+    width: 32px;
+    height: 32px;
+    background: var(--spring);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+  .milestone-marker svg { width: 16px; height: 16px; color: var(--forest); }
+  .milestone-content h4 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .milestone-content p { font-size: 0.95rem; margin-bottom: 0; opacity: 0.7; }
+
+  .why-section { background: var(--warm-white); }
+  .why-cards {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .why-cards { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+  .why-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    transition: all 0.3s ease;
+  }
+  .why-card:hover {
+    box-shadow: 0 20px 40px -15px rgba(45, 48, 71, 0.12);
+    transform: translateY(-4px);
+  }
+  .why-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--mist);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .why-icon svg { width: 26px; height: 26px; color: var(--forest); }
+  .why-card .stat-highlight {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    color: var(--forest);
+    margin-bottom: 0.5rem;
+  }
+  .why-card h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 0.75rem; }
+  .why-card p { color: var(--navy); opacity: 0.75; font-size: 0.95rem; }
+
+  .route-section {
+    background: var(--navy);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .route-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 100% 80% at 100% 50%, rgba(153, 204, 99, 0.1), transparent);
+    pointer-events: none;
+  }
+  .route-section .section-label { color: var(--spring); }
+  .route-section .section-header h2 { color: white; }
+  .route-section .section-header p { color: white; opacity: 0.7; }
+  .route-grid {
+    display: grid;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .route-grid { grid-template-columns: 1.2fr 1fr; gap: 4rem; }
+  }
+  .route-map {
+    aspect-ratio: 4/3;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+  }
+  .route-segments { display: flex; flex-direction: column; gap: 1.5rem; }
+  .segment {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+  }
+  .segment:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(153, 204, 99, 0.3);
+  }
+  .segment h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .segment p { opacity: 0.7; font-size: 0.9rem; margin: 0; }
+  .route-cta { margin-top: 1rem; }
+  .route-cta .btn {
+    background: var(--spring);
+    color: var(--navy);
+  }
+  .route-cta .btn:hover { background: white; }
+
+  .planning-teaser-section { background: var(--warm-white); padding: 5rem 0; }
+  .planning-teaser {
+    background: var(--mist);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  @media (min-width: 768px) {
+    .planning-teaser {
+      padding: 2.5rem;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+  .planning-teaser-content h3 { font-size: 1.35rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .planning-teaser-content p { color: var(--navy); opacity: 0.7; margin: 0; }
+</style>

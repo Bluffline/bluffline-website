@@ -1,0 +1,46 @@
+---
+import Header from '../components/nav/Header.astro';
+import Footer from '../components/nav/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { 
+  title, 
+  description = "The Bluffline is a 20-mile multimodal corridor transforming how Pensacola connects neighborhoods, parks, and the waterfront.",
+  currentPath = Astro.url.pathname
+} = Astro.props;
+
+const fullTitle = title === 'Home' 
+  ? "The Bluffline | Pensacola's 20-Mile Multimodal Corridor"
+  : `${title} | The Bluffline`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <slot name="head" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <Header currentPath={currentPath} />
+  
+  <main id="main-content">
+    <slot />
+  </main>
+  
+  <Footer />
+</body>
+</html>

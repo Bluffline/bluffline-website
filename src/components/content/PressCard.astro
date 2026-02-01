@@ -1,0 +1,88 @@
+---
+interface Props {
+  outlet: string;
+  title: string;
+  date: Date;
+  link: string;
+  type?: 'article' | 'radio' | 'tv' | 'podcast';
+}
+
+const { outlet, title, date, link, type = 'article' } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric'
+});
+---
+
+<a href={link} class="article-card" target="_blank" rel="noopener">
+  <span class="article-date">{formattedDate}</span>
+  <div class="article-content">
+    <h3>{title}</h3>
+    <p class="article-outlet">{outlet}</p>
+  </div>
+  <div class="article-arrow">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </div>
+</a>
+
+<style>
+  .article-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.25rem;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: white;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.04);
+  }
+
+  .article-card:hover {
+    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .article-date {
+    font-size: 0.875rem;
+    color: rgba(45, 48, 71, 0.5);
+    white-space: nowrap;
+    min-width: 50px;
+  }
+
+  .article-content h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+  }
+
+  .article-outlet {
+    font-size: 0.875rem;
+    color: var(--forest);
+    font-weight: 500;
+  }
+
+  .article-arrow {
+    opacity: 0.3;
+    transition: all 0.2s ease;
+  }
+
+  .article-arrow svg {
+    width: 20px;
+    height: 20px;
+    color: var(--forest);
+  }
+
+  .article-card:hover .article-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+</style>

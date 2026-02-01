@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import CallToAction from '../../components/ui/CallToAction.astro';
+
+const resources = [
+  { name: "Escambia River", description: "The fourth largest river in Florida, home to eighty-five native freshwater fish species.", qualities: ["Recreational", "Natural", "Scenic"] },
+  { name: "University of West Florida", description: "A 1,600-acre campus offering nature trails, river access, and diverse ecosystems.", qualities: ["Cultural", "Recreational", "Natural"] },
+  { name: "John Edmunds Apartment House", description: "A National Register–listed multi-family residential building.", qualities: ["Historical"] },
+  { name: "The Yonge House", description: "Listed on the National Register, associated with P.K. Yonge.", qualities: ["Historical"] },
+  { name: "Miraflores Park", description: "Historically known as Havana Square, featuring a 1934 Boy Scout Building.", qualities: ["Historical", "Archaeological", "Recreational"] },
+  { name: "Wayside Park & Visitor Center", description: "Scenic highway gateway and community gathering space.", qualities: ["Recreational", "Scenic"] },
+  { name: "Bay Bluffs Park", description: "City park featuring dramatic views of Escambia Bay.", qualities: ["Recreational", "Natural", "Scenic"] },
+  { name: "Chimney Park", description: "Neighborhood park with historic chimney remnants.", qualities: ["Historical", "Recreational"] },
+];
+---
+
+<BaseLayout 
+  title="The Corridor" 
+  description="A 22-mile scenic corridor tracing Pensacola's historic bay bluffs—connecting neighborhoods, natural areas, and cultural landmarks."
+>
+  <PageHero
+    label="The Corridor"
+    title="From the University of West Florida to Naval Air Station Pensacola"
+    description="A 22-mile scenic corridor tracing Pensacola's historic bay bluffs—connecting neighborhoods, natural areas, and cultural landmarks through a unified multimodal vision."
+  />
+
+  <section class="map-section">
+    <div class="map-container">
+      <div class="map-wrapper">
+        <div class="map-placeholder">
+          <div class="map-placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3>Interactive Corridor Map</h3>
+          <p>Explore intrinsic resources and points of interest along the 22-mile corridor from UWF to NAS Pensacola.</p>
+        </div>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item">
+          <div class="legend-line corridor"></div>
+          <span>Bluffline Corridor</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-point"></div>
+          <span>Intrinsic Resource</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section overview-section">
+    <div class="section-inner">
+      <div class="overview-grid">
+        <div class="overview-content">
+          <h2>A unified vision for Pensacola's waterfront</h2>
+          <p>The Bluffline corridor follows a distinctive geological formation that has shaped the region's geography and cultural identity for centuries. While today's bluffs rise prominently along north Escambia Bay, historical mapping shows that this bluff system once continued westward through downtown Pensacola to Naval Air Station Pensacola.</p>
+          <p>In 2024, the Bluffline merged with the Scenic Highway Foundation, becoming the managing organization for the Pensacola Scenic Bluffs Highway. This partnership united two complementary visions: the scenic highway's focus on preservation and interpretation with the Bluffline's mission to create safe, connected multimodal infrastructure.</p>
+          <p>The corridor we envision today extends the existing scenic highway in both directions—northeast to the University of West Florida and southwest through downtown Pensacola to NAS Pensacola—restoring interpretive continuity to the full historic bluff system.</p>
+        </div>
+        <div class="overview-sidebar">
+          <h3>Corridor at a Glance</h3>
+          <div class="corridor-stats">
+            <div class="stat-item"><span class="stat-label">Total Length</span><span class="stat-value">~22 miles</span></div>
+            <div class="stat-item"><span class="stat-label">Existing Scenic Highway</span><span class="stat-value">~11 miles</span></div>
+            <div class="stat-item"><span class="stat-label">Northeast Extension</span><span class="stat-value">~3.35 miles</span></div>
+            <div class="stat-item"><span class="stat-label">Southwest Extension</span><span class="stat-value">~7.75 miles</span></div>
+            <div class="stat-item"><span class="stat-label">Intrinsic Resources</span><span class="stat-value">27+ sites</span></div>
+            <div class="stat-item"><span class="stat-label">Designation</span><span class="stat-value">FL Scenic Highway</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section greenway-section">
+    <div class="section-inner">
+      <div class="greenway-content">
+        <h2>The greenway within the corridor</h2>
+        <p>Within this scenic highway corridor, the Bluffline is advancing a multimodal greenway—a network of trails, protected bike lanes, and water transit connections that will provide safe, car-free access to the waterfront and the resources along it.</p>
+        <p>The greenway vision utilizes abandoned rail corridors, utility rights-of-way, and existing public land to create continuous connections. Where the scenic highway provides the framework for preservation and interpretation, the greenway provides the infrastructure for access and mobility.</p>
+        <p>This is transportation infrastructure that also serves as access to nature—a corridor that connects people to their environment, to economic opportunity, and to each other.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section resources-section" id="resources">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Intrinsic resources</h2>
+        <p>The corridor connects 27 cultural, historical, archaeological, recreational, natural, and scenic resources across its 22-mile length.</p>
+      </div>
+      <div class="resources-grid">
+        {resources.map(resource => (
+          <div class="resource-card">
+            <h3>{resource.name}</h3>
+            <p>{resource.description}</p>
+            <div class="resource-qualities">
+              {resource.qualities.map(q => <span class="quality-tag">{q}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Explore the full corridor"
+    description="Want to learn more about specific resources or segments? Contact us for detailed information or to schedule a tour."
+    primaryLabel="Contact Us"
+    primaryHref="/support"
+    variant="mist"
+  />
+</BaseLayout>
+
+<style>
+  .map-section { background: var(--cream); padding: 0; }
+  .map-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .map-container { padding: 5rem 3rem; }
+  }
+  .map-wrapper {
+    aspect-ratio: 16/9;
+    background: var(--mist);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .map-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  .map-placeholder-icon {
+    width: 64px;
+    height: 64px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .map-placeholder-icon svg { width: 32px; height: 32px; color: var(--forest); }
+  .map-placeholder h3 { font-size: 1.5rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .map-placeholder p { color: var(--navy); opacity: 0.7; max-width: 400px; }
+  .map-legend { display: flex; gap: 2rem; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--navy); }
+  .legend-line {
+    width: 24px;
+    height: 3px;
+    background: var(--forest);
+    border-radius: 2px;
+  }
+  .legend-point {
+    width: 12px;
+    height: 12px;
+    background: var(--spring);
+    border-radius: 50%;
+  }
+
+  .overview-section { background: var(--warm-white); }
+  .overview-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .overview-grid { grid-template-columns: 1.5fr 1fr; gap: 4rem; }
+  }
+  .overview-content h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--navy); margin-bottom: 1.5rem; }
+  .overview-content p { font-size: 1.05rem; margin-bottom: 1.25rem; color: var(--navy); opacity: 0.85; }
+  .overview-sidebar {
+    background: var(--mist);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .overview-sidebar h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 1.5rem; }
+  .corridor-stats { display: flex; flex-direction: column; gap: 1rem; }
+  .stat-item { display: flex; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(45, 48, 71, 0.1); }
+  .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-label { font-size: 0.9rem; color: var(--navy); opacity: 0.7; }
+  .stat-value { font-weight: 600; color: var(--forest); }
+
+  .greenway-section { background: var(--navy); color: white; }
+  .greenway-content { max-width: 800px; }
+  .greenway-content h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 1.5rem; }
+  .greenway-content p { font-size: 1.1rem; margin-bottom: 1.25rem; opacity: 0.85; }
+
+  .resources-section { background: var(--cream); }
+  .resources-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .resources-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1200px) {
+    .resources-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+  .resource-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+  }
+  .resource-card h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .resource-card p { font-size: 0.9rem; color: var(--navy); opacity: 0.75; margin-bottom: 1rem; }
+  .resource-qualities { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .quality-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    background: var(--mist);
+    color: var(--forest);
+    border-radius: 100px;
+    font-weight: 500;
+  }
+</style>

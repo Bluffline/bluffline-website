@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import UpdateCard from '../../../components/content/UpdateCard.astro';
+import { getCollection } from 'astro:content';
+
+const updates = (await getCollection('updates'))
+  .filter(u => !u.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout 
+  title="Updates" 
+  description="News, announcements, and project updates from the Bluffline — Pensacola's 20-mile multimodal corridor."
+>
+  <PageHero
+    label="Progress"
+    title="Updates"
+    description="News, announcements, and progress reports from the Bluffline team."
+  />
+
+  <section class="updates-section">
+    <div class="updates-inner">
+      <div class="updates-list">
+        {updates.map(update => (
+          <UpdateCard
+            title={update.data.title}
+            date={update.data.pubDate}
+            excerpt={update.data.description}
+            slug={update.slug}
+            featuredImage={update.data.featuredImage}
+            featuredImageAlt={update.data.featuredImageAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .updates-section {
+    padding: 4rem 0;
+    background: var(--warm-white);
+  }
+
+  .updates-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .updates-inner {
+      padding: 0 3rem;
+    }
+  }
+
+  .updates-list {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .updates-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

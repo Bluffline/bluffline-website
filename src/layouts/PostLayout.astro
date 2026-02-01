@@ -1,0 +1,223 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import CallToAction from '../components/ui/CallToAction.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  author?: string;
+  authorTitle?: string;
+  featuredImage?: string;
+  featuredImageAlt?: string;
+}
+
+const { title, description, pubDate, author, authorTitle, featuredImage, featuredImageAlt } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    {featuredImage && (
+      <div class="article-featured-image">
+        <img src={featuredImage} alt={featuredImageAlt || ''} />
+      </div>
+    )}
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <a href="/progress/updates" class="article-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          All Updates
+        </a>
+        <p class="article-date">{formattedDate}</p>
+        <h1>{title}</h1>
+        {description && <p class="article-subtitle">{description}</p>}
+      </div>
+    </header>
+
+    <div class="article-body">
+      <div class="article-content">
+        <slot />
+
+        {author && (
+          <div class="article-author">
+            <div class="author-avatar">{authorInitials}</div>
+            <div>
+              <p class="author-name">{author}</p>
+              {authorTitle && <p class="author-title">{authorTitle}</p>}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </article>
+
+  <CallToAction
+    title="Get involved in the planning process"
+    description="Community participation directly shapes outcomes. Sign up to receive updates about public meetings, workshops, and opportunities to provide input."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+  />
+</BaseLayout>
+
+<style>
+  .article-featured-image {
+    width: 100%;
+    height: 40vh;
+    min-height: 300px;
+    max-height: 500px;
+    margin-top: 73px;
+    overflow: hidden;
+  }
+
+  .article-featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-header {
+    background: var(--cream);
+    padding: 3rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .article-header {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .article-header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    transition: gap 0.2s ease;
+  }
+
+  .article-back:hover {
+    gap: 0.75rem;
+  }
+
+  .article-back svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .article-date {
+    font-size: 0.9rem;
+    color: rgba(45, 48, 71, 0.6);
+    margin-bottom: 0.75rem;
+  }
+
+  .article-header h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .article-subtitle {
+    font-size: 1.15rem;
+    color: var(--navy);
+    opacity: 0.75;
+  }
+
+  .article-body {
+    padding: 3rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .article-body {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .article-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .article-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .article-content :global(h2) {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--navy);
+  }
+
+  .article-content :global(blockquote) {
+    border-left: 3px solid var(--spring);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+  }
+
+  .article-content :global(blockquote p) {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .article-content :global(blockquote cite) {
+    font-size: 0.9rem;
+    color: rgba(45, 48, 71, 0.7);
+    font-style: normal;
+  }
+
+  .article-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--mist);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--forest);
+    font-size: 0.9rem;
+  }
+
+  .author-name {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.125rem;
+  }
+
+  .author-title {
+    font-size: 0.875rem;
+    color: rgba(45, 48, 71, 0.6);
+  }
+</style>

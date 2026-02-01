@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import CallToAction from '../../components/ui/CallToAction.astro';
+
+const plans = [
+  { level: "State of Florida", title: "Florida Greenways & Trails System Plan", description: "The statewide plan identifies priority corridors for trail development. The Bluffline corridor is designated as part of the larger Gulf Coast trail network." },
+  { level: "Regional (FL-AL TPO)", title: "Long Range Transportation Plan 2045", description: "The region's federally-mandated transportation plan identifies multimodal corridors and prioritizes projects that improve safety for people walking and biking." },
+  { level: "Regional (FL-AL TPO)", title: "Bicycle & Pedestrian Master Plan", description: "This regional plan specifically identifies the Bluffline corridor as a priority for investment, with recommendations for facility types and connection points." },
+  { level: "City & County", title: "Reimagine Jackson Street Plan", description: "This joint city-county plan envisions a transformed Jackson Street corridor with improved multimodal connections." },
+  { level: "Escambia County", title: "Warrington CRA Plan", description: "The Warrington Community Redevelopment Area plan outlines the vision for transforming Jackson Lakes into a public park." },
+  { level: "City of Pensacola", title: "Strive to Thrive 2035", description: "The City's strategic plan emphasizes quality of life, connectivity, and neighborhood revitalization." },
+  { level: "City of Pensacola", title: "Waterfront Framework Plan", description: "This plan guides development along Pensacola's waterfront, including connections between downtown and the bay." },
+  { level: "City of Pensacola", title: "Urban Core CRA Plan", description: "The Community Redevelopment Area plan identifies trail connectivity and waterfront access as priorities." },
+  { level: "City of Pensacola", title: "Westside CRA Plan", description: "The Westside CRA plan prioritizes improved connectivity to employment centers and safe routes for residents." },
+];
+---
+
+<BaseLayout 
+  title="Planning" 
+  description="See how the Bluffline aligns with adopted plans from local, regional, and state agencies."
+>
+  <PageHero
+    label="Progress"
+    title="Grounded in adopted plans"
+    description="The Bluffline isn't a new idea—it builds on decades of planning and policy that have consistently identified this corridor as a regional priority."
+  />
+
+  <section class="planning-intro">
+    <div class="section-inner">
+      <div class="intro-content">
+        <p>Every segment of the Bluffline corridor appears in at least one adopted plan from a local, regional, or state agency. This isn't coincidence—it reflects a consistent regional vision for multimodal connectivity that has emerged through multiple public planning processes over the past two decades.</p>
+        <p>The plans below represent the policy foundation that the Bluffline builds upon. They demonstrate that this corridor has been identified as a priority by the City of Pensacola, Escambia County, the Florida-Alabama Transportation Planning Organization, and the State of Florida.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Adopted Plans</h2>
+      </div>
+      <div class="plans-grid">
+        {plans.map(plan => (
+          <div class="plan-card">
+            <div class="plan-level">{plan.level}</div>
+            <h3>{plan.title}</h3>
+            <p>{plan.description}</p>
+            <a href="#" class="plan-link">
+              View Plan 
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        ))}
+
+        <div class="highlight-box">
+          <div>
+            <h3>Pensacola Bay Scenic Highway Corridor Master Plan</h3>
+            <p>The northeast segment of the Bluffline follows the Pensacola Bay Scenic Highway corridor. This master plan provides a framework for preserving and enhancing the corridor's natural and historic character while improving multimodal access.</p>
+          </div>
+          <a href="#" class="btn">View Master Plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Questions about planning?"
+    description="We're happy to discuss how the Bluffline fits into the broader planning landscape and answer questions about specific plans or policies."
+    primaryLabel="Get in Touch"
+    primaryHref="/support"
+    variant="mist"
+  />
+</BaseLayout>
+
+<style>
+  .planning-intro { background: var(--cream); padding: 4rem 0; }
+  .intro-content { max-width: 800px; }
+  .intro-content p { font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--navy); opacity: 0.85; }
+
+  .plans-section { background: var(--warm-white); }
+  .plans-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .plans-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  }
+  @media (min-width: 1200px) {
+    .plans-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .plan-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+    display: flex;
+    flex-direction: column;
+  }
+  .plan-level {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .plan-card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 0.75rem; }
+  .plan-card p { font-size: 0.9rem; color: var(--navy); opacity: 0.75; flex: 1; }
+  .plan-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--forest);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    transition: gap 0.2s ease;
+  }
+  .plan-link:hover { gap: 0.75rem; }
+  .plan-link svg { width: 16px; height: 16px; }
+
+  .highlight-box {
+    grid-column: 1 / -1;
+    background: var(--mist);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  @media (min-width: 768px) {
+    .highlight-box {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.5rem;
+    }
+  }
+  .highlight-box h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .highlight-box p { color: var(--navy); opacity: 0.75; margin: 0; }
+</style>

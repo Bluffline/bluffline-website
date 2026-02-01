@@ -1,0 +1,74 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'outline' | 'small';
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+
+const { href, variant = 'primary', class: className, target, rel } = Astro.props;
+
+const baseClasses = 'btn';
+const variantClasses = {
+  primary: '',
+  outline: 'btn-outline',
+  small: 'btn-small'
+};
+
+const classes = [baseClasses, variantClasses[variant], className].filter(Boolean).join(' ');
+---
+
+{href ? (
+  <a href={href} class={classes} target={target} rel={rel}>
+    <slot />
+  </a>
+) : (
+  <button class={classes} type="button">
+    <slot />
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: var(--forest);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 100px;
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: var(--navy);
+    transform: translateY(-1px);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--forest);
+    color: var(--forest);
+  }
+
+  .btn-outline:hover {
+    background: var(--forest);
+    color: white;
+  }
+
+  .btn-small {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+</style>

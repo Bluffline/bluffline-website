@@ -1,0 +1,111 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  variant?: 'forest' | 'mist';
+}
+
+const {
+  title,
+  description,
+  primaryHref = '/support',
+  primaryLabel = 'Get Involved',
+  secondaryHref,
+  secondaryLabel,
+  variant = 'forest'
+} = Astro.props;
+---
+
+<section class:list={['cta-section', variant]}>
+  <div class="cta-inner">
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
+    <div class="cta-buttons">
+      <a href={primaryHref} class="btn">{primaryLabel}</a>
+      {secondaryHref && secondaryLabel && (
+        <a href={secondaryHref} class="btn btn-outline">{secondaryLabel}</a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    text-align: center;
+    padding: 4rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .cta-section {
+      padding: 5rem 3rem;
+    }
+  }
+
+  .cta-section.forest {
+    background: linear-gradient(135deg, var(--forest) 0%, #2d3d12 100%);
+    color: white;
+  }
+
+  .cta-section.mist {
+    background: var(--mist);
+    color: var(--navy);
+  }
+
+  .cta-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(1.625rem, 3vw, 2.25rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.05rem;
+    opacity: 0.85;
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-section.forest .btn {
+    background: white;
+    color: var(--forest);
+  }
+
+  .cta-section.forest .btn:hover {
+    background: var(--spring);
+  }
+
+  .cta-section.forest .btn-outline {
+    background: transparent;
+    border-color: white;
+    color: white;
+  }
+
+  .cta-section.forest .btn-outline:hover {
+    background: white;
+    color: var(--forest);
+  }
+
+  .cta-section.mist .btn {
+    background: var(--forest);
+    color: white;
+  }
+
+  .cta-section.mist .btn:hover {
+    background: var(--navy);
+  }
+</style>

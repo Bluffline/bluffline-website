@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+---
+
+<BaseLayout 
+  title="Support" 
+  description="Support the Bluffline — become a member, volunteer, or partner with us to build Pensacola's multimodal future."
+>
+  <PageHero
+    label="Get Involved"
+    title="Shape the future of the corridor"
+    description="The Bluffline is community-driven. Your participation—as a donor, volunteer, or planning participant—directly shapes outcomes."
+  />
+
+  <section class="support-section">
+    <div class="section-inner">
+      <div class="support-intro">
+        <h2>Become a supporting member</h2>
+        <p>Supporting members fuel the Bluffline's work—from community engagement to advocacy to construction.</p>
+      </div>
+
+      <div class="membership-grid">
+        <div class="membership-card">
+          <div class="membership-level">Friend</div>
+          <div class="membership-amount">$25<span>/year</span></div>
+          <p>Show your support for safe, connected infrastructure.</p>
+          <a href="#" class="btn">Join</a>
+        </div>
+        <div class="membership-card featured">
+          <div class="membership-badge">Most Popular</div>
+          <div class="membership-level">Supporter</div>
+          <div class="membership-amount">$50<span>/year</span></div>
+          <p>Help fund community engagement and planning activities.</p>
+          <a href="#" class="btn">Join</a>
+        </div>
+        <div class="membership-card">
+          <div class="membership-level">Champion</div>
+          <div class="membership-amount">$100<span>/year</span></div>
+          <p>Make a meaningful contribution to corridor development.</p>
+          <a href="#" class="btn">Join</a>
+        </div>
+        <div class="membership-card">
+          <div class="membership-level">Builder</div>
+          <div class="membership-amount">$500<span>/year</span></div>
+          <p>Help build the infrastructure that connects communities.</p>
+          <a href="#" class="btn">Join</a>
+        </div>
+      </div>
+
+      <p class="tax-note">Bluffline, Inc. is a 501(c)(3) nonprofit. Your contribution is tax-deductible.</p>
+    </div>
+  </section>
+
+  <section class="other-ways-section" id="get-involved">
+    <div class="other-ways-inner">
+      <h2>Other ways to help</h2>
+      <p>Not ready to become a member? There are other ways to support the corridor.</p>
+
+      <form class="involvement-form" name="involvement" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="involvement">
+        
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="checkbox-group">
+          <span class="checkbox-group-label">I'd like to:</span>
+          <div class="checkbox-item">
+            <input type="checkbox" id="volunteer" name="interests[]" value="volunteer">
+            <label for="volunteer">Volunteer my time or skills</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="planning" name="interests[]" value="planning">
+            <label for="planning">Give input during the planning process</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="spread" name="interests[]" value="spread">
+            <label for="spread">Help spread the word</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="board" name="interests[]" value="board">
+            <label for="board">Learn about serving on the board</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Anything else?</label>
+          <textarea id="message" name="message"></textarea>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .support-section { padding: 5rem 0; background: var(--cream); }
+  .support-intro { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
+  .support-intro h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--navy); margin-bottom: 1rem; }
+  .support-intro p { font-size: 1.1rem; color: var(--navy); opacity: 0.75; }
+
+  .membership-grid { display: grid; gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+  @media (min-width: 600px) { .membership-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .membership-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .membership-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    border: 2px solid rgba(45, 48, 71, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .membership-card:hover { border-color: var(--spring); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45, 48, 71, 0.1); }
+  .membership-card.featured { border-color: var(--forest); background: linear-gradient(180deg, white 0%, var(--mist) 100%); }
+  .membership-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--forest);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.375rem 1rem;
+    border-radius: 100px;
+  }
+  .membership-level { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--forest); font-weight: 600; margin-bottom: 0.5rem; }
+  .membership-amount { font-family: 'Fraunces', serif; font-size: 2.5rem; color: var(--navy); margin-bottom: 1rem; }
+  .membership-amount span { font-size: 1rem; opacity: 0.5; }
+  .membership-card p { font-size: 0.9rem; color: var(--navy); opacity: 0.75; margin-bottom: 1.5rem; }
+  .membership-card .btn { width: 100%; justify-content: center; }
+
+  .tax-note { text-align: center; font-size: 0.875rem; color: var(--navy); opacity: 0.6; margin-top: 2rem; }
+
+  .other-ways-section { padding: 5rem 0; background: var(--warm-white); }
+  .other-ways-inner { max-width: 600px; margin: 0 auto; padding: 0 1.5rem; }
+  @media (min-width: 768px) { .other-ways-inner { padding: 0 3rem; } }
+  .other-ways-inner h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--navy); margin-bottom: 0.75rem; }
+  .other-ways-inner > p { font-size: 1rem; color: var(--navy); opacity: 0.75; margin-bottom: 2rem; }
+
+  .involvement-form { display: flex; flex-direction: column; gap: 1.5rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label { font-weight: 500; color: var(--navy); font-size: 0.9rem; }
+  .form-group input, .form-group textarea {
+    padding: 0.875rem 1rem;
+    border: 1.5px solid rgba(45, 48, 71, 0.15);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--forest); }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+
+  .checkbox-group { display: flex; flex-direction: column; gap: 0.75rem; }
+  .checkbox-group-label { font-weight: 500; color: var(--navy); font-size: 0.9rem; }
+  .checkbox-item { display: flex; align-items: center; gap: 0.75rem; }
+  .checkbox-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--forest); }
+  .checkbox-item label { font-size: 0.95rem; color: var(--navy); cursor: pointer; }
+</style>

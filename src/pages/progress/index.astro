@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import CallToAction from '../../components/ui/CallToAction.astro';
+import UpdateCard from '../../components/content/UpdateCard.astro';
+import { getCollection } from 'astro:content';
+
+const updates = (await getCollection('updates'))
+  .filter(u => !u.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const milestones = [
+  { title: "Reconnecting Communities Grant Awarded", description: "$1.2M from U.S. DOT", date: "Jan 2025", status: "complete" },
+  { title: "Master Planning Phase Begins", description: "Community engagement kickoff", date: "Q2 2025", status: "current" },
+  { title: "Corridor Extension Application", description: "Southwest extension to Jackson Lakes", date: "2024", status: "complete" },
+  { title: "Scenic Highway Merger", description: "Unified organization established", date: "Jul 2024", status: "complete" },
+  { title: "Feasibility Studies Complete", description: "Preliminary engineering", date: "Q4 2025", status: "upcoming" },
+  { title: "Capital Campaign Launch", description: "Construction funding initiative", date: "2026", status: "upcoming" },
+];
+---
+
+<BaseLayout 
+  title="Progress" 
+  description="Track the Bluffline's progress — from federal grants to community engagement to construction milestones."
+>
+  <PageHero
+    label="Progress"
+    title="Building momentum toward a connected Pensacola"
+    description="The Bluffline is moving from vision to reality. Track our progress from planning to construction."
+  />
+
+  <section class="grant-highlight-section">
+    <div class="section-inner">
+      <div class="grant-highlight">
+        <div>
+          <h3>Reconnecting Communities Grant</h3>
+          <p>In January 2025, the Bluffline was awarded a $1.2 million Reconnecting Communities grant from the U.S. Department of Transportation to fund master planning, feasibility studies, and preliminary design for the Escambia Bay Waterfront Access Study.</p>
+        </div>
+        <div class="grant-amount">
+          $1.2M
+          <span>Federal Grant</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="milestones">
+    <div class="milestones-inner">
+      <div class="milestones-header">
+        <h2>Project Milestones</h2>
+      </div>
+      <div class="milestone-list">
+        {milestones.map(m => (
+          <div class="milestone-item">
+            <div class={`milestone-status ${m.status}`}>
+              {m.status === 'complete' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              )}
+              {m.status === 'current' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="4"/>
+                </svg>
+              )}
+            </div>
+            <div class="milestone-content">
+              <h4>{m.title}</h4>
+              <p>{m.description}</p>
+            </div>
+            <div class="milestone-date">{m.date}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="updates-feed">
+    <div class="updates-feed-inner">
+      <div class="updates-header">
+        <h2>Latest Updates</h2>
+        <a href="/progress/updates" class="btn btn-outline">View All Updates</a>
+      </div>
+      <div class="updates-grid">
+        {updates.map(update => (
+          <UpdateCard
+            title={update.data.title}
+            date={update.data.pubDate}
+            excerpt={update.data.description}
+            slug={update.slug}
+            featuredImage={update.data.featuredImage}
+            featuredImageAlt={update.data.featuredImageAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Stay informed"
+    description="Sign up for updates on planning meetings, volunteer opportunities, and construction milestones."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+    variant="mist"
+  />
+</BaseLayout>
+
+<style>
+  .grant-highlight-section { background: var(--forest); color: white; padding: 3rem 0; }
+  @media (min-width: 768px) { .grant-highlight-section { padding: 4rem 0; } }
+  .grant-highlight {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .grant-highlight { grid-template-columns: 1fr auto; padding: 0; }
+  }
+  .grant-highlight h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .grant-highlight p { opacity: 0.9; line-height: 1.6; }
+  .grant-amount {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    font-weight: 500;
+    text-align: center;
+  }
+  .grant-amount span {
+    display: block;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    opacity: 0.8;
+    margin-top: 0.25rem;
+  }
+
+  .milestones { padding: 5rem 0; background: var(--cream); }
+  .milestones-inner { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+  @media (min-width: 768px) { .milestones-inner { padding: 0 3rem; } }
+  .milestones-header { margin-bottom: 3rem; }
+  .milestones-header h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  .milestone-list { display: grid; gap: 1rem; max-width: 800px; }
+  .milestone-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.25rem;
+    align-items: center;
+    background: white;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+  }
+  .milestone-status {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .milestone-status.complete { background: var(--spring); }
+  .milestone-status.complete svg { width: 16px; height: 16px; color: var(--forest); }
+  .milestone-status.upcoming { background: var(--mist); border: 2px dashed rgba(45, 48, 71, 0.2); }
+  .milestone-status.current { background: var(--forest); }
+  .milestone-status.current svg { width: 16px; height: 16px; color: white; }
+  .milestone-content h4 { font-size: 1rem; font-weight: 500; margin-bottom: 0.125rem; font-family: 'Source Sans 3', sans-serif; }
+  .milestone-content p { font-size: 0.875rem; color: rgba(45, 48, 71, 0.6); }
+  .milestone-date { font-size: 0.875rem; color: rgba(45, 48, 71, 0.5); text-align: right; white-space: nowrap; }
+
+  .updates-feed { padding: 5rem 0; background: var(--warm-white); }
+  .updates-feed-inner { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+  @media (min-width: 768px) { .updates-feed-inner { padding: 0 3rem; } }
+  .updates-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .updates-header h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  .updates-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 768px) { .updates-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .updates-grid { grid-template-columns: repeat(3, 1fr); } }
+</style>
