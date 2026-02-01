@@ -1,18 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 
-const resources = [
-  { name: "Escambia River", description: "The fourth largest river in Florida, home to eighty-five native freshwater fish species.", qualities: ["Recreational", "Natural", "Scenic"] },
-  { name: "University of West Florida", description: "A 1,600-acre campus offering nature trails, river access, and diverse ecosystems.", qualities: ["Cultural", "Recreational", "Natural"] },
-  { name: "John Edmunds Apartment House", description: "A National Register–listed multi-family residential building.", qualities: ["Historical"] },
-  { name: "The Yonge House", description: "Listed on the National Register, associated with P.K. Yonge.", qualities: ["Historical"] },
-  { name: "Miraflores Park", description: "Historically known as Havana Square, featuring a 1934 Boy Scout Building.", qualities: ["Historical", "Archaeological", "Recreational"] },
-  { name: "Wayside Park & Visitor Center", description: "Scenic highway gateway and community gathering space.", qualities: ["Recreational", "Scenic"] },
-  { name: "Bay Bluffs Park", description: "City park featuring dramatic views of Escambia Bay.", qualities: ["Recreational", "Natural", "Scenic"] },
-  { name: "Chimney Park", description: "Neighborhood park with historic chimney remnants.", qualities: ["Historical", "Recreational"] },
-];
+const resources = await getCollection('resources');
 ---
 
 <BaseLayout 
@@ -96,10 +88,10 @@ const resources = [
       <div class="resources-grid">
         {resources.map(resource => (
           <div class="resource-card">
-            <h3>{resource.name}</h3>
-            <p>{resource.description}</p>
+            <h3>{resource.data.name}</h3>
+            <p>{resource.data.description}</p>
             <div class="resource-qualities">
-              {resource.qualities.map(q => <span class="quality-tag">{q}</span>)}
+              {resource.data.qualities.map(q => <span class="quality-tag">{q}</span>)}
             </div>
           </div>
         ))}
