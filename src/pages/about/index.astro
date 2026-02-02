@@ -3,12 +3,70 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import BoardMemberCard from '../../components/content/BoardMemberCard.astro';
+import IconCard from '../../components/content/IconCard.astro';
+import DocumentCard from '../../components/content/DocumentCard.astro';
 import { getCollection } from 'astro:content';
 
 const boardMembers = await getCollection('board-members');
 const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.order);
 const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus');
 const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus');
+
+const values = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    title: 'Interdependence',
+    description: 'Our community thrives when all our neighbors are happy, healthy, and whole.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    title: 'Respect',
+    description: 'Every life is sacred. Every perspective is unique and valuable.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Self-Determination',
+    description: 'Every neighborhood deserves a say in decisions that affect them.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+    title: 'Transparency',
+    description: 'Sunlight is the best disinfectant and the surest path to accountability.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    title: 'Sustainability',
+    description: 'We build for future generations and consider those who come after us.',
+  },
+];
+
+const documents = [
+  {
+    title: 'Form 990',
+    description: 'IRS annual return',
+    href: '/documents/form-990.pdf',
+    external: true,
+  },
+  {
+    title: 'IRS Determination Letter',
+    description: '501(c)(3) status',
+    href: '/documents/irs-determination-letter.pdf',
+    external: true,
+  },
+  {
+    title: 'Annual Reports',
+    description: 'Yearly organizational updates',
+    href: '/documents/annual-reports',
+    external: false,
+  },
+  {
+    title: 'GuideStar Profile',
+    description: 'Verified nonprofit',
+    href: 'https://www.guidestar.org/profile/shared/c5cc3f03-5a18-4f14-89f3-4b194e00c2de',
+    external: true,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+  },
+];
 ---
 
 <BaseLayout 
@@ -107,41 +165,13 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
         <p>These principles guide every decision we make—from how we engage with communities to how we steward public resources.</p>
       </div>
       <div class="values-grid">
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Interdependence</h3>
-          <p>Our community thrives when all our neighbors are happy, healthy, and whole.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <h3>Respect</h3>
-          <p>Every life is sacred. Every perspective is unique and valuable.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>Self-Determination</h3>
-          <p>Every neighborhood deserves a say in decisions that affect them.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          </div>
-          <h3>Transparency</h3>
-          <p>Sunlight is the best disinfectant and the surest path to accountability.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3>Sustainability</h3>
-          <p>We build for future generations and consider those who come after us.</p>
-        </div>
+        {values.map(value => (
+          <IconCard
+            icon={value.icon}
+            title={value.title}
+            description={value.description}
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -193,54 +223,15 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
         <p>Transparency is one of our core values. Here you'll find our public accountability documents and organizational filings.</p>
       </div>
       <div class="documents-grid">
-        <a href="/documents/form-990.pdf" class="document-card" target="_blank" rel="noopener">
-          <div class="document-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <div class="document-content">
-            <h3>Form 990</h3>
-            <p>IRS annual return</p>
-          </div>
-          <div class="document-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </a>
-        <a href="/documents/irs-determination-letter.pdf" class="document-card" target="_blank" rel="noopener">
-          <div class="document-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <div class="document-content">
-            <h3>IRS Determination Letter</h3>
-            <p>501(c)(3) status</p>
-          </div>
-          <div class="document-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </a>
-        <a href="/documents/annual-reports" class="document-card">
-          <div class="document-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <div class="document-content">
-            <h3>Annual Reports</h3>
-            <p>Yearly organizational updates</p>
-          </div>
-          <div class="document-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>
-        <a href="https://www.guidestar.org/profile/shared/c5cc3f03-5a18-4f14-89f3-4b194e00c2de" class="document-card" target="_blank" rel="noopener">
-          <div class="document-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="document-content">
-            <h3>GuideStar Profile</h3>
-            <p>Verified nonprofit</p>
-          </div>
-          <div class="document-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </div>
-        </a>
+        {documents.map(doc => (
+          <DocumentCard
+            title={doc.title}
+            description={doc.description}
+            href={doc.href}
+            external={doc.external}
+            icon={doc.icon}
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -334,35 +325,6 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
   @media (min-width: 1024px) {
     .values-grid { grid-template-columns: repeat(3, 1fr); }
   }
-  .value-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.75rem;
-    border: 1px solid rgba(45, 48, 71, 0.06);
-    transition: all 0.3s ease;
-  }
-  .value-card:hover {
-    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.06);
-    transform: translateY(-2px);
-  }
-  .value-icon {
-    width: 48px;
-    height: 48px;
-    background: var(--mist);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-  }
-  .value-icon svg { width: 24px; height: 24px; color: var(--forest); }
-  .value-card h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-  .value-card p { font-size: 0.95rem; color: var(--navy); opacity: 0.75; line-height: 1.5; }
 
   /* Leadership Section */
   .leadership-section { background: var(--mist); }
@@ -416,54 +378,5 @@ const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus
   }
   @media (min-width: 768px) {
     .documents-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  }
-  .document-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    background: white;
-    border-radius: 12px;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.04);
-  }
-  .document-card:hover {
-    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.08);
-    transform: translateY(-2px);
-  }
-  .document-icon {
-    width: 44px;
-    height: 44px;
-    background: var(--mist);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .document-icon svg { width: 22px; height: 22px; color: var(--forest); }
-  .document-content { flex: 1; }
-  .document-content h3 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 0.125rem;
-  }
-  .document-content p {
-    font-size: 0.875rem;
-    color: var(--navy);
-    opacity: 0.6;
-  }
-  .document-arrow {
-    opacity: 0.3;
-    transition: all 0.2s ease;
-  }
-  .document-arrow svg { width: 18px; height: 18px; color: var(--forest); }
-  .document-card:hover .document-arrow {
-    opacity: 1;
-    transform: translateX(4px);
   }
 </style>
