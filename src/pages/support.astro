@@ -40,7 +40,7 @@ import PageHero from '../components/ui/PageHero.astro';
       <h2>Other ways to help</h2>
       <p>Not ready to become a member? There are other ways to support the corridor.</p>
 
-      <form class="involvement-form" name="involvement" method="POST" data-netlify="true">
+      <form class="involvement-form" name="involvement" method="POST" action="/thank-you/" data-netlify="true">
         <input type="hidden" name="form-name" value="involvement">
         
         <div class="form-group">
@@ -90,7 +90,8 @@ import PageHero from '../components/ui/PageHero.astro';
   .support-intro h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--navy); margin-bottom: 1rem; }
   .support-intro p { font-size: 1.1rem; color: var(--navy); opacity: 0.75; }
 
-  .pricing-table-container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+  .pricing-table-container { width: 100%; }
+  .pricing-table-container stripe-pricing-table { width: 100%; display: block; }
 
   .tax-note { text-align: center; font-size: 0.875rem; color: var(--navy); opacity: 0.6; margin-top: 2rem; }
 

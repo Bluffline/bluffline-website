@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Thank You"
+  description="Thank you for your interest in supporting the Bluffline."
+>
+  <section class="thank-you-section">
+    <div class="thank-you-inner">
+      <h1>Thank you!</h1>
+      <p>We've received your submission and will be in touch soon.</p>
+      <a href="/" class="btn">Back to Home</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thank-you-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 1.5rem;
+    background: var(--cream);
+  }
+
+  .thank-you-inner {
+    text-align: center;
+    max-width: 500px;
+  }
+
+  .thank-you-inner h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .thank-you-inner p {
+    font-size: 1.15rem;
+    color: var(--navy);
+    opacity: 0.75;
+    margin-bottom: 2rem;
+  }
+</style>
