@@ -101,11 +101,24 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     <div class="section-inner">
       <div class="section-header">
         <h2>Intrinsic resources</h2>
-        <p>The corridor connects 27 cultural, historical, archaeological, recreational, natural, and scenic resources across its 22-mile length.</p>
+        <p>The corridor connects {resources.length} cultural, historical, archaeological, recreational, natural, and scenic resources across its 22-mile length.</p>
       </div>
-      <div class="resources-grid">
-        {resources.map(resource => (
-          <div class="resource-card">
+      <div class="filter-controls">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Cultural">Cultural</button>
+        <button class="filter-btn" data-filter="Historical">Historical</button>
+        <button class="filter-btn" data-filter="Archaeological">Archaeological</button>
+        <button class="filter-btn" data-filter="Recreational">Recreational</button>
+        <button class="filter-btn" data-filter="Natural">Natural</button>
+        <button class="filter-btn" data-filter="Scenic">Scenic</button>
+      </div>
+      <div class="resources-grid" id="resources-grid">
+        {resources.map((resource, index) => (
+          <div
+            class="resource-card"
+            data-qualities={resource.data.qualities.join(',')}
+            data-index={index}
+          >
             <h3>{resource.data.name}</h3>
             <p>{resource.data.description}</p>
             <div class="resource-qualities">
@@ -113,6 +126,12 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
             </div>
           </div>
         ))}
+      </div>
+      <div class="show-more-container">
+        <button class="show-more-btn" id="show-more-btn">
+          <span class="show-more-text">Show All Resources</span>
+          <span class="show-less-text" style="display: none;">Show Less</span>
+        </button>
       </div>
     </div>
   </section>
@@ -233,6 +252,31 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   .greenway-content p { font-size: 1.1rem; margin-bottom: 1.25rem; opacity: 0.85; }
 
   .resources-section { background: var(--cream); }
+  .filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--forest);
+    background: transparent;
+    color: var(--forest);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-btn:hover {
+    background: rgba(65, 82, 31, 0.1);
+  }
+  .filter-btn.active {
+    background: var(--forest);
+    color: white;
+  }
   .resources-grid {
     display: grid;
     gap: 1.5rem;
@@ -248,6 +292,10 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     border-radius: 12px;
     padding: 1.5rem;
     border: 1px solid rgba(45, 48, 71, 0.06);
+    transition: opacity 0.2s ease;
+  }
+  .resource-card.hidden {
+    display: none;
   }
   .resource-card h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 0.5rem; }
   .resource-card p { font-size: 0.9rem; color: var(--navy); opacity: 0.75; margin-bottom: 1rem; }
@@ -259,6 +307,28 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     color: var(--forest);
     border-radius: 100px;
     font-weight: 500;
+  }
+  .show-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .show-more-btn {
+    padding: 0.75rem 2rem;
+    background: var(--forest);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .show-more-btn:hover {
+    background: #2d3a15;
+  }
+  .show-more-btn.hidden {
+    display: none;
   }
 </style>
 
@@ -379,4 +449,81 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       map.fitBounds(bounds, { padding: 50 });
     });
   }
+</script>
+
+<script is:inline>
+  // Resource filtering and show more/less functionality
+  (function() {
+    const INITIAL_COUNT = 6;
+    let showAll = false;
+    let currentFilter = 'all';
+
+    const cards = document.querySelectorAll('.resource-card');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const showMoreText = showMoreBtn ? showMoreBtn.querySelector('.show-more-text') : null;
+    const showLessText = showMoreBtn ? showMoreBtn.querySelector('.show-less-text') : null;
+
+    function updateVisibility() {
+      let visibleCount = 0;
+      let totalMatching = 0;
+
+      cards.forEach(function(card) {
+        const qualities = card.getAttribute('data-qualities');
+        const qualitiesArr = qualities ? qualities.split(',') : [];
+        const matchesFilter = currentFilter === 'all' || qualitiesArr.includes(currentFilter);
+
+        if (matchesFilter) {
+          totalMatching++;
+          if (showAll || visibleCount < INITIAL_COUNT) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Update show more button
+      if (showMoreBtn && showMoreText && showLessText) {
+        if (totalMatching <= INITIAL_COUNT) {
+          showMoreBtn.classList.add('hidden');
+        } else {
+          showMoreBtn.classList.remove('hidden');
+          if (showAll) {
+            showMoreText.style.display = 'none';
+            showLessText.style.display = 'inline';
+          } else {
+            showMoreText.textContent = 'Show All ' + totalMatching + ' Resources';
+            showMoreText.style.display = 'inline';
+            showLessText.style.display = 'none';
+          }
+        }
+      }
+    }
+
+    // Filter button click handlers
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        showAll = false; // Reset to show initial count when changing filters
+        updateVisibility();
+      });
+    });
+
+    // Show more/less button handler
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener('click', function() {
+        showAll = !showAll;
+        updateVisibility();
+      });
+    }
+
+    // Initial visibility
+    updateVisibility();
+  })();
 </script>
