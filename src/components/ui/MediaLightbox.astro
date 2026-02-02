@@ -1,0 +1,491 @@
+---
+/**
+ * MediaLightbox - A lightbox component for previewing photos and videos
+ * with metadata display and download functionality.
+ *
+ * Usage: Include this component once on your page and use data attributes
+ * on trigger elements to open the lightbox.
+ */
+---
+
+<div id="media-lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+  <div class="lightbox-backdrop"></div>
+  <div class="lightbox-container">
+    <button class="lightbox-close" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="lightbox-content">
+      <div class="lightbox-media">
+        <img id="lightbox-image" src="" alt="" />
+        <video id="lightbox-video" controls preload="metadata">
+          <source id="lightbox-video-source" src="" type="">
+        </video>
+      </div>
+
+      <div class="lightbox-sidebar">
+        <h3 id="lightbox-title" class="lightbox-media-title"></h3>
+
+        <div class="lightbox-metadata">
+          <div class="metadata-item" id="metadata-description-row">
+            <span class="metadata-label">Description</span>
+            <span class="metadata-value" id="lightbox-description"></span>
+          </div>
+          <div class="metadata-item" id="metadata-dimensions-row">
+            <span class="metadata-label">Dimensions</span>
+            <span class="metadata-value" id="lightbox-dimensions"></span>
+          </div>
+          <div class="metadata-item" id="metadata-format-row">
+            <span class="metadata-label">Format</span>
+            <span class="metadata-value" id="lightbox-format"></span>
+          </div>
+          <div class="metadata-item" id="metadata-size-row">
+            <span class="metadata-label">File Size</span>
+            <span class="metadata-value" id="lightbox-size"></span>
+          </div>
+          <div class="metadata-item" id="metadata-date-row">
+            <span class="metadata-label">Date</span>
+            <span class="metadata-value" id="lightbox-date"></span>
+          </div>
+          <div class="metadata-item" id="metadata-credit-row">
+            <span class="metadata-label">Credit</span>
+            <span class="metadata-value" id="lightbox-credit"></span>
+          </div>
+        </div>
+
+        <a id="lightbox-download" href="" download class="download-button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download
+        </a>
+      </div>
+    </div>
+
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous media" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" aria-label="Next media" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 6 15 12 9 18"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  function initLightbox() {
+    const lightbox = document.getElementById('media-lightbox');
+    const backdrop = lightbox?.querySelector('.lightbox-backdrop');
+    const closeBtn = lightbox?.querySelector('.lightbox-close') as HTMLButtonElement | null;
+    const prevBtn = lightbox?.querySelector('.lightbox-prev') as HTMLButtonElement | null;
+    const nextBtn = lightbox?.querySelector('.lightbox-next') as HTMLButtonElement | null;
+    const image = document.getElementById('lightbox-image') as HTMLImageElement;
+    const video = document.getElementById('lightbox-video') as HTMLVideoElement;
+    const videoSource = document.getElementById('lightbox-video-source') as HTMLSourceElement;
+    const downloadBtn = document.getElementById('lightbox-download') as HTMLAnchorElement;
+
+    const titleEl = document.getElementById('lightbox-title');
+    const descriptionEl = document.getElementById('lightbox-description');
+    const dimensionsEl = document.getElementById('lightbox-dimensions');
+    const formatEl = document.getElementById('lightbox-format');
+    const sizeEl = document.getElementById('lightbox-size');
+    const dateEl = document.getElementById('lightbox-date');
+    const creditEl = document.getElementById('lightbox-credit');
+
+    let currentIndex = 0;
+    let mediaItems: HTMLElement[] = [];
+    let previouslyFocusedElement: HTMLElement | null = null;
+
+    function updateMetadata(trigger: HTMLElement) {
+      const title = trigger.dataset.mediaTitle || 'Untitled';
+      const description = trigger.dataset.mediaDescription || '';
+      const dimensions = trigger.dataset.mediaDimensions || '';
+      const format = trigger.dataset.mediaFormat || '';
+      const size = trigger.dataset.mediaSize || '';
+      const date = trigger.dataset.mediaDate || '';
+      const credit = trigger.dataset.mediaCredit || '';
+
+      if (titleEl) titleEl.textContent = title;
+      if (descriptionEl) descriptionEl.textContent = description;
+      if (dimensionsEl) dimensionsEl.textContent = dimensions;
+      if (formatEl) formatEl.textContent = format;
+      if (sizeEl) sizeEl.textContent = size;
+      if (dateEl) dateEl.textContent = date;
+      if (creditEl) creditEl.textContent = credit;
+
+      // Show/hide metadata rows based on available data
+      toggleMetadataRow('metadata-description-row', description);
+      toggleMetadataRow('metadata-dimensions-row', dimensions);
+      toggleMetadataRow('metadata-format-row', format);
+      toggleMetadataRow('metadata-size-row', size);
+      toggleMetadataRow('metadata-date-row', date);
+      toggleMetadataRow('metadata-credit-row', credit);
+    }
+
+    function toggleMetadataRow(id: string, value: string) {
+      const row = document.getElementById(id);
+      if (row) {
+        row.style.display = value ? 'flex' : 'none';
+      }
+    }
+
+    function openLightbox(trigger: HTMLElement) {
+      if (!lightbox) return;
+
+      previouslyFocusedElement = document.activeElement as HTMLElement;
+
+      const src = trigger.dataset.mediaSrc || '';
+      const type = trigger.dataset.mediaType || 'image';
+      const downloadUrl = trigger.dataset.mediaDownload || src;
+
+      // Update media display
+      if (type === 'video') {
+        image.hidden = true;
+        video.hidden = false;
+        videoSource.src = src;
+        videoSource.type = trigger.dataset.mediaVideoType || 'video/mp4';
+        video.load();
+      } else {
+        video.hidden = true;
+        video.pause();
+        image.hidden = false;
+        image.src = src;
+        image.alt = trigger.dataset.mediaTitle || '';
+      }
+
+      // Update download button
+      downloadBtn.href = downloadUrl;
+      downloadBtn.download = trigger.dataset.mediaFilename || '';
+
+      // Update metadata
+      updateMetadata(trigger);
+
+      // Update navigation
+      updateNavigation();
+
+      // Show lightbox
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+
+      // Focus trap
+      closeBtn?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+
+      lightbox.hidden = true;
+      document.body.style.overflow = '';
+      video.pause();
+
+      previouslyFocusedElement?.focus();
+    }
+
+    function updateNavigation() {
+      if (!prevBtn || !nextBtn) return;
+
+      if (mediaItems.length <= 1) {
+        prevBtn.hidden = true;
+        nextBtn.hidden = true;
+      } else {
+        prevBtn.hidden = false;
+        nextBtn.hidden = false;
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === mediaItems.length - 1;
+      }
+    }
+
+    function navigate(direction: number) {
+      const newIndex = currentIndex + direction;
+      if (newIndex >= 0 && newIndex < mediaItems.length) {
+        currentIndex = newIndex;
+        openLightbox(mediaItems[currentIndex]);
+      }
+    }
+
+    // Collect all media triggers and set up click handlers
+    function setupTriggers() {
+      mediaItems = Array.from(document.querySelectorAll('[data-lightbox-trigger]'));
+
+      mediaItems.forEach((trigger, index) => {
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentIndex = index;
+          openLightbox(trigger);
+        });
+
+        trigger.addEventListener('keydown', (e) => {
+          if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+            e.preventDefault();
+            currentIndex = index;
+            openLightbox(trigger);
+          }
+        });
+      });
+    }
+
+    // Event listeners
+    backdrop?.addEventListener('click', closeLightbox);
+    closeBtn?.addEventListener('click', closeLightbox);
+    prevBtn?.addEventListener('click', () => navigate(-1));
+    nextBtn?.addEventListener('click', () => navigate(1));
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox?.hidden) return;
+
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        navigate(-1);
+      } else if (e.key === 'ArrowRight') {
+        navigate(1);
+      }
+    });
+
+    setupTriggers();
+  }
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', initLightbox);
+  // Also initialize immediately in case DOM is already loaded
+  if (document.readyState !== 'loading') {
+    initLightbox();
+  }
+</script>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox[hidden] {
+    display: none;
+  }
+
+  .lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .lightbox-container {
+    position: relative;
+    display: flex;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lightbox-close:hover {
+    background: white;
+    transform: scale(1.1);
+  }
+
+  .lightbox-close svg {
+    width: 20px;
+    height: 20px;
+    color: var(--navy, #2D3047);
+  }
+
+  .lightbox-content {
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+  }
+
+  @media (min-width: 900px) {
+    .lightbox-content {
+      flex-direction: row;
+    }
+  }
+
+  .lightbox-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .lightbox-media img,
+  .lightbox-media video {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+  }
+
+  @media (min-width: 900px) {
+    .lightbox-media img,
+    .lightbox-media video {
+      max-height: 80vh;
+      max-width: 65vw;
+    }
+  }
+
+  .lightbox-media img[hidden],
+  .lightbox-media video[hidden] {
+    display: none;
+  }
+
+  .lightbox-sidebar {
+    width: 100%;
+    padding: 1.5rem;
+    background: white;
+    overflow-y: auto;
+  }
+
+  @media (min-width: 900px) {
+    .lightbox-sidebar {
+      width: 320px;
+      max-height: 80vh;
+    }
+  }
+
+  .lightbox-media-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--navy, #2D3047);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .lightbox-metadata {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .metadata-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .metadata-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(45, 48, 71, 0.5);
+  }
+
+  .metadata-value {
+    font-size: 0.9rem;
+    color: var(--navy, #2D3047);
+    line-height: 1.4;
+  }
+
+  .download-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: var(--forest, #41521F);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .download-button:hover {
+    background: #364519;
+    transform: translateY(-1px);
+  }
+
+  .download-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lightbox-nav[hidden] {
+    display: none;
+  }
+
+  .lightbox-nav:hover:not(:disabled) {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .lightbox-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .lightbox-nav svg {
+    width: 24px;
+    height: 24px;
+    color: var(--navy, #2D3047);
+  }
+
+  .lightbox-prev {
+    left: 1rem;
+  }
+
+  .lightbox-next {
+    right: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .lightbox-prev {
+      left: -60px;
+    }
+    .lightbox-next {
+      right: -60px;
+    }
+  }
+</style>
