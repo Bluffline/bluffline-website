@@ -15,8 +15,9 @@ export interface MediaMetadata {
   width: number;
   height: number;
   src: string;
-  type: 'image' | 'video';
+  type: 'image' | 'video' | 'audio';
   videoType?: string;
+  audioType?: string;
 }
 
 /**
@@ -258,12 +259,51 @@ export async function extractVideoMetadata(
 }
 
 /**
+ * Extract metadata from an audio file
+ * Note: Audio metadata extraction is limited without specialized libraries
+ */
+export async function extractAudioMetadata(
+  filePath: string,
+  publicUrl: string
+): Promise<MediaMetadata> {
+  const filename = path.basename(filePath);
+  const stats = fs.statSync(filePath);
+  const ext = filename.split('.').pop()?.toLowerCase();
+
+  // Map extensions to MIME types
+  const audioTypes: Record<string, string> = {
+    mp3: 'audio/mpeg',
+    wav: 'audio/wav',
+    ogg: 'audio/ogg',
+    m4a: 'audio/mp4',
+    aac: 'audio/aac',
+    flac: 'audio/flac',
+  };
+
+  return {
+    title: formatFilenameAsTitle(filename),
+    description: '',
+    credit: '',
+    copyright: '',
+    date: '',
+    dimensions: '',
+    format: getFormatFromExtension(filename),
+    size: formatFileSize(stats.size),
+    width: 0,
+    height: 0,
+    src: publicUrl,
+    type: 'audio',
+    audioType: audioTypes[ext || ''] || 'audio/mpeg',
+  };
+}
+
+/**
  * Get all media assets from a directory with their metadata
  */
 export async function getMediaAssetsFromDirectory(
   directory: string,
   publicBasePath: string,
-  type: 'image' | 'video' = 'image'
+  type: 'image' | 'video' | 'audio' = 'image'
 ): Promise<MediaMetadata[]> {
   if (!fs.existsSync(directory)) {
     return [];
@@ -274,7 +314,10 @@ export async function getMediaAssetsFromDirectory(
     if (type === 'image') {
       return /\.(png|jpg|jpeg|svg|webp)$/i.test(f);
     }
-    return /\.(mp4|webm|mov)$/i.test(f);
+    if (type === 'video') {
+      return /\.(mp4|webm|mov)$/i.test(f);
+    }
+    return /\.(mp3|wav|ogg|m4a|aac|flac)$/i.test(f);
   });
 
   const assets = await Promise.all(
@@ -284,6 +327,9 @@ export async function getMediaAssetsFromDirectory(
 
       if (type === 'video') {
         return extractVideoMetadata(filePath, publicUrl);
+      }
+      if (type === 'audio') {
+        return extractAudioMetadata(filePath, publicUrl);
       }
       return extractImageMetadata(filePath, publicUrl);
     })

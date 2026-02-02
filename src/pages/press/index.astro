@@ -5,6 +5,7 @@ import PressCard from '../../components/content/PressCard.astro';
 import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
+import Tabs from '../../components/ui/Tabs.astro';
 import { getCollection } from 'astro:content';
 import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
 import path from 'node:path';
@@ -47,6 +48,27 @@ const videos = await getMediaAssetsFromDirectory(
   '/media-kit/videos',
   'video'
 );
+
+const audio = await getMediaAssetsFromDirectory(
+  path.join(publicDir, 'media-kit', 'audio'),
+  '/media-kit/audio',
+  'audio'
+);
+
+// Primary tabs configuration
+const primaryTabs = [
+  { id: 'news', label: 'In the News' },
+  { id: 'releases', label: 'Press Releases' },
+  { id: 'media-kit', label: 'Media Kit' },
+];
+
+// Asset type tabs configuration
+const assetTabs = [
+  { id: 'logos', label: 'Logos' },
+  { id: 'photos', label: 'Photos' },
+  { id: 'videos', label: 'Videos' },
+  { id: 'audio', label: 'Audio' },
+];
 ---
 
 <BaseLayout
@@ -61,306 +83,313 @@ const videos = await getMediaAssetsFromDirectory(
 
   <section class="tabs-section">
     <div class="section-inner">
-      <div class="tabs" role="tablist" aria-label="Press content">
-        <button
-          role="tab"
-          aria-selected="true"
-          aria-controls="news-panel"
-          id="news-tab"
-          class="tab active"
-        >
-          In the News
-        </button>
-        <button
-          role="tab"
-          aria-selected="false"
-          aria-controls="releases-panel"
-          id="releases-tab"
-          class="tab"
-          tabindex="-1"
-        >
-          Press Releases
-        </button>
-        <button
-          role="tab"
-          aria-selected="false"
-          aria-controls="media-kit-panel"
-          id="media-kit-tab"
-          class="tab"
-          tabindex="-1"
-        >
-          Media Kit
-        </button>
-      </div>
+      <Tabs id="press" tabs={primaryTabs} defaultTab="news" variant="primary" hashPrefix="">
+        <!-- News Panel -->
+        <div data-tab-panel="news" class="active">
+          {years.map(year => (
+            <div class="year-group">
+              <h3 class="year-label">{year}</h3>
+              <div class="articles-grid">
+                {pressByYear[Number(year)].map(item => (
+                  <PressCard
+                    outlet={item.data.outlet}
+                    title={item.data.title}
+                    date={item.data.date}
+                    link={item.data.link}
+                    type={item.data.type}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
-      <div
-        role="tabpanel"
-        id="news-panel"
-        aria-labelledby="news-tab"
-        class="tab-panel active"
-      >
-        {years.map(year => (
-          <div class="year-group">
-            <h3 class="year-label">{year}</h3>
-            <div class="articles-grid">
-              {pressByYear[Number(year)].map(item => (
-                <PressCard
-                  outlet={item.data.outlet}
-                  title={item.data.title}
-                  date={item.data.date}
-                  link={item.data.link}
-                  type={item.data.type}
+        <!-- Releases Panel -->
+        <div data-tab-panel="releases" hidden>
+          {sortedReleases.length > 0 ? (
+            <div class="releases-grid">
+              {sortedReleases.map(release => (
+                <PressReleaseCard
+                  title={release.data.title}
+                  pubDate={release.data.pubDate}
+                  summary={release.data.summary}
+                  slug={release.slug}
                 />
               ))}
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div
-        role="tabpanel"
-        id="releases-panel"
-        aria-labelledby="releases-tab"
-        class="tab-panel"
-        hidden
-      >
-        {sortedReleases.length > 0 ? (
-          <div class="releases-grid">
-            {sortedReleases.map(release => (
-              <PressReleaseCard
-                title={release.data.title}
-                pubDate={release.data.pubDate}
-                summary={release.data.summary}
-                slug={release.slug}
-              />
-            ))}
-          </div>
-        ) : (
-          <p class="empty-state">No press releases available yet.</p>
-        )}
-      </div>
-
-      <div
-        role="tabpanel"
-        id="media-kit-panel"
-        aria-labelledby="media-kit-tab"
-        class="tab-panel"
-        hidden
-      >
-        <div class="media-kit-intro">
-          <p>Download official Bluffline logos, photos, and videos for media use. All assets are free to use with proper attribution.</p>
-        </div>
-
-        <!-- Boilerplate Section -->
-        <div class="media-kit-section">
-          <h3 class="media-kit-section-title">About the Bluffline</h3>
-          <div class="boilerplate-card">
-            <div class="boilerplate">
-              <p>Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola. As the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway, the Bluffline is building safe, connected infrastructure for walking, cycling, and water transit that will reconnect communities to Pensacola's waterfront.</p>
-            </div>
-            <div class="boilerplate-actions">
-              <button class="copy-boilerplate" aria-label="Copy boilerplate text">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                </svg>
-                Copy to clipboard
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Logos Section -->
-        <div class="media-kit-section">
-          <h3 class="media-kit-section-title">Logos</h3>
-          <p class="media-kit-section-desc">High-resolution logos for print and digital use.</p>
-          {logos.length > 0 ? (
-            <div class="media-grid media-grid-logos">
-              {logos.map((asset) => (
-                <button
-                  class="media-item"
-                  data-lightbox-trigger
-                  data-media-src={asset.src}
-                  data-media-type={asset.type}
-                  data-media-title={asset.title}
-                  data-media-description={asset.description}
-                  data-media-format={asset.format}
-                  data-media-dimensions={asset.dimensions}
-                  data-media-size={asset.size}
-                  data-media-credit={asset.credit}
-                  data-media-date={asset.date}
-                  data-media-download={asset.src}
-                  data-media-filename={asset.src.split('/').pop()}
-                >
-                  <div class="media-item-preview logo-preview">
-                    <img src={asset.src} alt={asset.title} loading="lazy" />
-                  </div>
-                  <div class="media-item-info">
-                    <span class="media-item-title">{asset.title}</span>
-                    <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
-                  </div>
-                  <div class="media-item-actions">
-                    <span class="preview-hint">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      Preview
-                    </span>
-                  </div>
-                </button>
-              ))}
-            </div>
           ) : (
-            <div class="empty-state-card">
-              <div class="empty-state-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                  <circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21 15 16 10 5 21"/>
-                </svg>
-              </div>
-              <p class="empty-state-text">Logo files will appear here</p>
-              <p class="empty-state-hint">Add logo files to <code>public/media-kit/logos/</code></p>
-            </div>
+            <p class="empty-state">No press releases available yet.</p>
           )}
         </div>
 
-        <!-- Photos Section -->
-        <div class="media-kit-section">
-          <h3 class="media-kit-section-title">Photos</h3>
-          <p class="media-kit-section-desc">High-resolution photographs available for editorial use.</p>
-          {photos.length > 0 ? (
-            <div class="media-grid media-grid-photos">
-              {photos.map((asset) => (
-                <button
-                  class="media-item"
-                  data-lightbox-trigger
-                  data-media-src={asset.src}
-                  data-media-type={asset.type}
-                  data-media-title={asset.title}
-                  data-media-description={asset.description}
-                  data-media-format={asset.format}
-                  data-media-dimensions={asset.dimensions}
-                  data-media-size={asset.size}
-                  data-media-credit={asset.credit || 'Bluffline, Inc.'}
-                  data-media-date={asset.date}
-                  data-media-download={asset.src}
-                  data-media-filename={asset.src.split('/').pop()}
-                >
-                  <div class="media-item-preview photo-preview">
-                    <img src={asset.src} alt={asset.title} loading="lazy" />
-                  </div>
-                  <div class="media-item-info">
-                    <span class="media-item-title">{asset.title}</span>
-                    <span class="media-item-meta">{asset.format}{asset.dimensions && ` · ${asset.dimensions}`}{asset.size && ` · ${asset.size}`}</span>
-                  </div>
-                  <div class="media-item-actions">
-                    <span class="preview-hint">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      Preview
-                    </span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          ) : (
-            <div class="empty-state-card">
-              <div class="empty-state-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                  <circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21 15 16 10 5 21"/>
-                </svg>
-              </div>
-              <p class="empty-state-text">Photos will appear here</p>
-              <p class="empty-state-hint">Add image files to <code>public/media-kit/photos/</code></p>
-            </div>
-          )}
-        </div>
+        <!-- Media Kit Panel -->
+        <div data-tab-panel="media-kit" hidden>
+          <div class="media-kit-intro">
+            <p>Download official Bluffline assets for media use. All materials are free to use with proper attribution.</p>
+          </div>
 
-        <!-- Videos Section -->
-        <div class="media-kit-section">
-          <h3 class="media-kit-section-title">Videos</h3>
-          <p class="media-kit-section-desc">Video content available for broadcast and digital media.</p>
-          {videos.length > 0 ? (
-            <div class="media-grid media-grid-videos">
-              {videos.map((asset) => (
-                <button
-                  class="media-item"
-                  data-lightbox-trigger
-                  data-media-src={asset.src}
-                  data-media-type={asset.type}
-                  data-media-video-type={asset.videoType}
-                  data-media-title={asset.title}
-                  data-media-description={asset.description}
-                  data-media-format={asset.format}
-                  data-media-size={asset.size}
-                  data-media-credit={asset.credit || 'Bluffline, Inc.'}
-                  data-media-date={asset.date}
-                  data-media-download={asset.src}
-                  data-media-filename={asset.src.split('/').pop()}
-                >
-                  <div class="media-item-preview video-preview">
-                    <video src={asset.src} preload="metadata" />
-                    <div class="video-play-icon">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <polygon points="5 3 19 12 5 21 5 3"/>
+          <!-- Boilerplate Section -->
+          <div class="media-kit-section">
+            <h3 class="media-kit-section-title">About the Bluffline</h3>
+            <div class="boilerplate-card">
+              <div class="boilerplate">
+                <p>Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola. As the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway, the Bluffline is building safe, connected infrastructure for walking, cycling, and water transit that will reconnect communities to Pensacola's waterfront.</p>
+              </div>
+              <div class="boilerplate-actions">
+                <button class="copy-boilerplate" aria-label="Copy boilerplate text">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                  Copy to clipboard
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assets Section with Sub-tabs -->
+          <div class="media-kit-section">
+            <h3 class="media-kit-section-title">Assets</h3>
+            <p class="media-kit-section-desc">High-quality media assets for editorial and promotional use.</p>
+
+            <Tabs id="assets" tabs={assetTabs} defaultTab="logos" variant="pills">
+              <!-- Logos Panel -->
+              <div data-tab-panel="logos" class="active">
+                {logos.length > 0 ? (
+                  <div class="media-grid media-grid-logos">
+                    {logos.map((asset) => (
+                      <button
+                        class="media-item"
+                        data-lightbox-trigger
+                        data-media-src={asset.src}
+                        data-media-type={asset.type}
+                        data-media-title={asset.title}
+                        data-media-description={asset.description}
+                        data-media-format={asset.format}
+                        data-media-dimensions={asset.dimensions}
+                        data-media-size={asset.size}
+                        data-media-credit={asset.credit}
+                        data-media-date={asset.date}
+                        data-media-download={asset.src}
+                        data-media-filename={asset.src.split('/').pop()}
+                      >
+                        <div class="media-item-preview logo-preview">
+                          <img src={asset.src} alt={asset.title} loading="lazy" />
+                        </div>
+                        <div class="media-item-info">
+                          <span class="media-item-title">{asset.title}</span>
+                          <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
+                        </div>
+                        <div class="media-item-actions">
+                          <span class="preview-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            Preview
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div class="empty-state-card">
+                    <div class="empty-state-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
                       </svg>
                     </div>
+                    <p class="empty-state-text">Logo files will appear here</p>
+                    <p class="empty-state-hint">Add logo files to <code>public/media-kit/logos/</code></p>
                   </div>
-                  <div class="media-item-info">
-                    <span class="media-item-title">{asset.title}</span>
-                    <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
-                  </div>
-                  <div class="media-item-actions">
-                    <span class="preview-hint">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="5 3 19 12 5 21 5 3"/>
-                      </svg>
-                      Play
-                    </span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          ) : (
-            <div class="empty-state-card">
-              <div class="empty-state-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
-                  <line x1="7" y1="2" x2="7" y2="22"/>
-                  <line x1="17" y1="2" x2="17" y2="22"/>
-                  <line x1="2" y1="12" x2="22" y2="12"/>
-                  <line x1="2" y1="7" x2="7" y2="7"/>
-                  <line x1="2" y1="17" x2="7" y2="17"/>
-                  <line x1="17" y1="17" x2="22" y2="17"/>
-                  <line x1="17" y1="7" x2="22" y2="7"/>
-                </svg>
+                )}
               </div>
-              <p class="empty-state-text">Videos will appear here</p>
-              <p class="empty-state-hint">Add video files to <code>public/media-kit/videos/</code></p>
-            </div>
-          )}
-        </div>
 
-        <!-- Media Contact Section -->
-        <div class="media-kit-section">
-          <h3 class="media-kit-section-title">Media Contact</h3>
-          <div class="contact-card">
-            <p>For press inquiries, interviews, or additional information:</p>
-            <div class="contact-info">
-              <div class="contact-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <a href="mailto:press@bluffline.org">press@bluffline.org</a>
+              <!-- Photos Panel -->
+              <div data-tab-panel="photos" hidden>
+                {photos.length > 0 ? (
+                  <div class="media-grid media-grid-photos">
+                    {photos.map((asset) => (
+                      <button
+                        class="media-item"
+                        data-lightbox-trigger
+                        data-media-src={asset.src}
+                        data-media-type={asset.type}
+                        data-media-title={asset.title}
+                        data-media-description={asset.description}
+                        data-media-format={asset.format}
+                        data-media-dimensions={asset.dimensions}
+                        data-media-size={asset.size}
+                        data-media-credit={asset.credit || 'Bluffline, Inc.'}
+                        data-media-date={asset.date}
+                        data-media-download={asset.src}
+                        data-media-filename={asset.src.split('/').pop()}
+                      >
+                        <div class="media-item-preview photo-preview">
+                          <img src={asset.src} alt={asset.title} loading="lazy" />
+                        </div>
+                        <div class="media-item-info">
+                          <span class="media-item-title">{asset.title}</span>
+                          <span class="media-item-meta">{asset.format}{asset.dimensions && ` · ${asset.dimensions}`}{asset.size && ` · ${asset.size}`}</span>
+                        </div>
+                        <div class="media-item-actions">
+                          <span class="preview-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            Preview
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div class="empty-state-card">
+                    <div class="empty-state-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                      </svg>
+                    </div>
+                    <p class="empty-state-text">Photos will appear here</p>
+                    <p class="empty-state-hint">Add image files to <code>public/media-kit/photos/</code></p>
+                  </div>
+                )}
+              </div>
+
+              <!-- Videos Panel -->
+              <div data-tab-panel="videos" hidden>
+                {videos.length > 0 ? (
+                  <div class="media-grid media-grid-videos">
+                    {videos.map((asset) => (
+                      <button
+                        class="media-item"
+                        data-lightbox-trigger
+                        data-media-src={asset.src}
+                        data-media-type={asset.type}
+                        data-media-video-type={asset.videoType}
+                        data-media-title={asset.title}
+                        data-media-description={asset.description}
+                        data-media-format={asset.format}
+                        data-media-size={asset.size}
+                        data-media-credit={asset.credit || 'Bluffline, Inc.'}
+                        data-media-date={asset.date}
+                        data-media-download={asset.src}
+                        data-media-filename={asset.src.split('/').pop()}
+                      >
+                        <div class="media-item-preview video-preview">
+                          <video src={asset.src} preload="metadata" />
+                          <div class="video-play-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                              <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="media-item-info">
+                          <span class="media-item-title">{asset.title}</span>
+                          <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
+                        </div>
+                        <div class="media-item-actions">
+                          <span class="preview-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            Play
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div class="empty-state-card">
+                    <div class="empty-state-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                        <line x1="7" y1="2" x2="7" y2="22"/>
+                        <line x1="17" y1="2" x2="17" y2="22"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <line x1="2" y1="7" x2="7" y2="7"/>
+                        <line x1="2" y1="17" x2="7" y2="17"/>
+                        <line x1="17" y1="17" x2="22" y2="17"/>
+                        <line x1="17" y1="7" x2="22" y2="7"/>
+                      </svg>
+                    </div>
+                    <p class="empty-state-text">Videos will appear here</p>
+                    <p class="empty-state-hint">Add video files to <code>public/media-kit/videos/</code></p>
+                  </div>
+                )}
+              </div>
+
+              <!-- Audio Panel -->
+              <div data-tab-panel="audio" hidden>
+                {audio.length > 0 ? (
+                  <div class="media-grid media-grid-audio">
+                    {audio.map((asset) => (
+                      <div class="audio-item">
+                        <div class="audio-item-info">
+                          <div class="audio-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M9 18V5l12-2v13"/>
+                              <circle cx="6" cy="18" r="3"/>
+                              <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                          </div>
+                          <div class="audio-details">
+                            <span class="media-item-title">{asset.title}</span>
+                            <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
+                          </div>
+                        </div>
+                        <audio controls preload="metadata">
+                          <source src={asset.src} type={asset.audioType} />
+                          Your browser does not support the audio element.
+                        </audio>
+                        <a href={asset.src} download class="audio-download">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                          </svg>
+                          Download
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div class="empty-state-card">
+                    <div class="empty-state-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                      </svg>
+                    </div>
+                    <p class="empty-state-text">Audio files will appear here</p>
+                    <p class="empty-state-hint">Add audio files to <code>public/media-kit/audio/</code></p>
+                  </div>
+                )}
+              </div>
+            </Tabs>
+          </div>
+
+          <!-- Media Contact Section -->
+          <div class="media-kit-section">
+            <h3 class="media-kit-section-title">Media Contact</h3>
+            <div class="contact-card">
+              <p>For press inquiries, interviews, or additional information:</p>
+              <div class="contact-info">
+                <div class="contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <a href="mailto:press@bluffline.org">press@bluffline.org</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Tabs>
     </div>
   </section>
 
@@ -375,77 +404,6 @@ const videos = await getMediaAssetsFromDirectory(
 </BaseLayout>
 
 <script>
-  function initTabs() {
-    const tabs = document.querySelectorAll('[role="tab"]');
-    const panels = document.querySelectorAll('[role="tabpanel"]');
-
-    // Map of hash values to tab IDs
-    const hashToTab: Record<string, string> = {
-      '#news': 'news-tab',
-      '#releases': 'releases-tab',
-      '#media-kit': 'media-kit-tab',
-    };
-
-    // Map of tab IDs to hash values
-    const tabToHash: Record<string, string> = {
-      'news-tab': '#news',
-      'releases-tab': '#releases',
-      'media-kit-tab': '#media-kit',
-    };
-
-    // Check for hash in URL
-    const hash = window.location.hash;
-    if (hash && hashToTab[hash]) {
-      activateTab(hashToTab[hash]);
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        activateTab(tab.id);
-      });
-
-      tab.addEventListener('keydown', (event) => {
-        const e = event as KeyboardEvent;
-        const tabsArray = Array.from(tabs);
-        const currentIndex = tabsArray.indexOf(tab);
-
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          const nextIndex = e.key === 'ArrowRight'
-            ? (currentIndex + 1) % tabsArray.length
-            : (currentIndex - 1 + tabsArray.length) % tabsArray.length;
-
-          const nextTab = tabsArray[nextIndex] as HTMLElement;
-          nextTab.focus();
-          activateTab(nextTab.id);
-        }
-      });
-    });
-
-    function activateTab(tabId: string) {
-      tabs.forEach(t => {
-        const isSelected = t.id === tabId;
-        t.setAttribute('aria-selected', String(isSelected));
-        t.classList.toggle('active', isSelected);
-        t.setAttribute('tabindex', isSelected ? '0' : '-1');
-      });
-
-      panels.forEach(panel => {
-        const isActive = panel.getAttribute('aria-labelledby') === tabId;
-        panel.classList.toggle('active', isActive);
-        if (isActive) {
-          panel.removeAttribute('hidden');
-        } else {
-          panel.setAttribute('hidden', '');
-        }
-      });
-
-      // Update URL hash without scrolling
-      const newHash = tabToHash[tabId] || '#news';
-      history.replaceState(null, '', newHash);
-    }
-  }
-
   function initCopyBoilerplate() {
     const copyBtn = document.querySelector('.copy-boilerplate');
     const boilerplate = document.querySelector('.boilerplate p');
@@ -484,74 +442,11 @@ const videos = await getMediaAssetsFromDirectory(
     });
   }
 
-  initTabs();
   initCopyBoilerplate();
 </script>
 
 <style>
   .tabs-section { padding: 0 0 4rem; background: var(--cream); }
-
-  .tabs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(45, 48, 71, 0.1);
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tab {
-    padding: 1rem 1.5rem;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: rgba(45, 48, 71, 0.6);
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    transition: color 0.2s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .tab:hover {
-    color: var(--navy);
-  }
-
-  .tab.active {
-    color: var(--forest);
-  }
-
-  .tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--forest);
-  }
-
-  .tab:focus-visible {
-    outline: 2px solid var(--forest);
-    outline-offset: 2px;
-  }
-
-  .tab-panel {
-    display: none;
-  }
-
-  .tab-panel.active {
-    display: block;
-  }
 
   .year-group { margin-bottom: 3rem; }
   .year-group:last-child { margin-bottom: 0; }
@@ -728,6 +623,12 @@ const videos = await getMediaAssetsFromDirectory(
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 
+  .media-grid-audio {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .media-item {
     background: white;
     border-radius: 12px;
@@ -841,6 +742,93 @@ const videos = await getMediaAssetsFromDirectory(
   .preview-hint svg {
     width: 14px;
     height: 14px;
+  }
+
+  /* Audio Items */
+  .audio-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .audio-item {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .audio-item-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .audio-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--mist);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .audio-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--forest);
+  }
+
+  .audio-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .audio-details .media-item-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .audio-item audio {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+    height: 40px;
+  }
+
+  .audio-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: var(--forest);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .audio-download:hover {
+    background: #364519;
+  }
+
+  .audio-download svg {
+    width: 16px;
+    height: 16px;
   }
 
   /* Contact Card in Media Kit */

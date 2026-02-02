@@ -1,0 +1,285 @@
+---
+/**
+ * Tabs - A reusable accessible tab component
+ *
+ * Supports primary and secondary (nested) tab styles, URL hash navigation,
+ * and keyboard accessibility.
+ *
+ * Usage:
+ * <Tabs
+ *   id="my-tabs"
+ *   tabs={[
+ *     { id: 'tab1', label: 'First Tab' },
+ *     { id: 'tab2', label: 'Second Tab' },
+ *   ]}
+ *   defaultTab="tab1"
+ *   variant="primary"
+ *   hashPrefix="section"
+ * >
+ *   <div data-tab-panel="tab1">Content for tab 1</div>
+ *   <div data-tab-panel="tab2">Content for tab 2</div>
+ * </Tabs>
+ */
+
+export interface Tab {
+  id: string;
+  label: string;
+  icon?: string;
+}
+
+interface Props {
+  id: string;
+  tabs: Tab[];
+  defaultTab?: string;
+  variant?: 'primary' | 'secondary' | 'pills';
+  hashPrefix?: string;
+  class?: string;
+}
+
+const {
+  id,
+  tabs,
+  defaultTab = tabs[0]?.id,
+  variant = 'primary',
+  hashPrefix,
+  class: className,
+} = Astro.props;
+---
+
+<div class:list={['tabs-container', `tabs-${variant}`, className]} data-tabs={id} data-hash-prefix={hashPrefix}>
+  <div class="tabs" role="tablist" aria-label="Tab navigation">
+    {tabs.map((tab, index) => (
+      <button
+        role="tab"
+        aria-selected={tab.id === defaultTab ? 'true' : 'false'}
+        aria-controls={`${id}-panel-${tab.id}`}
+        id={`${id}-tab-${tab.id}`}
+        class:list={['tab', { active: tab.id === defaultTab }]}
+        tabindex={tab.id === defaultTab ? 0 : -1}
+        data-tab-id={tab.id}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="tab-panels">
+    <slot />
+  </div>
+</div>
+
+<script>
+  function initAllTabs() {
+    document.querySelectorAll('[data-tabs]').forEach((container) => {
+      initTabs(container as HTMLElement);
+    });
+  }
+
+  function initTabs(container: HTMLElement) {
+    const tabsId = container.dataset.tabs;
+    const hashPrefix = container.dataset.hashPrefix;
+    const tabButtons = container.querySelectorAll('[role="tab"]');
+    const panels = container.querySelectorAll('[data-tab-panel]');
+
+    // Build hash maps
+    const hashToTabId: Record<string, string> = {};
+    const tabIdToHash: Record<string, string> = {};
+
+    tabButtons.forEach((btn) => {
+      const tabId = (btn as HTMLElement).dataset.tabId;
+      if (tabId) {
+        const hash = hashPrefix ? `#${hashPrefix}-${tabId}` : `#${tabId}`;
+        hashToTabId[hash] = tabId;
+        tabIdToHash[tabId] = hash;
+      }
+    });
+
+    // Check URL hash on load
+    const hash = window.location.hash;
+    if (hash && hashToTabId[hash]) {
+      activateTab(hashToTabId[hash]);
+    }
+
+    // Click handlers
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tabId = (btn as HTMLElement).dataset.tabId;
+        if (tabId) activateTab(tabId);
+      });
+
+      // Keyboard navigation
+      btn.addEventListener('keydown', (e) => {
+        const event = e as KeyboardEvent;
+        const tabsArray = Array.from(tabButtons);
+        const currentIndex = tabsArray.indexOf(btn);
+
+        if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+          event.preventDefault();
+          const nextIndex = event.key === 'ArrowRight'
+            ? (currentIndex + 1) % tabsArray.length
+            : (currentIndex - 1 + tabsArray.length) % tabsArray.length;
+
+          const nextBtn = tabsArray[nextIndex] as HTMLElement;
+          const nextTabId = nextBtn.dataset.tabId;
+          nextBtn.focus();
+          if (nextTabId) activateTab(nextTabId);
+        }
+      });
+    });
+
+    function activateTab(tabId: string) {
+      // Update tab buttons
+      tabButtons.forEach((btn) => {
+        const isSelected = (btn as HTMLElement).dataset.tabId === tabId;
+        btn.setAttribute('aria-selected', String(isSelected));
+        btn.classList.toggle('active', isSelected);
+        btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+      });
+
+      // Update panels
+      panels.forEach((panel) => {
+        const isActive = (panel as HTMLElement).dataset.tabPanel === tabId;
+        panel.classList.toggle('active', isActive);
+        if (isActive) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+
+      // Update URL hash (without scrolling)
+      if (hashPrefix && tabIdToHash[tabId]) {
+        history.replaceState(null, '', tabIdToHash[tabId]);
+      }
+    }
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllTabs);
+  } else {
+    initAllTabs();
+  }
+</script>
+
+<style>
+  .tabs-container {
+    width: 100%;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .tab {
+    padding: 0.875rem 1.25rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(45, 48, 71, 0.6);
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tab:hover {
+    color: var(--navy);
+  }
+
+  .tab.active {
+    color: var(--forest);
+  }
+
+  .tab:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
+  /* Primary variant - underline style */
+  .tabs-primary .tabs {
+    border-bottom: 1px solid rgba(45, 48, 71, 0.1);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs-primary .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabs-primary .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--forest);
+  }
+
+  /* Secondary variant - smaller, subtle */
+  .tabs-secondary .tabs {
+    border-bottom: 1px solid rgba(45, 48, 71, 0.08);
+    margin-bottom: 1.5rem;
+    gap: 0;
+  }
+
+  .tabs-secondary .tab {
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .tabs-secondary .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--forest);
+  }
+
+  /* Pills variant - button-like */
+  .tabs-pills .tabs {
+    background: rgba(45, 48, 71, 0.05);
+    border-radius: 8px;
+    padding: 4px;
+    margin-bottom: 1.5rem;
+    display: inline-flex;
+    gap: 4px;
+  }
+
+  .tabs-pills .tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    color: var(--navy);
+  }
+
+  .tabs-pills .tab:hover {
+    background: rgba(45, 48, 71, 0.05);
+  }
+
+  .tabs-pills .tab.active {
+    background: white;
+    color: var(--forest);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Panel visibility */
+  .tab-panels [data-tab-panel] {
+    display: none;
+  }
+
+  .tab-panels [data-tab-panel].active {
+    display: block;
+  }
+</style>
