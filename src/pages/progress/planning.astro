@@ -51,7 +51,7 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
           <IconCard
             agency={plan.data.agency}
             title={plan.data.title}
-            description={plan.data.description}
+            description={plan.data.description ?? ''}
             href={plan.data.file || plan.data.link}
             external={true}
           />
