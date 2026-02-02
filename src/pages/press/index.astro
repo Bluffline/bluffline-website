@@ -4,6 +4,7 @@ import PageHero from '../../components/ui/PageHero.astro';
 import PressCard from '../../components/content/PressCard.astro';
 import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
+import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import { getCollection } from 'astro:content';
 
 // Fetch press coverage (external news)
@@ -23,6 +24,96 @@ const years = Object.keys(pressByYear).sort((a, b) => Number(b) - Number(a));
 // Fetch press releases
 const pressReleases = await getCollection('press-releases', ({ data }) => !data.draft);
 const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Media Kit assets - logos, photos, and videos
+// These can be managed as a content collection or defined here
+const mediaAssets = {
+  logos: [
+    {
+      title: 'Bluffline Logo (Light)',
+      description: 'Primary logo for use on dark backgrounds',
+      src: '/media-kit/logos/bluffline-logo-light.png',
+      thumbnail: '/media-kit/logos/bluffline-logo-light.png',
+      format: 'PNG',
+      dimensions: '1200 x 400',
+      size: '45 KB',
+      type: 'image' as const,
+    },
+    {
+      title: 'Bluffline Logo (Dark)',
+      description: 'Primary logo for use on light backgrounds',
+      src: '/media-kit/logos/bluffline-logo-dark.png',
+      thumbnail: '/media-kit/logos/bluffline-logo-dark.png',
+      format: 'PNG',
+      dimensions: '1200 x 400',
+      size: '48 KB',
+      type: 'image' as const,
+    },
+    {
+      title: 'Bluffline Logo (Vector)',
+      description: 'Scalable vector format for print and large displays',
+      src: '/media-kit/logos/bluffline-logo.svg',
+      thumbnail: '/media-kit/logos/bluffline-logo.svg',
+      format: 'SVG',
+      dimensions: 'Scalable',
+      size: '12 KB',
+      type: 'image' as const,
+    },
+  ],
+  photos: [
+    {
+      title: 'Bluffs Aerial View',
+      description: 'Aerial photograph of the Pensacola Bay bluffs showing the scenic corridor',
+      src: '/images/bluffs-aerial-2024.jpg',
+      thumbnail: '/images/bluffs-aerial-2024.jpg',
+      format: 'JPEG',
+      dimensions: '4000 x 2667',
+      size: '2.4 MB',
+      date: 'March 2024',
+      credit: 'Bluffline, Inc.',
+      type: 'image' as const,
+    },
+    {
+      title: 'Trail Walk Event',
+      description: 'Community members participating in a Bluffline trail walk event',
+      src: '/images/trail-walk-2022.jpg',
+      thumbnail: '/images/trail-walk-2022.jpg',
+      format: 'JPEG',
+      dimensions: '3200 x 2133',
+      size: '1.8 MB',
+      date: 'October 2022',
+      credit: 'Bluffline, Inc.',
+      type: 'image' as const,
+    },
+    {
+      title: 'Corridor Map',
+      description: 'Static map showing the full 20-mile Bluffline corridor',
+      src: '/images/corridor-map-static.png',
+      thumbnail: '/images/corridor-map-static.png',
+      format: 'PNG',
+      dimensions: '2400 x 1600',
+      size: '890 KB',
+      credit: 'Bluffline, Inc.',
+      type: 'image' as const,
+    },
+  ],
+  videos: [
+    // Videos can be added here when available
+    // {
+    //   title: 'Bluffline Vision Video',
+    //   description: 'An overview of the Bluffline vision and corridor plan',
+    //   src: '/media-kit/videos/bluffline-vision.mp4',
+    //   thumbnail: '/media-kit/videos/bluffline-vision-thumb.jpg',
+    //   format: 'MP4',
+    //   duration: '3:24',
+    //   size: '45 MB',
+    //   date: '2024',
+    //   credit: 'Bluffline, Inc.',
+    //   type: 'video' as const,
+    //   videoType: 'video/mp4',
+    // },
+  ],
+};
 ---
 
 <BaseLayout
@@ -56,6 +147,16 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
           tabindex="-1"
         >
           Press Releases
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="media-kit-panel"
+          id="media-kit-tab"
+          class="tab"
+          tabindex="-1"
+        >
+          Media Kit
         </button>
       </div>
 
@@ -105,53 +206,187 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
           <p class="empty-state">No press releases available yet.</p>
         )}
       </div>
-    </div>
-  </section>
 
-  <section class="press-kit-section">
-    <div class="section-inner">
-      <div class="section-header">
-        <h2>Press Resources</h2>
-        <p>Everything journalists need to cover the Bluffline.</p>
-      </div>
-      <div class="press-kit-grid">
-        <div class="press-kit-card">
-          <h3>Boilerplate</h3>
-          <div class="boilerplate">
-            <p>Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola. As the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway, the Bluffline is building safe, connected infrastructure for walking, cycling, and water transit that will reconnect communities to Pensacola's waterfront.</p>
+      <div
+        role="tabpanel"
+        id="media-kit-panel"
+        aria-labelledby="media-kit-tab"
+        class="tab-panel"
+        hidden
+      >
+        <div class="media-kit-intro">
+          <p>Download official Bluffline logos, photos, and videos for media use. All assets are free to use with proper attribution.</p>
+        </div>
+
+        <!-- Boilerplate Section -->
+        <div class="media-kit-section">
+          <h3 class="media-kit-section-title">About the Bluffline</h3>
+          <div class="boilerplate-card">
+            <div class="boilerplate">
+              <p>Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola. As the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway, the Bluffline is building safe, connected infrastructure for walking, cycling, and water transit that will reconnect communities to Pensacola's waterfront.</p>
+            </div>
+            <button class="copy-boilerplate" aria-label="Copy boilerplate text">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copy
+            </button>
           </div>
         </div>
-        <div class="press-kit-card">
-          <h3>Logo Downloads</h3>
-          <p>High-resolution logos for print and digital use.</p>
-          <div class="logo-downloads">
-            <a href="#" class="logo-download">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              PNG (Light)
-            </a>
-            <a href="#" class="logo-download">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              PNG (Dark)
-            </a>
-            <a href="#" class="logo-download">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              SVG
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="contact-section">
-    <div class="section-inner">
-      <div class="contact-card">
-        <h3>Media Contact</h3>
-        <p>For press inquiries, interviews, or additional information:</p>
-        <div class="contact-info">
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:press@bluffline.org">press@bluffline.org</a>
+        <!-- Logos Section -->
+        <div class="media-kit-section">
+          <h3 class="media-kit-section-title">Logos</h3>
+          <p class="media-kit-section-desc">High-resolution logos for print and digital use.</p>
+          {mediaAssets.logos.length > 0 ? (
+            <div class="media-grid media-grid-logos">
+              {mediaAssets.logos.map((asset) => (
+                <button
+                  class="media-item"
+                  data-lightbox-trigger
+                  data-media-src={asset.src}
+                  data-media-type={asset.type}
+                  data-media-title={asset.title}
+                  data-media-description={asset.description}
+                  data-media-format={asset.format}
+                  data-media-dimensions={asset.dimensions}
+                  data-media-size={asset.size}
+                  data-media-download={asset.src}
+                  data-media-filename={asset.src.split('/').pop()}
+                >
+                  <div class="media-item-preview logo-preview">
+                    <img src={asset.thumbnail} alt={asset.title} loading="lazy" />
+                  </div>
+                  <div class="media-item-info">
+                    <span class="media-item-title">{asset.title}</span>
+                    <span class="media-item-meta">{asset.format} · {asset.size}</span>
+                  </div>
+                  <div class="media-item-actions">
+                    <span class="preview-hint">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      Preview
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-state">Logo files coming soon.</p>
+          )}
+        </div>
+
+        <!-- Photos Section -->
+        <div class="media-kit-section">
+          <h3 class="media-kit-section-title">Photos</h3>
+          <p class="media-kit-section-desc">High-resolution photographs available for editorial use.</p>
+          {mediaAssets.photos.length > 0 ? (
+            <div class="media-grid media-grid-photos">
+              {mediaAssets.photos.map((asset) => (
+                <button
+                  class="media-item"
+                  data-lightbox-trigger
+                  data-media-src={asset.src}
+                  data-media-type={asset.type}
+                  data-media-title={asset.title}
+                  data-media-description={asset.description}
+                  data-media-format={asset.format}
+                  data-media-dimensions={asset.dimensions}
+                  data-media-size={asset.size}
+                  data-media-date={asset.date || ''}
+                  data-media-credit={asset.credit || ''}
+                  data-media-download={asset.src}
+                  data-media-filename={asset.src.split('/').pop()}
+                >
+                  <div class="media-item-preview photo-preview">
+                    <img src={asset.thumbnail} alt={asset.title} loading="lazy" />
+                  </div>
+                  <div class="media-item-info">
+                    <span class="media-item-title">{asset.title}</span>
+                    <span class="media-item-meta">{asset.format} · {asset.dimensions}</span>
+                  </div>
+                  <div class="media-item-actions">
+                    <span class="preview-hint">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      Preview
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-state">Photos coming soon.</p>
+          )}
+        </div>
+
+        <!-- Videos Section -->
+        <div class="media-kit-section">
+          <h3 class="media-kit-section-title">Videos</h3>
+          <p class="media-kit-section-desc">Video content available for broadcast and digital media.</p>
+          {mediaAssets.videos.length > 0 ? (
+            <div class="media-grid media-grid-videos">
+              {mediaAssets.videos.map((asset: any) => (
+                <button
+                  class="media-item"
+                  data-lightbox-trigger
+                  data-media-src={asset.src}
+                  data-media-type={asset.type}
+                  data-media-video-type={asset.videoType}
+                  data-media-title={asset.title}
+                  data-media-description={asset.description}
+                  data-media-format={asset.format}
+                  data-media-dimensions={asset.duration || ''}
+                  data-media-size={asset.size}
+                  data-media-date={asset.date || ''}
+                  data-media-credit={asset.credit || ''}
+                  data-media-download={asset.src}
+                  data-media-filename={asset.src.split('/').pop()}
+                >
+                  <div class="media-item-preview video-preview">
+                    <img src={asset.thumbnail} alt={asset.title} loading="lazy" />
+                    <div class="video-play-icon">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="media-item-info">
+                    <span class="media-item-title">{asset.title}</span>
+                    <span class="media-item-meta">{asset.format} · {asset.duration}</span>
+                  </div>
+                  <div class="media-item-actions">
+                    <span class="preview-hint">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                      </svg>
+                      Play
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-state">Video content coming soon.</p>
+          )}
+        </div>
+
+        <!-- Media Contact Section -->
+        <div class="media-kit-section">
+          <h3 class="media-kit-section-title">Media Contact</h3>
+          <div class="contact-card">
+            <p>For press inquiries, interviews, or additional information:</p>
+            <div class="contact-info">
+              <div class="contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:press@bluffline.org">press@bluffline.org</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -164,6 +399,8 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
     primaryLabel="Get Involved"
     primaryHref="/support"
   />
+
+  <MediaLightbox />
 </BaseLayout>
 
 <script>
@@ -171,10 +408,24 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
     const tabs = document.querySelectorAll('[role="tab"]');
     const panels = document.querySelectorAll('[role="tabpanel"]');
 
+    // Map of hash values to tab IDs
+    const hashToTab: Record<string, string> = {
+      '#news': 'news-tab',
+      '#releases': 'releases-tab',
+      '#media-kit': 'media-kit-tab',
+    };
+
+    // Map of tab IDs to hash values
+    const tabToHash: Record<string, string> = {
+      'news-tab': '#news',
+      'releases-tab': '#releases',
+      'media-kit-tab': '#media-kit',
+    };
+
     // Check for hash in URL
     const hash = window.location.hash;
-    if (hash === '#releases') {
-      activateTab('releases-tab');
+    if (hash && hashToTab[hash]) {
+      activateTab(hashToTab[hash]);
     }
 
     tabs.forEach(tab => {
@@ -219,12 +470,51 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
       });
 
       // Update URL hash without scrolling
-      const newHash = tabId === 'releases-tab' ? '#releases' : '#news';
+      const newHash = tabToHash[tabId] || '#news';
       history.replaceState(null, '', newHash);
     }
   }
 
+  function initCopyBoilerplate() {
+    const copyBtn = document.querySelector('.copy-boilerplate');
+    const boilerplate = document.querySelector('.boilerplate p');
+
+    copyBtn?.addEventListener('click', async () => {
+      if (!boilerplate) return;
+
+      const text = boilerplate.textContent || '';
+
+      try {
+        await navigator.clipboard.writeText(text);
+
+        // Update button to show success
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Copied!
+        `;
+        copyBtn.classList.add('copied');
+
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHTML;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      } catch {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+    });
+  }
+
   initTabs();
+  initCopyBoilerplate();
 </script>
 
 <style>
@@ -235,6 +525,8 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
     gap: 0.5rem;
     margin-bottom: 2.5rem;
     border-bottom: 1px solid rgba(45, 48, 71, 0.1);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .tab {
@@ -248,6 +540,7 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
     cursor: pointer;
     position: relative;
     transition: color 0.2s ease;
+    white-space: nowrap;
   }
 
   .tab:hover {
@@ -312,22 +605,45 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
     font-size: 1rem;
   }
 
-  .press-kit-section { padding: 5rem 0; background: var(--warm-white); }
-  .press-kit-grid {
-    display: grid;
-    gap: 2rem;
+  /* Media Kit Styles */
+  .media-kit-intro {
+    margin-bottom: 2.5rem;
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.85;
   }
-  @media (min-width: 768px) {
-    .press-kit-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .media-kit-section {
+    margin-bottom: 3rem;
   }
-  .press-kit-card {
+
+  .media-kit-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .media-kit-section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .media-kit-section-desc {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Boilerplate Card */
+  .boilerplate-card {
     background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    border: 1px solid rgba(45, 48, 71, 0.06);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    position: relative;
   }
-  .press-kit-card h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 1rem; }
-  .press-kit-card p { font-size: 0.95rem; color: var(--navy); opacity: 0.75; margin-bottom: 1.5rem; }
+
   .boilerplate {
     background: var(--mist);
     border-radius: 8px;
@@ -336,37 +652,209 @@ const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a
     color: var(--navy);
     line-height: 1.7;
   }
-  .boilerplate p { margin-bottom: 0; opacity: 1; }
-  .logo-downloads { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .logo-download {
+
+  .boilerplate p {
+    margin: 0;
+  }
+
+  .copy-boilerplate {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    background: var(--mist);
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.875rem;
+    gap: 0.4rem;
+    padding: 0.5rem 0.875rem;
+    background: var(--forest);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: var(--forest);
+    cursor: pointer;
     transition: all 0.2s ease;
   }
-  .logo-download:hover { background: var(--forest); color: white; }
-  .logo-download svg { width: 16px; height: 16px; }
 
-  .contact-section { padding: 0 0 5rem; background: var(--warm-white); }
-  .contact-card {
-    max-width: 600px;
+  .copy-boilerplate:hover {
+    background: #364519;
+  }
+
+  .copy-boilerplate.copied {
+    background: var(--spring);
+    color: var(--forest);
+  }
+
+  .copy-boilerplate svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Media Grid */
+  .media-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .media-grid-logos {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .media-grid-photos {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .media-grid-videos {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .media-item {
     background: white;
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+  }
+
+  .media-item:hover {
+    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .media-item:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
+  .media-item-preview {
+    aspect-ratio: 16 / 10;
+    background: var(--mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .logo-preview {
+    aspect-ratio: 3 / 2;
+    padding: 1.5rem;
+  }
+
+  .logo-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .photo-preview img,
+  .video-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-play-icon {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .video-play-icon svg {
+    width: 24px;
+    height: 24px;
+    color: var(--forest);
+    margin-left: 3px;
+  }
+
+  .media-item-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .media-item-title {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.95rem;
+  }
+
+  .media-item-meta {
+    font-size: 0.8rem;
+    color: rgba(45, 48, 71, 0.6);
+  }
+
+  .media-item-actions {
+    padding: 0 1rem 1rem;
+  }
+
+  .preview-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--forest);
+  }
+
+  .preview-hint svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Contact Card in Media Kit */
+  .contact-card {
+    max-width: 500px;
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
     border: 1px solid rgba(45, 48, 71, 0.08);
   }
-  .contact-card h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 0.5rem; }
-  .contact-card p { font-size: 0.95rem; color: var(--navy); opacity: 0.75; margin-bottom: 1.5rem; }
-  .contact-info { display: flex; flex-direction: column; gap: 0.75rem; }
-  .contact-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: var(--navy); }
-  .contact-item svg { width: 20px; height: 20px; color: var(--forest); flex-shrink: 0; }
-  .contact-item a { color: var(--forest); text-decoration: none; font-weight: 500; }
-  .contact-item a:hover { text-decoration: underline; }
+
+  .contact-card p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.75;
+    margin-bottom: 1rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--navy);
+  }
+
+  .contact-item svg {
+    width: 20px;
+    height: 20px;
+    color: var(--forest);
+    flex-shrink: 0;
+  }
+
+  .contact-item a {
+    color: var(--forest);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-item a:hover {
+    text-decoration: underline;
+  }
 </style>
