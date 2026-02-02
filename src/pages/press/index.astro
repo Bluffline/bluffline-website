@@ -6,6 +6,8 @@ import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import { getCollection } from 'astro:content';
+import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
+import path from 'node:path';
 
 // Fetch press coverage (external news)
 const pressItems = await getCollection('press');
@@ -25,95 +27,26 @@ const years = Object.keys(pressByYear).sort((a, b) => Number(b) - Number(a));
 const pressReleases = await getCollection('press-releases', ({ data }) => !data.draft);
 const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-// Media Kit assets - logos, photos, and videos
-// These can be managed as a content collection or defined here
-const mediaAssets = {
-  logos: [
-    {
-      title: 'Bluffline Logo (Light)',
-      description: 'Primary logo for use on dark backgrounds',
-      src: '/media-kit/logos/bluffline-logo-light.png',
-      thumbnail: '/media-kit/logos/bluffline-logo-light.png',
-      format: 'PNG',
-      dimensions: '1200 x 400',
-      size: '45 KB',
-      type: 'image' as const,
-    },
-    {
-      title: 'Bluffline Logo (Dark)',
-      description: 'Primary logo for use on light backgrounds',
-      src: '/media-kit/logos/bluffline-logo-dark.png',
-      thumbnail: '/media-kit/logos/bluffline-logo-dark.png',
-      format: 'PNG',
-      dimensions: '1200 x 400',
-      size: '48 KB',
-      type: 'image' as const,
-    },
-    {
-      title: 'Bluffline Logo (Vector)',
-      description: 'Scalable vector format for print and large displays',
-      src: '/media-kit/logos/bluffline-logo.svg',
-      thumbnail: '/media-kit/logos/bluffline-logo.svg',
-      format: 'SVG',
-      dimensions: 'Scalable',
-      size: '12 KB',
-      type: 'image' as const,
-    },
-  ],
-  photos: [
-    {
-      title: 'Bluffs Aerial View',
-      description: 'Aerial photograph of the Pensacola Bay bluffs showing the scenic corridor',
-      src: '/images/bluffs-aerial-2024.jpg',
-      thumbnail: '/images/bluffs-aerial-2024.jpg',
-      format: 'JPEG',
-      dimensions: '4000 x 2667',
-      size: '2.4 MB',
-      date: 'March 2024',
-      credit: 'Bluffline, Inc.',
-      type: 'image' as const,
-    },
-    {
-      title: 'Trail Walk Event',
-      description: 'Community members participating in a Bluffline trail walk event',
-      src: '/images/trail-walk-2022.jpg',
-      thumbnail: '/images/trail-walk-2022.jpg',
-      format: 'JPEG',
-      dimensions: '3200 x 2133',
-      size: '1.8 MB',
-      date: 'October 2022',
-      credit: 'Bluffline, Inc.',
-      type: 'image' as const,
-    },
-    {
-      title: 'Corridor Map',
-      description: 'Static map showing the full 20-mile Bluffline corridor',
-      src: '/images/corridor-map-static.png',
-      thumbnail: '/images/corridor-map-static.png',
-      format: 'PNG',
-      dimensions: '2400 x 1600',
-      size: '890 KB',
-      credit: 'Bluffline, Inc.',
-      type: 'image' as const,
-    },
-  ],
-  videos: [
-    // Videos can be added here when available
-    // {
-    //   title: 'Bluffline Vision Video',
-    //   description: 'An overview of the Bluffline vision and corridor plan',
-    //   src: '/media-kit/videos/bluffline-vision.mp4',
-    //   thumbnail: '/media-kit/videos/bluffline-vision-thumb.jpg',
-    //   format: 'MP4',
-    //   duration: '3:24',
-    //   size: '45 MB',
-    //   date: '2024',
-    //   credit: 'Bluffline, Inc.',
-    //   type: 'video' as const,
-    //   videoType: 'video/mp4',
-    // },
-  ],
-};
+// Load media kit assets with embedded metadata extraction
+const publicDir = path.join(process.cwd(), 'public');
+
+const logos = await getMediaAssetsFromDirectory(
+  path.join(publicDir, 'media-kit', 'logos'),
+  '/media-kit/logos',
+  'image'
+);
+
+const photos = await getMediaAssetsFromDirectory(
+  path.join(publicDir, 'media-kit', 'photos'),
+  '/media-kit/photos',
+  'image'
+);
+
+const videos = await getMediaAssetsFromDirectory(
+  path.join(publicDir, 'media-kit', 'videos'),
+  '/media-kit/videos',
+  'video'
+);
 ---
 
 <BaseLayout
@@ -225,13 +158,15 @@ const mediaAssets = {
             <div class="boilerplate">
               <p>Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola. As the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway, the Bluffline is building safe, connected infrastructure for walking, cycling, and water transit that will reconnect communities to Pensacola's waterfront.</p>
             </div>
-            <button class="copy-boilerplate" aria-label="Copy boilerplate text">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              Copy
-            </button>
+            <div class="boilerplate-actions">
+              <button class="copy-boilerplate" aria-label="Copy boilerplate text">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                Copy to clipboard
+              </button>
+            </div>
           </div>
         </div>
 
@@ -239,9 +174,9 @@ const mediaAssets = {
         <div class="media-kit-section">
           <h3 class="media-kit-section-title">Logos</h3>
           <p class="media-kit-section-desc">High-resolution logos for print and digital use.</p>
-          {mediaAssets.logos.length > 0 ? (
+          {logos.length > 0 ? (
             <div class="media-grid media-grid-logos">
-              {mediaAssets.logos.map((asset) => (
+              {logos.map((asset) => (
                 <button
                   class="media-item"
                   data-lightbox-trigger
@@ -252,15 +187,17 @@ const mediaAssets = {
                   data-media-format={asset.format}
                   data-media-dimensions={asset.dimensions}
                   data-media-size={asset.size}
+                  data-media-credit={asset.credit}
+                  data-media-date={asset.date}
                   data-media-download={asset.src}
                   data-media-filename={asset.src.split('/').pop()}
                 >
                   <div class="media-item-preview logo-preview">
-                    <img src={asset.thumbnail} alt={asset.title} loading="lazy" />
+                    <img src={asset.src} alt={asset.title} loading="lazy" />
                   </div>
                   <div class="media-item-info">
                     <span class="media-item-title">{asset.title}</span>
-                    <span class="media-item-meta">{asset.format} · {asset.size}</span>
+                    <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
                   </div>
                   <div class="media-item-actions">
                     <span class="preview-hint">
@@ -275,7 +212,17 @@ const mediaAssets = {
               ))}
             </div>
           ) : (
-            <p class="empty-state">Logo files coming soon.</p>
+            <div class="empty-state-card">
+              <div class="empty-state-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+              <p class="empty-state-text">Logo files will appear here</p>
+              <p class="empty-state-hint">Add logo files to <code>public/media-kit/logos/</code></p>
+            </div>
           )}
         </div>
 
@@ -283,9 +230,9 @@ const mediaAssets = {
         <div class="media-kit-section">
           <h3 class="media-kit-section-title">Photos</h3>
           <p class="media-kit-section-desc">High-resolution photographs available for editorial use.</p>
-          {mediaAssets.photos.length > 0 ? (
+          {photos.length > 0 ? (
             <div class="media-grid media-grid-photos">
-              {mediaAssets.photos.map((asset) => (
+              {photos.map((asset) => (
                 <button
                   class="media-item"
                   data-lightbox-trigger
@@ -296,17 +243,17 @@ const mediaAssets = {
                   data-media-format={asset.format}
                   data-media-dimensions={asset.dimensions}
                   data-media-size={asset.size}
-                  data-media-date={asset.date || ''}
-                  data-media-credit={asset.credit || ''}
+                  data-media-credit={asset.credit || 'Bluffline, Inc.'}
+                  data-media-date={asset.date}
                   data-media-download={asset.src}
                   data-media-filename={asset.src.split('/').pop()}
                 >
                   <div class="media-item-preview photo-preview">
-                    <img src={asset.thumbnail} alt={asset.title} loading="lazy" />
+                    <img src={asset.src} alt={asset.title} loading="lazy" />
                   </div>
                   <div class="media-item-info">
                     <span class="media-item-title">{asset.title}</span>
-                    <span class="media-item-meta">{asset.format} · {asset.dimensions}</span>
+                    <span class="media-item-meta">{asset.format}{asset.dimensions && ` · ${asset.dimensions}`}{asset.size && ` · ${asset.size}`}</span>
                   </div>
                   <div class="media-item-actions">
                     <span class="preview-hint">
@@ -321,7 +268,17 @@ const mediaAssets = {
               ))}
             </div>
           ) : (
-            <p class="empty-state">Photos coming soon.</p>
+            <div class="empty-state-card">
+              <div class="empty-state-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+              <p class="empty-state-text">Photos will appear here</p>
+              <p class="empty-state-hint">Add image files to <code>public/media-kit/photos/</code></p>
+            </div>
           )}
         </div>
 
@@ -329,9 +286,9 @@ const mediaAssets = {
         <div class="media-kit-section">
           <h3 class="media-kit-section-title">Videos</h3>
           <p class="media-kit-section-desc">Video content available for broadcast and digital media.</p>
-          {mediaAssets.videos.length > 0 ? (
+          {videos.length > 0 ? (
             <div class="media-grid media-grid-videos">
-              {mediaAssets.videos.map((asset: any) => (
+              {videos.map((asset) => (
                 <button
                   class="media-item"
                   data-lightbox-trigger
@@ -341,15 +298,14 @@ const mediaAssets = {
                   data-media-title={asset.title}
                   data-media-description={asset.description}
                   data-media-format={asset.format}
-                  data-media-dimensions={asset.duration || ''}
                   data-media-size={asset.size}
-                  data-media-date={asset.date || ''}
-                  data-media-credit={asset.credit || ''}
+                  data-media-credit={asset.credit || 'Bluffline, Inc.'}
+                  data-media-date={asset.date}
                   data-media-download={asset.src}
                   data-media-filename={asset.src.split('/').pop()}
                 >
                   <div class="media-item-preview video-preview">
-                    <img src={asset.thumbnail} alt={asset.title} loading="lazy" />
+                    <video src={asset.src} preload="metadata" />
                     <div class="video-play-icon">
                       <svg viewBox="0 0 24 24" fill="currentColor">
                         <polygon points="5 3 19 12 5 21 5 3"/>
@@ -358,7 +314,7 @@ const mediaAssets = {
                   </div>
                   <div class="media-item-info">
                     <span class="media-item-title">{asset.title}</span>
-                    <span class="media-item-meta">{asset.format} · {asset.duration}</span>
+                    <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
                   </div>
                   <div class="media-item-actions">
                     <span class="preview-hint">
@@ -372,7 +328,22 @@ const mediaAssets = {
               ))}
             </div>
           ) : (
-            <p class="empty-state">Video content coming soon.</p>
+            <div class="empty-state-card">
+              <div class="empty-state-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                  <line x1="7" y1="2" x2="7" y2="22"/>
+                  <line x1="17" y1="2" x2="17" y2="22"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <line x1="2" y1="7" x2="7" y2="7"/>
+                  <line x1="2" y1="17" x2="7" y2="17"/>
+                  <line x1="17" y1="17" x2="22" y2="17"/>
+                  <line x1="17" y1="7" x2="22" y2="7"/>
+                </svg>
+              </div>
+              <p class="empty-state-text">Videos will appear here</p>
+              <p class="empty-state-hint">Add video files to <code>public/media-kit/videos/</code></p>
+            </div>
           )}
         </div>
 
@@ -526,7 +497,14 @@ const mediaAssets = {
     margin-bottom: 2.5rem;
     border-bottom: 1px solid rgba(45, 48, 71, 0.1);
     overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .tab {
@@ -541,6 +519,7 @@ const mediaAssets = {
     position: relative;
     transition: color 0.2s ease;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .tab:hover {
@@ -641,7 +620,6 @@ const mediaAssets = {
     border-radius: 12px;
     padding: 1.5rem;
     border: 1px solid rgba(45, 48, 71, 0.08);
-    position: relative;
   }
 
   .boilerplate {
@@ -657,19 +635,22 @@ const mediaAssets = {
     margin: 0;
   }
 
+  .boilerplate-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .copy-boilerplate {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 0.875rem;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
     background: var(--forest);
     color: white;
     border: none;
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -685,8 +666,48 @@ const mediaAssets = {
   }
 
   .copy-boilerplate svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Empty State Card */
+  .empty-state-card {
+    background: white;
+    border: 2px dashed rgba(45, 48, 71, 0.15);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .empty-state-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    color: rgba(45, 48, 71, 0.25);
+  }
+
+  .empty-state-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .empty-state-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-state-hint {
+    font-size: 0.85rem;
+    color: rgba(45, 48, 71, 0.5);
+  }
+
+  .empty-state-hint code {
+    background: var(--mist);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
   }
 
   /* Media Grid */
@@ -741,6 +762,8 @@ const mediaAssets = {
   .logo-preview {
     aspect-ratio: 3 / 2;
     padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f8f8 25%, #e8e8e8 25%, #e8e8e8 50%, #f8f8f8 50%, #f8f8f8 75%, #e8e8e8 75%);
+    background-size: 20px 20px;
   }
 
   .logo-preview img {
@@ -749,8 +772,17 @@ const mediaAssets = {
     object-fit: contain;
   }
 
-  .photo-preview img,
-  .video-preview img {
+  .photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-preview {
+    background: #000;
+  }
+
+  .video-preview video {
     width: 100%;
     height: 100%;
     object-fit: cover;
