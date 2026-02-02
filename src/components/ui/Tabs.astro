@@ -78,8 +78,9 @@ const {
   function initTabs(container: HTMLElement) {
     const tabsId = container.dataset.tabs;
     const hashPrefix = container.dataset.hashPrefix;
-    const tabButtons = container.querySelectorAll('[role="tab"]');
-    const panels = container.querySelectorAll('[data-tab-panel]');
+    // Only select direct children to avoid conflicts with nested tabs
+    const tabButtons = container.querySelectorAll(':scope > .tabs > [role="tab"]');
+    const panels = container.querySelectorAll(':scope > .tab-panels > [data-tab-panel]');
 
     // Build hash maps
     const hashToTabId: Record<string, string> = {};
