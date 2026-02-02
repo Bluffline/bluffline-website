@@ -47,6 +47,10 @@ const resourcesCollection = defineCollection({
     name: z.string(),
     description: z.string(),
     qualities: z.array(z.enum(['Cultural', 'Historical', 'Archaeological', 'Recreational', 'Natural', 'Scenic'])),
+    coordinates: z.object({
+      lat: z.number(),
+      lng: z.number(),
+    }).optional(),
   }),
 });
 
