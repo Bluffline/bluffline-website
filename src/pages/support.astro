@@ -20,35 +20,18 @@ import PageHero from '../components/ui/PageHero.astro';
         <p>Supporting members fuel the Bluffline's work—from community engagement to advocacy to construction.</p>
       </div>
 
-      <div class="membership-grid">
-        <div class="membership-card">
-          <div class="membership-level">Friend</div>
-          <div class="membership-amount">$25<span>/year</span></div>
-          <p>Show your support for safe, connected infrastructure.</p>
-          <a href="#" class="btn">Join</a>
-        </div>
-        <div class="membership-card featured">
-          <div class="membership-badge">Most Popular</div>
-          <div class="membership-level">Supporter</div>
-          <div class="membership-amount">$50<span>/year</span></div>
-          <p>Help fund community engagement and planning activities.</p>
-          <a href="#" class="btn">Join</a>
-        </div>
-        <div class="membership-card">
-          <div class="membership-level">Champion</div>
-          <div class="membership-amount">$100<span>/year</span></div>
-          <p>Make a meaningful contribution to corridor development.</p>
-          <a href="#" class="btn">Join</a>
-        </div>
-        <div class="membership-card">
-          <div class="membership-level">Builder</div>
-          <div class="membership-amount">$500<span>/year</span></div>
-          <p>Help build the infrastructure that connects communities.</p>
-          <a href="#" class="btn">Join</a>
-        </div>
+      <div class="pricing-table-container">
+        <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+        <stripe-pricing-table pricing-table-id="prctbl_1OHU5vGfKxDdBMV4gGWObhpr"
+        publishable-key="pk_live_51LcE9pGfKxDdBMV4krBQvXuZxFTWQVEqaKvJN8wA3MlSvbDhpm9KosuZMDu06TSAK3ziOLZWi9HGYr5nNKQkrzwF00H25WGHo6">
+        </stripe-pricing-table>
       </div>
 
       <p class="tax-note">Bluffline, Inc. is a 501(c)(3) nonprofit. Your contribution is tax-deductible.</p>
+
+      <div class="member-portal">
+        <p>Already a member? <a href="https://checkout.bluffline.org/p/login/cN23cocuDcJp74IeUU">Manage your membership</a></p>
+      </div>
     </div>
   </section>
 
@@ -107,40 +90,14 @@ import PageHero from '../components/ui/PageHero.astro';
   .support-intro h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--navy); margin-bottom: 1rem; }
   .support-intro p { font-size: 1.1rem; color: var(--navy); opacity: 0.75; }
 
-  .membership-grid { display: grid; gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
-  @media (min-width: 600px) { .membership-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1024px) { .membership-grid { grid-template-columns: repeat(4, 1fr); } }
-
-  .membership-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    border: 2px solid rgba(45, 48, 71, 0.08);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  .membership-card:hover { border-color: var(--spring); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45, 48, 71, 0.1); }
-  .membership-card.featured { border-color: var(--forest); background: linear-gradient(180deg, white 0%, var(--mist) 100%); }
-  .membership-badge {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--forest);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.375rem 1rem;
-    border-radius: 100px;
-  }
-  .membership-level { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--forest); font-weight: 600; margin-bottom: 0.5rem; }
-  .membership-amount { font-family: 'Fraunces', serif; font-size: 2.5rem; color: var(--navy); margin-bottom: 1rem; }
-  .membership-amount span { font-size: 1rem; opacity: 0.5; }
-  .membership-card p { font-size: 0.9rem; color: var(--navy); opacity: 0.75; margin-bottom: 1.5rem; }
-  .membership-card .btn { width: 100%; justify-content: center; }
+  .pricing-table-container { max-width: 1000px; margin: 0 auto; }
 
   .tax-note { text-align: center; font-size: 0.875rem; color: var(--navy); opacity: 0.6; margin-top: 2rem; }
+
+  .member-portal { text-align: center; margin-top: 1.5rem; }
+  .member-portal p { font-size: 0.95rem; color: var(--navy); }
+  .member-portal a { color: var(--forest); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
+  .member-portal a:hover { color: var(--spring); }
 
   .other-ways-section { padding: 5rem 0; background: var(--warm-white); }
   .other-ways-inner { max-width: 600px; margin: 0 auto; padding: 0 1.5rem; }
