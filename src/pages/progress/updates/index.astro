@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/ui/PageHero.astro';
+import CallToAction from '../../../components/ui/CallToAction.astro';
 import UpdateCard from '../../../components/content/UpdateCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -35,6 +36,14 @@ const updates = (await getCollection('updates'))
       </div>
     </div>
   </section>
+
+  <CallToAction
+    title="Don't miss an update"
+    description="Subscribe to get the latest Bluffline news delivered to your inbox."
+    primaryLabel="Subscribe"
+    kitFormId="3f946cf4ba"
+    variant="mist"
+  />
 </BaseLayout>
 
 <style>

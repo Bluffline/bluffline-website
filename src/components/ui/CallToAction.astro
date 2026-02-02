@@ -7,6 +7,7 @@ interface Props {
   secondaryHref?: string;
   secondaryLabel?: string;
   variant?: 'forest' | 'mist';
+  kitFormId?: string;
 }
 
 const {
@@ -16,7 +17,8 @@ const {
   primaryLabel = 'Get Involved',
   secondaryHref,
   secondaryLabel,
-  variant = 'forest'
+  variant = 'forest',
+  kitFormId
 } = Astro.props;
 ---
 
@@ -25,7 +27,11 @@ const {
     <h2>{title}</h2>
     {description && <p>{description}</p>}
     <div class="cta-buttons">
-      <a href={primaryHref} class="btn">{primaryLabel}</a>
+      {kitFormId ? (
+        <button class="btn" data-formkit-toggle={kitFormId}>{primaryLabel}</button>
+      ) : (
+        <a href={primaryHref} class="btn">{primaryLabel}</a>
+      )}
       {secondaryHref && secondaryLabel && (
         <a href={secondaryHref} class="btn btn-outline">{secondaryLabel}</a>
       )}
