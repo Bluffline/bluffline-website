@@ -1,5 +1,9 @@
 {
   "name": "University of West Florida",
-  "description": "A 1,600-acre campus offering nature trails, river access, and diverse ecosystems.",
-  "qualities": ["Cultural", "Recreational", "Natural"]
+  "description": "A 1,600-acre campus offering nature trails, river access, and diverse ecosystems. UWF actively supports historic preservation through the UWF Historic Trust and its renowned archaeology program.",
+  "qualities": ["Cultural"],
+  "coordinates": {
+    "lat": 30.5494916667,
+    "lng": -87.2181194444
+  }
 }

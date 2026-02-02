@@ -1,0 +1,9 @@
+{
+  "name": "Pensacola Naval Air Station Historic District",
+  "description": "Established in 1914 as the nation's first permanent Naval Air Station, known as the 'Cradle of Naval Aviation.' The NRHP-listed historic district includes early administrative buildings, hangars, and training facilities.",
+  "qualities": ["Historical"],
+  "coordinates": {
+    "lat": 30.3463888889,
+    "lng": -87.2691666667
+  }
+}

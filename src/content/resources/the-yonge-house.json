@@ -1,5 +1,9 @@
 {
   "name": "The Yonge House",
-  "description": "Listed on the National Register, associated with P.K. Yonge.",
-  "qualities": ["Historical"]
+  "description": "Listed on the National Register, associated with P.K. Yonge, a prominent Pensacola businessman and key figure in Florida's higher-education governance.",
+  "qualities": ["Historical"],
+  "coordinates": {
+    "lat": 30.4239,
+    "lng": -87.1907
+  }
 }

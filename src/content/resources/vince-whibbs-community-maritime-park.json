@@ -1,0 +1,9 @@
+{
+  "name": "Vince J. Whibbs Sr. Community Maritime Park",
+  "description": "A 38,000+ square foot multi-use park on Pensacola Bay, home to the Pensacola Blue Wahoos Minor League Baseball stadium, Hunter Amphitheater, festival grounds, and playground.",
+  "qualities": ["Recreational", "Scenic"],
+  "coordinates": {
+    "lat": 30.4042944444,
+    "lng": -87.2196611111
+  }
+}

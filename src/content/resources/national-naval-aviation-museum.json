@@ -1,0 +1,9 @@
+{
+  "name": "National Naval Aviation Museum",
+  "description": "One of the largest aviation museums in the world, displaying 150 restored aircraft representing Navy, Marine Corps, and Coast Guard aviation history, along with 4,000 artifacts.",
+  "qualities": ["Cultural", "Historical"],
+  "coordinates": {
+    "lat": 30.34958,
+    "lng": -87.3035833333
+  }
+}
