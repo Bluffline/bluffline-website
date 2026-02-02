@@ -1,0 +1,131 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  statHighlight?: string;
+  href?: string;
+  external?: boolean;
+  agency?: string;
+}
+
+const { title, description, icon, statHighlight, href, external = false, agency } = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+const linkProps = href ? {
+  href,
+  target: external ? '_blank' : undefined,
+  rel: external ? 'noopener' : undefined,
+} : {};
+---
+
+<Tag class:list={['icon-card', { 'is-link': !!href }]} {...linkProps}>
+  {agency && <div class="icon-card-agency">{agency}</div>}
+  {icon && (
+    <div class="icon-card-icon">
+      <Fragment set:html={icon} />
+    </div>
+  )}
+  {statHighlight && <span class="icon-card-stat">{statHighlight}</span>}
+  <h3>{title}</h3>
+  <p>{description}</p>
+  {href && (
+    <span class="icon-card-link">
+      {external ? 'View' : 'Learn more'}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </span>
+  )}
+</Tag>
+
+<style>
+  .icon-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.75rem;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .icon-card.is-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .icon-card:hover {
+    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .icon-card-agency {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .icon-card-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--mist);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .icon-card-icon :global(svg) {
+    width: 24px;
+    height: 24px;
+    color: var(--forest);
+  }
+
+  .icon-card-stat {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    color: var(--forest);
+    margin-bottom: 0.5rem;
+  }
+
+  .icon-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .icon-card p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .icon-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--forest);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    transition: gap 0.2s ease;
+  }
+
+  .icon-card-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .icon-card:hover .icon-card-link {
+    gap: 0.75rem;
+  }
+</style>

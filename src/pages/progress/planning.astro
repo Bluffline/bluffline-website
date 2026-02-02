@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
+import IconCard from '../../components/content/IconCard.astro';
 import { getCollection } from 'astro:content';
 
 const allDocuments = await getCollection('documents');
@@ -47,26 +48,13 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
       </div>
       <div class="plans-grid">
         {regularPlans.map(plan => (
-          <div class="plan-card">
-            <div class="plan-level">{plan.data.agency}</div>
-            <h3>{plan.data.title}</h3>
-            <p>{plan.data.description}</p>
-            {(plan.data.file || plan.data.link) ? (
-              <a href={plan.data.file || plan.data.link} class="plan-link" target="_blank" rel="noopener">
-                View Plan
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </a>
-            ) : (
-              <span class="plan-link disabled">
-                View Plan
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
-            )}
-          </div>
+          <IconCard
+            agency={plan.data.agency}
+            title={plan.data.title}
+            description={plan.data.description}
+            href={plan.data.file || plan.data.link}
+            external={true}
+          />
         ))}
 
         {scenicHighwayPlan && (
@@ -112,41 +100,6 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
   }
   @media (min-width: 1200px) {
     .plans-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .plan-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    border: 1px solid rgba(45, 48, 71, 0.06);
-    display: flex;
-    flex-direction: column;
-  }
-  .plan-level {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--forest);
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-  .plan-card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 0.75rem; }
-  .plan-card p { font-size: 0.9rem; color: var(--navy); opacity: 0.75; flex: 1; }
-  .plan-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--forest);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    transition: gap 0.2s ease;
-  }
-  .plan-link:hover:not(.disabled) { gap: 0.75rem; }
-  .plan-link svg { width: 16px; height: 16px; }
-  .plan-link.disabled {
-    opacity: 0.4;
-    cursor: default;
   }
   .btn.disabled {
     opacity: 0.4;

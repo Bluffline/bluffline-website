@@ -6,6 +6,7 @@ import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import Tabs from '../../components/ui/Tabs.astro';
+import EmptyStateCard from '../../components/content/EmptyStateCard.astro';
 import { getCollection } from 'astro:content';
 import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
 import path from 'node:path';
@@ -193,17 +194,11 @@ const assetTabs = [
                     ))}
                   </div>
                 ) : (
-                  <div class="empty-state-card">
-                    <div class="empty-state-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                      </svg>
-                    </div>
-                    <p class="empty-state-text">Logo files will appear here</p>
-                    <p class="empty-state-hint">Add logo files to <code>public/media-kit/logos/</code></p>
-                  </div>
+                  <EmptyStateCard
+                    title="No logos available"
+                    description="Logo files will be available here when uploaded."
+                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`}
+                  />
                 )}
               </div>
 
@@ -247,17 +242,11 @@ const assetTabs = [
                     ))}
                   </div>
                 ) : (
-                  <div class="empty-state-card">
-                    <div class="empty-state-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                      </svg>
-                    </div>
-                    <p class="empty-state-text">Photos will appear here</p>
-                    <p class="empty-state-hint">Add image files to <code>public/media-kit/photos/</code></p>
-                  </div>
+                  <EmptyStateCard
+                    title="No photos available"
+                    description="Photos will be available here when uploaded."
+                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`}
+                  />
                 )}
               </div>
 
@@ -305,22 +294,11 @@ const assetTabs = [
                     ))}
                   </div>
                 ) : (
-                  <div class="empty-state-card">
-                    <div class="empty-state-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
-                        <line x1="7" y1="2" x2="7" y2="22"/>
-                        <line x1="17" y1="2" x2="17" y2="22"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <line x1="2" y1="7" x2="7" y2="7"/>
-                        <line x1="2" y1="17" x2="7" y2="17"/>
-                        <line x1="17" y1="17" x2="22" y2="17"/>
-                        <line x1="17" y1="7" x2="22" y2="7"/>
-                      </svg>
-                    </div>
-                    <p class="empty-state-text">Videos will appear here</p>
-                    <p class="empty-state-hint">Add video files to <code>public/media-kit/videos/</code></p>
-                  </div>
+                  <EmptyStateCard
+                    title="No videos available"
+                    description="Videos will be available here when uploaded."
+                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>`}
+                  />
                 )}
               </div>
 
@@ -359,17 +337,11 @@ const assetTabs = [
                     ))}
                   </div>
                 ) : (
-                  <div class="empty-state-card">
-                    <div class="empty-state-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M9 18V5l12-2v13"/>
-                        <circle cx="6" cy="18" r="3"/>
-                        <circle cx="18" cy="16" r="3"/>
-                      </svg>
-                    </div>
-                    <p class="empty-state-text">Audio files will appear here</p>
-                    <p class="empty-state-hint">Add audio files to <code>public/media-kit/audio/</code></p>
-                  </div>
+                  <EmptyStateCard
+                    title="No audio files available"
+                    description="Audio files will be available here when uploaded."
+                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`}
+                  />
                 )}
               </div>
             </Tabs>
@@ -563,46 +535,6 @@ const assetTabs = [
   .copy-boilerplate svg {
     width: 16px;
     height: 16px;
-  }
-
-  /* Empty State Card */
-  .empty-state-card {
-    background: white;
-    border: 2px dashed rgba(45, 48, 71, 0.15);
-    border-radius: 12px;
-    padding: 3rem 2rem;
-    text-align: center;
-  }
-
-  .empty-state-icon {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 1rem;
-    color: rgba(45, 48, 71, 0.25);
-  }
-
-  .empty-state-icon svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .empty-state-text {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-
-  .empty-state-hint {
-    font-size: 0.85rem;
-    color: rgba(45, 48, 71, 0.5);
-  }
-
-  .empty-state-hint code {
-    background: var(--mist);
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
   }
 
   /* Media Grid */

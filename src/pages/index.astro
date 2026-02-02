@@ -2,6 +2,28 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
 import CallToAction from '../components/ui/CallToAction.astro';
+import IconCard from '../components/content/IconCard.astro';
+
+const whyCards = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    statHighlight: '4,400',
+    title: 'Households without cars',
+    description: 'Families in the corridor area who depend on safe walking and biking infrastructure for daily transportation.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+    statHighlight: '17.8%',
+    title: 'Park access in Ferry Pass',
+    description: 'Only 17.8% of residents live within a 10-minute walk of a park. The Bluffline will change that.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    statHighlight: 'Zero',
+    title: 'Protected routes today',
+    description: 'There are no protected bike lanes connecting West Pensacola to the downtown waterfront. We\'re building the first.',
+  },
+];
 ---
 
 <BaseLayout title="Home">
@@ -66,24 +88,14 @@ import CallToAction from '../components/ui/CallToAction.astro';
         <p>The Bluffline isn't just about recreation. It's about equity, safety, and economic opportunity for every neighborhood along the corridor.</p>
       </div>
       <div class="why-cards">
-        <div class="why-card">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <span class="stat-highlight">4,400</span>
-          <h3>Households without cars</h3>
-          <p>Families in the corridor area who depend on safe walking and biking infrastructure for daily transportation.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <span class="stat-highlight">17.8%</span>
-          <h3>Park access in Ferry Pass</h3>
-          <p>Only 17.8% of residents live within a 10-minute walk of a park. The Bluffline will change that.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <span class="stat-highlight">Zero</span>
-          <h3>Protected routes today</h3>
-          <p>There are no protected bike lanes connecting West Pensacola to the downtown waterfront. We're building the first.</p>
-        </div>
+        {whyCards.map(card => (
+          <IconCard
+            icon={card.icon}
+            statHighlight={card.statHighlight}
+            title={card.title}
+            description={card.description}
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -281,37 +293,6 @@ import CallToAction from '../components/ui/CallToAction.astro';
   @media (min-width: 768px) {
     .why-cards { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   }
-  .why-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(45, 48, 71, 0.08);
-    transition: all 0.3s ease;
-  }
-  .why-card:hover {
-    box-shadow: 0 20px 40px -15px rgba(45, 48, 71, 0.12);
-    transform: translateY(-4px);
-  }
-  .why-icon {
-    width: 52px;
-    height: 52px;
-    background: var(--mist);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-  }
-  .why-icon svg { width: 26px; height: 26px; color: var(--forest); }
-  .why-card .stat-highlight {
-    display: block;
-    font-family: 'Fraunces', serif;
-    font-size: 2rem;
-    color: var(--forest);
-    margin-bottom: 0.5rem;
-  }
-  .why-card h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 0.75rem; }
-  .why-card p { color: var(--navy); opacity: 0.75; font-size: 0.95rem; }
 
   .route-section {
     background: var(--navy);

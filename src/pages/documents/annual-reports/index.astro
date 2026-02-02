@@ -2,6 +2,8 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/ui/PageHero.astro';
 import CallToAction from '../../../components/ui/CallToAction.astro';
+import DocumentCard from '../../../components/content/DocumentCard.astro';
+import EmptyStateCard from '../../../components/content/EmptyStateCard.astro';
 import { getCollection } from 'astro:content';
 
 const allDocuments = await getCollection('documents');
@@ -25,48 +27,22 @@ const annualReports = allDocuments
       {annualReports.length > 0 ? (
         <div class="reports-grid">
           {annualReports.map(report => (
-            <a
+            <DocumentCard
+              title={report.data.title}
+              description={report.data.description || ''}
               href={report.data.file || report.data.link || '#'}
-              class="report-card"
-              target={report.data.file || report.data.link ? '_blank' : undefined}
-              rel={report.data.file || report.data.link ? 'noopener' : undefined}
-            >
-              <div class="report-year">{report.data.year}</div>
-              <div class="report-content">
-                <h3>{report.data.title}</h3>
-                {report.data.description && <p>{report.data.description}</p>}
-              </div>
-              <div class="report-action">
-                {report.data.file || report.data.link ? (
-                  <span class="download-indicator">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                      <polyline points="7 10 12 15 17 10"/>
-                      <line x1="12" y1="15" x2="12" y2="3"/>
-                    </svg>
-                    Download PDF
-                  </span>
-                ) : (
-                  <span class="coming-soon">Coming Soon</span>
-                )}
-              </div>
-            </a>
+              external={true}
+              year={report.data.year}
+              showDownload={!!(report.data.file || report.data.link)}
+            />
           ))}
         </div>
       ) : (
-        <div class="empty-state">
-          <div class="empty-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-              <polyline points="10 9 9 9 8 9"/>
-            </svg>
-          </div>
-          <h3>Annual Reports Coming Soon</h3>
-          <p>We're preparing our annual reports for publication. Check back soon for yearly organizational updates and financial transparency.</p>
-        </div>
+        <EmptyStateCard
+          title="Annual Reports Coming Soon"
+          description="We're preparing our annual reports for publication. Check back soon for yearly organizational updates and financial transparency."
+          variant="default"
+        />
       )}
     </div>
   </section>
@@ -93,109 +69,5 @@ const annualReports = allDocuments
   }
   @media (min-width: 1200px) {
     .reports-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  .report-card {
-    display: flex;
-    flex-direction: column;
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid rgba(45, 48, 71, 0.06);
-    transition: all 0.3s ease;
-  }
-  .report-card:hover {
-    box-shadow: 0 12px 32px rgba(45, 48, 71, 0.08);
-    transform: translateY(-2px);
-  }
-
-  .report-year {
-    font-family: 'Fraunces', serif;
-    font-size: 2.5rem;
-    color: var(--forest);
-    margin-bottom: 1rem;
-    line-height: 1;
-  }
-
-  .report-content {
-    flex: 1;
-  }
-  .report-content h3 {
-    font-size: 1.15rem;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-  .report-content p {
-    font-size: 0.9rem;
-    color: var(--navy);
-    opacity: 0.75;
-    line-height: 1.5;
-  }
-
-  .report-action {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(45, 48, 71, 0.08);
-  }
-
-  .download-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--forest);
-    font-weight: 500;
-    font-size: 0.9rem;
-  }
-  .download-indicator svg {
-    width: 18px;
-    height: 18px;
-  }
-  .report-card:hover .download-indicator {
-    text-decoration: underline;
-  }
-
-  .coming-soon {
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--navy);
-    opacity: 0.4;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  .empty-icon {
-    width: 80px;
-    height: 80px;
-    background: var(--mist);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-  }
-  .empty-icon svg {
-    width: 40px;
-    height: 40px;
-    color: var(--forest);
-    opacity: 0.6;
-  }
-  .empty-state h3 {
-    font-size: 1.5rem;
-    color: var(--navy);
-    margin-bottom: 0.75rem;
-  }
-  .empty-state p {
-    color: var(--navy);
-    opacity: 0.7;
-    line-height: 1.6;
   }
 </style>
