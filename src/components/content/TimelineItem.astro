@@ -1,0 +1,267 @@
+---
+interface TimelineImage {
+  src: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+}
+
+interface Props {
+  date: string;
+  title: string;
+  description: string;
+  images?: TimelineImage[];
+  entryId: string;
+}
+
+const { date, title, description, images, entryId } = Astro.props;
+const hasImages = images && images.length > 0;
+---
+
+<div class:list={["timeline-item", { "has-images": hasImages }]}>
+  <div class="timeline-marker"></div>
+
+  <div class="timeline-content">
+    <div class="timeline-text">
+      <div class="timeline-date">{date}</div>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+
+    {hasImages && (
+      <div class="timeline-images" data-lightbox-group={entryId}>
+        {images.map((image, index) => (
+          <button
+            type="button"
+            class="timeline-image-trigger"
+            data-lightbox-trigger
+            data-lightbox-group={entryId}
+            data-media-src={image.src}
+            data-media-type="image"
+            data-media-title={title}
+            data-media-description={image.caption}
+            data-media-credit={image.credit}
+            data-media-index={index}
+            data-media-total={images.length}
+          >
+            <img src={image.src} alt={image.alt} loading="lazy" />
+            {images.length > 1 && index === 0 && (
+              <span class="image-count">{images.length} photos</span>
+            )}
+            <span class="image-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+                <path d="M11 8v6"/>
+                <path d="M8 11h6"/>
+              </svg>
+            </span>
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    background: var(--spring);
+    border-radius: 50%;
+    border: 3px solid var(--warm-white);
+    transform: translateX(-50%);
+    margin-left: 8px;
+  }
+
+  .timeline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .timeline-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .timeline-date {
+    font-size: 0.85rem;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-item h3 {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    font-family: 'Fraunces', serif;
+  }
+
+  .timeline-item p {
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Image grid */
+  .timeline-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .timeline-images:has(> :only-child) {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-image-trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+
+  /* Show only first image on mobile by default, rest on larger screens */
+  .timeline-image-trigger:not(:first-child) {
+    display: none;
+  }
+
+  .timeline-image-trigger img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-image-trigger:hover img,
+  .timeline-image-trigger:focus img {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 48, 71, 0);
+    transition: background 0.2s ease;
+  }
+
+  .image-overlay svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.2s ease;
+  }
+
+  .timeline-image-trigger:hover .image-overlay,
+  .timeline-image-trigger:focus .image-overlay {
+    background: rgba(45, 48, 71, 0.4);
+  }
+
+  .timeline-image-trigger:hover .image-overlay svg,
+  .timeline-image-trigger:focus .image-overlay svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .image-count {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background: rgba(45, 48, 71, 0.85);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  /* Tablet and up */
+  @media (min-width: 640px) {
+    .timeline-image-trigger:not(:first-child) {
+      display: block;
+    }
+
+    .image-count {
+      display: none;
+    }
+  }
+
+  /* Desktop - side by side layout */
+  @media (min-width: 900px) {
+    .timeline-item {
+      padding-left: 2.5rem;
+    }
+
+    .timeline-item.has-images .timeline-content {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .timeline-item.has-images .timeline-text {
+      flex: 1;
+    }
+
+    .timeline-item.has-images .timeline-images {
+      flex: 0 0 280px;
+      max-width: 280px;
+    }
+
+    /* For entries with many images, limit grid height */
+    .timeline-images {
+      max-height: 400px;
+      overflow: hidden;
+    }
+  }
+
+  /* Large desktop */
+  @media (min-width: 1200px) {
+    .timeline-item.has-images .timeline-images {
+      flex: 0 0 320px;
+      max-width: 320px;
+    }
+  }
+
+  /* Focus styles for accessibility */
+  .timeline-image-trigger:focus {
+    outline: 2px solid var(--spring);
+    outline-offset: 2px;
+  }
+
+  .timeline-image-trigger:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .timeline-image-trigger:focus-visible {
+    outline: 2px solid var(--spring);
+    outline-offset: 2px;
+  }
+</style>
