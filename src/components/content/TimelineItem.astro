@@ -135,12 +135,41 @@ const hasImages = images && images.length > 0;
     display: block;
     width: 100%;
     padding: 0;
-    border: none;
-    background: none;
+    border: 3px solid var(--spring);
+    background: var(--spring);
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 16px 8px 20px 10px / 10px 18px 8px 14px;
     overflow: hidden;
     aspect-ratio: 4/3;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .timeline-image-trigger:hover,
+  .timeline-image-trigger:focus {
+    border-color: var(--forest);
+  }
+
+  /* Vary the shape for each thumbnail to feel more organic */
+  .timeline-image-trigger:nth-child(1) {
+    border-radius: 16px 8px 20px 10px / 10px 18px 8px 14px;
+    transform: rotate(-0.5deg);
+  }
+  .timeline-image-trigger:nth-child(2) {
+    border-radius: 10px 18px 8px 16px / 14px 10px 18px 8px;
+    transform: rotate(0.75deg);
+  }
+  .timeline-image-trigger:nth-child(3) {
+    border-radius: 14px 10px 16px 12px / 12px 16px 10px 18px;
+    transform: rotate(-0.3deg);
+  }
+  .timeline-image-trigger:nth-child(4) {
+    border-radius: 12px 16px 10px 18px / 18px 8px 14px 10px;
+    transform: rotate(0.5deg);
+  }
+
+  .timeline-image-trigger:hover,
+  .timeline-image-trigger:focus {
+    transform: rotate(0deg) scale(1.02);
   }
 
   /* Show only first image on mobile by default, rest on larger screens */
@@ -192,15 +221,16 @@ const hasImages = images && images.length > 0;
 
   .image-count {
     position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    background: rgba(45, 48, 71, 0.85);
+    bottom: 0.75rem;
+    right: 0.75rem;
+    background: var(--forest);
     color: white;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: 10px 6px 12px 8px / 8px 10px 6px 12px;
     pointer-events: none;
+    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.2);
   }
 
   /* Tablet and up */
