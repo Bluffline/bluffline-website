@@ -4,7 +4,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 
+import scenicHighwayData from '../../data/scenic-highway.json';
+import planningCorridorData from '../../data/planning-corridor.json';
+
 const resources = await getCollection('resources');
+
+// Convert resources with coordinates to GeoJSON format
+const resourcesWithCoordinates = resources.filter(r => r.data.coordinates);
+const resourcesGeoJSON = {
+  type: 'FeatureCollection',
+  features: resourcesWithCoordinates.map(resource => ({
+    type: 'Feature',
+    properties: {
+      name: resource.data.name,
+      description: resource.data.description,
+      qualities: resource.data.qualities,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [resource.data.coordinates!.lng, resource.data.coordinates!.lat],
+    },
+  })),
+};
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
 ---
 
 <BaseLayout 
@@ -20,21 +43,16 @@ const resources = await getCollection('resources');
   <section class="map-section">
     <div class="map-container">
       <div class="map-wrapper">
-        <div class="map-placeholder">
-          <div class="map-placeholder-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-          </div>
-          <h3>Interactive Corridor Map</h3>
-          <p>Explore intrinsic resources and points of interest along the 22-mile corridor from UWF to NAS Pensacola.</p>
-        </div>
+        <div id="corridor-map"></div>
       </div>
       <div class="map-legend">
         <div class="legend-item">
-          <div class="legend-line corridor"></div>
-          <span>Bluffline Corridor</span>
+          <div class="legend-polygon"></div>
+          <span>Bluffline Planning Corridor</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-line"></div>
+          <span>Bluffline Scenic Highway</span>
         </div>
         <div class="legend-item">
           <div class="legend-point"></div>
@@ -125,31 +143,24 @@ const resources = await getCollection('resources');
     overflow: hidden;
     margin-bottom: 1.5rem;
   }
-  .map-placeholder {
+  #corridor-map {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
   }
-  .map-placeholder-icon {
-    width: 64px;
-    height: 64px;
-    background: white;
-    border-radius: 50%;
+  .map-legend {
     display: flex;
-    align-items: center;
+    gap: 1.5rem;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
   }
-  .map-placeholder-icon svg { width: 32px; height: 32px; color: var(--forest); }
-  .map-placeholder h3 { font-size: 1.5rem; color: var(--navy); margin-bottom: 0.5rem; }
-  .map-placeholder p { color: var(--navy); opacity: 0.7; max-width: 400px; }
-  .map-legend { display: flex; gap: 2rem; justify-content: center; }
   .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--navy); }
+  .legend-polygon {
+    width: 20px;
+    height: 14px;
+    background: rgba(65, 82, 31, 0.2);
+    border: 2px solid var(--forest);
+    border-radius: 2px;
+  }
   .legend-line {
     width: 24px;
     height: 3px;
@@ -161,6 +172,37 @@ const resources = await getCollection('resources');
     height: 12px;
     background: var(--spring);
     border-radius: 50%;
+    border: 2px solid var(--forest);
+  }
+
+  /* Mapbox popup styles */
+  :global(.mapboxgl-popup-content) {
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 280px;
+  }
+  :global(.mapboxgl-popup-content h3) {
+    font-size: 1rem;
+    color: var(--navy);
+    margin: 0 0 0.5rem 0;
+  }
+  :global(.mapboxgl-popup-content p) {
+    font-size: 0.875rem;
+    color: var(--navy);
+    opacity: 0.8;
+    margin: 0 0 0.5rem 0;
+  }
+  :global(.mapboxgl-popup-content .qualities) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  :global(.mapboxgl-popup-content .quality) {
+    font-size: 0.7rem;
+    padding: 0.125rem 0.5rem;
+    background: var(--mist);
+    color: var(--forest);
+    border-radius: 100px;
   }
 
   .overview-section { background: var(--warm-white); }
@@ -219,3 +261,122 @@ const resources = await getCollection('resources');
     font-weight: 500;
   }
 </style>
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+
+<script define:vars={{ MAPBOX_TOKEN, scenicHighwayData, planningCorridorData, resourcesGeoJSON }}>
+  // Load Mapbox GL JS
+  const script = document.createElement('script');
+  script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js';
+  script.onload = initMap;
+  document.head.appendChild(script);
+
+  function initMap() {
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+
+    const map = new mapboxgl.Map({
+      container: 'corridor-map',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [-87.22, 30.46],
+      zoom: 10,
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    map.on('load', () => {
+      // Add Planning Corridor (polygon) - rendered first (bottom layer)
+      map.addSource('planning-corridor', {
+        type: 'geojson',
+        data: planningCorridorData,
+      });
+      map.addLayer({
+        id: 'planning-corridor-fill',
+        type: 'fill',
+        source: 'planning-corridor',
+        paint: {
+          'fill-color': '#41521F',
+          'fill-opacity': 0.15,
+        },
+      });
+      map.addLayer({
+        id: 'planning-corridor-outline',
+        type: 'line',
+        source: 'planning-corridor',
+        paint: {
+          'line-color': '#41521F',
+          'line-width': 2,
+        },
+      });
+
+      // Add Scenic Highway (polyline)
+      map.addSource('scenic-highway', {
+        type: 'geojson',
+        data: scenicHighwayData,
+      });
+      map.addLayer({
+        id: 'scenic-highway-line',
+        type: 'line',
+        source: 'scenic-highway',
+        paint: {
+          'line-color': '#41521F',
+          'line-width': 4,
+        },
+      });
+
+      // Add Intrinsic Resources (markers)
+      map.addSource('resources', {
+        type: 'geojson',
+        data: resourcesGeoJSON,
+      });
+      map.addLayer({
+        id: 'resources-points',
+        type: 'circle',
+        source: 'resources',
+        paint: {
+          'circle-radius': 8,
+          'circle-color': '#99CC63',
+          'circle-stroke-color': '#41521F',
+          'circle-stroke-width': 2,
+        },
+      });
+
+      // Popup on click for resources
+      map.on('click', 'resources-points', (e) => {
+        const feature = e.features[0];
+        const { name, description, qualities } = feature.properties;
+        const qualitiesArr = JSON.parse(qualities);
+
+        const qualitiesHtml = qualitiesArr
+          .map(q => `<span class="quality">${q}</span>`)
+          .join('');
+
+        new mapboxgl.Popup()
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(`
+            <h3>${name}</h3>
+            <p>${description}</p>
+            <div class="qualities">${qualitiesHtml}</div>
+          `)
+          .addTo(map);
+      });
+
+      // Change cursor on hover
+      map.on('mouseenter', 'resources-points', () => {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+      map.on('mouseleave', 'resources-points', () => {
+        map.getCanvas().style.cursor = '';
+      });
+
+      // Fit map to show the entire corridor
+      const bounds = new mapboxgl.LngLatBounds();
+
+      // Add corridor polygon bounds
+      planningCorridorData.features[0].geometry.coordinates[0].forEach(coord => {
+        bounds.extend(coord);
+      });
+
+      map.fitBounds(bounds, { padding: 50 });
+    });
+  }
+</script>
