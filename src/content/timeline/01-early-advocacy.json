@@ -2,5 +2,13 @@
   "date": "1960s–1980s",
   "title": "Early Advocacy",
   "description": "Pensacola News Journal editor J. Earle Bowden begins decades of editorial advocacy for preserving the scenic bay bluffs and creating public access along the waterfront. His vision plants the seeds for what would become a regional movement.",
-  "order": 1
+  "order": 1,
+  "images": [
+    {
+      "src": "/images/Bowden-Scenic-Highway-Article.jpg",
+      "alt": "Full-page Pensacola News-Journal spread dated Dec. 8, 1968, featuring J. Earle Bowden’s editorial “Scenic Highway: Will It Remain Pensacola’s Parkway of Beauty?” with photos of Scenic Highway along the bay bluffs.",
+      "caption": "In a Dec. 8, 1968, Pensacola News-Journal editorial, writer J. Earle Bowden argues that development, road widening, and commercial intrusion could permanently diminish Scenic Highway’s bayfront bluffs and shoreline views.",
+      "credit": "Pensacola News Journal"
+    }
+  ]
 }
