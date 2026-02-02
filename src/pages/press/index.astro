@@ -6,6 +6,8 @@ import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import { getCollection } from 'astro:content';
+import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
+import path from 'node:path';
 
 // Fetch press coverage (external news)
 const pressItems = await getCollection('press');
@@ -25,73 +27,26 @@ const years = Object.keys(pressByYear).sort((a, b) => Number(b) - Number(a));
 const pressReleases = await getCollection('press-releases', ({ data }) => !data.draft);
 const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-// Types for media assets
-interface MediaAsset {
-  title: string;
-  src: string;
-  format: string;
-  size: string;
-  type: 'image' | 'video';
-  videoType?: string;
-}
+// Load media kit assets with embedded metadata extraction
+const publicDir = path.join(process.cwd(), 'public');
 
-// Use Vite's import.meta.glob to auto-load media files at build time
-const logoGlob = import.meta.glob<{ default: string }>('/public/media-kit/logos/*.{png,jpg,jpeg,svg,webp}', { eager: true });
-const photoGlob = import.meta.glob<{ default: string }>('/public/media-kit/photos/*.{png,jpg,jpeg,webp}', { eager: true });
-const videoGlob = import.meta.glob<{ default: string }>('/public/media-kit/videos/*.{mp4,webm,mov}', { eager: true });
+const logos = await getMediaAssetsFromDirectory(
+  path.join(publicDir, 'media-kit', 'logos'),
+  '/media-kit/logos',
+  'image'
+);
 
-// Helper to format filename to title
-function formatTitle(filepath: string): string {
-  const filename = filepath.split('/').pop() || '';
-  return filename
-    .replace(/\.[^/.]+$/, '') // Remove extension
-    .replace(/[-_]/g, ' ') // Replace dashes/underscores with spaces
-    .replace(/\b\w/g, (c: string) => c.toUpperCase()); // Capitalize words
-}
+const photos = await getMediaAssetsFromDirectory(
+  path.join(publicDir, 'media-kit', 'photos'),
+  '/media-kit/photos',
+  'image'
+);
 
-// Helper to get format from extension
-function getFormat(filepath: string): string {
-  const ext = filepath.split('.').pop()?.toUpperCase() || '';
-  if (ext === 'JPG') return 'JPEG';
-  return ext;
-}
-
-// Helper to get public URL from glob path
-function getPublicUrl(globPath: string): string {
-  // Convert "/public/media-kit/logos/file.png" to "/media-kit/logos/file.png"
-  return globPath.replace(/^\/public/, '');
-}
-
-// Process logos
-const logos: MediaAsset[] = Object.keys(logoGlob).map((filepath) => ({
-  title: formatTitle(filepath),
-  src: getPublicUrl(filepath),
-  format: getFormat(filepath),
-  size: '',
-  type: 'image' as const,
-}));
-
-// Process photos
-const photos: MediaAsset[] = Object.keys(photoGlob).map((filepath) => ({
-  title: formatTitle(filepath),
-  src: getPublicUrl(filepath),
-  format: getFormat(filepath),
-  size: '',
-  type: 'image' as const,
-}));
-
-// Process videos
-const videos: MediaAsset[] = Object.keys(videoGlob).map((filepath) => {
-  const ext = filepath.split('.').pop()?.toLowerCase();
-  return {
-    title: formatTitle(filepath),
-    src: getPublicUrl(filepath),
-    format: getFormat(filepath),
-    size: '',
-    type: 'video' as const,
-    videoType: ext === 'webm' ? 'video/webm' : ext === 'mov' ? 'video/quicktime' : 'video/mp4',
-  };
-});
+const videos = await getMediaAssetsFromDirectory(
+  path.join(publicDir, 'media-kit', 'videos'),
+  '/media-kit/videos',
+  'video'
+);
 ---
 
 <BaseLayout
@@ -228,8 +183,12 @@ const videos: MediaAsset[] = Object.keys(videoGlob).map((filepath) => {
                   data-media-src={asset.src}
                   data-media-type={asset.type}
                   data-media-title={asset.title}
+                  data-media-description={asset.description}
                   data-media-format={asset.format}
+                  data-media-dimensions={asset.dimensions}
                   data-media-size={asset.size}
+                  data-media-credit={asset.credit}
+                  data-media-date={asset.date}
                   data-media-download={asset.src}
                   data-media-filename={asset.src.split('/').pop()}
                 >
@@ -280,9 +239,12 @@ const videos: MediaAsset[] = Object.keys(videoGlob).map((filepath) => {
                   data-media-src={asset.src}
                   data-media-type={asset.type}
                   data-media-title={asset.title}
+                  data-media-description={asset.description}
                   data-media-format={asset.format}
+                  data-media-dimensions={asset.dimensions}
                   data-media-size={asset.size}
-                  data-media-credit="Bluffline, Inc."
+                  data-media-credit={asset.credit || 'Bluffline, Inc.'}
+                  data-media-date={asset.date}
                   data-media-download={asset.src}
                   data-media-filename={asset.src.split('/').pop()}
                 >
@@ -291,7 +253,7 @@ const videos: MediaAsset[] = Object.keys(videoGlob).map((filepath) => {
                   </div>
                   <div class="media-item-info">
                     <span class="media-item-title">{asset.title}</span>
-                    <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
+                    <span class="media-item-meta">{asset.format}{asset.dimensions && ` · ${asset.dimensions}`}{asset.size && ` · ${asset.size}`}</span>
                   </div>
                   <div class="media-item-actions">
                     <span class="preview-hint">
@@ -334,9 +296,11 @@ const videos: MediaAsset[] = Object.keys(videoGlob).map((filepath) => {
                   data-media-type={asset.type}
                   data-media-video-type={asset.videoType}
                   data-media-title={asset.title}
+                  data-media-description={asset.description}
                   data-media-format={asset.format}
                   data-media-size={asset.size}
-                  data-media-credit="Bluffline, Inc."
+                  data-media-credit={asset.credit || 'Bluffline, Inc.'}
+                  data-media-date={asset.date}
                   data-media-download={asset.src}
                   data-media-filename={asset.src.split('/').pop()}
                 >
