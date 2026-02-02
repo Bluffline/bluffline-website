@@ -16,7 +16,7 @@ import CallToAction from '../components/ui/CallToAction.astro';
         </div>
       </div>
       <div class="hero-image">
-        <div class="hero-image-placeholder">[Aerial view of bay bluffs or trail rendering]</div>
+        <img src="/images/hero-trail-2022.jpg" alt="People walking along a trail toward Pensacola Bay through oak trees" />
       </div>
     </div>
   </section>
@@ -53,7 +53,7 @@ import CallToAction from '../components/ui/CallToAction.astro';
             <div class="milestone-content"><h4>Pensacola Scenic Bluffs Corridor</h4><p>State scenic byway designation for the northeast segment</p></div>
           </div>
         </div>
-        <div class="what-image"><div class="what-image-placeholder">[Construction progress or planning meeting]</div></div>
+        <div class="what-image"><img src="/images/bluffs-aerial-2024.jpg" alt="Aerial view of Pensacola Bay bluffs showing the coastline, railroad, and forested neighborhoods" /></div>
       </div>
     </div>
   </section>
@@ -96,7 +96,7 @@ import CallToAction from '../components/ui/CallToAction.astro';
         <p>The Bluffline begins at Corry Station in West Pensacola, travels through Jackson Lakes, connects to the downtown waterfront, then continues northeast along the bay bluffs to the University of West Florida.</p>
       </div>
       <div class="route-grid">
-        <div class="route-map">[Interactive corridor map]</div>
+        <div class="route-map"><img src="/images/corridor-map-static.png" alt="Map showing the Bluffline corridor from Corry Station through downtown Pensacola to UWF" /></div>
         <div class="route-segments">
           <div class="segment"><h3>West Pensacola / Jackson Lakes</h3><p>70-acre county park with trails, wetland restoration, boat launch, and protected connections to schools and Corry Station.</p></div>
           <div class="segment"><h3>Downtown Waterfront</h3><p>Connecting West Pensacola to the urban core via Bayou Chico and the waterfront promenade.</p></div>
@@ -192,18 +192,10 @@ import CallToAction from '../components/ui/CallToAction.astro';
     overflow: hidden;
     box-shadow: 0 40px 80px -20px rgba(45, 48, 71, 0.2), 0 20px 40px -10px rgba(65, 82, 31, 0.1);
   }
-  .hero-image-placeholder, .what-image-placeholder {
+  .hero-image img, .what-image img {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--forest) 0%, #5a7329 50%, var(--spring) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: 'Fraunces', serif;
-    font-size: 1rem;
-    text-align: center;
-    padding: 2rem;
+    object-fit: cover;
   }
 
   .stats-bar {
@@ -349,15 +341,13 @@ import CallToAction from '../components/ui/CallToAction.astro';
   }
   .route-map {
     aspect-ratio: 4/3;
-    background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.5);
-    font-family: 'Fraunces', serif;
-    font-size: 1rem;
+    overflow: hidden;
+  }
+  .route-map img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .route-segments { display: flex; flex-direction: column; gap: 1.5rem; }
   .segment {
