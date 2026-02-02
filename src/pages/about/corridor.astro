@@ -42,8 +42,22 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 
   <section class="map-section">
     <div class="map-container">
-      <div class="map-wrapper">
+      <div class="map-wrapper" id="map-wrapper">
         <div id="corridor-map"></div>
+        <button class="fullscreen-btn" id="fullscreen-btn" aria-label="Toggle fullscreen map">
+          <svg class="icon-expand" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+          <svg class="icon-collapse" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 14 10 14 10 20"></polyline>
+            <polyline points="20 10 14 10 14 4"></polyline>
+            <line x1="14" y1="10" x2="21" y2="3"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+        </button>
       </div>
       <div class="map-legend">
         <div class="legend-item">
@@ -156,15 +170,79 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     .map-container { padding: 5rem 3rem; }
   }
   .map-wrapper {
-    aspect-ratio: 16/9;
+    position: relative;
+    height: 70vh;
+    min-height: 400px;
+    max-height: 600px;
     background: var(--mist);
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 1.5rem;
   }
+  @media (min-width: 768px) {
+    .map-wrapper {
+      aspect-ratio: 16/9;
+      height: auto;
+      min-height: auto;
+      max-height: none;
+    }
+  }
   #corridor-map {
     width: 100%;
     height: 100%;
+  }
+
+  /* Fullscreen button */
+  .fullscreen-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .fullscreen-btn:hover {
+    background: var(--mist);
+    transform: scale(1.05);
+  }
+  .fullscreen-btn .icon-collapse {
+    display: none;
+  }
+
+  /* Fullscreen mode */
+  .map-wrapper.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    min-height: auto;
+    border-radius: 0;
+    z-index: 9999;
+    margin: 0;
+  }
+  .map-wrapper.fullscreen .fullscreen-btn {
+    top: 20px;
+    left: 20px;
+  }
+  .map-wrapper.fullscreen .fullscreen-btn .icon-expand {
+    display: none;
+  }
+  .map-wrapper.fullscreen .fullscreen-btn .icon-collapse {
+    display: block;
   }
   .map-legend {
     display: flex;
@@ -447,6 +525,35 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       });
 
       map.fitBounds(bounds, { padding: 50 });
+
+      // Fullscreen toggle functionality
+      const mapWrapper = document.getElementById('map-wrapper');
+      const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+      function toggleFullscreen() {
+        mapWrapper.classList.toggle('fullscreen');
+        document.body.style.overflow = mapWrapper.classList.contains('fullscreen') ? 'hidden' : '';
+
+        // Resize the map after the CSS transition
+        setTimeout(() => {
+          map.resize();
+          // Re-fit bounds when entering fullscreen for better view
+          if (mapWrapper.classList.contains('fullscreen')) {
+            map.fitBounds(bounds, { padding: 60 });
+          } else {
+            map.fitBounds(bounds, { padding: 50 });
+          }
+        }, 100);
+      }
+
+      fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+      // Close fullscreen on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mapWrapper.classList.contains('fullscreen')) {
+          toggleFullscreen();
+        }
+      });
     });
   }
 </script>
