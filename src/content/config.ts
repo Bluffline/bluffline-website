@@ -79,6 +79,22 @@ const boardMembersCollection = defineCollection({
   }),
 });
 
+const timelineCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    date: z.string(),
+    title: z.string(),
+    description: z.string(),
+    order: z.number(),
+    images: z.array(z.object({
+      src: z.string(),
+      alt: z.string(),
+      caption: z.string().optional(),
+      credit: z.string().optional(),
+    })).optional(),
+  }),
+});
+
 export const collections = {
   'updates': updatesCollection,
   'press': pressCollection,
@@ -86,4 +102,5 @@ export const collections = {
   'resources': resourcesCollection,
   'press-releases': pressReleasesCollection,
   'board-members': boardMembersCollection,
+  'timeline': timelineCollection,
 };

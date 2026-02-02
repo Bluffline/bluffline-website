@@ -5,9 +5,13 @@ import CallToAction from '../../components/ui/CallToAction.astro';
 import BoardMemberCard from '../../components/content/BoardMemberCard.astro';
 import IconCard from '../../components/content/IconCard.astro';
 import DocumentCard from '../../components/content/DocumentCard.astro';
+import TimelineItem from '../../components/content/TimelineItem.astro';
+import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import { getCollection } from 'astro:content';
 
 const boardMembers = await getCollection('board-members');
+const timelineEntries = await getCollection('timeline');
+const sortedTimeline = timelineEntries.sort((a, b) => a.data.order - b.data.order);
 const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.order);
 const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus');
 const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus');
@@ -96,36 +100,15 @@ const documents = [
         <p>The idea of connecting Pensacola's bluffs to the bay isn't new. For generations, advocates have championed this corridor—through newspaper editorials, planning studies, and grassroots organizing.</p>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-date">1960s–1980s</div>
-          <h3>Early Advocacy</h3>
-          <p>Pensacola News Journal editor J. Earle Bowden begins decades of editorial advocacy for preserving the scenic bay bluffs and creating public access along the waterfront. His vision plants the seeds for what would become a regional movement.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-date">1998</div>
-          <h3>Florida Scenic Highway Program</h3>
-          <p>Florida creates its scenic highway program, offering a framework for protecting and enhancing corridors with outstanding natural, cultural, and historic resources.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-date">2008</div>
-          <h3>Scenic Bluffs Designated</h3>
-          <p>The Pensacola Scenic Bay Bluffs corridor earns official designation as a Florida Scenic Highway—a victory for preservation advocates, but the multimodal trail vision remains unrealized.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-date">2008–2020</div>
-          <h3>A Vision Deferred</h3>
-          <p>While the scenic highway program succeeds in protecting the corridor's character, efforts to build an actual trail stall repeatedly. The scenic highway has a managing organization; the trail does not.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-date">2021</div>
-          <h3>Bluffline, Inc. Founded</h3>
-          <p>A group of advocates incorporates Bluffline, Inc. as a 501(c)(3) nonprofit organization, creating the dedicated entity needed to advance the multimodal vision that had languished for decades.</p>
-        </div>
+        {sortedTimeline.map((entry) => (
+          <TimelineItem
+            date={entry.data.date}
+            title={entry.data.title}
+            description={entry.data.description}
+            images={entry.data.images}
+            entryId={entry.id}
+          />
+        ))}
       </div>
     </div>
   </section>
@@ -242,6 +225,8 @@ const documents = [
     primaryLabel="View the Corridor"
     primaryHref="/about/corridor"
   />
+
+  <MediaLightbox />
 </BaseLayout>
 
 <style>
@@ -257,7 +242,10 @@ const documents = [
   .purpose-content p { font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--navy); opacity: 0.85; }
 
   .history-section { background: var(--warm-white); }
-  .timeline { max-width: 700px; position: relative; padding-left: 2rem; }
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
   .timeline::before {
     content: '';
     position: absolute;
@@ -267,25 +255,16 @@ const documents = [
     width: 2px;
     background: var(--spring);
   }
-  .timeline-item { position: relative; margin-bottom: 2.5rem; }
-  .timeline-marker {
-    position: absolute;
-    left: -2rem;
-    top: 6px;
-    width: 16px;
-    height: 16px;
-    background: var(--spring);
-    border-radius: 50%;
-    border: 3px solid var(--warm-white);
+  @media (min-width: 900px) {
+    .timeline {
+      max-width: 900px;
+    }
   }
-  .timeline-date {
-    font-size: 0.85rem;
-    color: var(--forest);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+  @media (min-width: 1200px) {
+    .timeline {
+      max-width: 1000px;
+    }
   }
-  .timeline-item h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 0.5rem; }
-  .timeline-item p { color: var(--navy); opacity: 0.75; }
 
   .merger-section { background: var(--mist); }
   .merger-grid {
