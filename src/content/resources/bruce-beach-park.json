@@ -1,0 +1,9 @@
+{
+  "name": "Bruce Beach Park",
+  "description": "A 10-acre waterfront park with markers commemorating its significance in African American history of Pensacola. Features walking paths, picnic tables, beach access, and kayak launching.",
+  "qualities": ["Historical", "Recreational", "Natural", "Scenic"],
+  "coordinates": {
+    "lat": 30.4116,
+    "lng": -87.2232
+  }
+}

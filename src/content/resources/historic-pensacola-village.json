@@ -1,0 +1,9 @@
+{
+  "name": "Historic Pensacola Village",
+  "description": "An 8.5-acre area in Downtown Pensacola featuring multiple museums, historic homes, and the Colonial Archaeological Trail with outdoor exhibits from Spanish, British, and American occupations.",
+  "qualities": ["Cultural", "Historical", "Archaeological"],
+  "coordinates": {
+    "lat": 30.40849,
+    "lng": -87.2107
+  }
+}

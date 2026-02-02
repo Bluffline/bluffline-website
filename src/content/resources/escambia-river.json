@@ -1,5 +1,9 @@
 {
   "name": "Escambia River",
-  "description": "The fourth largest river in Florida, home to eighty-five native freshwater fish species.",
-  "qualities": ["Recreational", "Natural", "Scenic"]
+  "description": "The fourth largest river in Florida, home to eighty-five native freshwater fish species. The Escambia River runs near the current northern limit of the byway and along the northern border of the University of West Florida Campus.",
+  "qualities": ["Recreational", "Natural", "Scenic"],
+  "coordinates": {
+    "lat": 30.5421395,
+    "lng": -87.1685809
+  }
 }

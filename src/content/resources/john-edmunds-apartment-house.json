@@ -1,5 +1,9 @@
 {
   "name": "John Edmunds Apartment House",
-  "description": "A National Register–listed multi-family residential building.",
-  "qualities": ["Historical"]
+  "description": "A National Register-listed multi-family residential building representing early 20th-century urban development patterns in Pensacola.",
+  "qualities": ["Historical"],
+  "coordinates": {
+    "lat": 30.42528,
+    "lng": -87.19
+  }
 }

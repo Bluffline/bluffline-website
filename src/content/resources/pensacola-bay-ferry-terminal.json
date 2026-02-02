@@ -1,0 +1,9 @@
+{
+  "name": "Pensacola Bay Ferry Terminal",
+  "description": "Gateway for seasonal passenger ferry service connecting downtown Pensacola with Pensacola Beach and Fort Pickens area of Gulf Islands National Seashore.",
+  "qualities": ["Recreational", "Scenic"],
+  "coordinates": {
+    "lat": 30.4052281,
+    "lng": -87.2122763
+  }
+}

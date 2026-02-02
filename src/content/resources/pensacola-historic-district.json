@@ -1,0 +1,9 @@
+{
+  "name": "Pensacola Historic District & Palafox Historic District",
+  "description": "Approximately 108 acres of Downtown Pensacola listed on the National Register in 1970, featuring 19th century Gulf Coast cottages, Greek Revival, and Victorian homes. Adjacent Palafox Historic District adds 176 acres of architectural significance.",
+  "qualities": ["Cultural", "Historical"],
+  "coordinates": {
+    "lat": 30.4104166667,
+    "lng": -87.2123611111
+  }
+}
