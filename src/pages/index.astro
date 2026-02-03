@@ -4,24 +4,44 @@ import Button from '../components/ui/Button.astro';
 import CallToAction from '../components/ui/CallToAction.astro';
 import IconCard from '../components/content/IconCard.astro';
 
-const whyCards = [
+// Problem framing: waterfront disconnection as throughline
+const challenges = [
   {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    statHighlight: '4,400',
-    title: 'Households without cars',
-    description: 'Families in the corridor area who depend on safe walking and biking infrastructure for daily transportation.',
-  },
-  {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
-    statHighlight: '17.8%',
-    title: 'Park access in Ferry Pass',
-    description: 'Only 17.8% of residents live within a 10-minute walk of a park. The Bluffline will change that.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+    statHighlight: 'Cut Off',
+    title: 'Waterfront disconnection',
+    description: 'Rail corridors and highways have separated Pensacola neighborhoods from the bay for generations. Infrastructure built for industry now blocks access to our greatest natural asset.',
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
     statHighlight: 'Zero',
-    title: 'Protected routes today',
-    description: 'There are no protected bike lanes connecting West Pensacola to the downtown waterfront. We\'re building the first.',
+    title: 'Protected routes',
+    description: 'There are no protected bike lanes connecting West Pensacola to the downtown waterfront. Residents walking or cycling face dangerous conditions.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    statHighlight: '4,400',
+    title: 'Households without cars',
+    description: 'Thousands of families in the corridor depend on safe walking and biking infrastructure for daily access to jobs, schools, and parks.',
+  },
+];
+
+// Solution triad: parks, trails, transit
+const solutions = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c-4.97 0-9-2.686-9-6v-4c0-3.314 4.03-6 9-6s9 2.686 9 6v4c0 3.314-4.03 6-9 6z"/><path d="M12 6v16"/><path d="M8 10l4-4 4 4"/></svg>`,
+    title: 'Waterfront parks & public access',
+    description: 'New and enhanced parks restoring public access to Pensacola Bay, including Jackson Lakes, Bayou Chico, and the Scenic Bluffs.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="18.5" r="3.5"/><circle cx="5.5" cy="5.5" r="3.5"/><path d="M5.5 9v5a7 7 0 0 0 7 7h0"/><path d="M18.5 15V9a7 7 0 0 0-7-7h0"/></svg>`,
+    title: 'Protected trails & active transportation',
+    description: 'A continuous network of trails and protected bike lanes providing safe, car-free routes for daily transportation and recreation.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
+    title: 'Transit connections',
+    description: 'Integrated bus connections and future water transit linking neighborhoods along the corridor to employment centers and the downtown waterfront.',
   },
 ];
 ---
@@ -30,11 +50,12 @@ const whyCards = [
   <section class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h1>Reconnecting Pensacolians to their <em>environment</em> and their <em>neighbors</em></h1>
-        <p>The Bluffline is a grassroots effort to transform how our region moves, plays, and thrives with 20 miles of waterfront trails and transit.</p>
+        <h1>Reconnecting Pensacolians to <em>nature</em> and <em>neighbors</em></h1>
+        <p>The Bluffline is building 20 miles of waterfront parks, protected trails, and transit connections along Pensacola Bay—restoring access to the water that defines our region.</p>
+        <p class="hero-authority">Bluffline, Inc. is the designated steward of the Pensacola Scenic Bluffs Scenic Highway and the driving force behind the region's most significant multimodal infrastructure initiative.</p>
         <div class="hero-buttons">
           <Button href="/support">Get Involved</Button>
-          <Button href="/about" variant="outline">Learn More</Button>
+          <Button href="/about/corridor" variant="outline">Explore the Corridor</Button>
         </div>
       </div>
       <div class="hero-image">
@@ -45,50 +66,42 @@ const whyCards = [
 
   <div class="stats-bar">
     <div class="stats-inner">
-      <div class="stat"><div class="stat-number">20</div><div class="stat-label">Miles of Corridor</div></div>
+      <div class="stat"><div class="stat-number">20</div><div class="stat-label">Miles of Waterfront Corridor</div></div>
       <div class="stat"><div class="stat-number">$1.2M</div><div class="stat-label">Federal Funding Secured</div></div>
       <div class="stat"><div class="stat-number">60+</div><div class="stat-label">Years of Advocacy</div></div>
-      <div class="stat"><div class="stat-number">27</div><div class="stat-label">Intrinsic Resources</div></div>
+      <div class="stat"><div class="stat-number">FL</div><div class="stat-label">Scenic Highway Steward</div></div>
     </div>
   </div>
 
-  <section class="section what-section">
+  <section class="section corridor-section">
     <div class="section-inner">
       <div class="section-header">
-        <div class="section-label">What We're Building</div>
-        <h2>Safe paths for walking, cycling, and rolling</h2>
-        <p>The Bluffline is a protected multimodal corridor—trails, bike paths, and water transit connections that will link the University of West Florida to Naval Air Station Pensacola.</p>
+        <div class="section-label">The Corridor</div>
+        <h2>20 miles along Pensacola Bay</h2>
+        <p>From West Pensacola through downtown to the University of West Florida—a continuous waterfront corridor connecting communities, parks, and cultural landmarks.</p>
       </div>
-      <div class="what-grid">
-        <div class="what-content">
-          <p>We're not just building trails. We're reconnecting communities that have been divided by highways and rail corridors for decades. The Bluffline will provide safe, car-free access to jobs, schools, parks, and the waterfront.</p>
-          <div class="milestone">
-            <div class="milestone-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="milestone-content"><h4>Reconnecting Communities Grant</h4><p>$1.2M federal grant for master planning and preliminary design</p></div>
-          </div>
-          <div class="milestone">
-            <div class="milestone-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="milestone-content"><h4>Jackson Lakes County Park</h4><p>70-acre park with trails, wetland restoration, and connections to schools</p></div>
-          </div>
-          <div class="milestone">
-            <div class="milestone-marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="milestone-content"><h4>Pensacola Scenic Bluffs Corridor</h4><p>State scenic byway designation for the northeast segment</p></div>
-          </div>
+      <div class="corridor-grid">
+        <div class="corridor-map"><img src="/images/corridor-map-static.png" alt="Map showing the Bluffline corridor from Corry Station through downtown Pensacola to UWF" /></div>
+        <div class="corridor-segments">
+          <div class="segment"><span class="segment-marker">1</span><h3>West Pensacola & Jackson Lakes</h3><p>Beginning at Corry Station with the 70-acre Jackson Lakes County Park—trails, wetland restoration, and protected connections to schools.</p></div>
+          <div class="segment"><span class="segment-marker">2</span><h3>Downtown Waterfront</h3><p>Through Bayou Chico to the heart of Pensacola—connecting neighborhoods to the urban core and waterfront promenade.</p></div>
+          <div class="segment"><span class="segment-marker">3</span><h3>Scenic Bluffs</h3><p>Along the designated Florida Scenic Highway, following the historic bay bluffs through established neighborhoods.</p></div>
+          <div class="segment"><span class="segment-marker">4</span><h3>Ferry Pass to UWF</h3><p>Northeast to the University of West Florida, serving communities with the lowest park access in the county.</p></div>
+          <div class="corridor-cta"><a href="/about/corridor" class="btn">Explore the Full Corridor</a></div>
         </div>
-        <div class="what-image"><img src="/images/trail-walk-2022.jpg" alt="People walking along a trail toward Pensacola Bay through oak trees" /></div>
       </div>
     </div>
   </section>
 
-  <section class="section why-section">
+  <section class="section challenge-section">
     <div class="section-inner">
       <div class="section-header">
-        <div class="section-label">Why It Matters</div>
-        <h2>Infrastructure that changes lives</h2>
-        <p>The Bluffline isn't just about recreation. It's about safety, access and economic opportunity for every neighborhood along the corridor.</p>
+        <div class="section-label">The Challenge</div>
+        <h2>A waterfront we can see but can't safely reach</h2>
+        <p>Pensacola Bay is our region's greatest natural asset. But for too many neighborhoods, the water is visible yet inaccessible—blocked by infrastructure that prioritizes vehicles over people.</p>
       </div>
-      <div class="why-cards">
-        {whyCards.map(card => (
+      <div class="challenge-cards">
+        {challenges.map(card => (
           <IconCard
             icon={card.icon}
             statHighlight={card.statHighlight}
@@ -100,20 +113,60 @@ const whyCards = [
     </div>
   </section>
 
-  <section class="section route-section">
+  <section class="section solution-section">
     <div class="section-inner">
       <div class="section-header">
-        <div class="section-label">The Route</div>
-        <h2>From Corry Station to UWF—and everywhere in between</h2>
-        <p>The Bluffline begins at Corry Station in West Pensacola, travels through Jackson Lakes, connects to the downtown waterfront, then continues northeast along the bay bluffs to the University of West Florida.</p>
+        <div class="section-label">The Solution</div>
+        <h2>One integrated system for reconnection</h2>
+        <p>The Bluffline isn't three separate projects—it's a unified vision for restoring access to the waterfront through interconnected infrastructure.</p>
       </div>
-      <div class="route-grid">
-        <div class="route-map"><img src="/images/corridor-map-static.png" alt="Map showing the Bluffline corridor from Corry Station through downtown Pensacola to UWF" /></div>
-        <div class="route-segments">
-          <div class="segment"><h3>West Pensacola / Jackson Lakes</h3><p>70-acre county park with trails, wetland restoration, boat launch, and protected connections to schools and Corry Station.</p></div>
-          <div class="segment"><h3>Downtown Waterfront</h3><p>Connecting West Pensacola to the urban core via Bayou Chico and the waterfront promenade.</p></div>
-          <div class="segment"><h3>Scenic Bluffs to UWF</h3><p>Following the historic bay bluffs northeast through established neighborhoods to campus.</p></div>
-          <div class="route-cta"><a href="/about/corridor" class="btn">Explore the Full Route</a></div>
+      <div class="solution-grid">
+        {solutions.map(sol => (
+          <div class="solution-card">
+            <div class="solution-icon" set:html={sol.icon} />
+            <h3>{sol.title}</h3>
+            <p>{sol.description}</p>
+          </div>
+        ))}
+      </div>
+      <div class="solution-highlight">
+        <div class="highlight-content">
+          <h3>Building momentum</h3>
+          <p>In January 2025, the Bluffline was awarded a <strong>$1.2 million Reconnecting Communities grant</strong> from the U.S. Department of Transportation to fund master planning and preliminary design. This work builds on decades of adopted plans that have consistently identified this corridor as a regional priority.</p>
+          <a href="/progress" class="btn btn-outline">View Our Progress</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section authority-section">
+    <div class="section-inner">
+      <div class="authority-grid">
+        <div class="authority-content">
+          <div class="section-label">Our Role</div>
+          <h2>Six decades of advocacy. One organization to build it.</h2>
+          <p>Bluffline, Inc. isn't new to this work. We're the continuation of a legacy that stretches back to the 1960s, when community advocates first championed the vision of connecting Pensacola's bluffs to the bay.</p>
+          <p>In 2024, we merged with the Pensacola Scenic Highway Foundation, becoming the official <strong>Corridor Management Entity</strong> for the Pensacola Scenic Bluffs Scenic Highway. This merger united decades of preservation work with a mandate to build new multimodal infrastructure.</p>
+          <p>Today, we hold both the institutional knowledge and the organizational capacity to finally deliver what generations of Pensacolians have envisioned.</p>
+          <a href="/about" class="btn btn-outline">Learn Our Story</a>
+        </div>
+        <div class="authority-sidebar">
+          <div class="authority-stat">
+            <div class="authority-stat-value">60+</div>
+            <div class="authority-stat-label">Years of corridor advocacy</div>
+          </div>
+          <div class="authority-stat">
+            <div class="authority-stat-value">2008</div>
+            <div class="authority-stat-label">Florida Scenic Highway designated</div>
+          </div>
+          <div class="authority-stat">
+            <div class="authority-stat-value">2024</div>
+            <div class="authority-stat-label">Unified organization established</div>
+          </div>
+          <div class="authority-stat">
+            <div class="authority-stat-value">CME</div>
+            <div class="authority-stat-label">Corridor Management Entity</div>
+          </div>
         </div>
       </div>
     </div>
@@ -175,8 +228,13 @@ const whyCards = [
     font-size: 1.15rem;
     color: var(--navy);
     opacity: 0.8;
-    margin-bottom: 2.5rem;
-    max-width: 520px;
+    margin-bottom: 1.25rem;
+    max-width: 540px;
+  }
+  .hero-text .hero-authority {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
   }
   .hero-buttons {
     display: flex;
@@ -190,7 +248,7 @@ const whyCards = [
     overflow: hidden;
     box-shadow: 0 40px 80px -20px rgba(45, 48, 71, 0.2), 0 20px 40px -10px rgba(65, 82, 31, 0.1);
   }
-  .hero-image img, .what-image img {
+  .hero-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -229,111 +287,229 @@ const whyCards = [
     opacity: 0.8;
   }
 
-  .what-section { background: var(--cream); }
-  .what-grid {
-    display: grid;
-    gap: 3rem;
-    align-items: start;
-  }
-  @media (min-width: 1024px) {
-    .what-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
-  }
-  .what-content p { font-size: 1.05rem; margin-bottom: 1.5rem; color: var(--navy); }
-  .what-image {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 16/10;
-    box-shadow: 0 20px 60px -20px rgba(45, 48, 71, 0.2);
-  }
-  .milestone {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    align-items: flex-start;
-  }
-  .milestone-marker {
-    width: 32px;
-    height: 32px;
-    background: var(--spring);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 0.25rem;
-  }
-  .milestone-marker svg { width: 16px; height: 16px; color: var(--forest); }
-  .milestone-content h4 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 0.25rem;
-  }
-  .milestone-content p { font-size: 0.95rem; margin-bottom: 0; opacity: 0.7; }
-
-  .why-section { background: var(--warm-white); }
-  .why-cards {
-    display: grid;
-    gap: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .why-cards { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  }
-
-  .route-section {
+  /* Corridor Section - Geographic Orientation */
+  .corridor-section {
     background: var(--navy);
     color: white;
     position: relative;
     overflow: hidden;
   }
-  .route-section::before {
+  .corridor-section::before {
     content: '';
     position: absolute;
     inset: 0;
     background: radial-gradient(ellipse 100% 80% at 100% 50%, rgba(153, 204, 99, 0.1), transparent);
     pointer-events: none;
   }
-  .route-section .section-label { color: var(--spring); }
-  .route-section .section-header h2 { color: white; }
-  .route-section .section-header p { color: white; opacity: 0.7; }
-  .route-grid {
+  .corridor-section .section-label { color: var(--spring); }
+  .corridor-section .section-header h2 { color: white; }
+  .corridor-section .section-header p { color: white; opacity: 0.7; }
+  .corridor-grid {
     display: grid;
     gap: 3rem;
     align-items: start;
   }
   @media (min-width: 1024px) {
-    .route-grid { grid-template-columns: 1.2fr 1fr; gap: 4rem; }
+    .corridor-grid { grid-template-columns: 1.2fr 1fr; gap: 4rem; }
   }
-  .route-map {
+  .corridor-map {
     aspect-ratio: 4/3;
     border-radius: 16px;
     overflow: hidden;
   }
-  .route-map img {
+  .corridor-map img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .route-segments { display: flex; flex-direction: column; gap: 1.5rem; }
-  .segment {
+  .corridor-segments { display: flex; flex-direction: column; gap: 1rem; }
+  .corridor-segments .segment {
+    display: flex;
+    gap: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1.25rem 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s ease;
+    align-items: flex-start;
   }
-  .segment:hover {
+  .corridor-segments .segment:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(153, 204, 99, 0.3);
   }
-  .segment h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-  .segment p { opacity: 0.7; font-size: 0.9rem; margin: 0; }
-  .route-cta { margin-top: 1rem; }
-  .route-cta .btn {
+  .segment-marker {
+    width: 28px;
+    height: 28px;
+    background: var(--spring);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--forest);
+    flex-shrink: 0;
+  }
+  .corridor-segments .segment h3 { font-size: 1.05rem; margin-bottom: 0.25rem; color: white; }
+  .corridor-segments .segment p { opacity: 0.7; font-size: 0.875rem; margin: 0; }
+  .corridor-cta { margin-top: 0.5rem; }
+  .corridor-cta .btn {
     background: var(--spring);
     color: var(--navy);
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s ease;
   }
-  .route-cta .btn:hover { background: white; }
+  .corridor-cta .btn:hover { background: white; }
+
+  /* Challenge Section - Problem Framing */
+  .challenge-section { background: var(--cream); }
+  .challenge-cards {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .challenge-cards { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+
+  /* Solution Section */
+  .solution-section { background: var(--warm-white); }
+  .solution-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 768px) {
+    .solution-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+  .solution-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+    transition: all 0.3s ease;
+  }
+  .solution-card:hover {
+    box-shadow: 0 8px 32px rgba(45, 48, 71, 0.08);
+    transform: translateY(-2px);
+  }
+  .solution-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--mist);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .solution-icon :global(svg) {
+    width: 24px;
+    height: 24px;
+    color: var(--forest);
+  }
+  .solution-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .solution-card p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.75;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .solution-highlight {
+    background: var(--mist);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  @media (min-width: 768px) {
+    .solution-highlight { padding: 2.5rem 3rem; }
+  }
+  .highlight-content h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .highlight-content p {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+  .highlight-content strong { color: var(--forest); }
+  .btn-outline {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--forest);
+    border-radius: 8px;
+    color: var(--forest);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: var(--forest);
+    color: white;
+  }
+
+  /* Authority Section - Institutional Legitimacy */
+  .authority-section { background: var(--forest); color: white; }
+  .authority-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .authority-grid { grid-template-columns: 1.5fr 1fr; gap: 4rem; align-items: start; }
+  }
+  .authority-content .section-label { color: var(--spring); }
+  .authority-content h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: 1.5rem;
+  }
+  .authority-content p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+  .authority-content strong { color: var(--spring); }
+  .authority-content .btn-outline {
+    border-color: var(--spring);
+    color: var(--spring);
+    margin-top: 0.5rem;
+  }
+  .authority-content .btn-outline:hover {
+    background: var(--spring);
+    color: var(--forest);
+  }
+  .authority-sidebar {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .authority-stat {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .authority-stat:first-child { padding-top: 0; }
+  .authority-stat:last-child { border-bottom: none; padding-bottom: 0; }
+  .authority-stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 1.75rem;
+    color: var(--spring);
+    margin-bottom: 0.25rem;
+  }
+  .authority-stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
 </style>
