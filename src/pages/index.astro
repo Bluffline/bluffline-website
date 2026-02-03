@@ -51,8 +51,7 @@ const solutions = [
     <div class="hero-content">
       <div class="hero-text">
         <h1>Reconnecting Pensacolians to <em>nature</em> and <em>neighbors</em></h1>
-        <p>The Bluffline is building 20 miles of waterfront parks, protected trails, and transit connections along Pensacola Bay—restoring access to the water that defines our region.</p>
-        <p class="hero-authority">Bluffline, Inc. is the designated steward of the Pensacola Scenic Bluffs Scenic Highway and the driving force behind the region's most significant multimodal infrastructure initiative.</p>
+        <p>20 miles of waterfront parks, protected trails, and transit connections along Pensacola Bay.</p>
         <div class="hero-buttons">
           <Button href="/support">Get Involved</Button>
           <Button href="/about/corridor" variant="outline">Explore the Corridor</Button>
@@ -128,13 +127,6 @@ const solutions = [
             <p>{sol.description}</p>
           </div>
         ))}
-      </div>
-      <div class="solution-highlight">
-        <div class="highlight-content">
-          <h3>Building momentum</h3>
-          <p>In January 2025, the Bluffline was awarded a <strong>$1.2 million Reconnecting Communities grant</strong> from the U.S. Department of Transportation to fund master planning and preliminary design. This work builds on decades of adopted plans that have consistently identified this corridor as a regional priority.</p>
-          <a href="/progress" class="btn btn-outline">View Our Progress</a>
-        </div>
       </div>
     </div>
   </section>
@@ -228,13 +220,8 @@ const solutions = [
     font-size: 1.15rem;
     color: var(--navy);
     opacity: 0.8;
-    margin-bottom: 1.25rem;
-    max-width: 540px;
-  }
-  .hero-text .hero-authority {
-    font-size: 0.95rem;
-    opacity: 0.7;
     margin-bottom: 2rem;
+    max-width: 540px;
   }
   .hero-buttons {
     display: flex;
@@ -289,21 +276,8 @@ const solutions = [
 
   /* Corridor Section - Geographic Orientation */
   .corridor-section {
-    background: var(--navy);
-    color: white;
-    position: relative;
-    overflow: hidden;
+    background: var(--warm-white);
   }
-  .corridor-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 100% 80% at 100% 50%, rgba(153, 204, 99, 0.1), transparent);
-    pointer-events: none;
-  }
-  .corridor-section .section-label { color: var(--spring); }
-  .corridor-section .section-header h2 { color: white; }
-  .corridor-section .section-header p { color: white; opacity: 0.7; }
   .corridor-grid {
     display: grid;
     gap: 3rem;
@@ -316,46 +290,47 @@ const solutions = [
     aspect-ratio: 4/3;
     border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(45, 48, 71, 0.1);
   }
   .corridor-map img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .corridor-segments { display: flex; flex-direction: column; gap: 1rem; }
+  .corridor-segments { display: flex; flex-direction: column; gap: 0.75rem; }
   .corridor-segments .segment {
     display: flex;
     gap: 1rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: white;
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(45, 48, 71, 0.08);
     transition: all 0.3s ease;
     align-items: flex-start;
   }
   .corridor-segments .segment:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(153, 204, 99, 0.3);
+    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.08);
+    border-color: rgba(65, 82, 31, 0.2);
   }
   .segment-marker {
     width: 28px;
     height: 28px;
-    background: var(--spring);
+    background: var(--forest);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--forest);
+    color: white;
     flex-shrink: 0;
   }
-  .corridor-segments .segment h3 { font-size: 1.05rem; margin-bottom: 0.25rem; color: white; }
-  .corridor-segments .segment p { opacity: 0.7; font-size: 0.875rem; margin: 0; }
+  .corridor-segments .segment h3 { font-size: 1rem; margin-bottom: 0.25rem; color: var(--navy); font-family: 'Source Sans 3', sans-serif; font-weight: 600; }
+  .corridor-segments .segment p { color: var(--navy); opacity: 0.7; font-size: 0.875rem; margin: 0; }
   .corridor-cta { margin-top: 0.5rem; }
   .corridor-cta .btn {
-    background: var(--spring);
-    color: var(--navy);
+    background: var(--forest);
+    color: white;
     display: inline-block;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
@@ -363,10 +338,10 @@ const solutions = [
     text-decoration: none;
     transition: background 0.2s ease;
   }
-  .corridor-cta .btn:hover { background: white; }
+  .corridor-cta .btn:hover { background: var(--navy); }
 
   /* Challenge Section - Problem Framing */
-  .challenge-section { background: var(--cream); }
+  .challenge-section { background: var(--mist); }
   .challenge-cards {
     display: grid;
     gap: 1.5rem;
@@ -376,11 +351,10 @@ const solutions = [
   }
 
   /* Solution Section */
-  .solution-section { background: var(--warm-white); }
+  .solution-section { background: var(--cream); }
   .solution-grid {
     display: grid;
     gap: 1.5rem;
-    margin-bottom: 3rem;
   }
   @media (min-width: 768px) {
     .solution-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -424,28 +398,6 @@ const solutions = [
     margin: 0;
     line-height: 1.6;
   }
-  .solution-highlight {
-    background: var(--mist);
-    border-radius: 16px;
-    padding: 2rem;
-  }
-  @media (min-width: 768px) {
-    .solution-highlight { padding: 2.5rem 3rem; }
-  }
-  .highlight-content h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.35rem;
-    color: var(--navy);
-    margin-bottom: 1rem;
-  }
-  .highlight-content p {
-    font-size: 1.05rem;
-    color: var(--navy);
-    opacity: 0.85;
-    margin-bottom: 1.5rem;
-    max-width: 700px;
-  }
-  .highlight-content strong { color: var(--forest); }
   .btn-outline {
     display: inline-block;
     padding: 0.75rem 1.5rem;
