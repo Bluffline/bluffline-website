@@ -58,7 +58,8 @@ const hasGallery = gallery && gallery.length > 0;
       data-media-src={img.src}
       data-media-title={img.title}
       data-media-description={img.description || ''}
-      hidden
+      aria-hidden="true"
+      tabindex="-1"
     />
   ))}
   <div class="event-content">
