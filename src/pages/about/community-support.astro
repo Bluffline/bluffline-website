@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import TestimonialCard from '../../components/content/TestimonialCard.astro';
+import CallToAction from '../../components/ui/CallToAction.astro';
+
+const testimonials = await getCollection('testimonials');
+
+// Sort by order if provided, otherwise by date
+const sortedTestimonials = testimonials.sort((a, b) => {
+  if (a.data.order !== undefined && b.data.order !== undefined) {
+    return a.data.order - b.data.order;
+  }
+  if (a.data.date && b.data.date) {
+    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+  }
+  return 0;
+});
+---
+
+<BaseLayout
+  title="Community Support"
+  description="Letters of support from civic leaders, elected officials, and community organizations endorsing the Bluffline vision for Pensacola's waterfront."
+>
+  <PageHero
+    label="Community Support"
+    title="Letters of Support"
+    description="Over the years, civic leaders, elected officials, and community organizations have voiced their support for the Bluffline vision. Here are some of their words."
+  />
+
+  <section class="section testimonials-section">
+    <div class="section-inner">
+      {sortedTestimonials.length > 0 ? (
+        <div class="testimonials-grid">
+          {sortedTestimonials.map((testimonial) => (
+            <TestimonialCard
+              quote={testimonial.data.quote}
+              author={testimonial.data.author}
+              title={testimonial.data.title}
+              organization={testimonial.data.organization}
+              pdfFile={testimonial.data.pdfFile}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <p>Letters of support coming soon.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <CallToAction
+    title="Add your voice"
+    description="Join the growing coalition of supporters working to make the Bluffline a reality."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+    variant="forest"
+  />
+</BaseLayout>
+
+<style>
+  .testimonials-section {
+    background: var(--cream);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 16px;
+    color: var(--navy);
+    opacity: 0.7;
+  }
+</style>
