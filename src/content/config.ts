@@ -95,6 +95,19 @@ const timelineCollection = defineCollection({
   }),
 });
 
+const testimonialsCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    quote: z.string(),
+    author: z.string(),
+    title: z.string(),
+    organization: z.string(),
+    date: z.coerce.date().optional(),
+    pdfFile: z.string(),
+    order: z.number().optional(),
+  }),
+});
+
 export const collections = {
   'updates': updatesCollection,
   'press': pressCollection,
@@ -103,4 +116,5 @@ export const collections = {
   'press-releases': pressReleasesCollection,
   'board-members': boardMembersCollection,
   'timeline': timelineCollection,
+  'testimonials': testimonialsCollection,
 };
