@@ -66,77 +66,16 @@ const knoxWhiteGallery = [
         <p>The Bluffline is now embedded in official planning frameworks at every level of government—from City Hall to the State Capitol.</p>
       </div>
 
-      <div class="milestone-grid">
-        <MilestoneCard
-          level="City"
-          title="Pensacola CRA Overhaul"
-          description="Bluffline identified as a priority project in both the West Side and Urban Core Community Redevelopment Area plans."
-          year="2025"
-          status="complete"
-        />
-        <MilestoneCard
-          level="County"
-          title="Warrington CRA Plan"
-          description="Previously adopted into Escambia County's Warrington CRA plan, establishing county-level support for the corridor."
-          year="2024"
-          status="complete"
-        />
-        <MilestoneCard
-          level="Regional"
-          title="Long-Range Transportation Plan"
-          description="Included in the Florida–Alabama TPO and Emerald Coast Regional Council's 25-year transportation vision."
-          year="2025"
-          status="complete"
-        />
-        <MilestoneCard
-          level="State"
-          title="Florida Greenways & Trails Council"
-          description="Invited to present on the Bluffline's role as a key connective link between two State Land Trail Priority Corridors."
-          year="2025"
-          status="complete"
-        />
-      </div>
-
-      <div class="planning-visual">
-        <div class="planning-ladder">
-          <div class="ladder-item">
-            <span class="ladder-level">State</span>
-            <span class="ladder-connector"></span>
-          </div>
-          <div class="ladder-item">
-            <span class="ladder-level">Regional</span>
-            <span class="ladder-connector"></span>
-          </div>
-          <div class="ladder-item">
-            <span class="ladder-level">County</span>
-            <span class="ladder-connector"></span>
-          </div>
-          <div class="ladder-item">
-            <span class="ladder-level">City</span>
-            <span class="ladder-connector"></span>
-          </div>
-          <div class="ladder-base">
-            <span>Bluffline</span>
-          </div>
-        </div>
-        <p class="planning-caption">The Bluffline is now recognized at every level of regional planning—from neighborhood CRAs to state trail networks.</p>
-      </div>
-
-      <div class="planning-documents">
-        <h3>Supporting Planning Documents</h3>
-        <p class="documents-intro">Explore the official planning frameworks that now include the Bluffline corridor.</p>
-        <div class="documents-grid">
-          {planningDocuments.map(doc => (
-            <DocumentCard
-              title={doc.data.title}
-              description={doc.data.description || ''}
-              href={doc.data.file || doc.data.link || '#'}
-              external={!!doc.data.link}
-              agency={doc.data.agency}
-              level={doc.data.level}
-            />
-          ))}
-        </div>
+      <div class="documents-grid">
+        {planningDocuments.map(doc => (
+          <DocumentCard
+            title={doc.data.title}
+            href={doc.data.file || doc.data.link || '#'}
+            external={!!doc.data.link}
+            agency={doc.data.agency}
+            level={doc.data.level}
+          />
+        ))}
       </div>
     </div>
   </section>

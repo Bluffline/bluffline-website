@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  description: string;
+  description?: string;
   href: string;
   external?: boolean;
   icon?: string;
@@ -67,7 +67,7 @@ const levelLabels: Record<string, string> = {
     {!year && level && <span class="document-level">{levelLabels[level]}</span>}
     <h3>{title}</h3>
     {agency && <span class="document-agency">{agency}</span>}
-    <p>{description}</p>
+    {description && <p>{description}</p>}
   </div>
 
   <div class="document-action">
