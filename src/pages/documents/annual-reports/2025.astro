@@ -8,7 +8,30 @@ import PartnerCard from '../../../components/report/PartnerCard.astro';
 import ProjectSpotlight from '../../../components/report/ProjectSpotlight.astro';
 import EventHighlight from '../../../components/report/EventHighlight.astro';
 import AwardFeature from '../../../components/report/AwardFeature.astro';
+import PhotoGallery from '../../../components/report/PhotoGallery.astro';
+import TestimonialCard from '../../../components/content/TestimonialCard.astro';
+import DocumentCard from '../../../components/content/DocumentCard.astro';
 import Button from '../../../components/ui/Button.astro';
+import { getCollection } from 'astro:content';
+
+// Get testimonials for the featured voices
+const allTestimonials = await getCollection('testimonials');
+const featuredTestimonials = allTestimonials.filter(t =>
+  ['reeves-dc', 'hofberger-robert', 'diaz-joe'].includes(t.id)
+);
+
+// Get planning documents for the document section
+const allDocuments = await getCollection('documents');
+const planningDocuments = allDocuments.filter(d =>
+  ['plan-urban-core-cra', 'plan-westside-cra', 'plan-warrington-cra', 'plan-lrtp-2045', 'plan-florida-greenways'].includes(d.id)
+);
+
+const knoxWhiteGallery = [
+  { src: '/images/knox-white-speaking.jpg', alt: 'Mayor Knox White speaking about greenway development', caption: 'Mayor Knox White shares lessons from Greenville\'s Swamp Rabbit Trail' },
+  { src: '/images/knox-white-crowd.jpg', alt: 'Audience listening to Mayor Knox White', caption: 'Community members gather to learn about trail-led economic development' },
+  { src: '/images/knox-white-gena-maps.jpg', alt: 'Gena Buchanan looking at maps with attendees', caption: 'Gena Buchanan discusses the corridor with event attendees' },
+  { src: '/images/knox-white-maps.jpg', alt: 'Attendees reviewing Bluffline corridor maps', caption: 'Exploring the vision for Pensacola\'s connected waterfront' },
+];
 ---
 
 <BaseLayout title="2025 Annual Report | Bluffline">
@@ -94,6 +117,23 @@ import Button from '../../../components/ui/Button.astro';
           </div>
         </div>
         <p class="planning-caption">The Bluffline is now recognized at every level of regional planning—from neighborhood CRAs to state trail networks.</p>
+      </div>
+
+      <div class="planning-documents">
+        <h3>Supporting Planning Documents</h3>
+        <p class="documents-intro">Explore the official planning frameworks that now include the Bluffline corridor.</p>
+        <div class="documents-grid">
+          {planningDocuments.map(doc => (
+            <DocumentCard
+              title={doc.data.title}
+              description={doc.data.description || ''}
+              href={doc.data.file || doc.data.link || '#'}
+              external={!!doc.data.link}
+              agency={doc.data.agency}
+              level={doc.data.level}
+            />
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -276,6 +316,38 @@ import Button from '../../../components/ui/Button.astro';
     </div>
   </section>
 
+  <!-- Voices of Support -->
+  <section class="section bg-mist" id="voices">
+    <div class="section-inner">
+      <div class="section-header centered">
+        <span class="section-label">Community Support</span>
+        <h2>Voices of Support</h2>
+        <p>Regional leaders are speaking out about the Bluffline's potential to transform our community.</p>
+      </div>
+
+      <div class="testimonial-grid">
+        {featuredTestimonials.map(testimonial => (
+          <TestimonialCard
+            quote={testimonial.data.quote}
+            author={testimonial.data.author}
+            title={testimonial.data.title}
+            organization={testimonial.data.organization}
+            pdfFile={testimonial.data.pdfFile}
+          />
+        ))}
+      </div>
+
+      <div class="testimonials-cta">
+        <a href="/friends" class="testimonials-link">
+          See all voices of support
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Section E: Chimney Park Spotlight -->
   <section class="section bg-cream" id="chimney-park">
     <div class="section-inner">
@@ -293,8 +365,8 @@ import Button from '../../../components/ui/Button.astro';
         partner="City of Pensacola"
         funder="NextEra Energy Foundation"
         targetDate="2026"
-        imageSrc="/images/placeholder-chimney-park.jpg"
-        imageAlt="Chimney Park site along the Bluffline corridor"
+        imageSrc="/images/chimney-park-tracks.jpg"
+        imageAlt="View of Chimney Park from the railroad tracks"
       />
     </div>
   </section>
@@ -369,8 +441,8 @@ import Button from '../../../components/ui/Button.astro';
           title="Greenways as Economic Catalysts"
           date="2025"
           description="We hosted Mayor Knox White of Greenville, South Carolina for a public conversation about how greenways drive economic development. Mayor White shared lessons from Greenville's Swamp Rabbit Trail—a nationally recognized example of trail-led urban revitalization—and how those lessons apply to Pensacola's opportunity."
-          imageSrc="/images/placeholder-knox-white-event.jpg"
-          imageAlt="Mayor Knox White speaking at Bluffline event"
+          imageSrc="/images/knox-white-speaking.jpg"
+          imageAlt="Mayor Knox White speaking at the Bluffline event about greenways as economic catalysts"
           sponsor="Voyage Real Estate"
         >
           <BigQuote
@@ -379,6 +451,10 @@ import Button from '../../../components/ui/Button.astro';
             attributionTitle="Greenville, South Carolina"
           />
         </EventHighlight>
+        <div class="event-gallery">
+          <h4>Event Highlights</h4>
+          <PhotoGallery images={knoxWhiteGallery} featured={0} />
+        </div>
       </div>
 
       <!-- Bluffline Defender Award -->
@@ -390,12 +466,12 @@ import Button from '../../../components/ui/Button.astro';
 
         <AwardFeature
           awardName="The Bluffline Defender Award"
-          recipient="Gina Buchanan"
+          recipient="Gena Buchanan"
           recipientTitle="Longtime Director, Scenic Highway Foundation"
-          description="The inaugural Bluffline Defender Award was presented to Gina Buchanan, whose decades of leadership at the Scenic Highway Foundation laid the groundwork for everything the Bluffline has become. Her tireless advocacy preserved the corridor's scenic character while building the community relationships that made our merger—and our current momentum—possible."
+          description="The inaugural Bluffline Defender Award was presented to Gena Buchanan, whose decades of leadership at the Scenic Highway Foundation laid the groundwork for everything the Bluffline has become. Her tireless advocacy preserved the corridor's scenic character while building the community relationships that made our merger—and our current momentum—possible."
           awardDescription="An engraved walking stick bearing the words 'Bluffline Defender'—symbolizing the long journey of advocacy and the path still ahead."
-          imageSrc="/images/placeholder-gina-buchanan.jpg"
-          imageAlt="Gina Buchanan receiving the Bluffline Defender Award"
+          imageSrc="/images/gena-buchanan.jpg"
+          imageAlt="Gena Buchanan receiving the Bluffline Defender Award"
         >
           <p>This award signals continuity between the Scenic Highway Foundation's legacy and the Bluffline's future. It establishes a tradition of honoring those who walk the long road of civic change.</p>
         </AwardFeature>
@@ -462,7 +538,11 @@ import Button from '../../../components/ui/Button.astro';
   </section>
 
   <!-- Closing Section -->
-  <section class="section bg-forest closing-section" id="looking-ahead">
+  <section class="section closing-section" id="looking-ahead">
+    <div class="closing-background">
+      <img src="/images/walking-on-tracks.jpg" alt="" aria-hidden="true" />
+      <div class="closing-gradient"></div>
+    </div>
     <div class="section-inner">
       <div class="closing-content">
         <h2>Looking Ahead</h2>
@@ -582,6 +662,44 @@ import Button from '../../../components/ui/Button.astro';
     text-align: center;
     max-width: 500px;
     margin: 0;
+  }
+
+  /* Planning Documents */
+  .planning-documents {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+  }
+
+  .planning-documents h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .documents-intro {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .documents-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .documents-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .documents-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   /* Corridor Expansion */
@@ -930,6 +1048,49 @@ import Button from '../../../components/ui/Button.astro';
     font-weight: 300;
   }
 
+  /* Testimonials Section */
+  .testimonial-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .testimonial-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .testimonial-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .testimonials-cta {
+    text-align: center;
+  }
+
+  .testimonials-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: gap 0.2s ease;
+  }
+
+  .testimonials-link:hover {
+    gap: 0.75rem;
+  }
+
+  .testimonials-link svg {
+    width: 20px;
+    height: 20px;
+  }
+
   /* Federal Narrative */
   .federal-narrative {
     max-width: 900px;
@@ -1059,6 +1220,21 @@ import Button from '../../../components/ui/Button.astro';
     margin-bottom: 4rem;
   }
 
+  .event-gallery {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--mist);
+    border-radius: 16px;
+  }
+
+  .event-gallery h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
   .award-section {
     margin-top: 2rem;
   }
@@ -1128,8 +1304,38 @@ import Button from '../../../components/ui/Button.astro';
 
   /* Closing Section */
   .closing-section {
-    background: var(--forest);
+    position: relative;
     color: white;
+    overflow: hidden;
+  }
+
+  .closing-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .closing-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .closing-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(59, 94, 68, 0.85) 0%,
+      rgba(59, 94, 68, 0.92) 50%,
+      rgba(59, 94, 68, 0.95) 100%
+    );
+  }
+
+  .closing-section .section-inner {
+    position: relative;
+    z-index: 1;
   }
 
   .closing-content {

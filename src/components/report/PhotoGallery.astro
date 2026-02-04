@@ -1,0 +1,337 @@
+---
+interface GalleryImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+  featured?: number;
+}
+
+const { images, featured = 0 } = Astro.props;
+const galleryId = `gallery-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="photo-gallery" data-gallery-id={galleryId}>
+  <div class="gallery-grid">
+    {images.map((image, index) => (
+      <button
+        class:list={['gallery-item', { featured: index === featured }]}
+        data-index={index}
+        aria-label={`View ${image.alt}`}
+      >
+        <img src={image.src} alt={image.alt} loading="lazy" />
+        <div class="gallery-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+            <path d="M11 8v6M8 11h6"/>
+          </svg>
+        </div>
+      </button>
+    ))}
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image gallery">
+    <button class="lightbox-close" aria-label="Close gallery">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <div class="lightbox-content">
+      <img class="lightbox-image" src="" alt="" />
+      <p class="lightbox-caption"></p>
+    </div>
+
+    <button class="lightbox-nav lightbox-next" aria-label="Next image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+
+    <div class="lightbox-counter">
+      <span class="current">1</span> / <span class="total">{images.length}</span>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ images, galleryId }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const gallery = document.querySelector(`[data-gallery-id="${galleryId}"]`);
+    if (!gallery) return;
+
+    const lightbox = gallery.querySelector('.lightbox');
+    const lightboxImage = gallery.querySelector('.lightbox-image');
+    const lightboxCaption = gallery.querySelector('.lightbox-caption');
+    const currentCounter = gallery.querySelector('.lightbox-counter .current');
+    const closeBtn = gallery.querySelector('.lightbox-close');
+    const prevBtn = gallery.querySelector('.lightbox-prev');
+    const nextBtn = gallery.querySelector('.lightbox-next');
+    const galleryItems = gallery.querySelectorAll('.gallery-item');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+      currentIndex = index;
+      const image = images[index];
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+      lightboxCaption.textContent = image.caption || '';
+      lightboxCaption.style.display = image.caption ? 'block' : 'none';
+      currentCounter.textContent = index + 1;
+    }
+
+    function openLightbox(index) {
+      showImage(index);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      showImage((currentIndex + 1) % images.length);
+    }
+
+    function prevImage() {
+      showImage((currentIndex - 1 + images.length) % images.length);
+    }
+
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+  });
+</script>
+
+<style>
+  .photo-gallery {
+    position: relative;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    background: var(--mist);
+    transition: transform 0.2s ease;
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.02);
+  }
+
+  .gallery-item.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: 1;
+  }
+
+  @media (min-width: 640px) {
+    .gallery-item.featured {
+      aspect-ratio: auto;
+    }
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(45, 48, 71, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  .gallery-overlay svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.2s ease;
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    background: rgba(45, 48, 71, 0.4);
+  }
+
+  .gallery-item:hover .gallery-overlay svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Lightbox styles */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 10;
+  }
+
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .lightbox-close svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 10;
+  }
+
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .lightbox-nav svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+  }
+
+  .lightbox-prev {
+    left: 1rem;
+  }
+
+  .lightbox-next {
+    right: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .lightbox-prev {
+      left: 2rem;
+    }
+
+    .lightbox-next {
+      right: 2rem;
+    }
+  }
+
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .lightbox-caption {
+    margin-top: 1rem;
+    color: white;
+    font-size: 0.95rem;
+    text-align: center;
+    opacity: 0.8;
+    max-width: 600px;
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+</style>
