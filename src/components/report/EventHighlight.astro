@@ -1,4 +1,10 @@
 ---
+interface GalleryImage {
+  src: string;
+  title: string;
+  description?: string;
+}
+
 interface Props {
   title: string;
   date?: string;
@@ -7,18 +13,54 @@ interface Props {
   imageAlt?: string;
   imageCaption?: string;
   sponsor?: string;
+  gallery?: GalleryImage[];
 }
 
-const { title, date, description, imageSrc, imageAlt, imageCaption, sponsor } = Astro.props;
+const { title, date, description, imageSrc, imageAlt, imageCaption, sponsor, gallery } = Astro.props;
+const hasGallery = gallery && gallery.length > 0;
 ---
 
 <article class="event-highlight">
   {imageSrc && (
     <div class="event-image">
-      <img src={imageSrc} alt={imageAlt || title} loading="lazy" />
+      {hasGallery ? (
+        <button
+          class="gallery-trigger"
+          data-lightbox-trigger
+          data-media-src={gallery[0].src}
+          data-media-title={gallery[0].title}
+          data-media-description={gallery[0].description || ''}
+          aria-label={`View gallery: ${title}`}
+        >
+          <img src={imageSrc} alt={imageAlt || title} loading="lazy" />
+          <div class="gallery-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            <span>View Gallery ({gallery.length} photos)</span>
+          </div>
+        </button>
+      ) : (
+        <img src={imageSrc} alt={imageAlt || title} loading="lazy" />
+      )}
       {imageCaption && <span class="image-caption">{imageCaption}</span>}
     </div>
   )}
+
+  {/* Hidden gallery triggers for additional images */}
+  {hasGallery && gallery.slice(1).map((img) => (
+    <button
+      class="hidden-trigger"
+      data-lightbox-trigger
+      data-media-src={img.src}
+      data-media-title={img.title}
+      data-media-description={img.description || ''}
+      hidden
+    />
+  ))}
   <div class="event-content">
     {date && <span class="event-date">{date}</span>}
     <h3 class="event-title">{title}</h3>
@@ -67,6 +109,54 @@ const { title, date, description, imageSrc, imageAlt, imageCaption, sponsor } = 
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .gallery-trigger {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .gallery-trigger img {
+    display: block;
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+  }
+
+  .gallery-overlay svg {
+    width: 16px;
+    height: 16px;
+    color: var(--forest);
+  }
+
+  .gallery-trigger:hover .gallery-overlay {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .hidden-trigger {
+    display: none;
   }
 
   .image-caption {

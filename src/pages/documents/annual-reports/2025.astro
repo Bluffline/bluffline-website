@@ -8,9 +8,8 @@ import PartnerCard from '../../../components/report/PartnerCard.astro';
 import ProjectSpotlight from '../../../components/report/ProjectSpotlight.astro';
 import EventHighlight from '../../../components/report/EventHighlight.astro';
 import AwardFeature from '../../../components/report/AwardFeature.astro';
-import PhotoGallery from '../../../components/report/PhotoGallery.astro';
 import TestimonialCard from '../../../components/content/TestimonialCard.astro';
-import DocumentCard from '../../../components/content/DocumentCard.astro';
+import MediaLightbox from '../../../components/ui/MediaLightbox.astro';
 import Button from '../../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
 
@@ -20,17 +19,12 @@ const featuredTestimonials = allTestimonials.filter(t =>
   ['reeves-dc', 'hofberger-robert', 'diaz-joe'].includes(t.id)
 );
 
-// Get planning documents for the document section
-const allDocuments = await getCollection('documents');
-const planningDocuments = allDocuments.filter(d =>
-  ['plan-urban-core-cra', 'plan-westside-cra', 'plan-warrington-cra', 'plan-lrtp-2045', 'plan-florida-greenways'].includes(d.id)
-);
-
+// Knox White event gallery images for lightbox
 const knoxWhiteGallery = [
-  { src: '/images/knox-white-speaking.jpg', alt: 'Mayor Knox White speaking about greenway development', caption: 'Mayor Knox White shares lessons from Greenville\'s Swamp Rabbit Trail' },
-  { src: '/images/knox-white-crowd.jpg', alt: 'Audience listening to Mayor Knox White', caption: 'Community members gather to learn about trail-led economic development' },
-  { src: '/images/knox-white-gena-maps.jpg', alt: 'Gena Buchanan looking at maps with attendees', caption: 'Gena Buchanan discusses the corridor with event attendees' },
-  { src: '/images/knox-white-maps.jpg', alt: 'Attendees reviewing Bluffline corridor maps', caption: 'Exploring the vision for Pensacola\'s connected waterfront' },
+  { src: '/images/knox-white-speaking.jpg', title: 'Mayor Knox White Speaking', description: 'Mayor Knox White shares lessons from Greenville\'s Swamp Rabbit Trail' },
+  { src: '/images/knox-white-crowd.jpg', title: 'Community Gathering', description: 'Community members gather to learn about trail-led economic development' },
+  { src: '/images/knox-white-gena-maps.jpg', title: 'Corridor Discussion', description: 'Gena Buchanan discusses the corridor with event attendees' },
+  { src: '/images/knox-white-maps.jpg', title: 'Exploring the Vision', description: 'Exploring the vision for Pensacola\'s connected waterfront' },
 ];
 ---
 
@@ -41,7 +35,9 @@ const knoxWhiteGallery = [
     title="From Project to Platform"
     subtitle="Annual Report"
     thesis="2025 was the year the Bluffline shifted from a 'project' to a 'platform.' Not in concrete—in plans, partnerships, policy, and public narrative."
-  />
+  >
+    <img slot="visual" src="/images/bluffs-aerial-2024.jpg" alt="Aerial view of the Pensacola bluffs" />
+  </ReportHero>
 
   <!-- Opening Statement -->
   <section class="section bg-warm-white" id="introduction">
@@ -117,23 +113,6 @@ const knoxWhiteGallery = [
           </div>
         </div>
         <p class="planning-caption">The Bluffline is now recognized at every level of regional planning—from neighborhood CRAs to state trail networks.</p>
-      </div>
-
-      <div class="planning-documents">
-        <h3>Supporting Planning Documents</h3>
-        <p class="documents-intro">Explore the official planning frameworks that now include the Bluffline corridor.</p>
-        <div class="documents-grid">
-          {planningDocuments.map(doc => (
-            <DocumentCard
-              title={doc.data.title}
-              description={doc.data.description || ''}
-              href={doc.data.file || doc.data.link || '#'}
-              external={!!doc.data.link}
-              agency={doc.data.agency}
-              level={doc.data.level}
-            />
-          ))}
-        </div>
       </div>
     </div>
   </section>
@@ -444,6 +423,7 @@ const knoxWhiteGallery = [
           imageSrc="/images/knox-white-speaking.jpg"
           imageAlt="Mayor Knox White speaking at the Bluffline event about greenways as economic catalysts"
           sponsor="Voyage Real Estate"
+          gallery={knoxWhiteGallery}
         >
           <BigQuote
             quote="The trail didn't just connect neighborhoods—it changed how developers, businesses, and residents thought about what our city could become."
@@ -451,10 +431,6 @@ const knoxWhiteGallery = [
             attributionTitle="Greenville, South Carolina"
           />
         </EventHighlight>
-        <div class="event-gallery">
-          <h4>Event Highlights</h4>
-          <PhotoGallery images={knoxWhiteGallery} featured={0} />
-        </div>
       </div>
 
       <!-- Bluffline Defender Award -->
@@ -556,6 +532,9 @@ const knoxWhiteGallery = [
       </div>
     </div>
   </section>
+
+  <!-- Lightbox for galleries -->
+  <MediaLightbox />
 </BaseLayout>
 
 <style>
@@ -662,44 +641,6 @@ const knoxWhiteGallery = [
     text-align: center;
     max-width: 500px;
     margin: 0;
-  }
-
-  /* Planning Documents */
-  .planning-documents {
-    margin-top: 3rem;
-    padding-top: 3rem;
-    border-top: 1px solid rgba(45, 48, 71, 0.1);
-  }
-
-  .planning-documents h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.35rem;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-
-  .documents-intro {
-    font-size: 1rem;
-    color: var(--navy);
-    opacity: 0.7;
-    margin-bottom: 1.5rem;
-  }
-
-  .documents-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  @media (min-width: 640px) {
-    .documents-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .documents-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
   /* Corridor Expansion */
@@ -1218,21 +1159,6 @@ const knoxWhiteGallery = [
   /* Culture Building */
   .culture-event {
     margin-bottom: 4rem;
-  }
-
-  .event-gallery {
-    margin-top: 2rem;
-    padding: 2rem;
-    background: var(--mist);
-    border-radius: 16px;
-  }
-
-  .event-gallery h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
-    color: var(--navy);
-    margin-bottom: 1.25rem;
-    text-align: center;
   }
 
   .award-section {
