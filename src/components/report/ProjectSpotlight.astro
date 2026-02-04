@@ -1,0 +1,284 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  description: string;
+  status: 'planning' | 'funded' | 'in-delivery' | 'complete';
+  targetDate?: string;
+  partner?: string;
+  funder?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const { title, subtitle, description, status, targetDate, partner, funder, imageSrc, imageAlt } = Astro.props;
+
+const statusConfig = {
+  planning: { label: 'Planning', color: 'var(--navy)', bg: 'rgba(45, 48, 71, 0.1)' },
+  funded: { label: 'Funded', color: 'var(--forest)', bg: 'rgba(153, 204, 99, 0.2)' },
+  'in-delivery': { label: 'In Delivery', color: 'var(--forest)', bg: 'rgba(153, 204, 99, 0.3)' },
+  complete: { label: 'Complete', color: 'var(--forest)', bg: 'var(--spring)' }
+};
+
+const currentStatus = statusConfig[status];
+---
+
+<article class="project-spotlight">
+  <div class="spotlight-content">
+    <div class="spotlight-header">
+      {subtitle && <span class="spotlight-subtitle">{subtitle}</span>}
+      <h3 class="spotlight-title">{title}</h3>
+    </div>
+
+    <p class="spotlight-description">{description}</p>
+
+    <div class="spotlight-meta">
+      {partner && (
+        <div class="meta-item">
+          <span class="meta-label">Partner</span>
+          <span class="meta-value">{partner}</span>
+        </div>
+      )}
+      {funder && (
+        <div class="meta-item">
+          <span class="meta-label">Funding</span>
+          <span class="meta-value">{funder}</span>
+        </div>
+      )}
+    </div>
+
+    <div class="spotlight-status-bar">
+      <div class="status-track">
+        <div class="status-step" data-active={status === 'planning' || status === 'funded' || status === 'in-delivery' || status === 'complete'}>
+          <div class="status-dot"></div>
+          <span>Planning</span>
+        </div>
+        <div class="status-connector" data-active={status === 'funded' || status === 'in-delivery' || status === 'complete'}></div>
+        <div class="status-step" data-active={status === 'funded' || status === 'in-delivery' || status === 'complete'}>
+          <div class="status-dot"></div>
+          <span>Funded</span>
+        </div>
+        <div class="status-connector" data-active={status === 'in-delivery' || status === 'complete'}></div>
+        <div class="status-step" data-active={status === 'in-delivery' || status === 'complete'} data-current={status === 'in-delivery'}>
+          <div class="status-dot"></div>
+          <span>In Delivery</span>
+        </div>
+        <div class="status-connector" data-active={status === 'complete'}></div>
+        <div class="status-step" data-active={status === 'complete'}>
+          <div class="status-dot"></div>
+          <span>Complete</span>
+        </div>
+      </div>
+      {targetDate && (
+        <div class="target-date">
+          <span class="target-label">Target completion:</span>
+          <span class="target-value">{targetDate}</span>
+        </div>
+      )}
+    </div>
+  </div>
+
+  {imageSrc && (
+    <div class="spotlight-image">
+      <img src={imageSrc} alt={imageAlt || title} loading="lazy" />
+      <div class="image-badge" style={`background: ${currentStatus.bg}; color: ${currentStatus.color}`}>
+        {currentStatus.label}
+      </div>
+    </div>
+  )}
+</article>
+
+<style>
+  .project-spotlight {
+    display: grid;
+    gap: 2rem;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.04);
+  }
+
+  @media (min-width: 900px) {
+    .project-spotlight {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 2.5rem;
+    }
+  }
+
+  .spotlight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .spotlight-subtitle {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .spotlight-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--navy);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .spotlight-description {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .spotlight-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    opacity: 0.5;
+    font-weight: 600;
+  }
+
+  .meta-value {
+    font-size: 0.95rem;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  .spotlight-status-bar {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .status-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .status-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .status-step .status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(45, 48, 71, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .status-step[data-active="true"] .status-dot {
+    background: var(--spring);
+  }
+
+  .status-step[data-current="true"] .status-dot {
+    background: var(--forest);
+    box-shadow: 0 0 0 4px rgba(153, 204, 99, 0.3);
+  }
+
+  .status-step span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--navy);
+    opacity: 0.4;
+    white-space: nowrap;
+  }
+
+  .status-step[data-active="true"] span {
+    opacity: 0.8;
+  }
+
+  .status-step[data-current="true"] span {
+    color: var(--forest);
+    opacity: 1;
+    font-weight: 600;
+  }
+
+  .status-connector {
+    flex: 1;
+    min-width: 20px;
+    max-width: 60px;
+    height: 2px;
+    background: rgba(45, 48, 71, 0.1);
+    margin: 0 0.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .status-connector[data-active="true"] {
+    background: var(--spring);
+  }
+
+  .target-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .target-label {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.5;
+  }
+
+  .target-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--forest);
+  }
+
+  .spotlight-image {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: var(--mist);
+  }
+
+  .spotlight-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

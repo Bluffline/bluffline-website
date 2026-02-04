@@ -1,0 +1,1215 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ReportHero from '../../../components/report/ReportHero.astro';
+import BigQuote from '../../../components/report/BigQuote.astro';
+import StatCard from '../../../components/report/StatCard.astro';
+import MilestoneCard from '../../../components/report/MilestoneCard.astro';
+import PartnerCard from '../../../components/report/PartnerCard.astro';
+import ProjectSpotlight from '../../../components/report/ProjectSpotlight.astro';
+import EventHighlight from '../../../components/report/EventHighlight.astro';
+import AwardFeature from '../../../components/report/AwardFeature.astro';
+import Button from '../../../components/ui/Button.astro';
+---
+
+<BaseLayout title="2025 Annual Report | Bluffline">
+  <!-- Hero Section -->
+  <ReportHero
+    year="2025"
+    title="From Project to Platform"
+    subtitle="Annual Report"
+    thesis="2025 was the year the Bluffline shifted from a 'project' to a 'platform.' Not in concrete—in plans, partnerships, policy, and public narrative."
+  />
+
+  <!-- Opening Statement -->
+  <section class="section bg-warm-white" id="introduction">
+    <div class="section-inner">
+      <div class="opening-statement">
+        <p class="opening-lead">This isn't just a trail project anymore.</p>
+        <p>In 2025, the Bluffline became part of how the region plans itself. From city planning frameworks to state transportation priorities, from securing federal commitments to launching a new civic tradition—this year marked a fundamental shift in what the Bluffline means for Pensacola's future.</p>
+        <p>This report tells the story of that transformation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section A: From Project to Policy -->
+  <section class="section bg-cream" id="planning-integration">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Planning Integration</span>
+        <h2>From Project to Policy</h2>
+        <p>The Bluffline is now embedded in official planning frameworks at every level of government—from City Hall to the State Capitol.</p>
+      </div>
+
+      <div class="milestone-grid">
+        <MilestoneCard
+          level="City"
+          title="Pensacola CRA Overhaul"
+          description="Bluffline identified as a priority project in both the West Side and Urban Core Community Redevelopment Area plans."
+          year="2025"
+          status="complete"
+        />
+        <MilestoneCard
+          level="County"
+          title="Warrington CRA Plan"
+          description="Previously adopted into Escambia County's Warrington CRA plan, establishing county-level support for the corridor."
+          year="2024"
+          status="complete"
+        />
+        <MilestoneCard
+          level="Regional"
+          title="Long-Range Transportation Plan"
+          description="Included in the Florida–Alabama TPO and Emerald Coast Regional Council's 25-year transportation vision."
+          year="2025"
+          status="complete"
+        />
+        <MilestoneCard
+          level="State"
+          title="Florida Greenways & Trails Council"
+          description="Invited to present on the Bluffline's role as a key connective link between two State Land Trail Priority Corridors."
+          year="2025"
+          status="complete"
+        />
+      </div>
+
+      <div class="planning-visual">
+        <div class="planning-ladder">
+          <div class="ladder-item">
+            <span class="ladder-level">State</span>
+            <span class="ladder-connector"></span>
+          </div>
+          <div class="ladder-item">
+            <span class="ladder-level">Regional</span>
+            <span class="ladder-connector"></span>
+          </div>
+          <div class="ladder-item">
+            <span class="ladder-level">County</span>
+            <span class="ladder-connector"></span>
+          </div>
+          <div class="ladder-item">
+            <span class="ladder-level">City</span>
+            <span class="ladder-connector"></span>
+          </div>
+          <div class="ladder-base">
+            <span>Bluffline</span>
+          </div>
+        </div>
+        <p class="planning-caption">The Bluffline is now recognized at every level of regional planning—from neighborhood CRAs to state trail networks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thesis Quote Break -->
+  <section class="section bg-navy">
+    <div class="section-inner">
+      <BigQuote
+        quote="The Bluffline is crossing from visionary project into official city, regional, and state planning frameworks."
+        variant="dark"
+      />
+    </div>
+  </section>
+
+  <!-- Section B: Extending the Corridor -->
+  <section class="section bg-warm-white" id="corridor-expansion">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Vision Expansion</span>
+        <h2>Extending the Corridor, Unifying the Vision</h2>
+        <p>In 2025, we expanded our planning scope to encompass the full historic bluff system—from UWF to Naval Air Station Pensacola.</p>
+      </div>
+
+      <div class="corridor-expansion">
+        <div class="expansion-content">
+          <h3>A Bigger Vision</h3>
+          <p>What began as a focus on the Scenic Highway corridor has grown into something more ambitious: a multimodal waterfront reconnection spine stretching across the full length of Pensacola's historic bluffs.</p>
+
+          <div class="expansion-directions">
+            <div class="direction-item">
+              <span class="direction-arrow northeast">↗</span>
+              <div class="direction-content">
+                <span class="direction-label">Northeast Extension</span>
+                <span class="direction-target">University of West Florida</span>
+              </div>
+            </div>
+            <div class="direction-item">
+              <span class="direction-arrow southwest">↙</span>
+              <div class="direction-content">
+                <span class="direction-label">Southwest Extension</span>
+                <span class="direction-target">Downtown → Naval Air Station Pensacola</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="expansion-reframe">This reframes the corridor from a limited Scenic Highway segment to the <strong>full historic bluff system</strong>—positioning it as Pensacola's primary infrastructure for waterfront access and neighborhood connectivity.</p>
+        </div>
+
+        <div class="expansion-map">
+          <!-- Placeholder for corridor expansion map -->
+          <div class="map-placeholder">
+            <div class="map-placeholder-content">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7"/>
+                <path d="M9 20l6-3"/>
+                <path d="M9 7l6-3"/>
+                <path d="M15 17l5.447 2.724A1 1 0 0 0 21 18.882V8.118a1 1 0 0 0-1.447-.894L15 10"/>
+                <path d="M9 7v13"/>
+                <path d="M15 4v13"/>
+              </svg>
+              <span>Corridor Expansion Map</span>
+              <span class="placeholder-note">Full interactive map coming soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section C: One Organization, One Vision -->
+  <section class="section bg-mist" id="unified-organization">
+    <div class="section-inner">
+      <div class="section-header centered">
+        <span class="section-label">Organizational Maturation</span>
+        <h2>One Organization, One Waterfront Vision</h2>
+      </div>
+
+      <div class="merger-narrative">
+        <div class="merger-timeline">
+          <div class="merger-year">
+            <span class="year-label">2024</span>
+            <span class="year-event">Merger with Scenic Highway Foundation</span>
+          </div>
+          <div class="merger-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+          <div class="merger-year">
+            <span class="year-label">2025</span>
+            <span class="year-event">First year of strategic synthesis</span>
+          </div>
+        </div>
+
+        <div class="legacy-cards">
+          <div class="legacy-card">
+            <h4>Scenic Highway Foundation Legacy</h4>
+            <ul>
+              <li>60+ years of scenic preservation</li>
+              <li>Historic corridor advocacy</li>
+              <li>Community stewardship tradition</li>
+            </ul>
+          </div>
+          <div class="legacy-connector">
+            <span>+</span>
+          </div>
+          <div class="legacy-card">
+            <h4>Bluffline Vision</h4>
+            <ul>
+              <li>Multimodal infrastructure focus</li>
+              <li>Federal funding capacity</li>
+              <li>Regional planning integration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="unified-mission">
+          <h3>One Platform Linking:</h3>
+          <div class="mission-pillars">
+            <div class="pillar">
+              <span class="pillar-icon">🌿</span>
+              <span class="pillar-label">Scenic Preservation</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-icon">🚴</span>
+              <span class="pillar-label">Mobility</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-icon">🌊</span>
+              <span class="pillar-label">Waterfront Access</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-icon">🏛️</span>
+              <span class="pillar-label">Historic Bluffs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section D: Partnerships -->
+  <section class="section bg-warm-white" id="partnerships">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Strategic Partnerships</span>
+        <h2>Partnerships That Move Projects</h2>
+        <p>In 2025, our relationships with key institutions shifted from advocacy to co-development and delivery.</p>
+      </div>
+
+      <div class="partner-grid">
+        <PartnerCard
+          name="City of Pensacola"
+          role="Municipal Partner"
+          outcome="Joint grant applications, Chimney Park partnership, CRA plan integration"
+        />
+        <PartnerCard
+          name="Escambia County"
+          role="County Partner"
+          outcome="Multiple joint grant applications, Warrington CRA coordination, regional trail connectivity"
+        />
+        <PartnerCard
+          name="University of West Florida"
+          role="Institutional Partner"
+          outcome="Corridor extension planning, campus connectivity studies, new administration engagement"
+        />
+      </div>
+
+      <div class="partnership-shift">
+        <div class="shift-before">
+          <span class="shift-label">Before</span>
+          <span class="shift-mode">Advocacy</span>
+        </div>
+        <div class="shift-arrow">→</div>
+        <div class="shift-after">
+          <span class="shift-label">Now</span>
+          <span class="shift-mode">Co-Development & Delivery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section E: Chimney Park Spotlight -->
+  <section class="section bg-cream" id="chimney-park">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Project Spotlight</span>
+        <h2>From Vision to Dirt (Almost)</h2>
+        <p>Chimney Park represents our first tangible, visible project—proof that the Bluffline is moving from plans to places.</p>
+      </div>
+
+      <ProjectSpotlight
+        title="Chimney Park"
+        subtitle="First Bluffline Project"
+        description="A partnership with the City of Pensacola to beautify and refresh Chimney Park, creating an early visible win along the corridor. This project demonstrates that the Bluffline isn't just about planning—it's about building."
+        status="in-delivery"
+        partner="City of Pensacola"
+        funder="NextEra Energy Foundation"
+        targetDate="2026"
+        imageSrc="/images/placeholder-chimney-park.jpg"
+        imageAlt="Chimney Park site along the Bluffline corridor"
+      />
+    </div>
+  </section>
+
+  <!-- Section F: Federal Funding -->
+  <section class="section bg-navy" id="federal-funding">
+    <div class="section-inner">
+      <div class="federal-narrative">
+        <div class="section-header light">
+          <span class="section-label">Federal Commitment</span>
+          <h2>Holding the Federal Line</h2>
+        </div>
+
+        <div class="federal-story">
+          <p class="federal-lead">At the end of 2024, we received a $1.2 million USDOT Reconnecting Communities award. In 2025, we faced a critical challenge: ensuring that award survived a federal administration transition.</p>
+
+          <div class="federal-timeline">
+            <div class="timeline-item">
+              <span class="timeline-marker past"></span>
+              <div class="timeline-content">
+                <span class="timeline-date">Late 2024</span>
+                <span class="timeline-event">Award Received</span>
+              </div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-item">
+              <span class="timeline-marker risk"></span>
+              <div class="timeline-content">
+                <span class="timeline-date">Early 2025</span>
+                <span class="timeline-event">Administration Transition</span>
+              </div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-item">
+              <span class="timeline-marker success"></span>
+              <div class="timeline-content">
+                <span class="timeline-date">2025</span>
+                <span class="timeline-event">Obligation Secured</span>
+              </div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-item">
+              <span class="timeline-marker future"></span>
+              <div class="timeline-content">
+                <span class="timeline-date">2026+</span>
+                <span class="timeline-event">Master Planning Begins</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="obligation-explainer">
+            <h4>Why Obligation Matters</h4>
+            <p>An award is a promise. An <strong>obligation</strong> is a commitment. When federal funds are obligated, they transform from a discretionary award that can be rescinded into enforceable, real funding that must be spent. Securing obligation through the transition protected years of work and community investment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section G: Building Culture -->
+  <section class="section bg-warm-white" id="culture-building">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Civic Culture</span>
+        <h2>Building the Narrative, Not Just the Network</h2>
+        <p>2025 was also the year Bluffline began building its own civic culture and traditions—not just its project pipeline.</p>
+      </div>
+
+      <!-- Knox White Event -->
+      <div class="culture-event">
+        <EventHighlight
+          title="Greenways as Economic Catalysts"
+          date="2025"
+          description="We hosted Mayor Knox White of Greenville, South Carolina for a public conversation about how greenways drive economic development. Mayor White shared lessons from Greenville's Swamp Rabbit Trail—a nationally recognized example of trail-led urban revitalization—and how those lessons apply to Pensacola's opportunity."
+          imageSrc="/images/placeholder-knox-white-event.jpg"
+          imageAlt="Mayor Knox White speaking at Bluffline event"
+          sponsor="Voyage Real Estate"
+        >
+          <BigQuote
+            quote="The trail didn't just connect neighborhoods—it changed how developers, businesses, and residents thought about what our city could become."
+            attribution="Mayor Knox White"
+            attributionTitle="Greenville, South Carolina"
+          />
+        </EventHighlight>
+      </div>
+
+      <!-- Bluffline Defender Award -->
+      <div class="award-section">
+        <div class="award-intro">
+          <h3>A New Tradition Begins</h3>
+          <p>In 2025, we established the Bluffline Defender Award—an annual recognition honoring individuals who have made exceptional contributions to the vision of a connected Pensacola waterfront.</p>
+        </div>
+
+        <AwardFeature
+          awardName="The Bluffline Defender Award"
+          recipient="Gina Buchanan"
+          recipientTitle="Longtime Director, Scenic Highway Foundation"
+          description="The inaugural Bluffline Defender Award was presented to Gina Buchanan, whose decades of leadership at the Scenic Highway Foundation laid the groundwork for everything the Bluffline has become. Her tireless advocacy preserved the corridor's scenic character while building the community relationships that made our merger—and our current momentum—possible."
+          awardDescription="An engraved walking stick bearing the words 'Bluffline Defender'—symbolizing the long journey of advocacy and the path still ahead."
+          imageSrc="/images/placeholder-gina-buchanan.jpg"
+          imageAlt="Gina Buchanan receiving the Bluffline Defender Award"
+        >
+          <p>This award signals continuity between the Scenic Highway Foundation's legacy and the Bluffline's future. It establishes a tradition of honoring those who walk the long road of civic change.</p>
+        </AwardFeature>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section H: Impact Metrics -->
+  <section class="section bg-mist" id="impact">
+    <div class="section-inner">
+      <div class="section-header centered">
+        <span class="section-label">2025 Impact</span>
+        <h2>What Moved This Year</h2>
+        <p>Impact, not accounting. Here's what changed because of this year's work.</p>
+      </div>
+
+      <div class="impact-grid">
+        <StatCard
+          stat="4"
+          label="Planning Frameworks"
+          description="City, county, regional, and state plans now include the Bluffline"
+        />
+        <StatCard
+          stat="1"
+          label="State Presentation"
+          description="Invited to present to Florida Greenways & Trails Council"
+        />
+        <StatCard
+          stat="20+"
+          label="Miles of Corridor"
+          description="Expanded vision from Scenic Highway to full bluff system"
+        />
+        <StatCard
+          stat="$1.2M"
+          label="Federal Funding Secured"
+          description="Reconnecting Communities award successfully obligated"
+        />
+        <StatCard
+          stat="1"
+          label="Project in Delivery"
+          description="Chimney Park moving from planning to construction"
+        />
+        <StatCard
+          stat="3"
+          label="Major Partnerships"
+          description="City, County, and UWF now in co-development mode"
+        />
+        <StatCard
+          stat="1st"
+          label="Bluffline Defender Award"
+          description="New annual tradition honoring corridor champions"
+        />
+        <StatCard
+          stat="1"
+          label="National Speaker Hosted"
+          description="Mayor Knox White on greenways as catalysts"
+        />
+      </div>
+
+      <div class="financials-footer">
+        <p>For complete financial information, including our Form 990 and audited statements, visit our <a href="/about#documents">documents page</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing Section -->
+  <section class="section bg-forest closing-section" id="looking-ahead">
+    <div class="section-inner">
+      <div class="closing-content">
+        <h2>Looking Ahead</h2>
+        <p class="closing-lead">2025 proved that the Bluffline is no longer just a proposal. It's becoming infrastructure—for mobility, for access, and for how this region thinks about its future.</p>
+        <p>In the years ahead, we'll move from planning to construction. From vision to visible change. From a project to a permanent part of Pensacola's landscape.</p>
+        <p class="closing-thesis">The platform is built. Now we build on it.</p>
+        <div class="closing-cta">
+          <Button href="/support">Join the Movement</Button>
+          <Button href="/progress" variant="outline">See Our Progress</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Opening Statement */
+  .opening-statement {
+    max-width: 800px;
+  }
+
+  .opening-lead {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .opening-statement p {
+    font-size: 1.15rem;
+    color: var(--navy);
+    opacity: 0.85;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  /* Milestone Grid */
+  .milestone-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .milestone-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .milestone-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Planning Visual */
+  .planning-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem;
+    background: white;
+    border-radius: 20px;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .planning-ladder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .ladder-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ladder-level {
+    padding: 0.75rem 2rem;
+    background: var(--mist);
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .ladder-connector {
+    width: 2px;
+    height: 24px;
+    background: var(--spring);
+  }
+
+  .ladder-base {
+    padding: 1rem 3rem;
+    background: var(--forest);
+    border-radius: 12px;
+    margin-top: 0.5rem;
+  }
+
+  .ladder-base span {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: white;
+    font-weight: 500;
+  }
+
+  .planning-caption {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.7;
+    text-align: center;
+    max-width: 500px;
+    margin: 0;
+  }
+
+  /* Corridor Expansion */
+  .corridor-expansion {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .corridor-expansion {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
+  .expansion-content h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .expansion-content p {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.85;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .expansion-directions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .direction-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--mist);
+    border-radius: 12px;
+  }
+
+  .direction-arrow {
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--spring);
+    border-radius: 50%;
+    color: var(--forest);
+    flex-shrink: 0;
+  }
+
+  .direction-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .direction-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+  }
+
+  .direction-target {
+    font-size: 1rem;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  .expansion-reframe {
+    padding: 1.5rem;
+    background: rgba(153, 204, 99, 0.1);
+    border-left: 3px solid var(--spring);
+    border-radius: 0 12px 12px 0;
+  }
+
+  .expansion-reframe strong {
+    color: var(--forest);
+  }
+
+  .expansion-map {
+    min-height: 400px;
+  }
+
+  .map-placeholder {
+    height: 100%;
+    min-height: 400px;
+    background: linear-gradient(135deg, var(--mist), var(--cream));
+    border-radius: 20px;
+    border: 2px dashed rgba(45, 48, 71, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .map-placeholder-content svg {
+    width: 64px;
+    height: 64px;
+    color: var(--navy);
+    opacity: 0.3;
+  }
+
+  .map-placeholder-content span {
+    font-weight: 600;
+    color: var(--navy);
+    opacity: 0.5;
+  }
+
+  .placeholder-note {
+    font-size: 0.85rem;
+    font-weight: 400 !important;
+  }
+
+  /* Merger/Unified Organization */
+  .section-header.centered {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .merger-narrative {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .merger-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .merger-year {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .year-label {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    color: var(--forest);
+  }
+
+  .year-event {
+    font-size: 0.9rem;
+    color: var(--navy);
+    text-align: center;
+  }
+
+  .merger-arrow svg {
+    width: 32px;
+    height: 32px;
+    color: var(--spring);
+  }
+
+  .legacy-cards {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .legacy-card {
+    flex: 1;
+    min-width: 280px;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .legacy-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .legacy-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .legacy-card li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--navy);
+    opacity: 0.8;
+    font-size: 0.95rem;
+  }
+
+  .legacy-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 6px;
+    height: 6px;
+    background: var(--spring);
+    border-radius: 50%;
+  }
+
+  .legacy-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--spring);
+    border-radius: 50%;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  .legacy-connector span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--forest);
+  }
+
+  .unified-mission {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 20px;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .unified-mission h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 2rem;
+  }
+
+  .mission-pillars {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pillar-icon {
+    font-size: 2rem;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mist);
+    border-radius: 16px;
+  }
+
+  .pillar-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* Partner Grid */
+  .partner-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .partner-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .partnership-shift {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--mist);
+    border-radius: 16px;
+    flex-wrap: wrap;
+  }
+
+  .shift-before, .shift-after {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .shift-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    opacity: 0.5;
+  }
+
+  .shift-mode {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+  }
+
+  .shift-arrow {
+    font-size: 2rem;
+    color: var(--spring);
+    font-weight: 300;
+  }
+
+  /* Federal Narrative */
+  .federal-narrative {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-header.light {
+    color: white;
+  }
+
+  .section-header.light .section-label {
+    color: var(--spring);
+  }
+
+  .section-header.light h2 {
+    color: white;
+  }
+
+  .federal-story {
+    color: white;
+  }
+
+  .federal-lead {
+    font-size: 1.15rem;
+    opacity: 0.9;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .federal-timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 3rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  .federal-timeline .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+
+  .timeline-marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .timeline-marker.past {
+    background: var(--spring);
+  }
+
+  .timeline-marker.risk {
+    background: #e8a838;
+  }
+
+  .timeline-marker.success {
+    background: var(--spring);
+    box-shadow: 0 0 0 4px rgba(153, 204, 99, 0.3);
+  }
+
+  .timeline-marker.future {
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+  }
+
+  .timeline-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+  }
+
+  .timeline-date {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+  }
+
+  .timeline-event {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .timeline-connector {
+    flex: 1;
+    min-width: 40px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-top: 7px;
+  }
+
+  .obligation-explainer {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    border-left: 3px solid var(--spring);
+  }
+
+  .obligation-explainer h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .obligation-explainer p {
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .obligation-explainer strong {
+    color: var(--spring);
+  }
+
+  /* Culture Building */
+  .culture-event {
+    margin-bottom: 4rem;
+  }
+
+  .award-section {
+    margin-top: 2rem;
+  }
+
+  .award-intro {
+    max-width: 700px;
+    margin-bottom: 2rem;
+  }
+
+  .award-intro h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .award-intro p {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.7;
+  }
+
+  /* Impact Grid */
+  .impact-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .impact-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .impact-grid > :global(.stat-card) {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+  }
+
+  .financials-footer {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+  }
+
+  .financials-footer p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .financials-footer a {
+    color: var(--forest);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .financials-footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Closing Section */
+  .closing-section {
+    background: var(--forest);
+    color: white;
+  }
+
+  .closing-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .closing-content h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 2rem;
+  }
+
+  .closing-lead {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing-content > p {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing-thesis {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .closing-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .closing-cta :global(.btn) {
+    background: white;
+    color: var(--forest);
+  }
+
+  .closing-cta :global(.btn:hover) {
+    background: var(--spring);
+  }
+
+  .closing-cta :global(.btn-outline) {
+    background: transparent;
+    border-color: white;
+    color: white;
+  }
+
+  .closing-cta :global(.btn-outline:hover) {
+    background: white;
+    color: var(--forest);
+  }
+
+  /* Background utilities */
+  .bg-warm-white {
+    background: var(--warm-white);
+  }
+
+  .bg-cream {
+    background: var(--cream);
+  }
+
+  .bg-mist {
+    background: var(--mist);
+  }
+
+  .bg-navy {
+    background: var(--navy);
+  }
+
+  .bg-forest {
+    background: var(--forest);
+  }
+</style>

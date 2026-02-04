@@ -1,0 +1,88 @@
+---
+interface Stat {
+  value: string;
+  label: string;
+  context?: string;
+}
+
+interface Props {
+  stats: Stat[];
+  columns?: 2 | 3 | 4;
+}
+
+const { stats, columns = 3 } = Astro.props;
+---
+
+<div class:list={['stat-grid', `cols-${columns}`]}>
+  {stats.map((stat) => (
+    <div class="stat-card">
+      <span class="stat-value">{stat.value}</span>
+      <span class="stat-label">{stat.label}</span>
+      {stat.context && <span class="stat-context">{stat.context}</span>}
+    </div>
+  ))}
+</div>
+
+<style>
+  .stat-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    .stat-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .stat-grid.cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stat-grid.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.75rem;
+    text-align: center;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .stat-value {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: var(--forest);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  .stat-context {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.6;
+    margin-top: 0.35rem;
+    line-height: 1.4;
+  }
+</style>

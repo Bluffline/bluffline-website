@@ -1,0 +1,72 @@
+---
+interface Props {
+  stat: string;
+  label: string;
+  description?: string;
+  icon?: string;
+}
+
+const { stat, label, description, icon } = Astro.props;
+---
+
+<div class="stat-card">
+  {icon && (
+    <div class="stat-icon">
+      <Fragment set:html={icon} />
+    </div>
+  )}
+  <div class="stat-value">{stat}</div>
+  <div class="stat-label">{label}</div>
+  {description && <p class="stat-description">{description}</p>}
+</div>
+
+<style>
+  .stat-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    background: rgba(153, 204, 99, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-icon :global(svg) {
+    width: 24px;
+    height: 24px;
+    color: var(--forest);
+  }
+
+  .stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: var(--forest);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-description {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.7;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+</style>

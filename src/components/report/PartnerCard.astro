@@ -1,0 +1,101 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  outcome: string;
+  logo?: string;
+}
+
+const { name, role, outcome, logo } = Astro.props;
+---
+
+<div class="partner-card">
+  {logo && (
+    <div class="partner-logo">
+      <img src={logo} alt={`${name} logo`} loading="lazy" />
+    </div>
+  )}
+  <div class="partner-content">
+    <h3 class="partner-name">{name}</h3>
+    <p class="partner-role">{role}</p>
+    <div class="partner-outcome">
+      <span class="outcome-label">What this unlocked:</span>
+      <p class="outcome-text">{outcome}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .partner-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .partner-card:hover {
+    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .partner-logo {
+    width: 80px;
+    height: 80px;
+    background: var(--mist);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .partner-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .partner-content {
+    flex: 1;
+  }
+
+  .partner-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .partner-role {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.6;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .partner-outcome {
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .outcome-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .outcome-text {
+    font-size: 0.95rem;
+    color: var(--navy);
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
