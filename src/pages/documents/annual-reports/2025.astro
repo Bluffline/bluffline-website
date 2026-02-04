@@ -9,6 +9,7 @@ import ProjectSpotlight from '../../../components/report/ProjectSpotlight.astro'
 import EventHighlight from '../../../components/report/EventHighlight.astro';
 import AwardFeature from '../../../components/report/AwardFeature.astro';
 import TestimonialCard from '../../../components/content/TestimonialCard.astro';
+import DocumentCard from '../../../components/content/DocumentCard.astro';
 import MediaLightbox from '../../../components/ui/MediaLightbox.astro';
 import Button from '../../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
@@ -17,6 +18,12 @@ import { getCollection } from 'astro:content';
 const allTestimonials = await getCollection('testimonials');
 const featuredTestimonials = allTestimonials.filter(t =>
   ['reeves-dc', 'hofberger-robert', 'diaz-joe'].includes(t.id)
+);
+
+// Get planning documents for the document section
+const allDocuments = await getCollection('documents');
+const planningDocuments = allDocuments.filter(d =>
+  ['plan-urban-core-cra', 'plan-westside-cra', 'plan-warrington-cra', 'plan-lrtp-2045', 'plan-florida-greenways'].includes(d.id)
 );
 
 // Knox White event gallery images for lightbox
@@ -114,6 +121,23 @@ const knoxWhiteGallery = [
         </div>
         <p class="planning-caption">The Bluffline is now recognized at every level of regional planning—from neighborhood CRAs to state trail networks.</p>
       </div>
+
+      <div class="planning-documents">
+        <h3>Supporting Planning Documents</h3>
+        <p class="documents-intro">Explore the official planning frameworks that now include the Bluffline corridor.</p>
+        <div class="documents-grid">
+          {planningDocuments.map(doc => (
+            <DocumentCard
+              title={doc.data.title}
+              description={doc.data.description || ''}
+              href={doc.data.file || doc.data.link || '#'}
+              external={!!doc.data.link}
+              agency={doc.data.agency}
+              level={doc.data.level}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -162,21 +186,7 @@ const knoxWhiteGallery = [
         </div>
 
         <div class="expansion-map">
-          <!-- Placeholder for corridor expansion map -->
-          <div class="map-placeholder">
-            <div class="map-placeholder-content">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7"/>
-                <path d="M9 20l6-3"/>
-                <path d="M9 7l6-3"/>
-                <path d="M15 17l5.447 2.724A1 1 0 0 0 21 18.882V8.118a1 1 0 0 0-1.447-.894L15 10"/>
-                <path d="M9 7v13"/>
-                <path d="M15 4v13"/>
-              </svg>
-              <span>Corridor Expansion Map</span>
-              <span class="placeholder-note">Full interactive map coming soon</span>
-            </div>
-          </div>
+          <img src="/images/Corridor-Extension-Map.jpg" alt="Map showing the expanded Bluffline corridor from UWF to Naval Air Station Pensacola" loading="lazy" />
         </div>
       </div>
     </div>
@@ -643,6 +653,44 @@ const knoxWhiteGallery = [
     margin: 0;
   }
 
+  /* Planning Documents */
+  .planning-documents {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+  }
+
+  .planning-documents h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .documents-intro {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .documents-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .documents-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .documents-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   /* Corridor Expansion */
   .corridor-expansion {
     display: grid;
@@ -733,45 +781,16 @@ const knoxWhiteGallery = [
   }
 
   .expansion-map {
-    min-height: 400px;
-  }
-
-  .map-placeholder {
-    height: 100%;
-    min-height: 400px;
-    background: linear-gradient(135deg, var(--mist), var(--cream));
     border-radius: 20px;
-    border: 2px dashed rgba(45, 48, 71, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(45, 48, 71, 0.1);
   }
 
-  .map-placeholder-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-    padding: 2rem;
-  }
-
-  .map-placeholder-content svg {
-    width: 64px;
-    height: 64px;
-    color: var(--navy);
-    opacity: 0.3;
-  }
-
-  .map-placeholder-content span {
-    font-weight: 600;
-    color: var(--navy);
-    opacity: 0.5;
-  }
-
-  .placeholder-note {
-    font-size: 0.85rem;
-    font-weight: 400 !important;
+  .expansion-map img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   /* Merger/Unified Organization */
