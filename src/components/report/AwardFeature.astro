@@ -1,0 +1,237 @@
+---
+interface Props {
+  awardName: string;
+  recipient: string;
+  recipientTitle?: string;
+  description: string;
+  awardDescription?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const { awardName, recipient, recipientTitle, description, awardDescription, imageSrc, imageAlt } = Astro.props;
+---
+
+<article class="award-feature">
+  <div class="award-badge">
+    <div class="badge-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 15l-3.5 2.1 1-4-3.1-2.7 4.1-.4L12 6l1.5 4 4.1.4-3.1 2.7 1 4z"/>
+        <circle cx="12" cy="12" r="10"/>
+      </svg>
+    </div>
+    <span class="badge-label">Inaugural Award</span>
+  </div>
+
+  <div class="award-content">
+    <h3 class="award-name">{awardName}</h3>
+
+    <div class="recipient-block">
+      {imageSrc && (
+        <div class="recipient-image">
+          <img src={imageSrc} alt={imageAlt || recipient} loading="lazy" />
+        </div>
+      )}
+      <div class="recipient-info">
+        <span class="recipient-label">Presented to</span>
+        <span class="recipient-name">{recipient}</span>
+        {recipientTitle && <span class="recipient-title">{recipientTitle}</span>}
+      </div>
+    </div>
+
+    <p class="award-description">{description}</p>
+
+    {awardDescription && (
+      <div class="award-object">
+        <span class="object-label">The Award</span>
+        <p class="object-description">{awardDescription}</p>
+      </div>
+    )}
+  </div>
+
+  <div class="award-significance">
+    <span class="significance-label">A tradition begins</span>
+    <slot />
+  </div>
+</article>
+
+<style>
+  .award-feature {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 100%);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .award-feature {
+      padding: 3rem;
+    }
+  }
+
+  .award-feature::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(153, 204, 99, 0.1), transparent 70%);
+    pointer-events: none;
+  }
+
+  .award-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .badge-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--spring);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--forest);
+  }
+
+  .badge-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+  }
+
+  .award-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .award-name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .recipient-block {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+  }
+
+  .recipient-image {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--mist);
+  }
+
+  .recipient-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .recipient-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .recipient-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    opacity: 0.5;
+  }
+
+  .recipient-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+  }
+
+  .recipient-title {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.65;
+  }
+
+  .award-description {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.85;
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0;
+    max-width: 650px;
+  }
+
+  .award-object {
+    padding: 1.25rem 1.5rem;
+    background: rgba(153, 204, 99, 0.12);
+    border-radius: 12px;
+    border-left: 3px solid var(--spring);
+  }
+
+  .object-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .object-description {
+    font-size: 0.95rem;
+    color: var(--navy);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .award-significance {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .significance-label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .award-significance :global(p) {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.7;
+    margin: 0;
+  }
+</style>

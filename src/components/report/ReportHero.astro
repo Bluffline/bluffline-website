@@ -1,0 +1,132 @@
+---
+interface Props {
+  year: string;
+  title: string;
+  subtitle?: string;
+  thesis: string;
+}
+
+const { year, title, subtitle, thesis } = Astro.props;
+---
+
+<section class="report-hero">
+  <div class="report-hero-inner">
+    <div class="report-hero-year">{year}</div>
+    <h1>{title}</h1>
+    {subtitle && <p class="report-hero-subtitle">{subtitle}</p>}
+    <div class="report-hero-thesis">
+      <p>{thesis}</p>
+    </div>
+  </div>
+  <div class="report-hero-visual">
+    <slot name="visual" />
+  </div>
+</section>
+
+<style>
+  .report-hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--mist) 0%, var(--water) 40%, var(--cream) 100%);
+    padding: 8rem 1.5rem 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .report-hero {
+      padding: 10rem 3rem 6rem;
+    }
+  }
+
+  .report-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 20% 80%, rgba(153, 204, 99, 0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(201, 251, 255, 0.35), transparent);
+    pointer-events: none;
+  }
+
+  .report-hero-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .report-hero-year {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 300;
+    color: var(--navy);
+    opacity: 0.12;
+    line-height: 1;
+    margin-bottom: -0.5em;
+    letter-spacing: -0.03em;
+  }
+
+  .report-hero h1 {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+    max-width: 900px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .report-hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: var(--navy);
+    opacity: 0.7;
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+  }
+
+  .report-hero-thesis {
+    max-width: 650px;
+    padding: 1.75rem 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .report-hero-thesis p {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .report-hero-visual {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 45%;
+    height: 60%;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .report-hero-visual {
+      opacity: 0.12;
+    }
+  }
+
+  .report-hero-visual :global(img),
+  .report-hero-visual :global(svg) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom right;
+  }
+</style>

@@ -4,6 +4,7 @@ import PageHero from '../../../components/ui/PageHero.astro';
 import CallToAction from '../../../components/ui/CallToAction.astro';
 import DocumentCard from '../../../components/content/DocumentCard.astro';
 import EmptyStateCard from '../../../components/content/EmptyStateCard.astro';
+import Button from '../../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
 
 const allDocuments = await getCollection('documents');
@@ -22,8 +23,40 @@ const annualReports = allDocuments
     description="Each year, we publish a comprehensive report documenting our progress, financials, and impact. Transparency is one of our core values."
   />
 
+  <!-- Featured 2025 Report -->
+  <section class="featured-report-section">
+    <div class="section-inner">
+      <div class="featured-report">
+        <div class="featured-content">
+          <span class="featured-label">Latest Report</span>
+          <h2>2025: From Project to Platform</h2>
+          <p>2025 was the year the Bluffline shifted from a "project" to a "platform." Explore our narrative annual report to see how the Bluffline became embedded in official planning frameworks at every level of government—and what that means for Pensacola's future.</p>
+          <div class="featured-highlights">
+            <div class="highlight-item">
+              <span class="highlight-value">4</span>
+              <span class="highlight-label">Planning Frameworks</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-value">$1.2M</span>
+              <span class="highlight-label">Federal Funding</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-value">20+</span>
+              <span class="highlight-label">Miles of Corridor</span>
+            </div>
+          </div>
+          <Button href="/documents/annual-reports/2025">Read the Full Report</Button>
+        </div>
+        <div class="featured-visual">
+          <div class="year-display">2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="reports-section">
     <div class="section-inner">
+      <h3 class="archive-title">Report Archive</h3>
       {annualReports.length > 0 ? (
         <div class="reports-grid">
           {annualReports.map(report => (
@@ -39,8 +72,8 @@ const annualReports = allDocuments
         </div>
       ) : (
         <EmptyStateCard
-          title="Annual Reports Coming Soon"
-          description="We're preparing our annual reports for publication. Check back soon for yearly organizational updates and financial transparency."
+          title="Previous Reports Coming Soon"
+          description="We're preparing our historical reports for publication. Check back soon for yearly organizational updates and financial transparency."
           variant="default"
         />
       )}
@@ -57,17 +90,145 @@ const annualReports = allDocuments
 </BaseLayout>
 
 <style>
-  .reports-section { background: var(--cream); padding: 5rem 0; }
-  @media (min-width: 768px) { .reports-section { padding: 7rem 0; } }
+  /* Featured Report Section */
+  .featured-report-section {
+    background: linear-gradient(135deg, var(--mist) 0%, var(--water) 50%, var(--cream) 100%);
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .featured-report-section {
+      padding: 7rem 0;
+    }
+  }
+
+  .featured-report {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .featured-report {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+    }
+  }
+
+  .featured-content {
+    max-width: 600px;
+  }
+
+  .featured-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 100px;
+  }
+
+  .featured-content h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+
+  .featured-content > p {
+    font-size: 1.1rem;
+    color: var(--navy);
+    opacity: 0.85;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .featured-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+  }
+
+  .highlight-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .highlight-value {
+    font-family: 'Fraunces', serif;
+    font-size: 1.75rem;
+    color: var(--forest);
+    line-height: 1;
+  }
+
+  .highlight-label {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.6;
+  }
+
+  .featured-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .year-display {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 300;
+    color: var(--navy);
+    opacity: 0.08;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Archive Section */
+  .reports-section {
+    background: var(--cream);
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .reports-section {
+      padding: 7rem 0;
+    }
+  }
+
+  .archive-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 2rem;
+  }
 
   .reports-grid {
     display: grid;
     gap: 1.5rem;
   }
+
   @media (min-width: 768px) {
-    .reports-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .reports-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
   }
+
   @media (min-width: 1200px) {
-    .reports-grid { grid-template-columns: repeat(3, 1fr); }
+    .reports-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>

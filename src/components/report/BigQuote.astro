@@ -1,0 +1,106 @@
+---
+interface Props {
+  quote: string;
+  attribution?: string;
+  attributionTitle?: string;
+  variant?: 'default' | 'dark' | 'accent';
+}
+
+const { quote, attribution, attributionTitle, variant = 'default' } = Astro.props;
+---
+
+<blockquote class:list={['big-quote', variant]}>
+  <p>{quote}</p>
+  {attribution && (
+    <footer>
+      <cite>
+        <span class="attribution-name">{attribution}</span>
+        {attributionTitle && <span class="attribution-title">{attributionTitle}</span>}
+      </cite>
+    </footer>
+  )}
+</blockquote>
+
+<style>
+  .big-quote {
+    max-width: 900px;
+    margin: 0;
+    padding: 3rem 0;
+  }
+
+  .big-quote.default {
+    color: var(--navy);
+  }
+
+  .big-quote.dark {
+    color: white;
+  }
+
+  .big-quote.accent {
+    color: var(--forest);
+  }
+
+  .big-quote p {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.35;
+    margin: 0 0 1.5rem 0;
+    position: relative;
+  }
+
+  .big-quote p::before {
+    content: '"';
+    font-size: 1.2em;
+    margin-right: 0.1em;
+    opacity: 0.4;
+  }
+
+  .big-quote p::after {
+    content: '"';
+    font-size: 1.2em;
+    margin-left: 0.05em;
+    opacity: 0.4;
+  }
+
+  .big-quote footer {
+    padding-left: 0;
+  }
+
+  .big-quote cite {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .attribution-name {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .big-quote.default .attribution-name {
+    color: var(--forest);
+  }
+
+  .big-quote.dark .attribution-name {
+    color: var(--spring);
+  }
+
+  .big-quote.accent .attribution-name {
+    color: var(--navy);
+  }
+
+  .attribution-title {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  @media (min-width: 768px) {
+    .big-quote {
+      padding: 4rem 0;
+    }
+  }
+</style>
