@@ -8,6 +8,8 @@ interface Props {
   year?: number;
   actionLabel?: string;
   showDownload?: boolean;
+  agency?: string;
+  level?: 'federal' | 'state' | 'regional' | 'county' | 'city';
 }
 
 const {
@@ -18,7 +20,9 @@ const {
   icon,
   year,
   actionLabel,
-  showDownload = false
+  showDownload = false,
+  agency,
+  level
 } = Astro.props;
 
 const defaultIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`;
@@ -28,6 +32,14 @@ const externalArrowIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentC
 const internalArrowIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
 
 const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+
+const levelLabels: Record<string, string> = {
+  federal: 'Federal',
+  state: 'State',
+  regional: 'Regional',
+  county: 'County',
+  city: 'City'
+};
 ---
 
 <a
@@ -36,16 +48,28 @@ const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener' : undefined}
 >
-  {year && <div class="document-year">{year}</div>}
+  <div class="document-accent"></div>
+
+  {year && (
+    <div class="document-header">
+      <div class="document-year">{year}</div>
+      {level && <span class="document-level">{levelLabels[level]}</span>}
+    </div>
+  )}
+
   {!year && (
     <div class="document-icon">
       <Fragment set:html={icon || defaultIcon} />
     </div>
   )}
+
   <div class="document-content">
+    {!year && level && <span class="document-level">{levelLabels[level]}</span>}
     <h3>{title}</h3>
+    {agency && <span class="document-agency">{agency}</span>}
     <p>{description}</p>
   </div>
+
   <div class="document-action">
     {showDownload ? (
       <span class="download-indicator">
@@ -53,9 +77,10 @@ const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
         {actionLabel || 'Download PDF'}
       </span>
     ) : (
-      <div class="document-arrow">
+      <span class="view-indicator">
         <Fragment set:html={external ? externalArrowIcon : internalArrowIcon} />
-      </div>
+        <span class="view-label">{external ? 'View External' : 'View Document'}</span>
+      </span>
     )}
   </div>
 </a>
@@ -63,20 +88,38 @@ const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
 <style>
   .document-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
-    padding: 1.25rem 1.5rem;
+    padding: 1.5rem;
+    padding-left: 1.75rem;
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     text-decoration: none;
     color: inherit;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(45, 48, 71, 0.04);
+    border: 1px solid rgba(45, 48, 71, 0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .document-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--spring);
+    transition: width 0.3s ease;
   }
 
   .document-card:hover {
-    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.08);
+    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.08);
     transform: translateY(-2px);
+  }
+
+  .document-card:hover .document-accent {
+    width: 6px;
   }
 
   /* Year variant (for annual reports) */
@@ -84,93 +127,153 @@ const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
     flex-direction: column;
     align-items: stretch;
     padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(45, 48, 71, 0.06);
-    transition: all 0.3s ease;
+    padding-left: 2.25rem;
+    border-radius: 20px;
   }
 
   .document-card.has-year:hover {
-    box-shadow: 0 12px 32px rgba(45, 48, 71, 0.08);
+    box-shadow: 0 12px 32px rgba(45, 48, 71, 0.1);
+  }
+
+  .document-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 
   .document-year {
     font-family: 'Fraunces', serif;
     font-size: 2.5rem;
     color: var(--forest);
-    margin-bottom: 1rem;
     line-height: 1;
   }
 
+  .document-level {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--forest);
+    background: rgba(153, 204, 99, 0.15);
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+  }
+
   .document-icon {
-    width: 44px;
-    height: 44px;
-    background: var(--mist);
-    border-radius: 10px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--mist), rgba(153, 204, 99, 0.15));
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .document-card:hover .document-icon {
+    transform: scale(1.05);
   }
 
   .document-icon :global(svg) {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     color: var(--forest);
   }
 
   .document-content {
     flex: 1;
+    min-width: 0;
+  }
+
+  .document-content .document-level {
+    display: inline-block;
+    margin-bottom: 0.5rem;
   }
 
   .document-content h3 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: var(--navy);
-    margin-bottom: 0.125rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
   }
 
   .has-year .document-content h3 {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .document-agency {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--forest);
+    font-weight: 500;
     margin-bottom: 0.5rem;
   }
 
   .document-content p {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     color: var(--navy);
-    opacity: 0.6;
-    line-height: 1.5;
+    opacity: 0.7;
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .has-year .document-content p {
-    font-size: 0.9rem;
-    opacity: 0.75;
+    font-size: 0.95rem;
+    opacity: 0.8;
+    -webkit-line-clamp: 3;
   }
 
   .document-action {
     flex-shrink: 0;
+    align-self: center;
   }
 
   .has-year .document-action {
+    align-self: stretch;
     margin-top: 1.5rem;
-    padding-top: 1rem;
+    padding-top: 1.25rem;
     border-top: 1px solid rgba(45, 48, 71, 0.08);
   }
 
-  .document-arrow {
-    opacity: 0.3;
+  .view-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--forest);
+    transition: gap 0.2s ease;
+  }
+
+  .view-indicator :global(svg) {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+  }
+
+  .view-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(-8px);
     transition: all 0.2s ease;
   }
 
-  .document-arrow :global(svg) {
-    width: 18px;
-    height: 18px;
-    color: var(--forest);
+  .document-card:hover .view-indicator :global(svg) {
+    transform: translateX(4px);
   }
 
-  .document-card:hover .document-arrow {
+  .document-card:hover .view-label {
     opacity: 1;
-    transform: translateX(4px);
+    transform: translateX(0);
   }
 
   .download-indicator {
@@ -178,16 +281,47 @@ const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
     align-items: center;
     gap: 0.5rem;
     color: var(--forest);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.9rem;
+    transition: gap 0.2s ease;
   }
 
   .download-indicator :global(svg) {
     width: 18px;
     height: 18px;
+    transition: transform 0.2s ease;
   }
 
   .document-card:hover .download-indicator {
-    text-decoration: underline;
+    gap: 0.75rem;
+  }
+
+  .document-card:hover .download-indicator :global(svg) {
+    transform: translateY(2px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .document-card {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .document-icon {
+      align-self: flex-start;
+    }
+
+    .document-action {
+      align-self: flex-start;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(45, 48, 71, 0.08);
+      width: 100%;
+    }
+
+    .view-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 </style>
