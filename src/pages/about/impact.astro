@@ -57,39 +57,68 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   <section class="map-section">
     <div class="map-wrapper" id="safety-map-wrapper">
       <div id="safety-map"></div>
-      <button class="fullscreen-btn" id="fullscreen-btn" aria-label="Toggle fullscreen map">
-        <svg class="icon-expand" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 3 21 3 21 9"></polyline>
-          <polyline points="9 21 3 21 3 15"></polyline>
-          <line x1="21" y1="3" x2="14" y2="10"></line>
-          <line x1="3" y1="21" x2="10" y2="14"></line>
-        </svg>
-        <svg class="icon-collapse" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="4 14 10 14 10 20"></polyline>
-          <polyline points="20 10 14 10 14 4"></polyline>
-          <line x1="14" y1="10" x2="21" y2="3"></line>
-          <line x1="3" y1="21" x2="10" y2="14"></line>
-        </svg>
-      </button>
-      <div class="map-legend">
+      <div class="map-controls">
+        <button class="map-control-btn" id="fullscreen-btn" aria-label="Toggle fullscreen map">
+          <svg class="icon-expand" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+          <svg class="icon-collapse" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 14 10 14 10 20"></polyline>
+            <polyline points="20 10 14 10 14 4"></polyline>
+            <line x1="14" y1="10" x2="21" y2="3"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+        </button>
+        <button class="map-control-btn view-toggle" id="view-toggle-btn" aria-label="Toggle map view">
+          <svg class="icon-points" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <circle cx="19" cy="5" r="2"></circle>
+            <circle cx="5" cy="19" r="2"></circle>
+            <circle cx="5" cy="5" r="2"></circle>
+            <circle cx="19" cy="19" r="2"></circle>
+          </svg>
+          <svg class="icon-heatmap" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" opacity="0.3"></circle>
+            <circle cx="12" cy="12" r="6" opacity="0.5"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <span class="toggle-label">Show Points</span>
+        </button>
+      </div>
+      <div class="map-legend" id="map-legend">
         <div class="legend-item">
           <div class="legend-polygon"></div>
           <span>Bluffline Corridor</span>
         </div>
-        <div class="legend-item">
-          <div class="legend-fatal"></div>
-          <span>Fatality</span>
+        <div class="legend-heatmap">
+          <div class="legend-item">
+            <div class="legend-heatmap-gradient"></div>
+            <span>Crash Density</span>
+          </div>
+          <div class="legend-heatmap-labels">
+            <span>Low</span>
+            <span>High</span>
+          </div>
         </div>
-        <div class="legend-item">
-          <div class="legend-serious"></div>
-          <span>Serious Injury</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-injury"></div>
-          <span>Injury</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-shape-note">● Pedestrian ■ Cyclist</span>
+        <div class="legend-points" style="display: none;">
+          <div class="legend-item">
+            <div class="legend-fatal"></div>
+            <span>Fatality</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-serious"></div>
+            <span>Serious Injury</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-injury"></div>
+            <span>Injury</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-shape-note">● Pedestrian (dot) ○ Cyclist</span>
+          </div>
         </div>
       </div>
     </div>
@@ -525,11 +554,15 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     height: 100%;
   }
 
-  .fullscreen-btn {
+  .map-controls {
     position: absolute;
     top: 12px;
     left: 12px;
     z-index: 10;
+    display: flex;
+    gap: 8px;
+  }
+  .map-control-btn {
     width: 40px;
     height: 40px;
     background: white;
@@ -543,12 +576,31 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     color: var(--navy);
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .fullscreen-btn:hover {
+  .map-control-btn:hover {
     background: var(--mist);
     transform: scale(1.05);
   }
-  .fullscreen-btn .icon-collapse {
+  .map-control-btn .icon-collapse,
+  .map-control-btn .icon-heatmap {
     display: none;
+  }
+  .map-control-btn.view-toggle {
+    width: auto;
+    padding: 0 12px;
+    gap: 6px;
+  }
+  .map-control-btn.view-toggle .toggle-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  @media (max-width: 480px) {
+    .map-control-btn.view-toggle .toggle-label {
+      display: none;
+    }
+    .map-control-btn.view-toggle {
+      width: 40px;
+      padding: 0;
+    }
   }
 
   .map-legend {
@@ -617,6 +669,36 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     color: var(--navy);
     opacity: 0.7;
   }
+  .legend-heatmap,
+  .legend-points {
+    display: contents;
+  }
+  .legend-heatmap-gradient {
+    width: 60px;
+    height: 10px;
+    background: linear-gradient(to right,
+      rgba(0, 255, 0, 0.4),
+      rgba(255, 255, 0, 0.6),
+      rgba(255, 165, 0, 0.8),
+      rgba(255, 0, 0, 1)
+    );
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .legend-heatmap-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 60px;
+    font-size: 0.65rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin-left: 0;
+  }
+  @media (min-width: 768px) {
+    .legend-heatmap-labels {
+      margin-left: -64px;
+    }
+  }
 
   .map-wrapper.fullscreen {
     position: fixed;
@@ -631,14 +713,14 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     z-index: 9999;
     margin: 0;
   }
-  .map-wrapper.fullscreen .fullscreen-btn {
+  .map-wrapper.fullscreen .map-controls {
     top: 20px;
     left: 20px;
   }
-  .map-wrapper.fullscreen .fullscreen-btn .icon-expand {
+  .map-wrapper.fullscreen #fullscreen-btn .icon-expand {
     display: none;
   }
-  .map-wrapper.fullscreen .fullscreen-btn .icon-collapse {
+  .map-wrapper.fullscreen #fullscreen-btn .icon-collapse {
     display: block;
   }
   .map-wrapper.fullscreen .map-legend {
@@ -1081,12 +1163,54 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         data: crashIncidentsData,
       });
 
+      // === HEATMAP LAYER (default view) ===
+      map.addLayer({
+        id: 'crashes-heatmap',
+        type: 'heatmap',
+        source: 'crash-incidents',
+        paint: {
+          // Increase weight based on severity
+          'heatmap-weight': [
+            'case',
+            ['==', ['get', 'severity'], 'fatal'], 3,
+            ['==', ['get', 'severity'], 'serious'], 2,
+            1
+          ],
+          // Increase intensity as zoom level increases
+          'heatmap-intensity': [
+            'interpolate', ['linear'], ['zoom'],
+            9, 0.5,
+            13, 1.5
+          ],
+          // Color gradient from green (low) to red (high)
+          'heatmap-color': [
+            'interpolate', ['linear'], ['heatmap-density'],
+            0, 'rgba(0, 0, 0, 0)',
+            0.1, 'rgba(0, 255, 0, 0.4)',
+            0.3, 'rgba(255, 255, 0, 0.6)',
+            0.5, 'rgba(255, 165, 0, 0.8)',
+            0.7, 'rgba(255, 69, 0, 0.9)',
+            1, 'rgba(255, 0, 0, 1)'
+          ],
+          // Radius increases with zoom
+          'heatmap-radius': [
+            'interpolate', ['linear'], ['zoom'],
+            9, 20,
+            11, 30,
+            13, 40
+          ],
+          'heatmap-opacity': 0.8,
+        },
+      });
+
+      // === POINT LAYERS (hidden by default) ===
       // Injury/minor pedestrian crashes (smallest, bottom layer)
       map.addLayer({
         id: 'crashes-ped-injury',
         type: 'circle',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['in', ['get', 'severity'], ['literal', ['injury', 'minor']]]],
+        layout: { 'visibility': 'none' },
         paint: {
           'circle-radius': 6,
           'circle-color': '#eab308',
@@ -1102,6 +1226,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'circle',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['in', ['get', 'severity'], ['literal', ['injury', 'minor']]]],
+        layout: { 'visibility': 'none' },
         paint: {
           'circle-radius': 6,
           'circle-color': '#eab308',
@@ -1117,6 +1242,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'circle',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['==', ['get', 'severity'], 'serious']],
+        layout: { 'visibility': 'none' },
         paint: {
           'circle-radius': 8,
           'circle-color': '#f97316',
@@ -1132,6 +1258,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'circle',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'serious']],
+        layout: { 'visibility': 'none' },
         paint: {
           'circle-radius': 8,
           'circle-color': '#f97316',
@@ -1147,6 +1274,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'circle',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['==', ['get', 'severity'], 'fatal']],
+        layout: { 'visibility': 'none' },
         paint: {
           'circle-radius': 10,
           'circle-color': '#dc2626',
@@ -1162,6 +1290,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'circle',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'fatal']],
+        layout: { 'visibility': 'none' },
         paint: {
           'circle-radius': 10,
           'circle-color': '#dc2626',
@@ -1177,13 +1306,57 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'circle',
         source: 'crash-incidents',
         filter: ['==', ['get', 'type'], 'pedestrian'],
+        layout: { 'visibility': 'none' },
         paint: {
           'circle-radius': 2.5,
           'circle-color': '#ffffff',
         },
       });
 
-      // Popup on click for all crash layers
+      // Point layers array for toggling
+      const pointLayers = [
+        'crashes-ped-fatal', 'crashes-ped-serious', 'crashes-ped-injury',
+        'crashes-bike-fatal', 'crashes-bike-serious', 'crashes-bike-injury',
+        'crashes-ped-indicator'
+      ];
+
+      // View toggle state and controls
+      let isHeatmapView = true;
+      const viewToggleBtn = document.getElementById('view-toggle-btn');
+      const legendHeatmap = document.querySelector('.legend-heatmap');
+      const legendPoints = document.querySelector('.legend-points');
+
+      function toggleMapView() {
+        isHeatmapView = !isHeatmapView;
+
+        if (isHeatmapView) {
+          // Show heatmap, hide points
+          map.setLayoutProperty('crashes-heatmap', 'visibility', 'visible');
+          pointLayers.forEach(layer => {
+            map.setLayoutProperty(layer, 'visibility', 'none');
+          });
+          viewToggleBtn.querySelector('.toggle-label').textContent = 'Show Points';
+          viewToggleBtn.querySelector('.icon-points').style.display = 'block';
+          viewToggleBtn.querySelector('.icon-heatmap').style.display = 'none';
+          legendHeatmap.style.display = 'contents';
+          legendPoints.style.display = 'none';
+        } else {
+          // Show points, hide heatmap
+          map.setLayoutProperty('crashes-heatmap', 'visibility', 'none');
+          pointLayers.forEach(layer => {
+            map.setLayoutProperty(layer, 'visibility', 'visible');
+          });
+          viewToggleBtn.querySelector('.toggle-label').textContent = 'Show Heatmap';
+          viewToggleBtn.querySelector('.icon-points').style.display = 'none';
+          viewToggleBtn.querySelector('.icon-heatmap').style.display = 'block';
+          legendHeatmap.style.display = 'none';
+          legendPoints.style.display = 'contents';
+        }
+      }
+
+      viewToggleBtn.addEventListener('click', toggleMapView);
+
+      // Popup on click for point layers
       const crashLayers = [
         'crashes-ped-fatal', 'crashes-ped-serious', 'crashes-ped-injury',
         'crashes-bike-fatal', 'crashes-bike-serious', 'crashes-bike-injury'
