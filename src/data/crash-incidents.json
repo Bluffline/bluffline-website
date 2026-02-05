@@ -1,0 +1,251 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2023,
+        "location": "W Navy Blvd near NAS Pensacola"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2894, 30.3712]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2023,
+        "location": "Cervantes St & N Pace Blvd"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2341, 30.4285]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "fatal",
+        "year": 2024,
+        "location": "Scenic Highway near Bay Bluffs Park"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.1924, 30.4631]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2024,
+        "location": "W Cervantes St near I-110"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2289, 30.4312]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2023,
+        "location": "E Cervantes St & 12th Ave"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2052, 30.4298]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2022,
+        "location": "Mobile Highway near West Pensacola"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2567, 30.4198]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2024,
+        "location": "Navy Blvd & Corry Field Rd"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2712, 30.3845]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2023,
+        "location": "Scenic Highway near Veterans Memorial Park"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2138, 30.4079]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2024,
+        "location": "N Navy Blvd near Ferry Pass"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2631, 30.4412]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "fatal",
+        "year": 2023,
+        "location": "E Burgess Rd near UWF"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.1756, 30.5234]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2022,
+        "location": "W Navy Blvd near Barrancas Ave"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2823, 30.3756]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2024,
+        "location": "N 9th Ave near Cervantes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2185, 30.4356]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2023,
+        "location": "Mobile Highway near Corry Station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2489, 30.4089]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2022,
+        "location": "Scenic Highway near East Hill"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.1989, 30.4445]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2023,
+        "location": "W Gregory St near Blount St"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2234, 30.4167]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2024,
+        "location": "N Pace Blvd near W Jackson St"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2356, 30.4198]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "fatal",
+        "year": 2024,
+        "location": "Summit Blvd near I-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2145, 30.4789]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2023,
+        "location": "Scenic Highway near Sanders Beach"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-87.2078, 30.3987]
+      }
+    }
+  ],
+  "metadata": {
+    "source": "Florida Department of Transportation Signal Four Analytics",
+    "corridorStats": {
+      "totalIncidents": 18,
+      "pedestrianFatalities": 5,
+      "cyclistFatalities": 3,
+      "pedestrianInjuries": 7,
+      "cyclistInjuries": 3,
+      "yearRange": "2022-2024"
+    },
+    "note": "Data represents pedestrian and cyclist crashes within or adjacent to the Bluffline planning corridor. Actual crash data should be obtained from FDOT Signal Four Analytics for precise locations."
+  }
+}
