@@ -94,13 +94,15 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
           <span>Bluffline Corridor</span>
         </div>
         <div class="legend-heatmap">
-          <div class="legend-item">
-            <div class="legend-heatmap-gradient"></div>
+          <div class="legend-item legend-heatmap-item">
+            <div class="legend-heatmap-block">
+              <div class="legend-heatmap-gradient"></div>
+              <div class="legend-heatmap-labels">
+                <span>Low</span>
+                <span>High</span>
+              </div>
+            </div>
             <span>Crash Density</span>
-          </div>
-          <div class="legend-heatmap-labels">
-            <span>Low</span>
-            <span>High</span>
           </div>
         </div>
         <div class="legend-points" style="display: none;">
@@ -673,6 +675,15 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   .legend-points {
     display: contents;
   }
+  .legend-heatmap-item {
+    flex-direction: row;
+    align-items: center;
+  }
+  .legend-heatmap-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
   .legend-heatmap-gradient {
     width: 60px;
     height: 10px;
@@ -689,15 +700,10 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     display: flex;
     justify-content: space-between;
     width: 60px;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--navy);
-    opacity: 0.7;
-    margin-left: 0;
-  }
-  @media (min-width: 768px) {
-    .legend-heatmap-labels {
-      margin-left: -64px;
-    }
+    opacity: 0.6;
+    line-height: 1;
   }
 
   .map-wrapper.fullscreen {
