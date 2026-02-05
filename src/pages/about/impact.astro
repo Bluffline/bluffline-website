@@ -118,8 +118,14 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
             <div class="legend-injury"></div>
             <span>Injury</span>
           </div>
+          <div class="legend-divider"></div>
           <div class="legend-item">
-            <span class="legend-shape-note">● Pedestrian (dot) ○ Cyclist</span>
+            <div class="legend-shape-circle"></div>
+            <span>Pedestrian</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-shape-square"></div>
+            <span>Cyclist</span>
           </div>
         </div>
       </div>
@@ -666,10 +672,26 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     border: 2px solid white;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
-  .legend-shape-note {
-    font-size: 0.7rem;
-    color: var(--navy);
-    opacity: 0.7;
+  .legend-divider {
+    width: 1px;
+    height: 16px;
+    background: var(--navy);
+    opacity: 0.2;
+    margin: 0 0.25rem;
+  }
+  .legend-shape-circle {
+    width: 10px;
+    height: 10px;
+    background: #888;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-shape-square {
+    width: 10px;
+    height: 10px;
+    background: #888;
+    border-radius: 1px;
+    flex-shrink: 0;
   }
   .legend-heatmap,
   .legend-points {
@@ -1169,6 +1191,30 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         data: crashIncidentsData,
       });
 
+      // Create square icons for cyclist markers
+      function createSquareIcon(color, size) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = size;
+        canvas.height = size;
+
+        // White border
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, size, size);
+
+        // Colored fill (with border padding)
+        const padding = 3;
+        ctx.fillStyle = color;
+        ctx.fillRect(padding, padding, size - padding * 2, size - padding * 2);
+
+        return { width: size, height: size, data: ctx.getImageData(0, 0, size, size).data };
+      }
+
+      // Add square icons for each severity level
+      map.addImage('square-fatal', createSquareIcon('#dc2626', 20));
+      map.addImage('square-serious', createSquareIcon('#f97316', 16));
+      map.addImage('square-injury', createSquareIcon('#eab308', 12));
+
       // === HEATMAP LAYER (default view) ===
       map.addLayer({
         id: 'crashes-heatmap',
@@ -1226,19 +1272,16 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         },
       });
 
-      // Injury/minor cyclist crashes (smallest)
+      // Injury/minor cyclist crashes (smallest) - squares
       map.addLayer({
         id: 'crashes-bike-injury',
-        type: 'circle',
+        type: 'symbol',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['in', ['get', 'severity'], ['literal', ['injury', 'minor']]]],
-        layout: { 'visibility': 'none' },
-        paint: {
-          'circle-radius': 6,
-          'circle-color': '#eab308',
-          'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 1.5,
-          'circle-opacity': 0.85,
+        layout: {
+          'visibility': 'none',
+          'icon-image': 'square-injury',
+          'icon-allow-overlap': true,
         },
       });
 
@@ -1258,19 +1301,16 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         },
       });
 
-      // Serious cyclist crashes
+      // Serious cyclist crashes - squares
       map.addLayer({
         id: 'crashes-bike-serious',
-        type: 'circle',
+        type: 'symbol',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'serious']],
-        layout: { 'visibility': 'none' },
-        paint: {
-          'circle-radius': 8,
-          'circle-color': '#f97316',
-          'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 2,
-          'circle-opacity': 0.9,
+        layout: {
+          'visibility': 'none',
+          'icon-image': 'square-serious',
+          'icon-allow-overlap': true,
         },
       });
 
@@ -1290,40 +1330,23 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         },
       });
 
-      // Fatal cyclist crashes (largest)
+      // Fatal cyclist crashes (largest) - squares
       map.addLayer({
         id: 'crashes-bike-fatal',
-        type: 'circle',
+        type: 'symbol',
         source: 'crash-incidents',
         filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'fatal']],
-        layout: { 'visibility': 'none' },
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#dc2626',
-          'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 2,
-          'circle-opacity': 0.95,
-        },
-      });
-
-      // Add inner indicators to differentiate pedestrian (dot) vs cyclist (no dot)
-      map.addLayer({
-        id: 'crashes-ped-indicator',
-        type: 'circle',
-        source: 'crash-incidents',
-        filter: ['==', ['get', 'type'], 'pedestrian'],
-        layout: { 'visibility': 'none' },
-        paint: {
-          'circle-radius': 2.5,
-          'circle-color': '#ffffff',
+        layout: {
+          'visibility': 'none',
+          'icon-image': 'square-fatal',
+          'icon-allow-overlap': true,
         },
       });
 
       // Point layers array for toggling
       const pointLayers = [
         'crashes-ped-fatal', 'crashes-ped-serious', 'crashes-ped-injury',
-        'crashes-bike-fatal', 'crashes-bike-serious', 'crashes-bike-injury',
-        'crashes-ped-indicator'
+        'crashes-bike-fatal', 'crashes-bike-serious', 'crashes-bike-injury'
       ];
 
       // View toggle state and controls
