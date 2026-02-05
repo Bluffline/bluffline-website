@@ -30,19 +30,19 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 
       <div class="stats-row">
         <div class="stat-card">
-          <span class="stat-number">#2</span>
-          <span class="stat-desc">Florida's rank for pedestrian fatalities per capita in the U.S.</span>
-          <a href="https://smartgrowthamerica.org/dangerous-by-design/" target="_blank" rel="noopener" class="stat-source">Smart Growth America</a>
+          <span class="stat-number">271</span>
+          <span class="stat-desc">Pedestrian and cyclist crashes in the Bluffline corridor (2022-2025)</span>
+          <a href="https://s4.geoplan.ufl.edu/" target="_blank" rel="noopener" class="stat-source">Signal Four Analytics</a>
         </div>
         <div class="stat-card">
-          <span class="stat-number">133</span>
-          <span class="stat-desc">Pedestrian crashes in the Pensacola metro area in 2024</span>
-          <a href="https://www.flhsmv.gov/traffic-crash-reports/crash-dashboard/" target="_blank" rel="noopener" class="stat-source">FLHSMV</a>
+          <span class="stat-number">11</span>
+          <span class="stat-desc">Fatalities in the corridor—9 pedestrians and 2 cyclists killed</span>
+          <a href="https://s4.geoplan.ufl.edu/" target="_blank" rel="noopener" class="stat-source">Signal Four Analytics</a>
         </div>
         <div class="stat-card">
-          <span class="stat-number">109</span>
-          <span class="stat-desc">Cyclist crashes in the Pensacola metro area in 2024</span>
-          <a href="https://www.flhsmv.gov/traffic-crash-reports/crash-dashboard/" target="_blank" rel="noopener" class="stat-source">FLHSMV</a>
+          <span class="stat-number">268</span>
+          <span class="stat-desc">People injured in the corridor, including 28 serious injuries</span>
+          <a href="https://s4.geoplan.ufl.edu/" target="_blank" rel="noopener" class="stat-source">Signal Four Analytics</a>
         </div>
         <div class="stat-card">
           <span class="stat-number">60%</span>
@@ -77,26 +77,25 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
           <span>Bluffline Corridor</span>
         </div>
         <div class="legend-item">
-          <div class="legend-fatal-ped"></div>
-          <span>Pedestrian Fatality</span>
+          <div class="legend-fatal"></div>
+          <span>Fatality</span>
         </div>
         <div class="legend-item">
-          <div class="legend-injury-ped"></div>
-          <span>Pedestrian Injury</span>
+          <div class="legend-serious"></div>
+          <span>Serious Injury</span>
         </div>
         <div class="legend-item">
-          <div class="legend-fatal-bike"></div>
-          <span>Cyclist Fatality</span>
+          <div class="legend-injury"></div>
+          <span>Injury</span>
         </div>
         <div class="legend-item">
-          <div class="legend-injury-bike"></div>
-          <span>Cyclist Injury</span>
+          <span class="legend-shape-note">● Pedestrian ■ Cyclist</span>
         </div>
       </div>
     </div>
     <div class="map-context">
-      <p class="map-caption">Pedestrian and cyclist crashes within and adjacent to the Bluffline planning corridor (2022-2024). The Bluffline will provide a safe, separated alternative to these high-risk roads.</p>
-      <p class="map-source">Data: Florida Department of Transportation Signal Four Analytics</p>
+      <p class="map-caption">Pedestrian and cyclist crashes within and adjacent to the Bluffline planning corridor (2022-2025). The Bluffline will provide a safe, separated alternative to these high-risk roads.</p>
+      <p class="map-source">Data: <a href="https://s4.geoplan.ufl.edu/" target="_blank" rel="noopener">Signal Four Analytics</a>, Florida Department of Transportation</p>
     </div>
   </section>
 
@@ -108,7 +107,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
           <h3>The problem: Roads designed for cars, not people</h3>
           <p>The Pensacola metro area's road network was designed primarily for high-speed motor vehicle traffic. Wide lanes, minimal sidewalks, and nonexistent bike infrastructure force pedestrians and cyclists into dangerous situations.</p>
           <p>Smart Growth America's "Dangerous by Design" report consistently ranks Florida among the deadliest states for people walking. Nine of the top 20 most dangerous metropolitan areas for pedestrians are located in Florida.</p>
-          <p>The consequences are stark: in 2024 alone, Escambia County saw over 100 bike crashes, with nearly every crash resulting in injury and four riders losing their lives.</p>
+          <p>The consequences are stark: within the Bluffline corridor alone, 271 crashes involving pedestrians and cyclists have occurred since 2022—resulting in 11 deaths and 268 injuries, including 28 serious injuries.</p>
         </div>
         <div class="context-content">
           <h3>The solution: Separated infrastructure saves lives</h3>
@@ -586,33 +585,37 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     border-radius: 2px;
     flex-shrink: 0;
   }
-  .legend-fatal-ped {
-    width: 12px;
-    height: 12px;
+  .legend-fatal {
+    width: 14px;
+    height: 14px;
     background: #dc2626;
     border-radius: 50%;
     flex-shrink: 0;
+    border: 2px solid white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
-  .legend-injury-ped {
-    width: 10px;
-    height: 10px;
+  .legend-serious {
+    width: 12px;
+    height: 12px;
     background: #f97316;
     border-radius: 50%;
     flex-shrink: 0;
+    border: 2px solid white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
-  .legend-fatal-bike {
-    width: 12px;
-    height: 12px;
-    background: #dc2626;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-  .legend-injury-bike {
+  .legend-injury {
     width: 10px;
     height: 10px;
-    background: #f97316;
-    border-radius: 2px;
+    background: #eab308;
+    border-radius: 50%;
     flex-shrink: 0;
+    border: 2px solid white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .legend-shape-note {
+    font-size: 0.7rem;
+    color: var(--navy);
+    opacity: 0.7;
   }
 
   .map-wrapper.fullscreen {
@@ -695,6 +698,23 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   :global(.mapboxgl-popup-content .popup-type.serious) {
     background: #fff7ed;
     color: #c2410c;
+  }
+  :global(.mapboxgl-popup-content .popup-type.injury),
+  :global(.mapboxgl-popup-content .popup-type.minor) {
+    background: #fefce8;
+    color: #a16207;
+  }
+  :global(.mapboxgl-popup-content .popup-details) {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.8;
+    margin: 0.5rem 0 0 0;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  :global(.mapboxgl-popup-content .popup-details span) {
+    display: block;
+    margin-bottom: 0.15rem;
   }
   :global(.mapboxgl-popup-content .popup-location) {
     font-size: 0.9rem;
@@ -1061,18 +1081,33 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         data: crashIncidentsData,
       });
 
-      // Fatal pedestrian crashes (circles)
+      // Injury/minor pedestrian crashes (smallest, bottom layer)
       map.addLayer({
-        id: 'crashes-ped-fatal',
+        id: 'crashes-ped-injury',
         type: 'circle',
         source: 'crash-incidents',
-        filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['==', ['get', 'severity'], 'fatal']],
+        filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['in', ['get', 'severity'], ['literal', ['injury', 'minor']]]],
         paint: {
-          'circle-radius': 10,
-          'circle-color': '#dc2626',
+          'circle-radius': 6,
+          'circle-color': '#eab308',
           'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 2,
-          'circle-opacity': 0.9,
+          'circle-stroke-width': 1.5,
+          'circle-opacity': 0.85,
+        },
+      });
+
+      // Injury/minor cyclist crashes (smallest)
+      map.addLayer({
+        id: 'crashes-bike-injury',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['in', ['get', 'severity'], ['literal', ['injury', 'minor']]]],
+        paint: {
+          'circle-radius': 6,
+          'circle-color': '#eab308',
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 1.5,
+          'circle-opacity': 0.85,
         },
       });
 
@@ -1085,21 +1120,6 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         paint: {
           'circle-radius': 8,
           'circle-color': '#f97316',
-          'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 2,
-          'circle-opacity': 0.9,
-        },
-      });
-
-      // Fatal cyclist crashes (squares via symbol)
-      map.addLayer({
-        id: 'crashes-bike-fatal',
-        type: 'circle',
-        source: 'crash-incidents',
-        filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'fatal']],
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#dc2626',
           'circle-stroke-color': '#ffffff',
           'circle-stroke-width': 2,
           'circle-opacity': 0.9,
@@ -1121,35 +1141,90 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         },
       });
 
-      // Add small icon indicators for cyclist vs pedestrian
-      // Pedestrians get a small inner dot
+      // Fatal pedestrian crashes (circles, largest)
+      map.addLayer({
+        id: 'crashes-ped-fatal',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['==', ['get', 'severity'], 'fatal']],
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#dc2626',
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2,
+          'circle-opacity': 0.95,
+        },
+      });
+
+      // Fatal cyclist crashes (largest)
+      map.addLayer({
+        id: 'crashes-bike-fatal',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'fatal']],
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#dc2626',
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2,
+          'circle-opacity': 0.95,
+        },
+      });
+
+      // Add inner indicators to differentiate pedestrian (dot) vs cyclist (no dot)
       map.addLayer({
         id: 'crashes-ped-indicator',
         type: 'circle',
         source: 'crash-incidents',
         filter: ['==', ['get', 'type'], 'pedestrian'],
         paint: {
-          'circle-radius': 3,
+          'circle-radius': 2.5,
           'circle-color': '#ffffff',
         },
       });
 
       // Popup on click for all crash layers
-      const crashLayers = ['crashes-ped-fatal', 'crashes-ped-serious', 'crashes-bike-fatal', 'crashes-bike-serious'];
+      const crashLayers = [
+        'crashes-ped-fatal', 'crashes-ped-serious', 'crashes-ped-injury',
+        'crashes-bike-fatal', 'crashes-bike-serious', 'crashes-bike-injury'
+      ];
 
       crashLayers.forEach(layer => {
         map.on('click', layer, (e) => {
           const feature = e.features[0];
-          const { type, severity, year, location } = feature.properties;
-          const typeLabel = type === 'pedestrian' ? 'Pedestrian' : 'Cyclist';
-          const severityLabel = severity === 'fatal' ? 'Fatality' : 'Serious Injury';
+          const props = feature.properties;
+          const typeLabel = props.type === 'pedestrian' ? 'Pedestrian' : 'Cyclist';
+
+          // Format severity label
+          let severityLabel;
+          switch(props.severity) {
+            case 'fatal': severityLabel = 'Fatality'; break;
+            case 'serious': severityLabel = 'Serious Injury'; break;
+            default: severityLabel = 'Injury'; break;
+          }
+
+          // Format date
+          const dateStr = props.crash_datetime || props.year;
+
+          // Build details section
+          let details = '';
+          if (props.fatalities > 0) {
+            details += `<span>Fatalities: ${props.fatalities}</span>`;
+          }
+          if (props.serious_injuries > 0) {
+            details += `<span>Serious injuries: ${props.serious_injuries}</span>`;
+          }
+          if (props.injuries > 0 && props.injuries !== props.serious_injuries) {
+            details += `<span>Total injured: ${props.injuries}</span>`;
+          }
 
           new mapboxgl.Popup()
             .setLngLat(feature.geometry.coordinates)
             .setHTML(`
-              <span class="popup-type ${severity}">${typeLabel} ${severityLabel}</span>
-              <p class="popup-location">${location}</p>
-              <p class="popup-year">${year}</p>
+              <span class="popup-type ${props.severity}">${typeLabel} ${severityLabel}</span>
+              <p class="popup-location">${props.location || 'Location unavailable'}</p>
+              <p class="popup-year">${dateStr}</p>
+              ${details ? `<div class="popup-details">${details}</div>` : ''}
             `)
             .addTo(map);
         });
