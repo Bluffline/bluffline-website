@@ -1,15 +1,44 @@
 ---
+interface StatItem {
+  value: string;
+  label?: string;
+  description?: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
+}
+
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   icon?: string;
   statHighlight?: string;
   href?: string;
   external?: boolean;
   agency?: string;
+  // New props for Impact page patterns
+  stats?: StatItem[];
+  sourceUrl?: string;
+  sourceLabel?: string;
+  location?: string;
+  detail?: string;
+  variant?: 'default' | 'stat' | 'stat-highlight' | 'evidence' | 'pillar' | 'dark';
 }
 
-const { title, description, icon, statHighlight, href, external = false, agency } = Astro.props;
+const {
+  title,
+  description,
+  icon,
+  statHighlight,
+  href,
+  external = false,
+  agency,
+  stats,
+  sourceUrl,
+  sourceLabel,
+  location,
+  detail,
+  variant = 'default'
+} = Astro.props;
 
 const Tag = href ? 'a' : 'div';
 const linkProps = href ? {
@@ -17,9 +46,12 @@ const linkProps = href ? {
   target: external ? '_blank' : undefined,
   rel: external ? 'noopener' : undefined,
 } : {};
+
+// Determine heading level based on variant
+const HeadingTag = variant === 'evidence' || variant === 'dark' ? 'h4' : 'h3';
 ---
 
-<Tag class:list={['icon-card', { 'is-link': !!href }]} {...linkProps}>
+<Tag class:list={['icon-card', `icon-card--${variant}`, { 'is-link': !!href }]} {...linkProps}>
   {agency && <div class="icon-card-agency">{agency}</div>}
   {icon && (
     <div class="icon-card-icon">
@@ -27,8 +59,39 @@ const linkProps = href ? {
     </div>
   )}
   {statHighlight && <span class="icon-card-stat">{statHighlight}</span>}
-  <h3>{title}</h3>
-  <p>{description}</p>
+  {title && <HeadingTag>{title}</HeadingTag>}
+  {location && <p class="icon-card-location">{location}</p>}
+  {description && <p class="icon-card-description">{description}</p>}
+
+  {/* Nested stats for pillar/evidence variants */}
+  {stats && stats.length > 0 && (
+    <div class="icon-card-stats">
+      {stats.map((stat) => (
+        <div class="icon-card-stat-item">
+          {stat.value && <strong>{stat.value}</strong>}
+          {stat.label && <span>{stat.label}</span>}
+          {stat.description && <span class="stat-inline-desc">{stat.description}</span>}
+          {stat.sourceUrl && (
+            <a href={stat.sourceUrl} target="_blank" rel="noopener" class="icon-card-stat-source">
+              {stat.sourceLabel || 'Source'}
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+
+  {/* Detail text for pillar cards (can contain HTML) */}
+  {detail && <p class="icon-card-detail" set:html={detail} />}
+
+  {/* Source link (citation, not navigation) */}
+  {sourceUrl && !href && (
+    <a href={sourceUrl} target="_blank" rel="noopener" class="icon-card-source">
+      {sourceLabel || 'Source'}
+    </a>
+  )}
+
+  {/* Navigation link arrow */}
   {href && (
     <span class="icon-card-link">
       {external ? 'View' : 'Learn more'}
@@ -40,6 +103,7 @@ const linkProps = href ? {
 </Tag>
 
 <style>
+  /* ===== BASE STYLES ===== */
   .icon-card {
     background: white;
     border-radius: 16px;
@@ -55,7 +119,7 @@ const linkProps = href ? {
     color: inherit;
   }
 
-  .icon-card:hover {
+  .icon-card.is-link:hover {
     box-shadow: 0 8px 24px rgba(45, 48, 71, 0.08);
     transform: translateY(-2px);
   }
@@ -94,19 +158,26 @@ const linkProps = href ? {
     margin-bottom: 0.5rem;
   }
 
-  .icon-card h3 {
+  .icon-card h3, .icon-card h4 {
     font-family: 'Fraunces', serif;
     font-size: 1.15rem;
     color: var(--navy);
     margin-bottom: 0.5rem;
   }
 
-  .icon-card p {
+  .icon-card-description {
     font-size: 0.95rem;
     color: var(--navy);
     opacity: 0.75;
     line-height: 1.5;
     flex: 1;
+    margin: 0;
+  }
+
+  .icon-card-location {
+    font-size: 0.85rem;
+    color: var(--forest);
+    margin: 0 0 1rem 0;
   }
 
   .icon-card-link {
@@ -125,7 +196,244 @@ const linkProps = href ? {
     height: 16px;
   }
 
-  .icon-card:hover .icon-card-link {
+  .icon-card.is-link:hover .icon-card-link {
     gap: 0.75rem;
+  }
+
+  /* Source link (citation style) */
+  .icon-card-source {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--forest);
+    text-decoration: none;
+    margin-top: 0.75rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  .icon-card-source:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  /* ===== STAT VARIANT ===== */
+  /* Simple centered stat card (Safety stats) */
+  .icon-card--stat {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+  }
+
+  .icon-card--stat .icon-card-stat {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .icon-card--stat .icon-card-description {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+
+  /* ===== STAT-HIGHLIGHT VARIANT ===== */
+  /* Larger centered stat with context (Research highlights) */
+  .icon-card--stat-highlight {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: var(--mist);
+    border-radius: 12px;
+    border: none;
+  }
+
+  .icon-card--stat-highlight .icon-card-stat {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .icon-card--stat-highlight .icon-card-description {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+
+  .icon-card--stat-highlight .icon-card-source {
+    margin-top: 1rem;
+    opacity: 0.85;
+  }
+
+  /* ===== PILLAR VARIANT ===== */
+  /* Icon + title + description + nested stats + detail */
+  .icon-card--pillar {
+    padding: 2rem;
+  }
+
+  .icon-card--pillar .icon-card-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .icon-card--pillar .icon-card-icon :global(svg) {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-card--pillar h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .icon-card--pillar .icon-card-description {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex: none;
+  }
+
+  .icon-card--pillar .icon-card-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .icon-card--pillar .icon-card-stat-item {
+    flex: 1;
+    min-width: 140px;
+    padding: 1rem;
+    background: var(--mist);
+    border-radius: 8px;
+  }
+
+  .icon-card--pillar .icon-card-stat-item strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--forest);
+    margin-bottom: 0.25rem;
+  }
+
+  .icon-card--pillar .icon-card-stat-item span {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+
+  .icon-card--pillar .icon-card-stat-source {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--forest);
+    text-decoration: none;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  .icon-card--pillar .icon-card-stat-source:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .icon-card--pillar .icon-card-detail {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .icon-card--pillar .icon-card-detail :global(a) {
+    color: var(--forest);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .icon-card--pillar .icon-card-detail :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  /* ===== EVIDENCE VARIANT ===== */
+  /* Title + location + inline stats + source */
+  .icon-card--evidence {
+    background: var(--mist);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: none;
+  }
+
+  .icon-card--evidence h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .icon-card--evidence .icon-card-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .icon-card--evidence .icon-card-stat-item {
+    font-size: 0.85rem;
+    color: var(--navy);
+    opacity: 0.8;
+  }
+
+  .icon-card--evidence .icon-card-stat-item strong {
+    color: var(--forest);
+    font-weight: 600;
+  }
+
+  .icon-card--evidence .icon-card-stat-item .stat-inline-desc {
+    margin-left: 0;
+  }
+
+  .icon-card--evidence .icon-card-source {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+  }
+
+  /* ===== DARK VARIANT ===== */
+  /* For dark backgrounds (Quality of Life) */
+  .icon-card--dark {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .icon-card--dark .icon-card-icon {
+    background: rgba(153, 204, 99, 0.15);
+  }
+
+  .icon-card--dark .icon-card-icon :global(svg) {
+    color: var(--spring);
+  }
+
+  .icon-card--dark h4 {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .icon-card--dark .icon-card-description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    opacity: 1;
+  }
+
+  .icon-card--dark .icon-card-source {
+    color: var(--spring);
+    opacity: 0.8;
+  }
+
+  .icon-card--dark .icon-card-source:hover {
+    opacity: 1;
   }
 </style>
