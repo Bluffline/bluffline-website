@@ -1,0 +1,1112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import CallToAction from '../../components/ui/CallToAction.astro';
+
+import planningCorridorData from '../../data/planning-corridor.json';
+import crashIncidentsData from '../../data/crash-incidents.json';
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
+---
+
+<BaseLayout
+  title="Impact"
+  description="The Bluffline converts non-motorized connectivity into safety, economic, and quality of life value for Pensacola and Northwest Florida."
+>
+  <PageHero
+    label="Impact"
+    title="Transforming connectivity into community value"
+    description="The Bluffline converts non-motorized connectivity into safety, economic development, and quality of life improvements for Pensacola and Northwest Florida."
+  />
+
+  <!-- Safety & Access Section -->
+  <section class="section safety-section" id="safety">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Safety & Access</span>
+        <h2>A safer corridor for everyone</h2>
+        <p>Florida consistently ranks among the most dangerous states for pedestrians and cyclists. Within the Bluffline corridor, the lack of safe infrastructure forces people walking and biking onto high-speed roads designed exclusively for motor vehicles.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-number">#2</span>
+          <span class="stat-desc">Florida's rank for pedestrian fatalities per capita in the U.S.</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">133</span>
+          <span class="stat-desc">Pedestrian crashes in the Pensacola metro area in 2024</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">109</span>
+          <span class="stat-desc">Cyclist crashes in the Pensacola metro area in 2024</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">60%</span>
+          <span class="stat-desc">Reduction in injury rates with off-road greenways</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety Map Section -->
+  <section class="map-section">
+    <div class="map-wrapper" id="safety-map-wrapper">
+      <div id="safety-map"></div>
+      <button class="fullscreen-btn" id="fullscreen-btn" aria-label="Toggle fullscreen map">
+        <svg class="icon-expand" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <polyline points="9 21 3 21 3 15"></polyline>
+          <line x1="21" y1="3" x2="14" y2="10"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+        <svg class="icon-collapse" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 14 10 14 10 20"></polyline>
+          <polyline points="20 10 14 10 14 4"></polyline>
+          <line x1="14" y1="10" x2="21" y2="3"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+      </button>
+      <div class="map-legend">
+        <div class="legend-item">
+          <div class="legend-polygon"></div>
+          <span>Bluffline Corridor</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-fatal-ped"></div>
+          <span>Pedestrian Fatality</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-injury-ped"></div>
+          <span>Pedestrian Injury</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-fatal-bike"></div>
+          <span>Cyclist Fatality</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-injury-bike"></div>
+          <span>Cyclist Injury</span>
+        </div>
+      </div>
+    </div>
+    <div class="map-context">
+      <p class="map-caption">Pedestrian and cyclist crashes within and adjacent to the Bluffline planning corridor (2022-2024). The Bluffline will provide a safe, separated alternative to these high-risk roads.</p>
+      <p class="map-source">Data: Florida Department of Transportation Signal Four Analytics</p>
+    </div>
+  </section>
+
+  <!-- Safety Context Section -->
+  <section class="section context-section">
+    <div class="section-inner">
+      <div class="context-grid">
+        <div class="context-content">
+          <h3>The problem: Roads designed for cars, not people</h3>
+          <p>The Pensacola metro area's road network was designed primarily for high-speed motor vehicle traffic. Wide lanes, minimal sidewalks, and nonexistent bike infrastructure force pedestrians and cyclists into dangerous situations.</p>
+          <p>Smart Growth America's "Dangerous by Design" report consistently ranks Florida among the deadliest states for people walking. Nine of the top 20 most dangerous metropolitan areas for pedestrians are located in Florida.</p>
+          <p>The consequences are stark: in 2024 alone, Escambia County saw over 100 bike crashes, with nearly every crash resulting in injury and four riders losing their lives.</p>
+        </div>
+        <div class="context-content">
+          <h3>The solution: Separated infrastructure saves lives</h3>
+          <p>Research consistently shows that separated greenways and trails dramatically reduce injury rates for pedestrians and cyclists. Off-road facilities reduce crash rates by up to 60% compared to on-street facilities.</p>
+          <p>The Bluffline provides this separated infrastructure—utilizing abandoned rail corridors, utility rights-of-way, and existing public land to create continuous, car-free connections throughout the corridor.</p>
+          <p>Beyond preventing crashes, the Bluffline enables a transportation option for the many Pensacola residents who cannot drive, cannot afford a car, or simply choose not to use one for every trip.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Economic Development Section -->
+  <section class="section economic-section" id="economic">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label">Economic Development</span>
+        <h2>Converting connectivity into economic value</h2>
+        <p>Decades of research demonstrate that trail infrastructure generates significant economic returns—from increased property values and tourism spending to job creation and reduced healthcare costs.</p>
+      </div>
+
+      <div class="research-highlight">
+        <div class="research-stat">
+          <span class="big-number">$1.72</span>
+          <span class="stat-context">returned for every $1 invested in trail construction from local business activity alone</span>
+        </div>
+        <div class="research-stat">
+          <span class="big-number">9.6</span>
+          <span class="stat-context">jobs supported per $1 million invested in trail construction</span>
+        </div>
+        <div class="research-stat">
+          <span class="big-number">$3</span>
+          <span class="stat-context">in healthcare cost savings for every $1 invested in trail infrastructure</span>
+        </div>
+      </div>
+
+      <p class="research-citation">Sources: Rails to Trails Conservancy, American Heart Association, Headwaters Economics</p>
+    </div>
+  </section>
+
+  <!-- Economic Pillars Section -->
+  <section class="section pillars-section">
+    <div class="section-inner">
+      <div class="pillars-grid">
+
+        <!-- Neighborhood Revitalization -->
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <h3>Neighborhood Revitalization</h3>
+          <p>Reactivating underutilized land and addressing long-standing blight in West Pensacola and Ferry Pass through safe, high-quality public infrastructure.</p>
+          <div class="pillar-stats">
+            <div class="pillar-stat">
+              <strong>5-11%</strong>
+              <span>Average property value increase near trails</span>
+            </div>
+            <div class="pillar-stat">
+              <strong>$282M</strong>
+              <span>Added real estate value projected for Miami-Dade's Ludlam Trail</span>
+            </div>
+          </div>
+          <p class="pillar-detail">Trail projects consistently catalyze private investment in adjacent properties. The Atlanta BeltLine generated $4.6 billion in private development from a $559 million public investment—an 8.5:1 return.</p>
+        </div>
+
+        <!-- Military & Defense Readiness -->
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>Military & Defense Readiness</h3>
+          <p>Improving safety, access, and quality of life around NAS Pensacola and Corry Station, supporting cadets, service members, and installation compatibility.</p>
+          <div class="pillar-stats">
+            <div class="pillar-stat">
+              <strong>NAS Pensacola</strong>
+              <span>Home of Naval Aviation, training 60,000+ annually</span>
+            </div>
+            <div class="pillar-stat">
+              <strong>Corry Station</strong>
+              <span>Center for Information Warfare Training</span>
+            </div>
+          </div>
+          <p class="pillar-detail">Safe, car-free connections benefit military personnel who may not have personal vehicles, especially students and trainees. Quality of life improvements also support installation encroachment compatibility goals.</p>
+        </div>
+
+        <!-- Workforce & Employment Access -->
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="8.5" cy="7" r="4"></circle>
+              <polyline points="17 11 19 13 23 9"></polyline>
+            </svg>
+          </div>
+          <h3>Workforce & Employment Access</h3>
+          <p>Providing safe, non-vehicular connections to major employment hubs, reducing transportation barriers for workers in car-constrained households.</p>
+          <div class="pillar-stats">
+            <div class="pillar-stat">
+              <strong>7.6%</strong>
+              <span>Escambia County households without vehicle access</span>
+            </div>
+            <div class="pillar-stat">
+              <strong>22+ miles</strong>
+              <span>of corridor connecting employment centers</span>
+            </div>
+          </div>
+          <p class="pillar-detail">For households without reliable vehicle access, the Bluffline provides a genuine transportation alternative connecting residential areas to employment centers, healthcare, education, and essential services.</p>
+        </div>
+
+        <!-- Talent, Tourism & Quality of Life -->
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+          </div>
+          <h3>Talent, Tourism & Quality of Life</h3>
+          <p>Strengthening Pensacola's competitiveness for employers, students, and visitors by expanding waterfront access and outdoor recreation.</p>
+          <div class="pillar-stats">
+            <div class="pillar-stat">
+              <strong>$3,700</strong>
+              <span>Average annual spending by trail users on equipment & services</span>
+            </div>
+            <div class="pillar-stat">
+              <strong>$400M</strong>
+              <span>Annual cycling tourism in Oregon alone</span>
+            </div>
+          </div>
+          <p class="pillar-detail">Trail networks are increasingly cited as key amenities in talent attraction and retention. Expanding waterfront access positions Pensacola competitively against peer cities investing in quality of life infrastructure.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Evidence Section -->
+  <section class="section evidence-section">
+    <div class="section-inner">
+      <div class="evidence-header">
+        <h2>Proven returns from peer projects</h2>
+        <p>Trail projects across the country demonstrate consistent economic returns. Here's what similar investments have achieved.</p>
+      </div>
+      <div class="evidence-grid">
+        <div class="evidence-card">
+          <h4>Atlanta BeltLine</h4>
+          <p class="evidence-location">Atlanta, GA</p>
+          <div class="evidence-stats">
+            <div class="evidence-stat"><strong>$10B</strong> total economic impact</div>
+            <div class="evidence-stat"><strong>50,000</strong> permanent jobs created</div>
+            <div class="evidence-stat"><strong>8.5:1</strong> return on investment</div>
+          </div>
+        </div>
+        <div class="evidence-card">
+          <h4>Circuit Trails</h4>
+          <p class="evidence-location">Philadelphia, PA</p>
+          <div class="evidence-stats">
+            <div class="evidence-stat"><strong>$795M</strong> annual healthcare savings</div>
+            <div class="evidence-stat"><strong>800 mi</strong> regional trail network</div>
+            <div class="evidence-stat"><strong>$200M+</strong> recent funding secured</div>
+          </div>
+        </div>
+        <div class="evidence-card">
+          <h4>Peachtree Creek Greenway</h4>
+          <p class="evidence-location">Atlanta, GA</p>
+          <div class="evidence-stats">
+            <div class="evidence-stat"><strong>$13.76</strong> return per $1 invested</div>
+            <div class="evidence-stat"><strong>228</strong> permanent jobs projected</div>
+            <div class="evidence-stat"><strong>$159M</strong> property value increase</div>
+          </div>
+        </div>
+        <div class="evidence-card">
+          <h4>Carolina Thread Trail</h4>
+          <p class="evidence-location">NC/SC Region</p>
+          <div class="evidence-stats">
+            <div class="evidence-stat"><strong>$174M</strong> construction stimulus per 300 mi</div>
+            <div class="evidence-stat"><strong>3,200</strong> jobs per 300 miles</div>
+            <div class="evidence-stat"><strong>$128M</strong> annual tourism activity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quality of Life Section -->
+  <section class="section quality-section" id="quality">
+    <div class="section-inner">
+      <div class="section-header light">
+        <span class="section-label light">Quality of Life</span>
+        <h2>Building a healthier, more connected community</h2>
+        <p>Beyond economic metrics, the Bluffline creates fundamental improvements to daily life—healthier residents, stronger neighborhoods, and expanded access to nature and recreation.</p>
+      </div>
+
+      <div class="quality-grid">
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+          </div>
+          <h4>Health & Wellness</h4>
+          <p>Regular trail users experience lower rates of diabetes, high blood pressure, and obesity. They file 14% fewer health claims and spend 30% fewer days in the hospital.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h4>Community Connection</h4>
+          <p>Trails create shared public spaces that bring neighbors together. They provide safe routes for children walking to school and seniors accessing services.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <h4>Waterfront Access</h4>
+          <p>The Bluffline opens Pensacola Bay's northern shore to residents who currently have no safe way to reach it. This is bayfront access for the entire community.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </div>
+          <h4>Outdoor Recreation</h4>
+          <p>The outdoor recreation economy generates $1.2 trillion annually nationwide. The Bluffline positions Pensacola to capture more of this growing sector.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <h4>Transportation Choice</h4>
+          <p>The Bluffline gives residents a genuine alternative to driving—not because they have to, but because they can choose the mode that works best for each trip.</p>
+        </div>
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <h4>Equity & Access</h4>
+          <p>Trail infrastructure provides disproportionate benefits to lower-income households, who are more likely to walk or bike out of necessity. The Bluffline is infrastructure for everyone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Help us build the Bluffline"
+    description="Every mile of safe trail infrastructure prevents injuries, creates jobs, and improves quality of life. Join us in making the Bluffline a reality."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+    secondaryLabel="See Our Progress"
+    secondaryHref="/progress"
+    variant="forest"
+  />
+</BaseLayout>
+
+<style>
+  /* Section styling */
+  .section {
+    padding: 5rem 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .section { padding: 6rem 3rem; }
+  }
+  .section-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 3rem;
+  }
+  .section-header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .section-header p {
+    font-size: 1.1rem;
+    color: var(--navy);
+    opacity: 0.8;
+  }
+  .section-header.light h2,
+  .section-header.light p {
+    color: white;
+  }
+  .section-header.light p {
+    opacity: 0.85;
+  }
+  .section-label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--forest);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .section-label.light {
+    color: var(--spring);
+  }
+
+  /* Safety Section */
+  .safety-section {
+    background: var(--warm-white);
+  }
+  .stats-row {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 600px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .stats-row { grid-template-columns: repeat(4, 1fr); }
+  }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+  .stat-number {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 0.5rem;
+  }
+  .stat-desc {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+
+  /* Map Section */
+  .map-section { background: var(--mist); padding: 0; }
+  .map-wrapper {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    background: var(--mist);
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .map-wrapper {
+      height: 65vh;
+      min-height: 450px;
+      max-height: 600px;
+    }
+  }
+  #safety-map {
+    width: 100%;
+    height: 100%;
+  }
+
+  .fullscreen-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .fullscreen-btn:hover {
+    background: var(--mist);
+    transform: scale(1.05);
+  }
+  .fullscreen-btn .icon-collapse {
+    display: none;
+  }
+
+  .map-legend {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 10;
+    display: flex;
+    gap: 0.5rem 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 0.625rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  @media (min-width: 768px) {
+    .map-legend {
+      left: auto;
+      right: 12px;
+      bottom: 12px;
+      max-width: fit-content;
+      padding: 0.75rem 1.25rem;
+    }
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--navy); white-space: nowrap; }
+  .legend-polygon {
+    width: 16px;
+    height: 10px;
+    background: rgba(65, 82, 31, 0.2);
+    border: 2px solid var(--forest);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .legend-fatal-ped {
+    width: 12px;
+    height: 12px;
+    background: #dc2626;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-injury-ped {
+    width: 10px;
+    height: 10px;
+    background: #f97316;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-fatal-bike {
+    width: 12px;
+    height: 12px;
+    background: #dc2626;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .legend-injury-bike {
+    width: 10px;
+    height: 10px;
+    background: #f97316;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .map-wrapper.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    min-height: auto;
+    z-index: 9999;
+    margin: 0;
+  }
+  .map-wrapper.fullscreen .fullscreen-btn {
+    top: 20px;
+    left: 20px;
+  }
+  .map-wrapper.fullscreen .fullscreen-btn .icon-expand {
+    display: none;
+  }
+  .map-wrapper.fullscreen .fullscreen-btn .icon-collapse {
+    display: block;
+  }
+  .map-wrapper.fullscreen .map-legend {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+  @media (min-width: 768px) {
+    .map-wrapper.fullscreen .map-legend {
+      left: auto;
+      right: 20px;
+    }
+  }
+
+  .map-context {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 2rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .map-context { padding: 2rem 3rem; }
+  }
+  .map-caption {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.8;
+    max-width: 700px;
+    margin: 0 auto 0.5rem;
+  }
+  .map-source {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.6;
+  }
+
+  /* Mapbox popup styles */
+  :global(.mapboxgl-popup-content) {
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    max-width: 260px;
+  }
+  :global(.mapboxgl-popup-content .popup-type) {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  :global(.mapboxgl-popup-content .popup-type.fatal) {
+    background: #fef2f2;
+    color: #dc2626;
+  }
+  :global(.mapboxgl-popup-content .popup-type.serious) {
+    background: #fff7ed;
+    color: #c2410c;
+  }
+  :global(.mapboxgl-popup-content .popup-location) {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0 0 0.25rem 0;
+  }
+  :global(.mapboxgl-popup-content .popup-year) {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  /* Context Section */
+  .context-section {
+    background: var(--cream);
+  }
+  .context-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 900px) {
+    .context-grid { grid-template-columns: repeat(2, 1fr); gap: 4rem; }
+  }
+  .context-content h3 {
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+  }
+  .context-content p {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.85;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Economic Section */
+  .economic-section {
+    background: var(--warm-white);
+  }
+  .research-highlight {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .research-highlight { grid-template-columns: repeat(3, 1fr); }
+  }
+  .research-stat {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: var(--mist);
+    border-radius: 12px;
+  }
+  .big-number {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--forest);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .stat-context {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+  .research-citation {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--navy);
+    opacity: 0.6;
+  }
+
+  /* Pillars Section */
+  .pillars-section {
+    background: var(--cream);
+  }
+  .pillars-grid {
+    display: grid;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .pillar-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.06);
+  }
+  .pillar-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--mist);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--forest);
+    margin-bottom: 1.25rem;
+  }
+  .pillar-card h3 {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .pillar-card > p {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  .pillar-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .pillar-stat {
+    flex: 1;
+    min-width: 140px;
+    padding: 1rem;
+    background: var(--mist);
+    border-radius: 8px;
+  }
+  .pillar-stat strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--forest);
+    margin-bottom: 0.25rem;
+  }
+  .pillar-stat span {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+  .pillar-detail {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  /* Evidence Section */
+  .evidence-section {
+    background: var(--warm-white);
+  }
+  .evidence-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+  }
+  .evidence-header h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .evidence-header p {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.75;
+  }
+  .evidence-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 600px) {
+    .evidence-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .evidence-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .evidence-card {
+    background: var(--mist);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .evidence-card h4 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .evidence-location {
+    font-size: 0.85rem;
+    color: var(--forest);
+    margin-bottom: 1rem;
+  }
+  .evidence-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .evidence-stat {
+    font-size: 0.85rem;
+    color: var(--navy);
+    opacity: 0.8;
+  }
+  .evidence-stat strong {
+    color: var(--forest);
+    font-weight: 600;
+  }
+
+  /* Quality of Life Section */
+  .quality-section {
+    background: var(--navy);
+  }
+  .quality-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 600px) {
+    .quality-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .quality-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .quality-card {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .quality-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(153, 204, 99, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--spring);
+    margin-bottom: 1rem;
+  }
+  .quality-card h4 {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+  .quality-card p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+
+<script define:vars={{ MAPBOX_TOKEN, planningCorridorData, crashIncidentsData }}>
+  // Load Mapbox GL JS
+  const script = document.createElement('script');
+  script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js';
+  script.onload = initMap;
+  document.head.appendChild(script);
+
+  function initMap() {
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+
+    const map = new mapboxgl.Map({
+      container: 'safety-map',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [-87.22, 30.43],
+      zoom: 10.5,
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    map.on('load', () => {
+      // Add Planning Corridor (polygon) as context
+      map.addSource('planning-corridor', {
+        type: 'geojson',
+        data: planningCorridorData,
+      });
+      map.addLayer({
+        id: 'planning-corridor-fill',
+        type: 'fill',
+        source: 'planning-corridor',
+        paint: {
+          'fill-color': '#41521F',
+          'fill-opacity': 0.1,
+        },
+      });
+      map.addLayer({
+        id: 'planning-corridor-outline',
+        type: 'line',
+        source: 'planning-corridor',
+        paint: {
+          'line-color': '#41521F',
+          'line-width': 2,
+          'line-opacity': 0.6,
+        },
+      });
+
+      // Add crash incidents
+      map.addSource('crash-incidents', {
+        type: 'geojson',
+        data: crashIncidentsData,
+      });
+
+      // Fatal pedestrian crashes (circles)
+      map.addLayer({
+        id: 'crashes-ped-fatal',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['==', ['get', 'severity'], 'fatal']],
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#dc2626',
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2,
+          'circle-opacity': 0.9,
+        },
+      });
+
+      // Serious pedestrian crashes (circles)
+      map.addLayer({
+        id: 'crashes-ped-serious',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['all', ['==', ['get', 'type'], 'pedestrian'], ['==', ['get', 'severity'], 'serious']],
+        paint: {
+          'circle-radius': 8,
+          'circle-color': '#f97316',
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2,
+          'circle-opacity': 0.9,
+        },
+      });
+
+      // Fatal cyclist crashes (squares via symbol)
+      map.addLayer({
+        id: 'crashes-bike-fatal',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'fatal']],
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#dc2626',
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2,
+          'circle-opacity': 0.9,
+        },
+      });
+
+      // Serious cyclist crashes
+      map.addLayer({
+        id: 'crashes-bike-serious',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['all', ['==', ['get', 'type'], 'cyclist'], ['==', ['get', 'severity'], 'serious']],
+        paint: {
+          'circle-radius': 8,
+          'circle-color': '#f97316',
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2,
+          'circle-opacity': 0.9,
+        },
+      });
+
+      // Add small icon indicators for cyclist vs pedestrian
+      // Pedestrians get a small inner dot
+      map.addLayer({
+        id: 'crashes-ped-indicator',
+        type: 'circle',
+        source: 'crash-incidents',
+        filter: ['==', ['get', 'type'], 'pedestrian'],
+        paint: {
+          'circle-radius': 3,
+          'circle-color': '#ffffff',
+        },
+      });
+
+      // Popup on click for all crash layers
+      const crashLayers = ['crashes-ped-fatal', 'crashes-ped-serious', 'crashes-bike-fatal', 'crashes-bike-serious'];
+
+      crashLayers.forEach(layer => {
+        map.on('click', layer, (e) => {
+          const feature = e.features[0];
+          const { type, severity, year, location } = feature.properties;
+          const typeLabel = type === 'pedestrian' ? 'Pedestrian' : 'Cyclist';
+          const severityLabel = severity === 'fatal' ? 'Fatality' : 'Serious Injury';
+
+          new mapboxgl.Popup()
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(`
+              <span class="popup-type ${severity}">${typeLabel} ${severityLabel}</span>
+              <p class="popup-location">${location}</p>
+              <p class="popup-year">${year}</p>
+            `)
+            .addTo(map);
+        });
+
+        map.on('mouseenter', layer, () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', layer, () => {
+          map.getCanvas().style.cursor = '';
+        });
+      });
+
+      // Fit map to show the corridor
+      const bounds = new mapboxgl.LngLatBounds();
+      planningCorridorData.features[0].geometry.coordinates[0].forEach(coord => {
+        bounds.extend(coord);
+      });
+      map.fitBounds(bounds, { padding: 40 });
+
+      // Fullscreen toggle
+      const mapWrapper = document.getElementById('safety-map-wrapper');
+      const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+      function toggleFullscreen() {
+        mapWrapper.classList.toggle('fullscreen');
+        document.body.style.overflow = mapWrapper.classList.contains('fullscreen') ? 'hidden' : '';
+
+        setTimeout(() => {
+          map.resize();
+          if (mapWrapper.classList.contains('fullscreen')) {
+            map.fitBounds(bounds, { padding: 60 });
+          } else {
+            map.fitBounds(bounds, { padding: 40 });
+          }
+        }, 100);
+      }
+
+      fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mapWrapper.classList.contains('fullscreen')) {
+          toggleFullscreen();
+        }
+      });
+    });
+  }
+</script>
