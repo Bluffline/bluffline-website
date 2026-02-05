@@ -5,13 +5,52 @@
       "type": "Feature",
       "properties": {
         "type": "pedestrian",
-        "severity": "fatal",
+        "severity": "injury",
         "year": 2023,
-        "location": "W Navy Blvd near NAS Pensacola"
+        "location": "On Roadway",
+        "crash_datetime": "22-JAN-2023 12:03 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2894, 30.3712]
+        "coordinates": [
+          -87.2132232346998,
+          30.4219682219514
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "15-DEC-2024 03:00 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2129769217778,
+          30.4146527015564
+        ]
       }
     },
     {
@@ -20,37 +59,180 @@
         "type": "pedestrian",
         "severity": "serious",
         "year": 2023,
-        "location": "Cervantes St & N Pace Blvd"
+        "location": "On Roadway",
+        "crash_datetime": "23-MAR-2023 10:49 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2341, 30.4285]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "cyclist",
-        "severity": "fatal",
-        "year": 2024,
-        "location": "Scenic Highway near Bay Bluffs Park"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-87.1924, 30.4631]
+        "coordinates": [
+          -87.2143154800949,
+          30.4129843572809
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "type": "pedestrian",
-        "severity": "serious",
-        "year": 2024,
-        "location": "W Cervantes St near I-110"
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "07-APR-2022 02:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2289, 30.4312]
+        "coordinates": [
+          -87.2143970268331,
+          30.412968706959
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "18-OCT-2024 09:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2154641084093,
+          30.4142598982631
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "17-FEB-2023 12:00 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2154593451547,
+          30.4142723002754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "04-MAR-2023 06:36 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 2,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2156278741148,
+          30.4130077942046
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "30-MAY-2025 04:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.215565502066,
+          30.4130243483976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "12-SEP-2025 12:45 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2157754297211,
+          30.4152416680142
+        ]
       }
     },
     {
@@ -59,11 +241,3768 @@
         "type": "cyclist",
         "severity": "serious",
         "year": 2023,
-        "location": "E Cervantes St & 12th Ave"
+        "location": "On Roadway",
+        "crash_datetime": "05-AUG-2023 10:55 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2052, 30.4298]
+        "coordinates": [
+          -87.2151316492209,
+          30.4234174063058
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Roadside",
+        "crash_datetime": "14-FEB-2022 06:43 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2172567745395,
+          30.420914870235
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "23-MAR-2023 03:13 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2174192240875,
+          30.421408092967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "both",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "05-JUN-2022 08:40 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2187290322197,
+          30.4149804322903
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "27-NOV-2022 02:14 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2174701091457,
+          30.4152290427164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2023,
+        "location": "Off Roadway",
+        "crash_datetime": "17-FEB-2023 08:25 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2181403406043,
+          30.4181372121125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "Shoulder",
+        "crash_datetime": "16-JUL-2025 02:58 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2195878538903,
+          30.4210343168676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "15-OCT-2025 08:13 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2200331982391,
+          30.4207842124258
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "08-JUN-2022 07:47 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2233408139228,
+          30.4223227435085
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "20-MAR-2022 08:17 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2187955523523,
+          30.4210943322865
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "14-MAY-2023 01:20 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2133993043804,
+          30.4094282536736
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "18-AUG-2023 08:20 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2139855152418,
+          30.4076533481625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "27-JUN-2025 09:10 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.213355461969,
+          30.4083643420367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "25-SEP-2022 03:10 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2144693150892,
+          30.4087859813407
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "01-SEP-2023 01:18 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2145931725324,
+          30.4093266493699
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2025,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "15-JUN-2025 03:53 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2141555585159,
+          30.4122744010096
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "06-AUG-2023 11:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2146711243933,
+          30.4097932580415
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "13-MAY-2023 10:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2137321567448,
+          30.4104944488089
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "01-MAR-2023 04:07 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2134291752802,
+          30.4105478379324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "15-JAN-2022 10:36 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2155267231108,
+          30.4067522540308
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "22-FEB-2023 04:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2174868148621,
+          30.40693663872
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "19-AUG-2023 09:10 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2232608248606,
+          30.4113809899367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "19-AUG-2024 06:21 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2261655085541,
+          30.4111243473878
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "26-FEB-2024 02:55 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2260853352203,
+          30.4111866080599
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "21-JUN-2024 01:56 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2262074190511,
+          30.4112448568007
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "11-JUL-2025 05:46 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2145762884333,
+          30.428692842437
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "28-FEB-2025 05:10 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2158353269102,
+          30.4343733764841
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "18-NOV-2022 07:20 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2149730950449,
+          30.4354918335537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "24-JUL-2023 09:54 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2140547272023,
+          30.4385808261554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "10-MAY-2025 02:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.214005557375,
+          30.4385843947687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "25-SEP-2023 08:30 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2160177597332,
+          30.4274417176679
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "05-JAN-2025 07:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2173855087323,
+          30.4341043032751
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "04-APR-2022 05:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2215690324008,
+          30.4333541085972
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "22-JUL-2022 09:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2203814153465,
+          30.4345490671422
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "03-OCT-2023 09:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2234092686416,
+          30.4310767768924
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "09-SEP-2024 01:08 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.226355486375,
+          30.4263342973489
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "29-MAR-2022 06:20 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2251242380817,
+          30.4269039386466
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "28-MAR-2023 10:20 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2103787633748,
+          30.5154614428145
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "Off Roadway",
+        "crash_datetime": "01-SEP-2023 08:37 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2191745058019,
+          30.5315830468311
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "09-OCT-2024 04:04 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2211075485952,
+          30.5322814123168
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "09-JUL-2024 10:06 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2212043613608,
+          30.5323681705402
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "30-OCT-2024 08:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2211561284732,
+          30.5328113487164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "09-APR-2025 01:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2213755023781,
+          30.5320743055259
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "17-OCT-2025 01:15 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2213755023781,
+          30.5320743055259
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "20-JUN-2025 04:00 AM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2210887553241,
+          30.5320661971573
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "14-JUN-2024 03:38 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 3,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2215811717305,
+          30.5321666800195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "22-OCT-2024 05:27 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2207819488053,
+          30.5217479150108
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "09-APR-2024 09:34 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2213472732517,
+          30.527866762789
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Outside Right-of-way",
+        "crash_datetime": "03-APR-2022 08:52 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2211537350966,
+          30.5312761232232
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "29-SEP-2023 01:44 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2224730116924,
+          30.529962527188
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "20-FEB-2023 10:26 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2239816022566,
+          30.5321871565193
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "28-AUG-2024 10:14 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2262069885823,
+          30.5327550187311
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "29-JAN-2023 10:46 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2248368376726,
+          30.5213966743407
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "16-AUG-2022 09:33 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.232852549026,
+          30.5322237751869
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "16-MAR-2023 09:19 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2321025328384,
+          30.5314888998945
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "28-MAY-2024 07:39 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.225567024561,
+          30.4198837319255
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "28-AUG-2024 12:55 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2266906367297,
+          30.4199274539758
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "21-JAN-2023 07:43 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2289199970616,
+          30.420113940233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "20-MAY-2024 06:42 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2299315436134,
+          30.4230953638763
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "15-NOV-2024 05:15 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2299520002883,
+          30.42206936971
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "10-JUN-2024 09:30 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2278068944036,
+          30.4205819737164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "30-MAR-2022 12:39 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2302656607478,
+          30.4172017768531
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "03-APR-2024 06:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2301539045559,
+          30.4201964620088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "22-OCT-2024 07:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2300252703048,
+          30.4202715064324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "22-JUN-2022 10:05 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2321940079472,
+          30.4222534030013
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "13-MAY-2022 09:47 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2331035082844,
+          30.420338571586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "20-JAN-2022 06:48 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2342029758419,
+          30.42038228836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "08-JUL-2022 08:06 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2365850267373,
+          30.4234460678285
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "21-OCT-2025 02:23 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2326340541032,
+          30.415327491924
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "16-MAY-2025 04:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2378855081781,
+          30.4205243427188
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "15-FEB-2024 04:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2377036408979,
+          30.4234952539117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "07-APR-2025 07:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2410854695788,
+          30.4236443653305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "05-MAR-2023 02:47 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2412555595853,
+          30.4206743468842
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "29-JUN-2024 11:13 PM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2412934528922,
+          30.419757169235
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "02-AUG-2023 09:02 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2413882410708,
+          30.4206384668993
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "08-JAN-2023 12:32 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2413318269373,
+          30.4205831787826
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "13-APR-2023 02:08 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2413297962382,
+          30.4205447537274
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "21-FEB-2023 11:39 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2414257241502,
+          30.4186964768556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "21-JUL-2024 10:47 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.24158095453,
+          30.4209639646878
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "06-FEB-2024 12:33 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2416570037097,
+          30.4153685492936
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "24-NOV-2025 11:01 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2411869840098,
+          30.4216273671877
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "15-FEB-2022 06:10 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2442479851235,
+          30.4206890571077
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "24-APR-2025 08:52 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2432621585838,
+          30.4207077044368
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "18-APR-2025 03:25 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2433394778138,
+          30.4207774039481
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "18-JUL-2022 04:11 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2452250363472,
+          30.4208556155449
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Off Roadway",
+        "crash_datetime": "26-JUL-2022 12:06 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2477653011307,
+          30.4229363313966
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "Roadside",
+        "crash_datetime": "29-JUN-2024 06:58 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2408128995914,
+          30.4263917564756
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "26-JAN-2022 06:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2407154222725,
+          30.4286809020819
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "24-JUN-2024 09:38 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2395395544519,
+          30.4281826824099
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "24-DEC-2024 07:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2389721964678,
+          30.4271307701666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "15-MAR-2024 05:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2407655027708,
+          30.4291843347722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "02-JAN-2025 04:11 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2407655027708,
+          30.4291843347722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "26-JUN-2022 02:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.240996804074,
+          30.4272665078721
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "08-NOV-2025 05:15 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2409135346832,
+          30.4265226609312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "27-JUN-2022 01:31 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2452071255618,
+          30.4293720161655
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "01-JAN-2022 04:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2372608592736,
+          30.5324599466777
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "18-APR-2024 07:41 PM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2391222502023,
+          30.532671260751
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "01-APR-2025 05:16 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2414755606148,
+          30.5326843748946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "15-FEB-2025 12:22 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2414455163026,
+          30.5325343028303
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "19-APR-2025 07:44 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2502755657214,
+          30.4212643994172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "30-JUL-2023 09:25 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2501946855858,
+          30.421388076075
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "10-OCT-2022 09:15 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2496406066597,
+          30.4230369121995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "17-JUL-2023 09:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2534989057314,
+          30.422078502492
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "16-AUG-2025 10:33 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2525060249704,
+          30.4218557535647
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Shoulder",
+        "crash_datetime": "20-FEB-2022 03:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2499547327564,
+          30.4270128484148
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "Unknown",
+        "crash_datetime": "13-MAR-2023 08:53 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 0,
+        "bicyclist_count": 2,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2604473943965,
+          30.4232697093171
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "04-NOV-2022 12:36 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2604070582501,
+          30.4233175620284
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "14-SEP-2025 01:41 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2607781349964,
+          30.4240881145722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "Off Roadway",
+        "crash_datetime": "25-OCT-2023 10:38 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2599630768136,
+          30.4214327909438
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "02-JUN-2022 05:01 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 2,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2626029471901,
+          30.4178731580689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "30-OCT-2024 03:37 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.234232226035,
+          30.4064357721443
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "06-FEB-2022 04:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.248777763371,
+          30.39576109296
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "20-APR-2024 06:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2577523911067,
+          30.4114442624003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "11-FEB-2023 11:15 PM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2651104683106,
+          30.410154278275
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Roadside",
+        "crash_datetime": "27-JUL-2022 07:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2647903294114,
+          30.410344545482
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "24-MAY-2023 02:07 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2715553830213,
+          30.4083611087387
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "26-NOV-2025 05:07 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2733354994674,
+          30.3950442966475
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "18-FEB-2025 07:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 2,
+        "pedestrian_count": 2,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2733411878961,
+          30.3954064223827
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "26-AUG-2022 07:42 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2735246709757,
+          30.4070737614744
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "26-AUG-2022 10:38 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2734555704711,
+          30.3964544056007
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "17-APR-2025 09:15 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2735855695078,
+          30.3978544053215
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "Off Roadway",
+        "crash_datetime": "10-OCT-2024 05:23 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2738610116459,
+          30.4006101779116
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "Off Roadway",
+        "crash_datetime": "20-JUN-2025 10:42 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2744255702266,
+          30.4063644029498
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "05-SEP-2023 08:09 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2731033914407,
+          30.407533370416
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "Off Roadway",
+        "crash_datetime": "07-SEP-2025 11:40 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2745055231481,
+          30.4073143276727
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "04-FEB-2022 01:19 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 2,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2744608579366,
+          30.4062923010468
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Shoulder",
+        "crash_datetime": "15-APR-2022 01:01 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2743491176884,
+          30.4047281182268
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "15-MAR-2024 02:17 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2154113161517,
+          30.5443254768702
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "24-SEP-2024 12:52 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2186020041231,
+          30.5479845011714
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2023,
+        "location": "Off Roadway",
+        "crash_datetime": "03-MAY-2023 08:19 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2169936452553,
+          30.5496638298273
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "12-FEB-2025 06:51 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2194854770213,
+          30.5405343420335
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "14-SEP-2023 11:11 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2194838596047,
+          30.5405340839371
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2025,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "08-OCT-2025 05:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2192843684702,
+          30.5494602941097
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2025,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "28-MAY-2025 01:59 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2197612331333,
+          30.549889307111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "28-OCT-2024 08:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2205886504378,
+          30.5442226592612
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "01-JAN-2025 11:28 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2386655248396,
+          30.5470442684341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "18-MAR-2025 05:15 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2324155265089,
+          30.5480542934514
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "08-SEP-2023 05:14 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2473758572459,
+          30.5427676449128
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "Off Roadway",
+        "crash_datetime": "23-JAN-2024 05:49 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2472381896109,
+          30.546584035553
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "15-AUG-2023 01:29 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2749048090212,
+          30.4120369783186
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "28-JUL-2023 04:50 AM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2762922261587,
+          30.4105010267874
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "Off Roadway",
+        "crash_datetime": "27-MAR-2023 01:03 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2766871952107,
+          30.4105182457509
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "21-DEC-2022 06:08 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2765382628781,
+          30.4081874438714
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "22-SEP-2022 09:14 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2767395887235,
+          30.4060766952883
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "17-JUL-2022 12:42 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2766119386407,
+          30.4058520676801
+        ]
       }
     },
     {
@@ -72,11 +4011,830 @@
         "type": "pedestrian",
         "severity": "fatal",
         "year": 2022,
-        "location": "Mobile Highway near West Pensacola"
+        "location": "On Roadway",
+        "crash_datetime": "17-DEC-2022 10:06 PM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2567, 30.4198]
+        "coordinates": [
+          -87.2769196455464,
+          30.4042523814041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "01-OCT-2023 05:35 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 2,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2774605053736,
+          30.4011425644907
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "Off Roadway",
+        "crash_datetime": "20-MAR-2025 10:38 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2769055708506,
+          30.4071144020328
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "17-JUN-2022 06:40 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2767464888154,
+          30.4021355489734
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "14-APR-2024 03:57 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2777755711894,
+          30.3960744055762
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2022,
+        "location": "Off Roadway",
+        "crash_datetime": "28-JAN-2022 09:41 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2774888189721,
+          30.3984709442057
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "30-APR-2022 01:37 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2772312525736,
+          30.3985095058459
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "17-MAY-2025 09:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2777654980283,
+          30.3982243327226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "07-OCT-2024 11:23 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2773438592936,
+          30.3994266817248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "17-MAR-2022 05:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2780755714405,
+          30.3950244058403
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "17-JUL-2022 02:07 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2772070295555,
+          30.4010774494237
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "15-MAY-2025 04:48 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2786712009767,
+          30.3958197358298
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "28-OCT-2023 12:14 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2779455274808,
+          30.396302493391
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "27-JAN-2025 12:43 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2777554956874,
+          30.3983743158754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "22-APR-2025 03:33 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2810355715096,
+          30.4081744031645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "08-OCT-2024 05:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2834626593388,
+          30.3983326901735
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "16-AUG-2024 04:10 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2878991030733,
+          30.3971863746745
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "Off Roadway",
+        "crash_datetime": "30-SEP-2025 01:15 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2781462312616,
+          30.3939860964754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "30-SEP-2023 04:33 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2553347204753,
+          30.3940824220112
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "28-MAR-2022 11:44 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2515478990053,
+          30.3934855837037
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "21-AUG-2025 01:23 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2588554711152,
+          30.392964358565
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "31-AUG-2022 12:59 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2826937708152,
+          30.3937579919837
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "05-MAR-2022 07:23 PM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2793597142215,
+          30.3939413909379
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "10-MAY-2024 04:45 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2783528231818,
+          30.3940059361544
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "31-JAN-2025 03:29 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2647055035797,
+          30.3934143540218
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "14-AUG-2023 04:50 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2724223677744,
+          30.3900385246291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "13-JUN-2025 07:51 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2708044300906,
+          30.3927810364451
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "25-JUL-2022 12:32 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2731721839805,
+          30.3937499514315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "01-JUL-2025 05:28 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.278315498505,
+          30.3877343172644
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "11-JAN-2025 09:25 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2732364335051,
+          30.3887608817335
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "10-OCT-2024 05:25 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2692844168863,
+          30.3899858542129
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "15-MAY-2023 11:50 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2777973611487,
+          30.3825528199454
+        ]
       }
     },
     {
@@ -85,24 +4843,180 @@
         "type": "cyclist",
         "severity": "serious",
         "year": 2024,
-        "location": "Navy Blvd & Corry Field Rd"
+        "location": "On Roadway",
+        "crash_datetime": "04-MAY-2024 07:27 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2712, 30.3845]
+        "coordinates": [
+          -87.3001863337226,
+          30.3896103116527
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "type": "pedestrian",
-        "severity": "serious",
-        "year": 2023,
-        "location": "Scenic Highway near Veterans Memorial Park"
+        "severity": "injury",
+        "year": 2025,
+        "location": "Off Roadway",
+        "crash_datetime": "08-JAN-2025 07:56 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2138, 30.4079]
+        "coordinates": [
+          -87.2967755456174,
+          30.3801143115588
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "17-OCT-2024 01:03 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.3043148545349,
+          30.3968604152446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "19-DEC-2023 06:44 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.301731201922,
+          30.3970640673094
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "07-APR-2023 03:47 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.3064046927622,
+          30.3865863653131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Off Roadway",
+        "crash_datetime": "13-DEC-2022 04:09 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.171705656408,
+          30.4906402232988
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "26-FEB-2025 04:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1693855306104,
+          30.483034300971
+        ]
       }
     },
     {
@@ -111,24 +5025,440 @@
         "type": "pedestrian",
         "severity": "fatal",
         "year": 2024,
-        "location": "N Navy Blvd near Ferry Pass"
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "05-MAR-2024 04:30 PM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2631, 30.4412]
+        "coordinates": [
+          -87.1825853803988,
+          30.4874926597019
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "21-JUN-2024 02:45 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1684714314916,
+          30.4823924724923
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "05-FEB-2022 10:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1614962748511,
+          30.4714104407772
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "type": "cyclist",
-        "severity": "fatal",
+        "severity": "minor",
         "year": 2023,
-        "location": "E Burgess Rd near UWF"
+        "location": "On Roadway",
+        "crash_datetime": "11-AUG-2023 02:32 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.1756, 30.5234]
+        "coordinates": [
+          -87.1745323759732,
+          30.4692337501026
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "22-FEB-2024 04:52 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1736517788567,
+          30.4708115042396
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "23-JUN-2023 07:00 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1793485795041,
+          30.4595244536368
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "17-NOV-2025 03:04 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1941799966683,
+          30.4643372459553
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "03-AUG-2023 09:50 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1900013369681,
+          30.462172124315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "14-NOV-2024 07:50 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1694709944776,
+          30.4548061386994
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "01-JUN-2024 04:52 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1937282237424,
+          30.4526367453261
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "28-SEP-2022 06:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1820625382819,
+          30.4399713652741
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "14-NOV-2025 07:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.17809508703,
+          30.4254477000003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "08-APR-2023 12:14 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1784295736572,
+          30.4258692207479
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "24-APR-2022 04:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1836376435124,
+          30.4254068617882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "06-SEP-2022 06:48 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1835431351526,
+          30.4254276742342
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "22-JUL-2024 04:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.183485459034,
+          30.4253863213044
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "15-OCT-2023 05:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1800595053784,
+          30.4251635331296
+        ]
       }
     },
     {
@@ -137,76 +5467,76 @@
         "type": "pedestrian",
         "severity": "serious",
         "year": 2022,
-        "location": "W Navy Blvd near Barrancas Ave"
+        "location": "On Roadway",
+        "crash_datetime": "02-DEC-2022 09:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2823, 30.3756]
+        "coordinates": [
+          -87.1806760652683,
+          30.4251156715492
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "type": "cyclist",
-        "severity": "serious",
-        "year": 2024,
-        "location": "N 9th Ave near Cervantes"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-87.2185, 30.4356]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "pedestrian",
-        "severity": "serious",
-        "year": 2023,
-        "location": "Mobile Highway near Corry Station"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-87.2489, 30.4089]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "pedestrian",
         "severity": "fatal",
         "year": 2022,
-        "location": "Scenic Highway near East Hill"
+        "location": "On Roadway",
+        "crash_datetime": "15-AUG-2022 02:50 AM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 1,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.1989, 30.4445]
+        "coordinates": [
+          -87.189148292213,
+          30.4259082111009
+        ]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "type": "cyclist",
-        "severity": "serious",
+        "severity": "injury",
         "year": 2023,
-        "location": "W Gregory St near Blount St"
+        "location": "On Roadway",
+        "crash_datetime": "23-OCT-2023 06:25 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2234, 30.4167]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "pedestrian",
-        "severity": "serious",
-        "year": 2024,
-        "location": "N Pace Blvd near W Jackson St"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-87.2356, 30.4198]
+        "coordinates": [
+          -87.1914551843447,
+          30.4257758743676
+        ]
       }
     },
     {
@@ -214,12 +5544,1299 @@
       "properties": {
         "type": "cyclist",
         "severity": "fatal",
-        "year": 2024,
-        "location": "Summit Blvd near I-10"
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "24-SEP-2025 04:23 AM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 1,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2145, 30.4789]
+        "coordinates": [
+          -87.2044755185231,
+          30.535064340671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "23-DEC-2022 04:45 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1891776011411,
+          30.4975027083073
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "06-AUG-2023 11:50 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1877211043097,
+          30.4951249680736
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "09-SEP-2024 01:09 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1889255945519,
+          30.4958697514743
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "16-AUG-2023 01:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1889060803793,
+          30.4959390137196
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "01-MAR-2025 11:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.210305475672,
+          30.4195742903355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "28-JUN-2024 02:28 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2113759192331,
+          30.4186172339984
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "07-FEB-2025 06:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.207375524614,
+          30.4182743358361
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "fatal",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "05-APR-2023 03:36 PM",
+        "fatalities": 1,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 1,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2072226026692,
+          30.4183046643494
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2023,
+        "location": "Off Roadway",
+        "crash_datetime": "30-NOV-2023 10:05 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2036240549836,
+          30.4172808065005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "05-DEC-2024 07:34 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2108739721032,
+          30.4168138810467
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "10-DEC-2023 08:57 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2078931213866,
+          30.5306786654191
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "10-OCT-2025 03:34 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2085636267227,
+          30.5297386123478
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2025,
+        "location": "Unknown",
+        "crash_datetime": "21-JAN-2025 02:21 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1934580927255,
+          30.530047425541
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "15-DEC-2022 04:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2092455314755,
+          30.5279642826455
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "29-NOV-2022 07:03 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 2,
+        "pedestrian_count": 2,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2083414981431,
+          30.5168318373558
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "Shoulder",
+        "crash_datetime": "30-DEC-2024 05:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1791355356858,
+          30.5151543181005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "09-JAN-2025 04:37 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.206555498536,
+          30.5100342947817
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "23-DEC-2024 05:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1961355528459,
+          30.5084243797677
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "03-SEP-2025 05:33 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.184262635584,
+          30.5062274188355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "25-JAN-2024 10:45 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1837487267414,
+          30.5044958361919
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "Off Roadway",
+        "crash_datetime": "02-JAN-2024 06:31 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2075101560991,
+          30.5099529329011
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "06-AUG-2025 12:38 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 2,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2027283275712,
+          30.5099074208637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "29-AUG-2022 02:00 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1785502392593,
+          30.4997673463816
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "Shoulder",
+        "crash_datetime": "04-JUL-2022 12:30 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1768926254083,
+          30.4998731483103
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "05-JUN-2024 12:19 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1847696300348,
+          30.5000845066779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "04-DEC-2022 05:12 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1849154942903,
+          30.5001043311402
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "04-NOV-2023 11:35 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2058476754825,
+          30.4172223769003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "20-MAR-2023 10:14 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2054801569343,
+          30.4160041650616
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "27-FEB-2022 12:08 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2054864439242,
+          30.4160107288878
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "17-SEP-2022 05:12 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2054955571894,
+          30.4160044002857
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "12-MAR-2025 01:58 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2059166504464,
+          30.4159481016314
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "03-FEB-2024 09:50 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2089250295994,
+          30.4153685782842
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "14-AUG-2024 10:25 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2106685185065,
+          30.4150943509741
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "26-JUL-2024 11:10 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2128533648272,
+          30.4134749615156
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "01-MAR-2025 05:12 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2083863743199,
+          30.4136815896299
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "08-FEB-2025 01:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2124754956878,
+          30.4118043653223
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "07-NOV-2025 05:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2128221816247,
+          30.4132278463799
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "14-JUN-2022 09:30 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.211918062803,
+          30.4096288551375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "07-OCT-2022 02:20 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2128153636492,
+          30.4095785456952
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "10-JUN-2025 12:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.209875478334,
+          30.4122443413944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "05-NOV-2023 10:00 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2078688153438,
+          30.4125608162848
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "29-JUL-2023 11:47 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2128016074958,
+          30.4095642452022
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "04-JUL-2025 09:02 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.211790758462,
+          30.4086610299363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "28-FEB-2022 08:45 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.211565063176,
+          30.4429588394799
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "injury",
+        "year": 2023,
+        "location": "On Roadway",
+        "crash_datetime": "20-JUL-2023 03:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2031758536951,
+          30.4434264503549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "serious",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "15-JAN-2024 11:33 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 2,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1987290322171,
+          30.4372841156653
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "13-APR-2022 02:08 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.209880833426,
+          30.4353495661117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "14-APR-2022 06:34 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2117702804369,
+          30.4271733504722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "14-MAY-2022 02:01 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2102755569818,
+          30.4283943968386
+        ]
       }
     },
     {
@@ -228,24 +6845,219 @@
         "type": "pedestrian",
         "severity": "serious",
         "year": 2023,
-        "location": "Scenic Highway near Sanders Beach"
+        "location": "On Roadway",
+        "crash_datetime": "01-JAN-2023 01:25 AM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 1,
+        "bicyclist_serious_injuries": 0
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-87.2078, 30.3987]
+        "coordinates": [
+          -87.2037084362699,
+          30.428522604895
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "28-JUL-2025 08:49 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2114489664101,
+          30.4252710719316
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "minor",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "04-OCT-2025 12:57 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.202761502773,
+          30.4239059540851
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2025,
+        "location": "On Roadway",
+        "crash_datetime": "25-APR-2025 01:55 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2026455029802,
+          30.4238442931156
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pedestrian",
+        "severity": "minor",
+        "year": 2022,
+        "location": "In Parking Lane or Zone",
+        "crash_datetime": "04-JAN-2022 02:22 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 0,
+        "pedestrian_count": 1,
+        "bicyclist_count": 0,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2034021752042,
+          30.4242433234525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "serious",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "30-SEP-2022 01:05 PM",
+        "fatalities": 0,
+        "serious_injuries": 1,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.2073439298339,
+          30.424104244812
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2024,
+        "location": "On Roadway",
+        "crash_datetime": "08-JUN-2024 10:11 AM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1997599944952,
+          30.4242493425639
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "cyclist",
+        "severity": "injury",
+        "year": 2022,
+        "location": "On Roadway",
+        "crash_datetime": "23-NOV-2022 05:40 PM",
+        "fatalities": 0,
+        "serious_injuries": 0,
+        "injuries": 1,
+        "pedestrian_count": 0,
+        "bicyclist_count": 1,
+        "pedestrian_fatalities": 0,
+        "bicyclist_fatalities": 0,
+        "pedestrian_serious_injuries": 0,
+        "bicyclist_serious_injuries": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.211927680581,
+          30.444794281937
+        ]
       }
     }
   ],
   "metadata": {
-    "source": "Florida Department of Transportation Signal Four Analytics",
+    "source": "Florida Department of Transportation Signal Four Analytics (exported dataset)",
     "corridorStats": {
-      "totalIncidents": 18,
-      "pedestrianFatalities": 5,
-      "cyclistFatalities": 3,
-      "pedestrianInjuries": 7,
-      "cyclistInjuries": 3,
-      "yearRange": "2022-2024"
+      "totalIncidents": 271,
+      "pedestrianFatalities": 9,
+      "cyclistFatalities": 2,
+      "pedestrianInjuryCrashes": 110,
+      "cyclistInjuryCrashes": 110,
+      "yearRange": "2022-2025"
     },
-    "note": "Data represents pedestrian and cyclist crashes within or adjacent to the Bluffline planning corridor. Actual crash data should be obtained from FDOT Signal Four Analytics for precise locations."
+    "note": "Dataset filtered to crashes with at least one pedestrian or bicyclist involved. Severity is derived from fatality and injury counts (fatal > serious > injury > minor). Location text is taken from the best available location/intersection fields in the export."
   }
 }
