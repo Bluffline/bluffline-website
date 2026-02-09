@@ -10,6 +10,9 @@ export default defineConfig({
     server: {
       hmr: {
         path: '/vite-hmr/'
+      },
+      headers: {
+        'Content-Security-Policy': "frame-ancestors 'self' https://app.netlify.com https://*.netlify.app"
       }
     }
   }
