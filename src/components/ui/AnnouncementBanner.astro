@@ -1,0 +1,95 @@
+---
+interface Props {
+  text: string;
+  linkText: string;
+  href: string;
+}
+
+const { text, linkText, href } = Astro.props;
+---
+
+<div class="announcement-banner" id="announcement-banner">
+  <div class="announcement-inner">
+    <p>{text} <a href={href}>{linkText} &rarr;</a></p>
+    <button class="announcement-close" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
+
+<style>
+  .announcement-banner {
+    background: var(--forest);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+  }
+  .announcement-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .announcement-banner p {
+    font-size: 0.875rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+  .announcement-banner a {
+    color: var(--spring);
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .announcement-banner a:hover {
+    text-decoration: underline;
+  }
+  .announcement-close {
+    background: none;
+    border: none;
+    color: white;
+    opacity: 0.6;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+  }
+  .announcement-close:hover {
+    opacity: 1;
+  }
+  .announcement-banner.is-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const banner = document.getElementById('announcement-banner');
+  const closeBtn = banner?.querySelector('.announcement-close');
+  const storageKey = 'announcement-dismissed';
+
+  function updateHeaderOffset() {
+    const bannerHeight = banner && !banner.classList.contains('is-hidden')
+      ? banner.offsetHeight
+      : 0;
+    document.documentElement.style.setProperty('--banner-height', `${bannerHeight}px`);
+  }
+
+  if (sessionStorage.getItem(storageKey)) {
+    banner?.classList.add('is-hidden');
+  }
+
+  updateHeaderOffset();
+
+  closeBtn?.addEventListener('click', () => {
+    banner?.classList.add('is-hidden');
+    sessionStorage.setItem(storageKey, 'true');
+    updateHeaderOffset();
+  });
+</script>

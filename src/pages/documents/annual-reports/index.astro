@@ -3,7 +3,6 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/ui/PageHero.astro';
 import CallToAction from '../../../components/ui/CallToAction.astro';
 import DocumentCard from '../../../components/content/DocumentCard.astro';
-import EmptyStateCard from '../../../components/content/EmptyStateCard.astro';
 import Button from '../../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
 
@@ -54,10 +53,10 @@ const annualReports = allDocuments
     </div>
   </section>
 
-  <section class="reports-section">
-    <div class="section-inner">
-      <h3 class="archive-title">Report Archive</h3>
-      {annualReports.length > 0 ? (
+  {annualReports.length > 0 && (
+    <section class="reports-section">
+      <div class="section-inner">
+        <h3 class="archive-title">Report Archive</h3>
         <div class="reports-grid">
           {annualReports.map(report => (
             <DocumentCard
@@ -70,15 +69,9 @@ const annualReports = allDocuments
             />
           ))}
         </div>
-      ) : (
-        <EmptyStateCard
-          title="Previous Reports Coming Soon"
-          description="We're preparing our historical reports for publication. Check back soon for yearly organizational updates and financial transparency."
-          variant="default"
-        />
-      )}
-    </div>
-  </section>
+      </div>
+    </section>
+  )}
 
   <CallToAction
     title="Questions about our finances?"

@@ -75,7 +75,7 @@ const isActive = (path: string) => {
         <a href="/about" class:list={[{ active: currentPath === '/about' }]}>Overview</a>
         <a href="/about/corridor" class:list={[{ active: currentPath === '/about/corridor' }]}>The Corridor</a>
         <a href="/about/impact" class:list={[{ active: currentPath === '/about/impact' }]}>Impact</a>
-        <a href="/about/community-support" class:list={[{ active: currentPath === '/about/community-support' }]}>Community Support</a>
+        <a href="/about/community-support" class:list={[{ active: currentPath === '/about/community-support' }]}>Our Friends</a>
       </div>
     </div>
     <div class="nav-mobile-group">
@@ -95,7 +95,7 @@ const isActive = (path: string) => {
 <style>
   header {
     position: fixed;
-    top: 0;
+    top: var(--banner-height, 0px);
     left: 0;
     right: 0;
     z-index: 1000;
@@ -293,7 +293,7 @@ const isActive = (path: string) => {
   /* Mobile Nav */
   .nav-mobile {
     position: fixed;
-    top: 73px;
+    top: calc(73px + var(--banner-height, 0px));
     left: 0;
     right: 0;
     bottom: 0;
