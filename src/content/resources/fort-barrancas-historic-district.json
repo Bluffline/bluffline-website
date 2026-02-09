@@ -1,7 +1,13 @@
 {
+  "type": "Resource",
   "name": "Fort Barrancas Historic District",
   "description": "A 640-acre National Historic Landmark encompassing Fort Barrancas (1839-1844), water battery, and Advanced Redoubt. Fortified by Spain, Britain, and the United States since 1698. Now part of Gulf Islands National Seashore.",
-  "qualities": ["Historical", "Archaeological", "Natural", "Scenic"],
+  "qualities": [
+    "Historical",
+    "Archaeological",
+    "Natural",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.3478024,
     "lng": -87.2975528

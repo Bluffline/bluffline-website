@@ -1,7 +1,11 @@
 {
+  "type": "Resource",
   "name": "Wayside Park & Pensacola Visitor Information Center",
   "description": "A 9-acre park offering walking paths, picnic tables, a pavilion, and the Pensacola fishing bridge. Home to the site of the 1559 Emanuel Point Shipwrecks and the Pensacola Visitor Information Center.",
-  "qualities": ["Recreational", "Scenic"],
+  "qualities": [
+    "Recreational",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.4173,
     "lng": -87.19272

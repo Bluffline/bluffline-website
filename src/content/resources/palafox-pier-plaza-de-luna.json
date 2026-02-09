@@ -1,7 +1,12 @@
 {
+  "type": "Resource",
   "name": "Palafox Pier & Plaza De Luna",
   "description": "A mixed-use waterfront development at the southern terminus of Palafox Street, featuring marina facilities and the 2.4-acre Plaza de Luna park with fountains, promenades, and a statue of Tristan de Luna.",
-  "qualities": ["Historical", "Recreational", "Scenic"],
+  "qualities": [
+    "Historical",
+    "Recreational",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.40246434085912,
     "lng": -87.21307717532699

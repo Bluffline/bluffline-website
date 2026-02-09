@@ -1,7 +1,12 @@
 {
+  "type": "Resource",
   "name": "Bartram Park",
   "description": "A 2.6-acre waterfront park on the shore of Pensacola Bay, featuring paved walking paths, picnic areas, benches, and areas for shoreline fishing, kayaking, and paddleboarding.",
-  "qualities": ["Recreational", "Natural", "Scenic"],
+  "qualities": [
+    "Recreational",
+    "Natural",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.408217,
     "lng": -87.2096

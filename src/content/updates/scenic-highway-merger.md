@@ -1,4 +1,5 @@
 ---
+type: Update
 title: "Bluffline Completes Merger with Scenic Highway Foundation"
 pubDate: 2024-07-15
 description: "Historic partnership unifies decades of advocacy under one organization"

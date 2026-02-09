@@ -1,7 +1,11 @@
 {
+  "type": "Resource",
   "name": "Pensacola Bay",
   "description": "Approximately thirteen miles long, Pensacola Bay is home to many animals and is noted to be an excellent place for dolphin watching. Popular for fishing, kayaking, and boating.",
-  "qualities": ["Natural", "Scenic"],
+  "qualities": [
+    "Natural",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.3676638889,
     "lng": -87.2005

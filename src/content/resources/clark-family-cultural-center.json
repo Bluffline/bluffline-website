@@ -1,7 +1,11 @@
 {
+  "type": "Resource",
   "name": "Clark Family Cultural Center & Pensacola Little Theatre",
   "description": "A major arts hub in the historic 1911 Escambia County Court of Records Building. Home to Pensacola Little Theatre, founded in 1926, along with Ballet Pensacola and multiple arts organizations.",
-  "qualities": ["Cultural", "Historical"],
+  "qualities": [
+    "Cultural",
+    "Historical"
+  ],
   "coordinates": {
     "lat": 30.4083333333,
     "lng": -87.2130833333

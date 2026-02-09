@@ -88,7 +88,7 @@ export default defineStackbitConfig({
             { name: "date", type: "date", required: true },
             { name: "link", type: "url", required: true },
             {
-              name: "type",
+              name: "mediaType",
               type: "enum",
               options: ["article", "radio", "tv", "podcast"],
               default: "article",

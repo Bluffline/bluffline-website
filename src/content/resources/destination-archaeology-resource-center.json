@@ -1,7 +1,10 @@
 {
+  "type": "Resource",
   "name": "Destination Archaeology Resource Center",
   "description": "An archaeology museum inside the Florida Public Archaeology Network headquarters, featuring exhibits on land and underwater archaeology sites throughout Florida.",
-  "qualities": ["Archaeological"],
+  "qualities": [
+    "Archaeological"
+  ],
   "coordinates": {
     "lat": 30.407996643216634,
     "lng": -87.21068467532685
