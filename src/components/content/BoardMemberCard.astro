@@ -5,9 +5,10 @@ interface Props {
   role: 'chair' | 'vice-president' | 'treasurer' | 'secretary' | 'board-member' | 'staff' | 'emeritus';
   bio: string;
   photo?: string;
+  sbObjectId?: string;
 }
 
-const { name, title, role, bio, photo } = Astro.props;
+const { name, title, role, bio, photo, sbObjectId } = Astro.props;
 
 const initials = name
   .split(' ')
@@ -17,18 +18,18 @@ const initials = name
   .slice(0, 2);
 ---
 
-<article class="board-member-card">
+<article class="board-member-card" data-sb-object-id={sbObjectId}>
   <div class="member-photo">
     {photo ? (
-      <img src={photo} alt={name} />
+      <img src={photo} alt={name} data-sb-field-path="photo" />
     ) : (
       <div class="member-initials">{initials}</div>
     )}
   </div>
   <div class="member-content">
-    <h3 class="member-name">{name}</h3>
-    <p class="member-title">{title}</p>
-    <p class="member-bio">{bio}</p>
+    <h3 class="member-name" data-sb-field-path="name">{name}</h3>
+    <p class="member-title" data-sb-field-path="title">{title}</p>
+    <p class="member-bio" data-sb-field-path="bio">{bio}</p>
   </div>
 </article>
 

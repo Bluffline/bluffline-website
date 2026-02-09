@@ -22,7 +22,7 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
 ---
 
 <BaseLayout title={release.data.title} description={release.data.summary}>
-  <article>
+  <article data-sb-object-id={`src/content/press-releases/${release.slug}.md`}>
     <header class="article-header">
       <div class="article-header-inner">
         <a href="/press#releases" class="article-back">
@@ -33,15 +33,15 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
         </a>
         <div class="release-meta">
           <span class="release-label">Press Release</span>
-          <span class="release-date">{formattedDate}</span>
+          <span class="release-date" data-sb-field-path="pubDate">{formattedDate}</span>
         </div>
-        <h1>{release.data.title}</h1>
-        <p class="article-subtitle">{release.data.summary}</p>
+        <h1 data-sb-field-path="title">{release.data.title}</h1>
+        <p class="article-subtitle" data-sb-field-path="summary">{release.data.summary}</p>
       </div>
     </header>
 
     <div class="article-body">
-      <div class="article-content">
+      <div class="article-content" data-sb-field-path="body">
         <Content />
 
         {(release.data.contactName || release.data.contactEmail || release.data.contactPhone) && (

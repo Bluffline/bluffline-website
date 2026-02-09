@@ -5,5 +5,15 @@ export default defineConfig({
   trailingSlash: 'never',
   build: {
     format: 'directory'
+  },
+  server: {
+    port: 3000
+  },
+  vite: {
+    server: {
+      hmr: {
+        path: '/vite-hmr/'
+      }
+    }
   }
 });

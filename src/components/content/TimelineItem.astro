@@ -12,20 +12,21 @@ interface Props {
   description: string;
   images?: TimelineImage[];
   entryId: string;
+  sbObjectId?: string;
 }
 
-const { date, title, description, images, entryId } = Astro.props;
+const { date, title, description, images, entryId, sbObjectId } = Astro.props;
 const hasImages = images && images.length > 0;
 ---
 
-<div class:list={["timeline-item", { "has-images": hasImages }]}>
+<div class:list={["timeline-item", { "has-images": hasImages }]} data-sb-object-id={sbObjectId}>
   <div class="timeline-marker"></div>
 
   <div class="timeline-content">
     <div class="timeline-text">
-      <div class="timeline-date">{date}</div>
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <div class="timeline-date" data-sb-field-path="date">{date}</div>
+      <h3 data-sb-field-path="title">{title}</h3>
+      <p data-sb-field-path="description">{description}</p>
     </div>
 
     {hasImages && (

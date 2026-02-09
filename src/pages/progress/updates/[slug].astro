@@ -22,6 +22,7 @@ const { Content } = await update.render();
   authorTitle={update.data.authorTitle}
   featuredImage={update.data.featuredImage}
   featuredImageAlt={update.data.featuredImageAlt}
+  sbObjectId={`src/content/updates/${update.slug}.md`}
 >
   <Content />
 </PostLayout>

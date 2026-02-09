@@ -98,6 +98,7 @@ const assetTabs = [
                     date={item.data.date}
                     link={item.data.link}
                     type={item.data.type}
+                    sbObjectId={`src/content/press/${item.id}.json`}
                   />
                 ))}
               </div>
@@ -115,6 +116,7 @@ const assetTabs = [
                   pubDate={release.data.pubDate}
                   summary={release.data.summary}
                   slug={release.slug}
+                  sbObjectId={`src/content/press-releases/${release.slug}.md`}
                 />
               ))}
             </div>

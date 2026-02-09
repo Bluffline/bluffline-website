@@ -40,6 +40,7 @@ const sortedTestimonials = testimonials.sort((a, b) => {
               title={testimonial.data.title}
               organization={testimonial.data.organization}
               pdfFile={testimonial.data.pdfFile}
+              sbObjectId={`src/content/testimonials/${testimonial.id}.json`}
             />
           ))}
         </div>

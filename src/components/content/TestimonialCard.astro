@@ -5,19 +5,20 @@ interface Props {
   title: string;
   organization: string;
   pdfFile: string;
+  sbObjectId?: string;
 }
 
-const { quote, author, title, organization, pdfFile } = Astro.props;
+const { quote, author, title, organization, pdfFile, sbObjectId } = Astro.props;
 ---
 
-<article class="testimonial-card">
+<article class="testimonial-card" data-sb-object-id={sbObjectId}>
   <div class="quote-mark" aria-hidden="true">"</div>
-  <blockquote class="quote">
+  <blockquote class="quote" data-sb-field-path="quote">
     {quote}
   </blockquote>
   <div class="attribution">
-    <p class="author">{author}</p>
-    <p class="title-org">{title}, {organization}</p>
+    <p class="author" data-sb-field-path="author">{author}</p>
+    <p class="title-org"><span data-sb-field-path="title">{title}</span>, <span data-sb-field-path="organization">{organization}</span></p>
   </div>
   <a href={pdfFile} class="pdf-link" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
