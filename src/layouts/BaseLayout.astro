@@ -1,6 +1,7 @@
 ---
 import Header from '../components/nav/Header.astro';
 import Footer from '../components/nav/Footer.astro';
+import AnnouncementBanner from '../components/ui/AnnouncementBanner.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -34,6 +35,12 @@ const fullTitle = title === 'Home'
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <AnnouncementBanner
+    text="Our 2025 Annual Report is here."
+    linkText="Read it now"
+    href="/documents/annual-reports/2025"
+  />
 
   <Header currentPath={currentPath} />
 
