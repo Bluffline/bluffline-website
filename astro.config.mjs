@@ -6,9 +6,6 @@ export default defineConfig({
   build: {
     format: 'directory'
   },
-  server: {
-    port: 3000
-  },
   vite: {
     server: {
       hmr: {

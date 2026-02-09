@@ -1,7 +1,8 @@
 {
+  "type": "Press",
   "outlet": "WEAR-TV",
   "title": "Bluffline receives $1.2 million for Escambia Bay Waterfront Access Study",
   "date": "2025-01-15",
   "link": "https://weartv.com/news/local/bluffline-receives-1-2-million-for-escambia-bay-waterfront-access-study",
-  "type": "tv"
+  "mediaType": "tv"
 }

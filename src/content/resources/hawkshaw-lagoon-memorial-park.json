@@ -1,7 +1,11 @@
 {
+  "type": "Resource",
   "name": "Hawkshaw Lagoon Memorial Park",
   "description": "A 900-square foot observation deck featuring 'The Sanctuary' statue by artist Sam Nettles, serving as the National Memorial to Missing Children.",
-  "qualities": ["Cultural", "Scenic"],
+  "qualities": [
+    "Cultural",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.412,
     "lng": -87.202233

@@ -1,7 +1,13 @@
 {
+  "type": "Resource",
   "name": "Plaza Ferdinand VII",
   "description": "A 2-acre park listed on the National Register in 1966. On July 17, 1821, this plaza hosted Florida's transfer from Spain to the United States, where Andrew Jackson was sworn in as the first Territorial Governor.",
-  "qualities": ["Cultural", "Historical", "Recreational", "Scenic"],
+  "qualities": [
+    "Cultural",
+    "Historical",
+    "Recreational",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.4075,
     "lng": -87.21389

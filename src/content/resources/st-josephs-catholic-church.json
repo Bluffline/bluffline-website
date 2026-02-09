@@ -1,7 +1,11 @@
 {
+  "type": "Resource",
   "name": "St. Joseph's Catholic Church",
   "description": "A historically Black Catholic parish and NRHP-listed architectural landmark reflecting Gothic Revival influences, serving as a religious, social, and cultural anchor since the late 19th century.",
-  "qualities": ["Cultural", "Historical"],
+  "qualities": [
+    "Cultural",
+    "Historical"
+  ],
   "coordinates": {
     "lat": 30.4091666667,
     "lng": -87.2180555556

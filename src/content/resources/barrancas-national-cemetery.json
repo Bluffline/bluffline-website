@@ -1,7 +1,11 @@
 {
+  "type": "Resource",
   "name": "Barrancas National Cemetery",
   "description": "A 95-acre National Cemetery on NAS Pensacola with over 50,000 interments, including Union and Confederate soldiers, 1883 yellow-fever casualties, and Medal of Honor recipients.",
-  "qualities": ["Cultural", "Historical"],
+  "qualities": [
+    "Cultural",
+    "Historical"
+  ],
   "coordinates": {
     "lat": 30.3551382,
     "lng": -87.2859486

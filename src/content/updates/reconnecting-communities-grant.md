@@ -1,4 +1,5 @@
 ---
+type: Update
 title: "Bluffline Secures $1.2 Million Grant from U.S. Department of Transportation"
 pubDate: 2025-01-15
 description: "Escambia Bay Waterfront Access Study will fund master planning, feasibility studies, and preliminary designs"

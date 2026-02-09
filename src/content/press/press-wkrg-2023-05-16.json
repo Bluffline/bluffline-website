@@ -1,7 +1,8 @@
 {
+  "type": "Press",
   "outlet": "WKRG-TV",
   "title": "Local organization wants 10-mile greenway to connect East and West Pensacola",
   "date": "2023-05-16",
   "link": "https://www.wkrg.com/northwest-florida/escambia-county/local-organization-wants-10-mile-greenway-to-connect-east-and-west-pensacola/",
-  "type": "tv"
+  "mediaType": "tv"
 }

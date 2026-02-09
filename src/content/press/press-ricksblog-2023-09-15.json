@@ -1,7 +1,8 @@
 {
+  "type": "Press",
   "outlet": "Rick's Blog",
   "title": "Real News: Bands on the Bayou benefits Bluffline",
   "date": "2023-09-15",
   "link": "https://ricksblog.biz/real-news-friday-sept-15-2023/",
-  "type": "article"
+  "mediaType": "article"
 }

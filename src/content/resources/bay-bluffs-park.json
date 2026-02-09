@@ -1,5 +1,10 @@
 {
+  "type": "Resource",
   "name": "Bay Bluffs Park",
   "description": "City park featuring dramatic views of Escambia Bay.",
-  "qualities": ["Recreational", "Natural", "Scenic"]
+  "qualities": [
+    "Recreational",
+    "Natural",
+    "Scenic"
+  ]
 }
