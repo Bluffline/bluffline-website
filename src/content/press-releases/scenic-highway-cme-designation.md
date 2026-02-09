@@ -1,11 +1,17 @@
 ---
 type: PressRelease
-title: "Bluffline Designated as Corridor Management Entity for Pensacola Scenic Bay Bluffs Highway"
-pubDate: 2024-09-12
-summary: "The Florida Department of Transportation has designated Bluffline, Inc. as the official Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway."
-contactName: "Media Relations"
-contactEmail: "press@bluffline.org"
+title: >-
+  Bluffline Designated as Corridor Management Entity for Pensacola Scenic Bay
+  Bluffs Highway
+pubDate: '2024-09-12'
+summary: >-
+  The Florida Department of Transportation has designated Bluffline, Inc. as the
+  official Corridor Management Entity for the Pensacola Scenic Bay Bluffs
+  Highway.
+contactName: Media Relations
+contactEmail: press@bluffline.org
 draft: false
+contactPhone: 850-776-0436
 ---
 
 **PENSACOLA, FL** — Bluffline, Inc. has been designated by the Florida Department of Transportation as the official Corridor Management Entity (CME) for the Pensacola Scenic Bay Bluffs Highway, a 10-mile stretch of State Road 292 recognized for its outstanding natural, cultural, and scenic qualities.
