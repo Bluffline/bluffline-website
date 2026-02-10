@@ -5,7 +5,7 @@ const updatesCollection = defineCollection({
   schema: z.object({
     type: z.string().optional(),
     title: z.string(),
-    pubDate: z.date(),
+    pubDate: z.coerce.date(),
     description: z.string(),
     author: z.string().optional(),
     authorTitle: z.string().optional(),
@@ -63,7 +63,7 @@ const pressReleasesCollection = defineCollection({
   schema: z.object({
     type: z.string().optional(),
     title: z.string(),
-    pubDate: z.date(),
+    pubDate: z.coerce.date(),
     summary: z.string(),
     contactName: z.string().optional(),
     contactEmail: z.string().email().optional(),
