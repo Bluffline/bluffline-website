@@ -11,7 +11,7 @@ summary: >-
 contactName: Media Relations
 contactEmail: press@bluffline.org
 draft: false
-contactPhone: 850-776-0436
+contactPhone: (850) 776-0436
 ---
 
 **PENSACOLA, FL** — Bluffline, Inc. has been designated by the Florida Department of Transportation as the official Corridor Management Entity (CME) for the Pensacola Scenic Bay Bluffs Highway, a 10-mile stretch of State Road 292 recognized for its outstanding natural, cultural, and scenic qualities.
