@@ -1,8 +1,8 @@
 ---
 type: PressRelease
 title: >-
-  Bluffline Designated as Corridor Management Entity for Pensacola Scenic Bay
-  Bluffs Highway
+  Bluffline Designated as Corridor Management Entity for Pensacola Bay Bluffs
+  Scenic Highway
 pubDate: '2024-09-12'
 summary: >-
   The Florida Department of Transportation has designated Bluffline, Inc. as the
