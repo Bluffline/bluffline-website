@@ -6,7 +6,7 @@ export default defineStackbitConfig({
   ssgName: "custom",
   nodeVersion: "18",
   devCommand:
-    "node_modules/.bin/astro dev --port {PORT} --hostname 0.0.0.0",
+    "node_modules/.bin/astro dev --port {PORT} --hostname 127.0.0.1",
   experimental: {
     ssg: {
       name: "Astro",
@@ -22,7 +22,16 @@ export default defineStackbitConfig({
   contentSources: [
     new GitContentSource({
       rootPath: __dirname,
-      contentDirs: ["src/content"],
+      contentDirs: [
+        "src/content/updates",
+        "src/content/press-releases",
+        "src/content/press",
+        "src/content/board-members",
+        "src/content/documents",
+        "src/content/testimonials",
+        "src/content/timeline",
+        "src/content/resources",
+      ],
       models: [
         // ── Updates (Markdown with frontmatter) ──
         {

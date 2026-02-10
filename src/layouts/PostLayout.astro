@@ -47,7 +47,7 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
     </header>
 
     <div class="article-body">
-      <div class="article-content" data-sb-field-path="body">
+      <div class="article-content" data-sb-field-path="markdown_content">
         <slot />
 
         {author && (
