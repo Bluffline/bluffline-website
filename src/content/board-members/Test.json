@@ -1,0 +1,8 @@
+{
+    "type": "BoardMember",
+    "name": "Test McTesterson",
+    "title": "Testing",
+    "role": "board-member",
+    "bio": "Just a test dude",
+    "order": 8
+}
