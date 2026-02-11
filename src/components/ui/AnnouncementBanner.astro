@@ -76,7 +76,7 @@ const { text, linkText, href } = Astro.props;
 
   function updateHeaderOffset() {
     const bannerHeight = banner && !banner.classList.contains('is-hidden')
-      ? banner.offsetHeight
+      ? banner.getBoundingClientRect().height
       : 0;
     document.documentElement.style.setProperty('--banner-height', `${bannerHeight}px`);
   }

@@ -95,11 +95,11 @@ const isActive = (path: string) => {
 <style>
   header {
     position: fixed;
-    top: var(--banner-height, 0px);
+    top: calc(var(--banner-height, 0px) - 1px);
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 0 0 1rem;
+    padding: 1rem 0;
     background: rgba(253, 252, 250, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -293,7 +293,7 @@ const isActive = (path: string) => {
   /* Mobile Nav */
   .nav-mobile {
     position: fixed;
-    top: calc(57px + var(--banner-height, 0px));
+    top: calc(73px + var(--banner-height, 0px));
     left: 0;
     right: 0;
     bottom: 0;
