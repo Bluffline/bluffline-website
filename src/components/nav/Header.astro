@@ -95,7 +95,7 @@ const isActive = (path: string) => {
 <style>
   header {
     position: fixed;
-    top: var(--banner-height, 0px);
+    top: calc(var(--banner-height, 0px) - 1px);
     left: 0;
     right: 0;
     z-index: 1000;
