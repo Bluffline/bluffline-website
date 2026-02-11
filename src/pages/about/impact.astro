@@ -15,8 +15,8 @@ const sbId = 'src/content/pages/impact.json';
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
 
 // Split rich text bodies into paragraphs
-const contextProblemParagraphs = (d.contextProblemBody || '').split('\n\n').filter(Boolean);
-const contextSolutionParagraphs = (d.contextSolutionBody || '').split('\n\n').filter(Boolean);
+const contextProblemParagraphs: string[] = (d.contextProblemBody || '').split('\n\n').filter(Boolean);
+const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split('\n\n').filter(Boolean);
 ---
 
 <BaseLayout
@@ -148,13 +148,13 @@ const contextSolutionParagraphs = (d.contextSolutionBody || '').split('\n\n').fi
         <div class="context-content">
           <h3 data-sb-field-path="contextProblemHeading">{d.contextProblemHeading}</h3>
           <div data-sb-field-path="contextProblemBody">
-            {contextProblemParagraphs.map(p => <p>{p}</p>)}
+            {contextProblemParagraphs.map((p: string) => <p>{p}</p>)}
           </div>
         </div>
         <div class="context-content">
           <h3 data-sb-field-path="contextSolutionHeading">{d.contextSolutionHeading}</h3>
           <div data-sb-field-path="contextSolutionBody">
-            {contextSolutionParagraphs.map(p => <p>{p}</p>)}
+            {contextSolutionParagraphs.map((p: string) => <p>{p}</p>)}
           </div>
         </div>
       </div>

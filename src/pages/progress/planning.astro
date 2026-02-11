@@ -45,7 +45,7 @@ const introParas = pd.introBody.split('\n\n');
   <section class="planning-intro" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="intro-content" data-sb-field-path="introBody">
-        {introParas.map(para => (
+        {introParas.map((para: string) => (
           <p>{para}</p>
         ))}
       </div>

@@ -8,7 +8,7 @@ const d = page.data;
 const sbId = 'src/content/pages/home.json';
 
 // Split rich text body on double newlines for paragraph rendering
-const aboutParagraphs = (d.aboutBody || '').split('\n\n').filter(Boolean);
+const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boolean);
 ---
 
 <BaseLayout title="Home">
@@ -36,7 +36,7 @@ const aboutParagraphs = (d.aboutBody || '').split('\n\n').filter(Boolean);
         <div class="about-content">
           <h2 data-sb-field-path="aboutHeading">{d.aboutHeading}</h2>
           <div data-sb-field-path="aboutBody">
-            {aboutParagraphs.map(p => <p>{p}</p>)}
+            {aboutParagraphs.map((p: string) => <p>{p}</p>)}
           </div>
           <a href={d.aboutLinkHref || '/about'} class="text-link" data-sb-field-path="aboutLinkText">{d.aboutLinkText || 'Learn more about our history and mission →'}</a>
         </div>

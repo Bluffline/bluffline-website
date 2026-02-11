@@ -90,14 +90,14 @@ const greenwayParagraphs = cd.greenwayBody.split('\n\n');
       <div class="overview-grid">
         <div class="overview-content">
           <h2 data-sb-field-path="overviewHeading">{cd.overviewHeading}</h2>
-          {overviewParagraphs.map((paragraph) => (
+          {overviewParagraphs.map((paragraph: string) => (
             <p>{paragraph}</p>
           ))}
         </div>
         <div class="overview-sidebar">
           <h3 data-sb-field-path="sidebarTitle">{cd.sidebarTitle}</h3>
           <div class="corridor-stats" data-sb-field-path="corridorStats">
-            {cd.corridorStats.map((stat, i) => (
+            {cd.corridorStats.map((stat: any, i: number) => (
               <div class="stat-item" data-sb-field-path={`.${i}`}>
                 <span class="stat-label" data-sb-field-path=".label">{stat.label}</span>
                 <span class="stat-value" data-sb-field-path=".value">{stat.value}</span>
@@ -113,7 +113,7 @@ const greenwayParagraphs = cd.greenwayBody.split('\n\n');
     <div class="section-inner">
       <div class="greenway-content">
         <h2 data-sb-field-path="greenwayHeading">{cd.greenwayHeading}</h2>
-        {greenwayParagraphs.map((paragraph) => (
+        {greenwayParagraphs.map((paragraph: string) => (
           <p>{paragraph}</p>
         ))}
       </div>

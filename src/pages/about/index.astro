@@ -42,7 +42,7 @@ const mergerBodyParagraphs = d.mergerBody.split('\n\n');
     <div class="section-inner">
       <div class="purpose-content">
         <p class="purpose-statement" data-sb-field-path="purposeStatement">{d.purposeStatement}</p>
-        {purposeBodyParagraphs.map((paragraph, i) => (
+        {purposeBodyParagraphs.map((paragraph: string, i: number) => (
           <p data-sb-field-path={i === 0 ? 'purposeBody' : undefined}>{paragraph}</p>
         ))}
       </div>
@@ -75,7 +75,7 @@ const mergerBodyParagraphs = d.mergerBody.split('\n\n');
       <div class="merger-grid">
         <div class="merger-content">
           <h2 data-sb-field-path="mergerHeading">{d.mergerHeading}</h2>
-          {mergerBodyParagraphs.map((paragraph, i) => (
+          {mergerBodyParagraphs.map((paragraph: string, i: number) => (
             <p data-sb-field-path={i === 0 ? 'mergerBody' : undefined}>{paragraph}</p>
           ))}
         </div>
