@@ -70,7 +70,7 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
   .article-header {
     background: var(--cream);
     padding: 3rem 1.5rem;
-    margin-top: 73px;
+    margin-top: calc(73px + var(--banner-height, 0px));
   }
 
   @media (min-width: 768px) {
