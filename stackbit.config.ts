@@ -448,6 +448,132 @@ export default defineStackbitConfig({
             { name: "ctaDescription", type: "text" },
           ],
         },
+
+        // Impact Page
+        {
+          name: "ImpactPage",
+          type: "page",
+          urlPath: "/about/impact",
+          filePath: "src/content/pages/impact.json",
+          fields: [
+            { name: "heroLabel", type: "string" },
+            { name: "heroTitle", type: "string", required: true },
+            { name: "heroDescription", type: "text" },
+            { name: "safetyLabel", type: "string" },
+            { name: "safetyHeading", type: "string", required: true },
+            { name: "safetyBody", type: "text", required: true },
+            {
+              name: "safetyStats",
+              type: "list",
+              items: {
+                type: "object",
+                fields: [
+                  { name: "value", type: "string", required: true },
+                  { name: "description", type: "string", required: true },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                ],
+              },
+            },
+            { name: "mapCaption", type: "text" },
+            { name: "mapSourceText", type: "string" },
+            { name: "mapSourceUrl", type: "url" },
+            { name: "mapSourceAgency", type: "string" },
+            { name: "contextProblemHeading", type: "string" },
+            { name: "contextProblemBody1", type: "text" },
+            { name: "contextProblemBody2", type: "text" },
+            { name: "contextProblemBody3", type: "text" },
+            { name: "contextSolutionHeading", type: "string" },
+            { name: "contextSolutionBody1", type: "text" },
+            { name: "contextSolutionBody2", type: "text" },
+            { name: "contextSolutionBody3", type: "text" },
+            { name: "economicLabel", type: "string" },
+            { name: "economicHeading", type: "string", required: true },
+            { name: "economicBody", type: "text", required: true },
+            {
+              name: "researchHighlights",
+              type: "list",
+              items: {
+                type: "object",
+                fields: [
+                  { name: "value", type: "string", required: true },
+                  { name: "description", type: "string", required: true },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                ],
+              },
+            },
+            {
+              name: "pillarCards",
+              type: "list",
+              items: {
+                type: "object",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "text", required: true },
+                  { name: "detail", type: "text" },
+                  {
+                    name: "stats",
+                    type: "list",
+                    items: {
+                      type: "object",
+                      fields: [
+                        { name: "value", type: "string", required: true },
+                        { name: "label", type: "string", required: true },
+                        { name: "sourceUrl", type: "url" },
+                        { name: "sourceLabel", type: "string" },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+            { name: "evidenceHeading", type: "string" },
+            { name: "evidenceBody", type: "text" },
+            {
+              name: "evidenceCards",
+              type: "list",
+              items: {
+                type: "object",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "location", type: "string", required: true },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                  {
+                    name: "stats",
+                    type: "list",
+                    items: {
+                      type: "object",
+                      fields: [
+                        { name: "value", type: "string", required: true },
+                        { name: "description", type: "string", required: true },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+            { name: "qualityLabel", type: "string" },
+            { name: "qualityHeading", type: "string" },
+            { name: "qualityBody", type: "text" },
+            {
+              name: "qualityCards",
+              type: "list",
+              items: {
+                type: "object",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "text", required: true },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                ],
+              },
+            },
+            { name: "ctaTitle", type: "string" },
+            { name: "ctaDescription", type: "text" },
+          ],
+        },
       ],
       assetsConfig: {
         referenceType: "static",
