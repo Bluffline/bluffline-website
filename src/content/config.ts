@@ -116,6 +116,13 @@ const testimonialsCollection = defineCollection({
   }),
 });
 
+const pagesCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    type: z.string(),
+  }).passthrough(),
+});
+
 export const collections = {
   'updates': updatesCollection,
   'press': pressCollection,
@@ -125,4 +132,5 @@ export const collections = {
   'board-members': boardMembersCollection,
   'timeline': timelineCollection,
   'testimonials': testimonialsCollection,
+  'pages': pagesCollection,
 };
