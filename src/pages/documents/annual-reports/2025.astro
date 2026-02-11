@@ -4,6 +4,7 @@ import ReportHero from '../../../components/report/ReportHero.astro';
 import BigQuote from '../../../components/report/BigQuote.astro';
 import StatCard from '../../../components/report/StatCard.astro';
 import MilestoneCard from '../../../components/report/MilestoneCard.astro';
+import PhaseTracker from '../../../components/ui/PhaseTracker.astro';
 import PartnerCard from '../../../components/report/PartnerCard.astro';
 import ProjectSpotlight from '../../../components/report/ProjectSpotlight.astro';
 import EventHighlight from '../../../components/report/EventHighlight.astro';
@@ -312,37 +313,15 @@ const knoxWhiteGallery = [
           <p class="federal-lead">At the end of 2024, we received a $1.2 million USDOT Reconnecting Communities award. In 2025, we faced a critical challenge: ensuring that award survived a federal administration transition.</p>
 
           <div class="federal-timeline">
-            <div class="timeline-item">
-              <span class="timeline-marker past"></span>
-              <div class="timeline-content">
-                <span class="timeline-date">Late 2024</span>
-                <span class="timeline-event">Award Received</span>
-              </div>
-            </div>
-            <div class="timeline-connector"></div>
-            <div class="timeline-item">
-              <span class="timeline-marker risk"></span>
-              <div class="timeline-content">
-                <span class="timeline-date">Early 2025</span>
-                <span class="timeline-event">Administration Transition</span>
-              </div>
-            </div>
-            <div class="timeline-connector"></div>
-            <div class="timeline-item">
-              <span class="timeline-marker success"></span>
-              <div class="timeline-content">
-                <span class="timeline-date">2025</span>
-                <span class="timeline-event">Obligation Secured</span>
-              </div>
-            </div>
-            <div class="timeline-connector"></div>
-            <div class="timeline-item">
-              <span class="timeline-marker future"></span>
-              <div class="timeline-content">
-                <span class="timeline-date">2026+</span>
-                <span class="timeline-event">Master Planning Begins</span>
-              </div>
-            </div>
+            <PhaseTracker
+              variant="dark"
+              phases={[
+                { label: 'Award Received', sublabel: 'Late 2024', status: 'complete' },
+                { label: 'Admin. Transition', sublabel: 'Early 2025', status: 'complete' },
+                { label: 'Obligation Secured', sublabel: '2025', status: 'current' },
+                { label: 'Master Planning Begins', sublabel: '2026+', status: 'upcoming' },
+              ]}
+            />
           </div>
 
           <div class="obligation-explainer">
@@ -1020,74 +999,7 @@ const knoxWhiteGallery = [
   }
 
   .federal-timeline {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
     margin-bottom: 3rem;
-    overflow-x: auto;
-    padding-bottom: 1rem;
-  }
-
-  .federal-timeline .timeline-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    flex-shrink: 0;
-    min-width: 100px;
-  }
-
-  .timeline-marker {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .timeline-marker.past {
-    background: var(--spring);
-  }
-
-  .timeline-marker.risk {
-    background: #e8a838;
-  }
-
-  .timeline-marker.success {
-    background: var(--spring);
-    box-shadow: 0 0 0 4px rgba(153, 204, 99, 0.3);
-  }
-
-  .timeline-marker.future {
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px dashed rgba(255, 255, 255, 0.5);
-  }
-
-  .timeline-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.25rem;
-  }
-
-  .timeline-date {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.6;
-  }
-
-  .timeline-event {
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-
-  .timeline-connector {
-    flex: 1;
-    min-width: 40px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    margin-top: 7px;
   }
 
   .obligation-explainer {

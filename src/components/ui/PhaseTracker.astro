@@ -1,0 +1,204 @@
+---
+export interface Phase {
+  label: string;
+  status: 'complete' | 'current' | 'upcoming';
+  /** Optional sublabel shown below the phase label (e.g. a date) */
+  sublabel?: string;
+}
+
+interface Props {
+  phases: Phase[];
+  /** Visual variant for different background contexts */
+  variant?: 'light' | 'dark';
+}
+
+const { phases, variant = 'light' } = Astro.props;
+---
+
+<div class:list={['phase-tracker', variant]}>
+  {phases.map((phase, i) => (
+    <>
+      <div
+        class="phase-step"
+        data-status={phase.status}
+      >
+        <div class="phase-dot"></div>
+        <div class="phase-labels">
+          <span class="phase-label">{phase.label}</span>
+          {phase.sublabel && <span class="phase-sublabel">{phase.sublabel}</span>}
+        </div>
+      </div>
+      {i < phases.length - 1 && (
+        <div
+          class="phase-connector"
+          data-filled={(phase.status === 'complete').toString()}
+        ></div>
+      )}
+    </>
+  ))}
+</div>
+
+<style>
+  .phase-tracker {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    padding: 6px 2px 0.5rem;
+  }
+
+  .phase-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .phase-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(45, 48, 71, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  /* Light variant (default) */
+  .phase-step[data-status="complete"] .phase-dot {
+    background: var(--spring);
+  }
+
+  .phase-step[data-status="current"] .phase-dot {
+    background: var(--forest);
+    box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .phase-step[data-status="upcoming"] .phase-dot {
+    background: rgba(45, 48, 71, 0.15);
+  }
+
+  /* Dark variant */
+  .dark .phase-step[data-status="complete"] .phase-dot {
+    background: var(--spring);
+  }
+
+  .dark .phase-step[data-status="current"] .phase-dot {
+    background: var(--spring);
+    box-shadow: 0 0 0 4px rgba(153, 204, 99, 0.3);
+    animation: pulse-dot-dark 2s ease-in-out infinite;
+  }
+
+  .dark .phase-step[data-status="upcoming"] .phase-dot {
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    width: 12px;
+    height: 12px;
+    box-sizing: border-box;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% {
+      box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(59, 94, 68, 0.15);
+    }
+  }
+
+  @keyframes pulse-dot-dark {
+    0%, 100% {
+      box-shadow: 0 0 0 4px rgba(153, 204, 99, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(153, 204, 99, 0.15);
+    }
+  }
+
+  .phase-labels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.15rem;
+  }
+
+  .phase-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--navy);
+    opacity: 0.4;
+    white-space: nowrap;
+  }
+
+  .phase-step[data-status="complete"] .phase-label {
+    opacity: 0.8;
+  }
+
+  .phase-step[data-status="current"] .phase-label {
+    color: var(--forest);
+    opacity: 1;
+    font-weight: 600;
+  }
+
+  .phase-sublabel {
+    font-size: 0.65rem;
+    color: var(--navy);
+    opacity: 0.4;
+    white-space: nowrap;
+  }
+
+  .phase-step[data-status="current"] .phase-sublabel {
+    opacity: 0.7;
+  }
+
+  /* Dark variant labels */
+  .dark .phase-label {
+    color: white;
+    opacity: 0.5;
+  }
+
+  .dark .phase-step[data-status="complete"] .phase-label {
+    color: white;
+    opacity: 0.9;
+  }
+
+  .dark .phase-step[data-status="current"] .phase-label {
+    color: var(--spring);
+    opacity: 1;
+    font-weight: 600;
+  }
+
+  .dark .phase-sublabel {
+    color: white;
+    opacity: 0.4;
+  }
+
+  .dark .phase-step[data-status="current"] .phase-sublabel {
+    color: white;
+    opacity: 0.6;
+  }
+
+  .phase-connector {
+    flex: 1;
+    min-width: 20px;
+    max-width: 60px;
+    height: 2px;
+    background: rgba(45, 48, 71, 0.1);
+    margin: 0 0.25rem;
+    margin-top: 5px;
+  }
+
+  .phase-connector[data-filled="true"] {
+    background: var(--spring);
+  }
+
+  .dark .phase-connector {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .phase-connector[data-filled="true"] {
+    background: var(--spring);
+  }
+</style>
