@@ -40,6 +40,12 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
       </div>
     </header>
 
+    {release.data.featuredImage && (
+      <div class="article-featured-image">
+        <img src={release.data.featuredImage} alt={release.data.featuredImageAlt || ''} data-sb-field-path="featuredImage" />
+      </div>
+    )}
+
     <div class="article-body">
       <div class="article-content" data-sb-field-path="body">
         <Content />
@@ -52,6 +58,20 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
               <p><a href={`mailto:${release.data.contactEmail}`}>{release.data.contactEmail}</a></p>
             )}
             {release.data.contactPhone && <p>{release.data.contactPhone}</p>}
+          </div>
+        )}
+
+        {release.data.gallery && release.data.gallery.length > 0 && (
+          <div class="article-gallery" data-sb-field-path="gallery">
+            <h4>Gallery</h4>
+            <div class="gallery-grid">
+              {release.data.gallery.map((img: any, i: number) => (
+                <figure class="gallery-item" data-sb-field-path={`.${i}`}>
+                  <img src={img.src} alt={img.alt} loading="lazy" data-sb-field-path=".src" />
+                  {img.caption && <figcaption data-sb-field-path=".caption">{img.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -234,5 +254,61 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
 
   .contact-box a:hover {
     text-decoration: underline;
+  }
+
+  .article-featured-image {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .article-featured-image {
+      padding: 0 3rem;
+    }
+  }
+
+  .article-featured-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .article-gallery {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+  }
+
+  .article-gallery h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .gallery-item {
+    margin: 0;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .gallery-item figcaption {
+    font-size: 0.8rem;
+    color: rgba(45, 48, 71, 0.6);
+    margin-top: 0.5rem;
+    line-height: 1.4;
   }
 </style>
