@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/ui/PageHero.astro';
+import { getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'support');
+const d = page.data;
+const sbId = 'src/content/pages/support.json';
 ---
 
 <BaseLayout 
@@ -8,16 +13,20 @@ import PageHero from '../components/ui/PageHero.astro';
   description="Support the Bluffline — become a member, volunteer, or partner with us to build Pensacola's multimodal future."
 >
   <PageHero
-    label="Get Involved"
-    title="Shape the future of the corridor"
-    description="The Bluffline is community-driven. Your participation—as a donor, volunteer, or planning participant—directly shapes outcomes."
+    label={d.heroLabel}
+    title={d.heroTitle}
+    description={d.heroDescription}
+    sbObjectId={sbId}
+    labelFieldPath="heroLabel"
+    titleFieldPath="heroTitle"
+    descriptionFieldPath="heroDescription"
   />
 
-  <section class="support-section">
+  <section class="support-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="support-intro">
-        <h2>Become a supporting member</h2>
-        <p>Supporting members fuel the Bluffline's work—from community engagement to advocacy to construction.</p>
+        <h2 data-sb-field-path="membershipHeading">{d.membershipHeading}</h2>
+        <p data-sb-field-path="membershipDescription">{d.membershipDescription}</p>
       </div>
 
       <div class="pricing-table-container">
@@ -27,7 +36,7 @@ import PageHero from '../components/ui/PageHero.astro';
         </stripe-pricing-table>
       </div>
 
-      <p class="tax-note">Bluffline, Inc. is a 501(c)(3) nonprofit. Your contribution is tax-deductible.</p>
+      <p class="tax-note" data-sb-field-path="taxNote">{d.taxNote}</p>
 
       <div class="member-portal">
         <p>Already a member? <a href="https://checkout.bluffline.org/p/login/cN23cocuDcJp74IeUU">Manage your membership</a></p>
@@ -35,10 +44,10 @@ import PageHero from '../components/ui/PageHero.astro';
     </div>
   </section>
 
-  <section class="other-ways-section" id="get-involved">
+  <section class="other-ways-section" id="get-involved" data-sb-object-id={sbId}>
     <div class="other-ways-inner">
-      <h2>Other ways to help</h2>
-      <p>Not ready to become a member? There are other ways to support the corridor.</p>
+      <h2 data-sb-field-path="otherWaysHeading">{d.otherWaysHeading}</h2>
+      <p data-sb-field-path="otherWaysDescription">{d.otherWaysDescription}</p>
 
       <form class="involvement-form" name="involvement" method="POST" action="/thank-you/" data-netlify="true">
         <input type="hidden" name="form-name" value="involvement">

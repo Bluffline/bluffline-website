@@ -3,7 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import IconCard from '../../components/content/IconCard.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'planning');
+const pd = page.data;
+const sbId = 'src/content/pages/planning.json';
 
 const allDocuments = await getCollection('documents');
 const plans = allDocuments
@@ -27,24 +31,28 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
   description="See how the Bluffline aligns with adopted plans from local, regional, and state agencies."
 >
   <PageHero
-    label="Progress"
-    title="Grounded in adopted plans"
-    description="The Bluffline isn't a new idea—it builds on decades of planning and policy that have consistently identified this corridor as a regional priority."
+    label={pd.heroLabel}
+    title={pd.heroTitle}
+    description={pd.heroDescription}
+    sbObjectId={sbId}
+    labelFieldPath="heroLabel"
+    titleFieldPath="heroTitle"
+    descriptionFieldPath="heroDescription"
   />
 
-  <section class="planning-intro">
+  <section class="planning-intro" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="intro-content">
-        <p>Every segment of the Bluffline corridor appears in at least one adopted plan from a local, regional, or state agency. This isn't coincidence—it reflects a consistent regional vision for multimodal connectivity that has emerged through multiple public planning processes over the past two decades.</p>
-        <p>The plans below represent the policy foundation that the Bluffline builds upon. They demonstrate that this corridor has been identified as a priority by the City of Pensacola, Escambia County, the Florida-Alabama Transportation Planning Organization, and the State of Florida.</p>
+        <p data-sb-field-path="introBody1">{pd.introBody1}</p>
+        <p data-sb-field-path="introBody2">{pd.introBody2}</p>
       </div>
     </div>
   </section>
 
   <section class="plans-section">
     <div class="section-inner">
-      <div class="section-header">
-        <h2>Adopted Plans</h2>
+      <div class="section-header" data-sb-object-id={sbId}>
+        <h2 data-sb-field-path="plansHeading">{pd.plansHeading}</h2>
       </div>
       <div class="plans-grid">
         {regularPlans.map(plan => (
@@ -75,11 +83,14 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
   </section>
 
   <CallToAction
-    title="Questions about planning?"
-    description="We're happy to discuss how the Bluffline fits into the broader planning landscape and answer questions about specific plans or policies."
+    title={pd.ctaTitle}
+    description={pd.ctaDescription}
     primaryLabel="Get in Touch"
     primaryHref="/support"
     variant="mist"
+    sbObjectId={sbId}
+    titleFieldPath="ctaTitle"
+    descriptionFieldPath="ctaDescription"
   />
 </BaseLayout>
 

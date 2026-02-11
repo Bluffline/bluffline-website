@@ -4,7 +4,11 @@ import PageHero from '../../components/ui/PageHero.astro';
 import PhaseTracker from '../../components/ui/PhaseTracker.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import UpdateCard from '../../components/content/UpdateCard.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'progress');
+const d = page.data;
+const sbId = 'src/content/pages/progress.json';
 
 const updates = (await getCollection('updates'))
   .filter(u => !u.data.draft)
@@ -26,21 +30,25 @@ const milestones = [
   description="Track the Bluffline's progress — from federal grants to community engagement to construction milestones."
 >
   <PageHero
-    label="Progress"
-    title="Building momentum toward a connected Pensacola"
-    description="The Bluffline is moving from vision to reality. Track our progress from planning to construction."
+    label={d.heroLabel}
+    title={d.heroTitle}
+    description={d.heroDescription}
+    sbObjectId={sbId}
+    labelFieldPath="heroLabel"
+    titleFieldPath="heroTitle"
+    descriptionFieldPath="heroDescription"
   />
 
-  <section class="grant-highlight-section">
+  <section class="grant-highlight-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="grant-highlight">
         <div>
-          <h3>Reconnecting Communities Grant</h3>
-          <p>In January 2025, the Bluffline was awarded a $1.2 million Reconnecting Communities grant from the U.S. Department of Transportation to fund master planning, feasibility studies, and preliminary design for the Escambia Bay Waterfront Access Study. This work builds on <a href="/progress/planning">decades of adopted plans</a> that have consistently identified this corridor as a regional priority.</p>
+          <h3 data-sb-field-path="grantHeading">{d.grantHeading}</h3>
+          <p data-sb-field-path="grantBody">{d.grantBody}</p>
         </div>
-        <div class="grant-amount">
-          $1.2M
-          <span>Federal Grant</span>
+        <div class="grant-amount" data-sb-field-path="grantAmount">
+          {d.grantAmount}
+          <span data-sb-field-path="grantAmountLabel">{d.grantAmountLabel}</span>
         </div>
       </div>
     </div>
@@ -49,7 +57,7 @@ const milestones = [
   <section class="milestones">
     <div class="milestones-inner">
       <div class="milestones-header">
-        <h2>Project Milestones</h2>
+        <h2 data-sb-field-path="milestonesHeading">{d.milestonesHeading}</h2>
       </div>
       <div class="milestones-phase-overview">
         <PhaseTracker
@@ -89,8 +97,8 @@ const milestones = [
 
   <section class="updates-feed">
     <div class="updates-feed-inner">
-      <div class="updates-header">
-        <h2>Latest Updates</h2>
+      <div class="updates-header" data-sb-object-id={sbId}>
+        <h2 data-sb-field-path="updatesHeading">{d.updatesHeading}</h2>
         <a href="/progress/updates" class="btn btn-outline">View All Updates</a>
       </div>
       <div class="updates-grid">
@@ -102,6 +110,7 @@ const milestones = [
             slug={update.slug}
             featuredImage={update.data.featuredImage}
             featuredImageAlt={update.data.featuredImageAlt}
+            sbObjectId={`src/content/updates/${update.slug}.md`}
           />
         ))}
       </div>
@@ -109,11 +118,14 @@ const milestones = [
   </section>
 
   <CallToAction
-    title="Stay in the loop"
-    description="Get updates on planning meetings, volunteer opportunities, and construction milestones delivered to your inbox."
+    title={d.ctaTitle}
+    description={d.ctaDescription}
     primaryLabel="Subscribe"
     kitFormId="3f946cf4ba"
     variant="mist"
+    sbObjectId={sbId}
+    titleFieldPath="ctaTitle"
+    descriptionFieldPath="ctaDescription"
   />
 </BaseLayout>
 

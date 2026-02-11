@@ -1,5 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'community-support');
+const pd = page.data;
+const sbId = 'src/content/pages/community-support.json';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import TestimonialCard from '../../components/content/TestimonialCard.astro';
@@ -24,9 +28,13 @@ const sortedTestimonials = testimonials.sort((a, b) => {
   description="Civic leaders, elected officials, and community partners share why they support the Bluffline vision for Pensacola's waterfront."
 >
   <PageHero
-    label="Our Friends"
-    title="Voices of Support"
-    description="Civic leaders, elected officials, and community partners share why they support the Bluffline vision."
+    label={pd.heroLabel}
+    title={pd.heroTitle}
+    description={pd.heroDescription}
+    sbObjectId={sbId}
+    labelFieldPath="heroLabel"
+    titleFieldPath="heroTitle"
+    descriptionFieldPath="heroDescription"
   />
 
   <section class="section testimonials-section">
@@ -53,11 +61,14 @@ const sortedTestimonials = testimonials.sort((a, b) => {
   </section>
 
   <CallToAction
-    title="Add your voice"
-    description="Join the growing coalition of supporters working to make the Bluffline a reality."
+    title={pd.ctaTitle}
+    description={pd.ctaDescription}
     primaryLabel="Get Involved"
     primaryHref="/support"
     variant="forest"
+    sbObjectId={sbId}
+    titleFieldPath="ctaTitle"
+    descriptionFieldPath="ctaDescription"
   />
 </BaseLayout>
 

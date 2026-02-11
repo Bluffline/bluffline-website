@@ -7,9 +7,13 @@ import CallToAction from '../../components/ui/CallToAction.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import Tabs from '../../components/ui/Tabs.astro';
 import EmptyStateCard from '../../components/content/EmptyStateCard.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
 import path from 'node:path';
+
+const page = await getEntry('pages', 'press');
+const pd = page.data;
+const sbId = 'src/content/pages/press.json';
 
 // Fetch press coverage (external news)
 const pressItems = await getCollection('press');
@@ -77,9 +81,13 @@ const assetTabs = [
   description="Media coverage, press releases, and press resources for the Bluffline — Pensacola's 20-mile multimodal corridor."
 >
   <PageHero
-    label="Press"
-    title="News & Press Releases"
-    description="Media coverage and official announcements from the Bluffline."
+    label={pd.heroLabel}
+    title={pd.heroTitle}
+    description={pd.heroDescription}
+    sbObjectId={sbId}
+    labelFieldPath="heroLabel"
+    titleFieldPath="heroTitle"
+    descriptionFieldPath="heroDescription"
   />
 
   <section class="tabs-section">
@@ -135,8 +143,8 @@ const assetTabs = [
           <div class="media-kit-section">
             <h3 class="media-kit-section-title">About the Bluffline</h3>
             <div class="boilerplate-card">
-              <div class="boilerplate">
-                <p>Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola. As the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Highway, the Bluffline is building safe, connected infrastructure for walking, cycling, and water transit that will reconnect communities to Pensacola's waterfront.</p>
+              <div class="boilerplate" data-sb-object-id={sbId}>
+                <p data-sb-field-path="boilerplate">{pd.boilerplate}</p>
               </div>
               <div class="boilerplate-actions">
                 <button class="copy-boilerplate" aria-label="Copy boilerplate text">
@@ -355,9 +363,9 @@ const assetTabs = [
             <div class="contact-card">
               <p>For press inquiries, interviews, or additional information:</p>
               <div class="contact-info">
-                <div class="contact-item">
+                <div class="contact-item" data-sb-object-id={sbId}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  <a href="mailto:press@bluffline.org">press@bluffline.org</a>
+                  <a href={`mailto:${pd.mediaContactEmail}`} data-sb-field-path="mediaContactEmail">{pd.mediaContactEmail}</a>
                 </div>
               </div>
             </div>
@@ -368,10 +376,13 @@ const assetTabs = [
   </section>
 
   <CallToAction
-    title="Support the Bluffline"
-    description="Help us build the infrastructure that will transform how Pensacola moves, plays, and connects."
+    title={pd.ctaTitle}
+    description={pd.ctaDescription}
     primaryLabel="Get Involved"
     primaryHref="/support"
+    sbObjectId={sbId}
+    titleFieldPath="ctaTitle"
+    descriptionFieldPath="ctaDescription"
   />
 
   <MediaLightbox />
