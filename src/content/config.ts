@@ -118,9 +118,7 @@ const testimonialsCollection = defineCollection({
 
 const pagesCollection = defineCollection({
   type: 'data',
-  schema: z.object({
-    type: z.string(),
-  }).passthrough(),
+  schema: z.record(z.any()),
 });
 
 export const collections = {
