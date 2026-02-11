@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
+import PhaseTracker from '../../components/ui/PhaseTracker.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import UpdateCard from '../../components/content/UpdateCard.astro';
 import { getCollection } from 'astro:content';
@@ -49,6 +50,16 @@ const milestones = [
     <div class="milestones-inner">
       <div class="milestones-header">
         <h2>Project Milestones</h2>
+      </div>
+      <div class="milestones-phase-overview">
+        <PhaseTracker
+          phases={[
+            { label: 'Grant Awarded', status: 'complete' },
+            { label: 'Master Planning', status: 'current' },
+            { label: 'Feasibility Studies', status: 'upcoming' },
+            { label: 'Capital Campaign', status: 'upcoming' },
+          ]}
+        />
       </div>
       <div class="milestone-list">
         {milestones.map(m => (
@@ -141,6 +152,10 @@ const milestones = [
   @media (min-width: 768px) { .milestones-inner { padding: 0 3rem; } }
   .milestones-header { margin-bottom: 3rem; }
   .milestones-header h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  .milestones-phase-overview {
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+  }
   .milestone-list { display: grid; gap: 1rem; max-width: 800px; }
   .milestone-item {
     display: grid;
@@ -163,8 +178,12 @@ const milestones = [
   .milestone-status.complete { background: var(--spring); }
   .milestone-status.complete svg { width: 16px; height: 16px; color: var(--forest); }
   .milestone-status.upcoming { background: var(--mist); border: 2px dashed rgba(45, 48, 71, 0.2); }
-  .milestone-status.current { background: var(--forest); }
+  .milestone-status.current { background: var(--forest); animation: pulse-status 2s ease-in-out infinite; }
   .milestone-status.current svg { width: 16px; height: 16px; color: white; }
+  @keyframes pulse-status {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25); }
+    50% { box-shadow: 0 0 0 8px rgba(59, 94, 68, 0.15); }
+  }
   .milestone-content h4 { font-size: 1rem; font-weight: 500; margin-bottom: 0.125rem; font-family: 'Source Sans 3', sans-serif; }
   .milestone-content p { font-size: 0.875rem; color: rgba(45, 48, 71, 0.6); }
   .milestone-date { font-size: 0.875rem; color: rgba(45, 48, 71, 0.5); text-align: right; white-space: nowrap; }

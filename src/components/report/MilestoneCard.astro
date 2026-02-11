@@ -114,7 +114,8 @@ const statusLabels = {
 
   .milestone-card.current .status-dot {
     background: var(--forest);
-    animation: pulse 2s infinite;
+    box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25);
+    animation: pulse-dot 2s ease-in-out infinite;
   }
 
   .milestone-card.upcoming .status-dot {
@@ -131,8 +132,12 @@ const statusLabels = {
     opacity: 0.6;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+  @keyframes pulse-dot {
+    0%, 100% {
+      box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(59, 94, 68, 0.15);
+    }
   }
 </style>
