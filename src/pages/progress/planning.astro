@@ -25,7 +25,7 @@ const plans = allDocuments
 const scenicHighwayPlan = plans.find(p => p.data.title.includes('Scenic Highway'));
 const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'));
 
-const introParas = pd.introBody.split('\n\n');
+const introParas = (pd.introBody || '').split('\n\n').filter(Boolean);
 ---
 
 <BaseLayout 

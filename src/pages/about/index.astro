@@ -20,8 +20,8 @@ const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.ord
 const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus');
 const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus');
 
-const purposeBodyParagraphs = d.purposeBody.split('\n\n');
-const mergerBodyParagraphs = d.mergerBody.split('\n\n');
+const purposeBodyParagraphs = (d.purposeBody || '').split('\n\n').filter(Boolean);
+const mergerBodyParagraphs = (d.mergerBody || '').split('\n\n').filter(Boolean);
 ---
 
 <BaseLayout 
@@ -105,7 +105,7 @@ const mergerBodyParagraphs = d.mergerBody.split('\n\n');
         <p data-sb-field-path="valuesDescription">{d.valuesDescription}</p>
       </div>
       <div class="values-grid" data-sb-field-path="values">
-        {d.values.map((value: any, i: number) => (
+        {d.values?.map((value: any, i: number) => (
           <IconCard
             icon={value.icon}
             title={value.title}
@@ -166,7 +166,7 @@ const mergerBodyParagraphs = d.mergerBody.split('\n\n');
         <p data-sb-field-path="documentsDescription">{d.documentsDescription}</p>
       </div>
       <div class="documents-grid" data-sb-field-path="documents">
-        {d.documents.map((doc: any, i: number) => (
+        {d.documents?.map((doc: any, i: number) => (
           <DocumentCard
             title={doc.title}
             description={doc.description}
