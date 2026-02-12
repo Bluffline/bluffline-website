@@ -43,7 +43,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
       </div>
 
       <div class="stats-row" data-sb-field-path="safetyStats">
-        {d.safetyStats.map((stat: any, i: number) => (
+        {d.safetyStats?.map((stat: any, i: number) => (
           <div data-sb-field-path={`.${i}`}>
             <IconCard
               statHighlight={stat.value}
@@ -171,7 +171,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
       </div>
 
       <div class="research-highlight" data-sb-field-path="researchHighlights">
-        {d.researchHighlights.map((stat: any, i: number) => (
+        {d.researchHighlights?.map((stat: any, i: number) => (
           <div data-sb-field-path={`.${i}`}>
             <IconCard
               statHighlight={stat.value}
@@ -190,7 +190,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
   <section class="section pillars-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="pillars-grid" data-sb-field-path="pillarCards">
-        {d.pillarCards.map((card: any, i: number) => (
+        {d.pillarCards?.map((card: any, i: number) => (
           <div data-sb-field-path={`.${i}`}>
             <IconCard
               icon={card.icon}
@@ -214,7 +214,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
         <p data-sb-field-path="evidenceBody">{d.evidenceBody}</p>
       </div>
       <div class="evidence-grid" data-sb-field-path="evidenceCards">
-        {d.evidenceCards.map((card: any, i: number) => (
+        {d.evidenceCards?.map((card: any, i: number) => (
           <div data-sb-field-path={`.${i}`}>
             <IconCard
               title={card.title}
@@ -240,7 +240,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
       </div>
 
       <div class="quality-grid" data-sb-field-path="qualityCards">
-        {d.qualityCards.map((card: any, i: number) => (
+        {d.qualityCards?.map((card: any, i: number) => (
           <div data-sb-field-path={`.${i}`}>
             <IconCard
               icon={card.icon}

@@ -51,10 +51,10 @@ const updates = (await getCollection('updates'))
         <h2 data-sb-field-path="milestonesHeading">{d.milestonesHeading}</h2>
       </div>
       <div class="milestones-phase-overview">
-        <PhaseTracker phases={d.phases} />
+        {d.phases && <PhaseTracker phases={d.phases} />}
       </div>
       <div class="milestone-list" data-sb-field-path="milestones">
-        {d.milestones.map((m: any, i: number) => (
+        {d.milestones?.map((m: any, i: number) => (
           <div class="milestone-item" data-sb-field-path={`.${i}`}>
             <div class={`milestone-status ${m.status}`}>
               {m.status === 'complete' && (

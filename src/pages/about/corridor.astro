@@ -33,8 +33,8 @@ const resourcesGeoJSON = {
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
 
-const overviewParagraphs = cd.overviewBody.split('\n\n');
-const greenwayParagraphs = cd.greenwayBody.split('\n\n');
+const overviewParagraphs = (cd.overviewBody || '').split('\n\n').filter(Boolean);
+const greenwayParagraphs = (cd.greenwayBody || '').split('\n\n').filter(Boolean);
 ---
 
 <BaseLayout
@@ -97,7 +97,7 @@ const greenwayParagraphs = cd.greenwayBody.split('\n\n');
         <div class="overview-sidebar">
           <h3 data-sb-field-path="sidebarTitle">{cd.sidebarTitle}</h3>
           <div class="corridor-stats" data-sb-field-path="corridorStats">
-            {cd.corridorStats.map((stat: any, i: number) => (
+            {cd.corridorStats?.map((stat: any, i: number) => (
               <div class="stat-item" data-sb-field-path={`.${i}`}>
                 <span class="stat-label" data-sb-field-path=".label">{stat.label}</span>
                 <span class="stat-value" data-sb-field-path=".value">{stat.value}</span>
