@@ -24,6 +24,8 @@ const plans = allDocuments
 // Separate the scenic highway plan for the highlight box
 const scenicHighwayPlan = plans.find(p => p.data.title.includes('Scenic Highway'));
 const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'));
+
+const introParas = pd.introBody.split('\n\n');
 ---
 
 <BaseLayout 
@@ -42,9 +44,10 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
 
   <section class="planning-intro" data-sb-object-id={sbId}>
     <div class="section-inner">
-      <div class="intro-content">
-        <p data-sb-field-path="introBody1">{pd.introBody1}</p>
-        <p data-sb-field-path="introBody2">{pd.introBody2}</p>
+      <div class="intro-content" data-sb-field-path="introBody">
+        {introParas.map((para: string) => (
+          <p>{para}</p>
+        ))}
       </div>
     </div>
   </section>
