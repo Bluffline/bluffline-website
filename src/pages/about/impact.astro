@@ -57,15 +57,10 @@ const qualityIcons = [
       </div>
 
       <div class="stats-row">
-        {d.safetyStats.map((stat: any) => (
-          <IconCard
-            statHighlight={stat.value}
-            description={stat.description}
-            sourceUrl={stat.sourceUrl}
-            sourceLabel={stat.sourceLabel}
-            variant="stat"
-          />
-        ))}
+        <IconCard statHighlight={d.safetyStat1Value} description={d.safetyStat1Description} sourceUrl={d.safetyStat1SourceUrl} sourceLabel={d.safetyStat1SourceLabel} variant="stat" />
+        <IconCard statHighlight={d.safetyStat2Value} description={d.safetyStat2Description} sourceUrl={d.safetyStat2SourceUrl} sourceLabel={d.safetyStat2SourceLabel} variant="stat" />
+        <IconCard statHighlight={d.safetyStat3Value} description={d.safetyStat3Description} sourceUrl={d.safetyStat3SourceUrl} sourceLabel={d.safetyStat3SourceLabel} variant="stat" />
+        <IconCard statHighlight={d.safetyStat4Value} description={d.safetyStat4Description} sourceUrl={d.safetyStat4SourceUrl} sourceLabel={d.safetyStat4SourceLabel} variant="stat" />
       </div>
     </div>
   </section>
@@ -183,15 +178,9 @@ const qualityIcons = [
       </div>
 
       <div class="research-highlight">
-        {d.researchHighlights.map((stat: any) => (
-          <IconCard
-            statHighlight={stat.value}
-            description={stat.description}
-            sourceUrl={stat.sourceUrl}
-            sourceLabel={stat.sourceLabel}
-            variant="stat-highlight"
-          />
-        ))}
+        <IconCard statHighlight={d.research1Value} description={d.research1Description} sourceUrl={d.research1SourceUrl} sourceLabel={d.research1SourceLabel} variant="stat-highlight" />
+        <IconCard statHighlight={d.research2Value} description={d.research2Description} sourceUrl={d.research2SourceUrl} sourceLabel={d.research2SourceLabel} variant="stat-highlight" />
+        <IconCard statHighlight={d.research3Value} description={d.research3Description} sourceUrl={d.research3SourceUrl} sourceLabel={d.research3SourceLabel} variant="stat-highlight" />
       </div>
     </div>
   </section>
@@ -200,22 +189,22 @@ const qualityIcons = [
   <section class="section pillars-section">
     <div class="section-inner">
       <div class="pillars-grid">
-        {d.pillarCards.map((card: any, i: number) => {
-          const stats = [
-            card.stat1Value && { value: card.stat1Value, label: card.stat1Label, sourceUrl: card.stat1SourceUrl, sourceLabel: card.stat1SourceLabel },
-            card.stat2Value && { value: card.stat2Value, label: card.stat2Label, sourceUrl: card.stat2SourceUrl, sourceLabel: card.stat2SourceLabel },
-          ].filter(Boolean);
-          return (
-            <IconCard
-              icon={pillarIcons[i]}
-              title={card.title}
-              description={card.description}
-              stats={stats}
-              detail={card.detail}
-              variant="pillar"
-            />
-          );
-        })}
+        <IconCard icon={pillarIcons[0]} title={d.pillar1Title} description={d.pillar1Description} stats={[
+          d.pillar1Stat1Value && { value: d.pillar1Stat1Value, label: d.pillar1Stat1Label, sourceUrl: d.pillar1Stat1SourceUrl, sourceLabel: d.pillar1Stat1SourceLabel },
+          d.pillar1Stat2Value && { value: d.pillar1Stat2Value, label: d.pillar1Stat2Label, sourceUrl: d.pillar1Stat2SourceUrl, sourceLabel: d.pillar1Stat2SourceLabel },
+        ].filter(Boolean)} detail={d.pillar1Detail} variant="pillar" />
+        <IconCard icon={pillarIcons[1]} title={d.pillar2Title} description={d.pillar2Description} stats={[
+          d.pillar2Stat1Value && { value: d.pillar2Stat1Value, label: d.pillar2Stat1Label, sourceUrl: d.pillar2Stat1SourceUrl, sourceLabel: d.pillar2Stat1SourceLabel },
+          d.pillar2Stat2Value && { value: d.pillar2Stat2Value, label: d.pillar2Stat2Label, sourceUrl: d.pillar2Stat2SourceUrl, sourceLabel: d.pillar2Stat2SourceLabel },
+        ].filter(Boolean)} detail={d.pillar2Detail} variant="pillar" />
+        <IconCard icon={pillarIcons[2]} title={d.pillar3Title} description={d.pillar3Description} stats={[
+          d.pillar3Stat1Value && { value: d.pillar3Stat1Value, label: d.pillar3Stat1Label, sourceUrl: d.pillar3Stat1SourceUrl, sourceLabel: d.pillar3Stat1SourceLabel },
+          d.pillar3Stat2Value && { value: d.pillar3Stat2Value, label: d.pillar3Stat2Label, sourceUrl: d.pillar3Stat2SourceUrl, sourceLabel: d.pillar3Stat2SourceLabel },
+        ].filter(Boolean)} detail={d.pillar3Detail} variant="pillar" />
+        <IconCard icon={pillarIcons[3]} title={d.pillar4Title} description={d.pillar4Description} stats={[
+          d.pillar4Stat1Value && { value: d.pillar4Stat1Value, label: d.pillar4Stat1Label, sourceUrl: d.pillar4Stat1SourceUrl, sourceLabel: d.pillar4Stat1SourceLabel },
+          d.pillar4Stat2Value && { value: d.pillar4Stat2Value, label: d.pillar4Stat2Label, sourceUrl: d.pillar4Stat2SourceUrl, sourceLabel: d.pillar4Stat2SourceLabel },
+        ].filter(Boolean)} detail={d.pillar4Detail} variant="pillar" />
       </div>
     </div>
   </section>
@@ -228,23 +217,26 @@ const qualityIcons = [
         <p data-sb-field-path="evidenceBody">{d.evidenceBody}</p>
       </div>
       <div class="evidence-grid">
-        {d.evidenceCards.map((card: any) => {
-          const stats = [
-            card.stat1Value && { value: card.stat1Value, description: card.stat1Description },
-            card.stat2Value && { value: card.stat2Value, description: card.stat2Description },
-            card.stat3Value && { value: card.stat3Value, description: card.stat3Description },
-          ].filter(Boolean);
-          return (
-            <IconCard
-              title={card.title}
-              location={card.location}
-              stats={stats}
-              sourceUrl={card.sourceUrl}
-              sourceLabel={card.sourceLabel}
-              variant="evidence"
-            />
-          );
-        })}
+        <IconCard title={d.evidence1Title} location={d.evidence1Location} stats={[
+          { value: d.evidence1Stat1Value, description: d.evidence1Stat1Description },
+          { value: d.evidence1Stat2Value, description: d.evidence1Stat2Description },
+          { value: d.evidence1Stat3Value, description: d.evidence1Stat3Description },
+        ]} sourceUrl={d.evidence1SourceUrl} sourceLabel={d.evidence1SourceLabel} variant="evidence" />
+        <IconCard title={d.evidence2Title} location={d.evidence2Location} stats={[
+          { value: d.evidence2Stat1Value, description: d.evidence2Stat1Description },
+          { value: d.evidence2Stat2Value, description: d.evidence2Stat2Description },
+          { value: d.evidence2Stat3Value, description: d.evidence2Stat3Description },
+        ]} sourceUrl={d.evidence2SourceUrl} sourceLabel={d.evidence2SourceLabel} variant="evidence" />
+        <IconCard title={d.evidence3Title} location={d.evidence3Location} stats={[
+          { value: d.evidence3Stat1Value, description: d.evidence3Stat1Description },
+          { value: d.evidence3Stat2Value, description: d.evidence3Stat2Description },
+          { value: d.evidence3Stat3Value, description: d.evidence3Stat3Description },
+        ]} sourceUrl={d.evidence3SourceUrl} sourceLabel={d.evidence3SourceLabel} variant="evidence" />
+        <IconCard title={d.evidence4Title} location={d.evidence4Location} stats={[
+          { value: d.evidence4Stat1Value, description: d.evidence4Stat1Description },
+          { value: d.evidence4Stat2Value, description: d.evidence4Stat2Description },
+          { value: d.evidence4Stat3Value, description: d.evidence4Stat3Description },
+        ]} sourceUrl={d.evidence4SourceUrl} sourceLabel={d.evidence4SourceLabel} variant="evidence" />
       </div>
     </div>
   </section>
@@ -259,16 +251,12 @@ const qualityIcons = [
       </div>
 
       <div class="quality-grid">
-        {d.qualityCards.map((card: any, i: number) => (
-          <IconCard
-            icon={qualityIcons[i]}
-            title={card.title}
-            description={card.description}
-            sourceUrl={card.sourceUrl}
-            sourceLabel={card.sourceLabel}
-            variant="dark"
-          />
-        ))}
+        <IconCard icon={qualityIcons[0]} title={d.qualityCard1Title} description={d.qualityCard1Description} sourceUrl={d.qualityCard1SourceUrl} sourceLabel={d.qualityCard1SourceLabel} variant="dark" />
+        <IconCard icon={qualityIcons[1]} title={d.qualityCard2Title} description={d.qualityCard2Description} variant="dark" />
+        <IconCard icon={qualityIcons[2]} title={d.qualityCard3Title} description={d.qualityCard3Description} variant="dark" />
+        <IconCard icon={qualityIcons[3]} title={d.qualityCard4Title} description={d.qualityCard4Description} sourceUrl={d.qualityCard4SourceUrl} sourceLabel={d.qualityCard4SourceLabel} variant="dark" />
+        <IconCard icon={qualityIcons[4]} title={d.qualityCard5Title} description={d.qualityCard5Description} variant="dark" />
+        <IconCard icon={qualityIcons[5]} title={d.qualityCard6Title} description={d.qualityCard6Description} variant="dark" />
       </div>
     </div>
   </section>
