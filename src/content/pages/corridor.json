@@ -8,32 +8,26 @@
   "sidebarTitle": "Corridor at a Glance",
   "corridorStats": [
     {
-      "type": "CorridorStat",
       "label": "Total Length",
       "value": "~22 miles"
     },
     {
-      "type": "CorridorStat",
       "label": "Existing Scenic Highway",
       "value": "~11 miles"
     },
     {
-      "type": "CorridorStat",
       "label": "Northeast Extension",
       "value": "~3.35 miles"
     },
     {
-      "type": "CorridorStat",
       "label": "Southwest Extension",
       "value": "~7.75 miles"
     },
     {
-      "type": "CorridorStat",
       "label": "Intrinsic Resources",
       "value": "27+ sites"
     },
     {
-      "type": "CorridorStat",
       "label": "Designation",
       "value": "FL Scenic Highway"
     }

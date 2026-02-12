@@ -55,7 +55,7 @@ const updates = (await getCollection('updates'))
       </div>
       <div class="milestone-list" data-sb-field-path="milestones">
         {d.milestones?.map((m: any, i: number) => (
-          <div class="milestone-item" data-sb-field-path={`.${i}`}>
+          <div class="milestone-item">
             <div class={`milestone-status ${m.status}`}>
               {m.status === 'complete' && (
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -69,10 +69,10 @@ const updates = (await getCollection('updates'))
               )}
             </div>
             <div class="milestone-content">
-              <h4 data-sb-field-path=".title">{m.title}</h4>
-              <p data-sb-field-path=".description">{m.description}</p>
+              <h4>{m.title}</h4>
+              <p>{m.description}</p>
             </div>
-            <div class="milestone-date" data-sb-field-path=".date">{m.date}</div>
+            <div class="milestone-date">{m.date}</div>
           </div>
         ))}
       </div>

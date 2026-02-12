@@ -59,9 +59,9 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
         <p data-sb-field-path="challengeBody">{d.challengeBody}</p>
         <div class="challenge-stats" data-sb-field-path="challengeStats">
           {d.challengeStats?.map((stat: any, i: number) => (
-            <div class="challenge-stat" data-sb-field-path={`.${i}`}>
-              <span class="stat-value" data-sb-field-path=".value">{stat.value}</span>
-              <span class="stat-description" data-sb-field-path=".description">{stat.description}</span>
+            <div class="challenge-stat">
+              <span class="stat-value">{stat.value}</span>
+              <span class="stat-description">{stat.description}</span>
             </div>
           ))}
         </div>
@@ -84,13 +84,13 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
         </div>
         <div class="solution-components" data-sb-field-path="solutionComponents">
           {d.solutionComponents?.map((comp: any, i: number) => (
-            <div class="component" data-sb-field-path={`.${i}`}>
-              <div class="component-icon" data-sb-field-path=".icon">
+            <div class="component">
+              <div class="component-icon">
                 <Fragment set:html={comp.icon} />
               </div>
               <div class="component-text">
-                <h3 data-sb-field-path=".title">{comp.title}</h3>
-                <p data-sb-field-path=".description">{comp.description}</p>
+                <h3>{comp.title}</h3>
+                <p>{comp.description}</p>
               </div>
             </div>
           ))}
