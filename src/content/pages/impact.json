@@ -79,37 +79,51 @@
       "title": "Neighborhood Revitalization",
       "description": "Reactivating underutilized land and addressing long-standing blight in West Pensacola and Ferry Pass through safe, high-quality public infrastructure.",
       "detail": "Trail projects consistently catalyze private investment in adjacent properties. The Atlanta BeltLine generated $4.6 billion in private development from a $559 million public investment—an <a href=\"https://www.fhwa.dot.gov/ipd/value_capture/case_studies/atlanta_beltline_tax_allocation_district.aspx\" target=\"_blank\" rel=\"noopener\">8.5:1 return</a>.",
-      "stats": [
-        { "value": "5-11%", "label": "Average property value increase near trails", "sourceUrl": "https://headwaterseconomics.org/trail/43-property-recreation-values-urban-greenways/", "sourceLabel": "Headwaters Economics" },
-        { "value": "$282M", "label": "Added real estate value projected for Miami-Dade's Ludlam Trail", "sourceUrl": "https://www.greenwaysfoundation.org/news/cultivating-prosperity-how-trails-become-engines-of-local-economic-growth", "sourceLabel": "Greenways Foundation" }
-      ]
+      "stat1Value": "5-11%",
+      "stat1Label": "Average property value increase near trails",
+      "stat1SourceUrl": "https://headwaterseconomics.org/trail/43-property-recreation-values-urban-greenways/",
+      "stat1SourceLabel": "Headwaters Economics",
+      "stat2Value": "$282M",
+      "stat2Label": "Added real estate value projected for Miami-Dade's Ludlam Trail",
+      "stat2SourceUrl": "https://www.greenwaysfoundation.org/news/cultivating-prosperity-how-trails-become-engines-of-local-economic-growth",
+      "stat2SourceLabel": "Greenways Foundation"
     },
     {
       "title": "Military & Defense Readiness",
       "description": "Improving safety, access, and quality of life around NAS Pensacola and Corry Station, supporting cadets, service members, and installation compatibility.",
       "detail": "Safe, car-free connections benefit military personnel who may not have personal vehicles, especially students and trainees. Quality of life improvements also support installation encroachment compatibility goals.",
-      "stats": [
-        { "value": "NAS Pensacola", "label": "Home of Naval Aviation, training 60,000+ annually", "sourceUrl": "https://www.cnic.navy.mil/regions/cnrse/installations/nas_pensacola.html", "sourceLabel": "U.S. Navy" },
-        { "value": "Corry Station", "label": "Center for Information Warfare Training", "sourceUrl": "https://www.netc.navy.mil/CIWT/", "sourceLabel": "U.S. Navy" }
-      ]
+      "stat1Value": "NAS Pensacola",
+      "stat1Label": "Home of Naval Aviation, training 60,000+ annually",
+      "stat1SourceUrl": "https://www.cnic.navy.mil/regions/cnrse/installations/nas_pensacola.html",
+      "stat1SourceLabel": "U.S. Navy",
+      "stat2Value": "Corry Station",
+      "stat2Label": "Center for Information Warfare Training",
+      "stat2SourceUrl": "https://www.netc.navy.mil/CIWT/",
+      "stat2SourceLabel": "U.S. Navy"
     },
     {
       "title": "Workforce & Employment Access",
       "description": "Providing safe, non-vehicular connections to major employment hubs, reducing transportation barriers for workers in car-constrained households.",
       "detail": "For households without reliable vehicle access, the Bluffline provides a genuine transportation alternative connecting residential areas to employment centers, healthcare, education, and essential services.",
-      "stats": [
-        { "value": "7.6%", "label": "Escambia County households without vehicle access", "sourceUrl": "https://data.census.gov/table/ACSST5Y2022.S0802?q=commuting&g=050XX00US12033", "sourceLabel": "U.S. Census ACS" },
-        { "value": "22+ miles", "label": "of corridor connecting employment centers" }
-      ]
+      "stat1Value": "7.6%",
+      "stat1Label": "Escambia County households without vehicle access",
+      "stat1SourceUrl": "https://data.census.gov/table/ACSST5Y2022.S0802?q=commuting&g=050XX00US12033",
+      "stat1SourceLabel": "U.S. Census ACS",
+      "stat2Value": "22+ miles",
+      "stat2Label": "of corridor connecting employment centers"
     },
     {
       "title": "Talent, Tourism & Quality of Life",
       "description": "Strengthening Pensacola's competitiveness for employers, students, and visitors by expanding waterfront access and outdoor recreation.",
       "detail": "Trail networks are increasingly cited as key amenities in talent attraction and retention. Expanding waterfront access positions Pensacola competitively against peer cities investing in quality of life infrastructure.",
-      "stats": [
-        { "value": "$3,700", "label": "Average annual spending by trail users on equipment & services", "sourceUrl": "https://openbooks.lib.msu.edu/michigantrails/chapter/the-economic-benefits-of-trails-and-trail-building/", "sourceLabel": "Michigan State University" },
-        { "value": "$400M", "label": "Annual cycling tourism in Oregon alone", "sourceUrl": "https://aashtojournal.org/2019/10/18/conservancy-report-projects-roi-from-active-transportation-investments/", "sourceLabel": "AASHTO Journal" }
-      ]
+      "stat1Value": "$3,700",
+      "stat1Label": "Average annual spending by trail users on equipment & services",
+      "stat1SourceUrl": "https://openbooks.lib.msu.edu/michigantrails/chapter/the-economic-benefits-of-trails-and-trail-building/",
+      "stat1SourceLabel": "Michigan State University",
+      "stat2Value": "$400M",
+      "stat2Label": "Annual cycling tourism in Oregon alone",
+      "stat2SourceUrl": "https://aashtojournal.org/2019/10/18/conservancy-report-projects-roi-from-active-transportation-investments/",
+      "stat2SourceLabel": "AASHTO Journal"
     }
   ],
 
@@ -122,44 +136,48 @@
       "location": "Atlanta, GA",
       "sourceUrl": "https://beltline.org/",
       "sourceLabel": "Atlanta BeltLine, Inc.",
-      "stats": [
-        { "value": "$10B", "description": "total economic impact" },
-        { "value": "50,000", "description": "permanent jobs created" },
-        { "value": "8.5:1", "description": "return on investment" }
-      ]
+      "stat1Value": "$10B",
+      "stat1Description": "total economic impact",
+      "stat2Value": "50,000",
+      "stat2Description": "permanent jobs created",
+      "stat3Value": "8.5:1",
+      "stat3Description": "return on investment"
     },
     {
       "title": "Circuit Trails",
       "location": "Philadelphia, PA",
       "sourceUrl": "https://www.railstotrails.org/trailblog/new-research-finds-public-investment-in-trails-walking-and-biking-infrastructure-delivers-potential-economic-benefits-of-138-5-billion-annually/",
       "sourceLabel": "Rails to Trails Conservancy",
-      "stats": [
-        { "value": "$795M", "description": "annual healthcare savings" },
-        { "value": "800 mi", "description": "regional trail network" },
-        { "value": "$200M+", "description": "recent funding secured" }
-      ]
+      "stat1Value": "$795M",
+      "stat1Description": "annual healthcare savings",
+      "stat2Value": "800 mi",
+      "stat2Description": "regional trail network",
+      "stat3Value": "$200M+",
+      "stat3Description": "recent funding secured"
     },
     {
       "title": "Peachtree Creek Greenway",
       "location": "Atlanta, GA",
       "sourceUrl": "https://peachtreecreek.org/economicimpactstudy/",
       "sourceLabel": "Peachtree Creek Greenway",
-      "stats": [
-        { "value": "$13.76", "description": "return per $1 invested" },
-        { "value": "228", "description": "permanent jobs projected" },
-        { "value": "$159M", "description": "property value increase" }
-      ]
+      "stat1Value": "$13.76",
+      "stat1Description": "return per $1 invested",
+      "stat2Value": "228",
+      "stat2Description": "permanent jobs projected",
+      "stat3Value": "$159M",
+      "stat3Description": "property value increase"
     },
     {
       "title": "Carolina Thread Trail",
       "location": "NC/SC Region",
       "sourceUrl": "https://www.carolinathreadtrail.org/trail-benefits/",
       "sourceLabel": "Carolina Thread Trail",
-      "stats": [
-        { "value": "$174M", "description": "construction stimulus per 300 mi" },
-        { "value": "3,200", "description": "jobs per 300 miles" },
-        { "value": "$128M", "description": "annual tourism activity" }
-      ]
+      "stat1Value": "$174M",
+      "stat1Description": "construction stimulus per 300 mi",
+      "stat2Value": "3,200",
+      "stat2Description": "jobs per 300 miles",
+      "stat3Value": "$128M",
+      "stat3Description": "annual tourism activity"
     }
   ],
 
