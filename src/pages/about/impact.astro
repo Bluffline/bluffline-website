@@ -44,7 +44,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
 
       <div class="stats-row" data-sb-field-path="safetyStats">
         {d.safetyStats?.map((stat: any, i: number) => (
-          <div data-sb-field-path={`.${i}`}>
+          <div>
             <IconCard
               statHighlight={stat.value}
               description={stat.description}
@@ -172,7 +172,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
 
       <div class="research-highlight" data-sb-field-path="researchHighlights">
         {d.researchHighlights?.map((stat: any, i: number) => (
-          <div data-sb-field-path={`.${i}`}>
+          <div>
             <IconCard
               statHighlight={stat.value}
               description={stat.description}
@@ -191,7 +191,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
     <div class="section-inner">
       <div class="pillars-grid" data-sb-field-path="pillarCards">
         {d.pillarCards?.map((card: any, i: number) => (
-          <div data-sb-field-path={`.${i}`}>
+          <div>
             <IconCard
               icon={card.icon}
               title={card.title}
@@ -215,7 +215,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
       </div>
       <div class="evidence-grid" data-sb-field-path="evidenceCards">
         {d.evidenceCards?.map((card: any, i: number) => (
-          <div data-sb-field-path={`.${i}`}>
+          <div>
             <IconCard
               title={card.title}
               location={card.location}
@@ -241,7 +241,7 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
 
       <div class="quality-grid" data-sb-field-path="qualityCards">
         {d.qualityCards?.map((card: any, i: number) => (
-          <div data-sb-field-path={`.${i}`}>
+          <div>
             <IconCard
               icon={card.icon}
               title={card.title}

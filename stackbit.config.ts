@@ -34,215 +34,6 @@ export default defineStackbitConfig({
         "src/content/pages",
       ],
       models: [
-        // ══════════════════════════════════════════
-        // Named object models for list items
-        // ══════════════════════════════════════════
-
-        // Home page
-        {
-          name: "ChallengeStat",
-          type: "object",
-          labelField: "value",
-          fields: [
-            { name: "value", type: "string", required: true },
-            { name: "description", type: "string", required: true },
-          ],
-        },
-        {
-          name: "SolutionComponent",
-          type: "object",
-          labelField: "title",
-          fields: [
-            { name: "icon", type: "text" },
-            { name: "title", type: "string", required: true },
-            { name: "description", type: "text", required: true },
-          ],
-        },
-
-        // About page
-        {
-          name: "ValueCard",
-          type: "object",
-          labelField: "title",
-          fields: [
-            { name: "icon", type: "text" },
-            { name: "title", type: "string", required: true },
-            { name: "description", type: "text", required: true },
-          ],
-        },
-        {
-          name: "DocumentLink",
-          type: "object",
-          labelField: "title",
-          fields: [
-            { name: "title", type: "string", required: true },
-            { name: "description", type: "string" },
-            { name: "href", type: "string", required: true },
-            { name: "external", type: "boolean" },
-            { name: "icon", type: "text" },
-          ],
-        },
-
-        // Corridor page
-        {
-          name: "CorridorStat",
-          type: "object",
-          labelField: "label",
-          fields: [
-            { name: "label", type: "string", required: true },
-            { name: "value", type: "string", required: true },
-          ],
-        },
-
-        // Progress page
-        {
-          name: "Milestone",
-          type: "object",
-          labelField: "title",
-          fields: [
-            { name: "title", type: "string", required: true },
-            { name: "description", type: "string", required: true },
-            { name: "date", type: "string", required: true },
-            {
-              name: "status",
-              type: "enum",
-              options: ["complete", "current", "upcoming"],
-              required: true,
-            },
-          ],
-        },
-        {
-          name: "Phase",
-          type: "object",
-          labelField: "label",
-          fields: [
-            { name: "label", type: "string", required: true },
-            {
-              name: "status",
-              type: "enum",
-              options: ["complete", "current", "upcoming"],
-              required: true,
-            },
-          ],
-        },
-
-        // Impact page
-        {
-          name: "SafetyStat",
-          type: "object",
-          labelField: "value",
-          fields: [
-            { name: "value", type: "string", required: true },
-            { name: "description", type: "string", required: true },
-            { name: "sourceUrl", type: "url" },
-            { name: "sourceLabel", type: "string" },
-          ],
-        },
-        {
-          name: "ResearchHighlight",
-          type: "object",
-          labelField: "value",
-          fields: [
-            { name: "value", type: "string", required: true },
-            { name: "description", type: "string", required: true },
-            { name: "sourceUrl", type: "url" },
-            { name: "sourceLabel", type: "string" },
-          ],
-        },
-        {
-          name: "PillarStat",
-          type: "object",
-          labelField: "value",
-          fields: [
-            { name: "value", type: "string", required: true },
-            { name: "label", type: "string", required: true },
-            { name: "sourceUrl", type: "url" },
-            { name: "sourceLabel", type: "string" },
-          ],
-        },
-        {
-          name: "PillarCard",
-          type: "object",
-          labelField: "title",
-          fields: [
-            { name: "title", type: "string", required: true },
-            { name: "description", type: "text", required: true },
-            { name: "detail", type: "text" },
-            { name: "icon", type: "text" },
-            {
-              name: "stats",
-              type: "list",
-              items: { type: "model", models: ["PillarStat"] },
-            },
-          ],
-        },
-        {
-          name: "EvidenceStat",
-          type: "object",
-          labelField: "value",
-          fields: [
-            { name: "value", type: "string", required: true },
-            { name: "description", type: "string", required: true },
-          ],
-        },
-        {
-          name: "EvidenceCard",
-          type: "object",
-          labelField: "title",
-          fields: [
-            { name: "title", type: "string", required: true },
-            { name: "location", type: "string", required: true },
-            { name: "sourceUrl", type: "url" },
-            { name: "sourceLabel", type: "string" },
-            {
-              name: "stats",
-              type: "list",
-              items: { type: "model", models: ["EvidenceStat"] },
-            },
-          ],
-        },
-        {
-          name: "QualityCard",
-          type: "object",
-          labelField: "title",
-          fields: [
-            { name: "title", type: "string", required: true },
-            { name: "description", type: "text", required: true },
-            { name: "icon", type: "text" },
-            { name: "sourceUrl", type: "url" },
-            { name: "sourceLabel", type: "string" },
-          ],
-        },
-
-        // Press release gallery
-        {
-          name: "GalleryImage",
-          type: "object",
-          labelField: "alt",
-          fields: [
-            { name: "src", type: "image", required: true },
-            { name: "alt", type: "string", required: true },
-            { name: "caption", type: "string" },
-          ],
-        },
-
-        // Timeline images
-        {
-          name: "TimelineImage",
-          type: "object",
-          labelField: "alt",
-          fields: [
-            { name: "src", type: "image", required: true },
-            { name: "alt", type: "string", required: true },
-            { name: "caption", type: "string" },
-            { name: "credit", type: "string" },
-          ],
-        },
-
-        // ══════════════════════════════════════════
-        // Collection models
-        // ══════════════════════════════════════════
-
         // ── Updates (Markdown with frontmatter) ──
         {
           name: "Update",
@@ -297,7 +88,15 @@ export default defineStackbitConfig({
             {
               name: "gallery",
               type: "list",
-              items: { type: "model", models: ["GalleryImage"] },
+              items: {
+                type: "object",
+                labelField: "alt",
+                fields: [
+                  { name: "src", type: "image", required: true },
+                  { name: "alt", type: "string", required: true },
+                  { name: "caption", type: "string" },
+                ],
+              },
             },
             { name: "body", type: "markdown", required: false },
           ],
@@ -411,7 +210,16 @@ export default defineStackbitConfig({
             {
               name: "images",
               type: "list",
-              items: { type: "model", models: ["TimelineImage"] },
+              items: {
+                type: "object",
+                labelField: "alt",
+                fields: [
+                  { name: "src", type: "image", required: true },
+                  { name: "alt", type: "string", required: true },
+                  { name: "caption", type: "string" },
+                  { name: "credit", type: "string" },
+                ],
+              },
             },
           ],
         },
@@ -451,9 +259,7 @@ export default defineStackbitConfig({
           ],
         },
 
-        // ══════════════════════════════════════════
-        // Page content models
-        // ══════════════════════════════════════════
+        // ── Page Content (JSON data for static pages) ──
 
         // Homepage
         {
@@ -484,7 +290,14 @@ export default defineStackbitConfig({
             {
               name: "challengeStats",
               type: "list",
-              items: { type: "model", models: ["ChallengeStat"] },
+              items: {
+                type: "object",
+                labelField: "value",
+                fields: [
+                  { name: "value", type: "string", required: true },
+                  { name: "description", type: "string", required: true },
+                ],
+              },
             },
             { name: "challengeLinkText", type: "string" },
             { name: "challengeLinkHref", type: "string" },
@@ -496,7 +309,15 @@ export default defineStackbitConfig({
             {
               name: "solutionComponents",
               type: "list",
-              items: { type: "model", models: ["SolutionComponent"] },
+              items: {
+                type: "object",
+                labelField: "title",
+                fields: [
+                  { name: "icon", type: "text" },
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "text", required: true },
+                ],
+              },
             },
             { name: "solutionLinkText", type: "string" },
             { name: "solutionLinkHref", type: "string" },
@@ -535,7 +356,15 @@ export default defineStackbitConfig({
             {
               name: "values",
               type: "list",
-              items: { type: "model", models: ["ValueCard"] },
+              items: {
+                type: "object",
+                labelField: "title",
+                fields: [
+                  { name: "icon", type: "text" },
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "text", required: true },
+                ],
+              },
             },
             { name: "leadershipHeading", type: "string" },
             { name: "leadershipDescription", type: "text" },
@@ -546,7 +375,17 @@ export default defineStackbitConfig({
             {
               name: "documents",
               type: "list",
-              items: { type: "model", models: ["DocumentLink"] },
+              items: {
+                type: "object",
+                labelField: "title",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "string" },
+                  { name: "href", type: "string", required: true },
+                  { name: "external", type: "boolean" },
+                  { name: "icon", type: "text" },
+                ],
+              },
             },
             { name: "ctaTitle", type: "string" },
             { name: "ctaDescription", type: "text" },
@@ -571,12 +410,38 @@ export default defineStackbitConfig({
             {
               name: "milestones",
               type: "list",
-              items: { type: "model", models: ["Milestone"] },
+              items: {
+                type: "object",
+                labelField: "title",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "string", required: true },
+                  { name: "date", type: "string", required: true },
+                  {
+                    name: "status",
+                    type: "enum",
+                    options: ["complete", "current", "upcoming"],
+                    required: true,
+                  },
+                ],
+              },
             },
             {
               name: "phases",
               type: "list",
-              items: { type: "model", models: ["Phase"] },
+              items: {
+                type: "object",
+                labelField: "label",
+                fields: [
+                  { name: "label", type: "string", required: true },
+                  {
+                    name: "status",
+                    type: "enum",
+                    options: ["complete", "current", "upcoming"],
+                    required: true,
+                  },
+                ],
+              },
             },
             { name: "updatesHeading", type: "string" },
             { name: "ctaTitle", type: "string" },
@@ -673,7 +538,14 @@ export default defineStackbitConfig({
             {
               name: "corridorStats",
               type: "list",
-              items: { type: "model", models: ["CorridorStat"] },
+              items: {
+                type: "object",
+                labelField: "label",
+                fields: [
+                  { name: "label", type: "string", required: true },
+                  { name: "value", type: "string", required: true },
+                ],
+              },
             },
             { name: "greenwayHeading", type: "string", required: true },
             { name: "greenwayBody", type: "markdown", required: true },
@@ -700,7 +572,16 @@ export default defineStackbitConfig({
             {
               name: "safetyStats",
               type: "list",
-              items: { type: "model", models: ["SafetyStat"] },
+              items: {
+                type: "object",
+                labelField: "value",
+                fields: [
+                  { name: "value", type: "string", required: true },
+                  { name: "description", type: "string", required: true },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                ],
+              },
             },
             { name: "mapCaption", type: "text" },
             { name: "mapSourceText", type: "string" },
@@ -716,19 +597,72 @@ export default defineStackbitConfig({
             {
               name: "researchHighlights",
               type: "list",
-              items: { type: "model", models: ["ResearchHighlight"] },
+              items: {
+                type: "object",
+                labelField: "value",
+                fields: [
+                  { name: "value", type: "string", required: true },
+                  { name: "description", type: "string", required: true },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                ],
+              },
             },
             {
               name: "pillarCards",
               type: "list",
-              items: { type: "model", models: ["PillarCard"] },
+              items: {
+                type: "object",
+                labelField: "title",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "text", required: true },
+                  { name: "detail", type: "text" },
+                  { name: "icon", type: "text" },
+                  {
+                    name: "stats",
+                    type: "list",
+                    items: {
+                      type: "object",
+                      labelField: "value",
+                      fields: [
+                        { name: "value", type: "string", required: true },
+                        { name: "label", type: "string", required: true },
+                        { name: "sourceUrl", type: "url" },
+                        { name: "sourceLabel", type: "string" },
+                      ],
+                    },
+                  },
+                ],
+              },
             },
             { name: "evidenceHeading", type: "string" },
             { name: "evidenceBody", type: "text" },
             {
               name: "evidenceCards",
               type: "list",
-              items: { type: "model", models: ["EvidenceCard"] },
+              items: {
+                type: "object",
+                labelField: "title",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "location", type: "string", required: true },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                  {
+                    name: "stats",
+                    type: "list",
+                    items: {
+                      type: "object",
+                      labelField: "value",
+                      fields: [
+                        { name: "value", type: "string", required: true },
+                        { name: "description", type: "string", required: true },
+                      ],
+                    },
+                  },
+                ],
+              },
             },
             { name: "qualityLabel", type: "string" },
             { name: "qualityHeading", type: "string" },
@@ -736,7 +670,17 @@ export default defineStackbitConfig({
             {
               name: "qualityCards",
               type: "list",
-              items: { type: "model", models: ["QualityCard"] },
+              items: {
+                type: "object",
+                labelField: "title",
+                fields: [
+                  { name: "title", type: "string", required: true },
+                  { name: "description", type: "text", required: true },
+                  { name: "icon", type: "text" },
+                  { name: "sourceUrl", type: "url" },
+                  { name: "sourceLabel", type: "string" },
+                ],
+              },
             },
             { name: "ctaTitle", type: "string" },
             { name: "ctaDescription", type: "text" },

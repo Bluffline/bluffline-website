@@ -110,7 +110,6 @@ const mergerBodyParagraphs = (d.mergerBody || '').split('\n\n').filter(Boolean);
             icon={value.icon}
             title={value.title}
             description={value.description}
-            data-sb-field-path={`.${i}`}
           />
         ))}
       </div>
@@ -173,7 +172,6 @@ const mergerBodyParagraphs = (d.mergerBody || '').split('\n\n').filter(Boolean);
             href={doc.href}
             external={doc.external}
             icon={doc.icon}
-            data-sb-field-path={`.${i}`}
           />
         ))}
       </div>

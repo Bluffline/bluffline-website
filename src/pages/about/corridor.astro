@@ -98,9 +98,9 @@ const greenwayParagraphs = (cd.greenwayBody || '').split('\n\n').filter(Boolean)
           <h3 data-sb-field-path="sidebarTitle">{cd.sidebarTitle}</h3>
           <div class="corridor-stats" data-sb-field-path="corridorStats">
             {cd.corridorStats?.map((stat: any, i: number) => (
-              <div class="stat-item" data-sb-field-path={`.${i}`}>
-                <span class="stat-label" data-sb-field-path=".label">{stat.label}</span>
-                <span class="stat-value" data-sb-field-path=".value">{stat.value}</span>
+              <div class="stat-item">
+                <span class="stat-label">{stat.label}</span>
+                <span class="stat-value">{stat.value}</span>
               </div>
             ))}
           </div>

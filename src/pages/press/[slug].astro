@@ -66,9 +66,9 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
             <h4>Gallery</h4>
             <div class="gallery-grid">
               {release.data.gallery.map((img: any, i: number) => (
-                <figure class="gallery-item" data-sb-field-path={`.${i}`}>
-                  <img src={img.src} alt={img.alt} loading="lazy" data-sb-field-path=".src" />
-                  {img.caption && <figcaption data-sb-field-path=".caption">{img.caption}</figcaption>}
+                <figure class="gallery-item">
+                  <img src={img.src} alt={img.alt} loading="lazy" />
+                  {img.caption && <figcaption>{img.caption}</figcaption>}
                 </figure>
               ))}
             </div>
