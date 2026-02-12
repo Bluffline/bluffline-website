@@ -6,9 +6,6 @@ import { getEntry } from 'astro:content';
 const page = await getEntry('pages', 'home');
 const d = page.data;
 const sbId = 'src/content/pages/home.json';
-
-// Split rich text body on double newlines for paragraph rendering
-const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boolean);
 ---
 
 <BaseLayout title="Home">
@@ -19,8 +16,8 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
         <h1 data-sb-field-path="heroTitle">{d.heroTitle}</h1>
         <p data-sb-field-path="heroSubtitle">{d.heroSubtitle}</p>
         <div class="hero-buttons">
-          <Button href={d.heroPrimaryCtaLink || '/support'} data-sb-field-path="heroPrimaryCta">{d.heroPrimaryCta || 'Get Involved'}</Button>
-          <Button href={d.heroSecondaryCtaLink || '/about'} variant="outline" data-sb-field-path="heroSecondaryCta">{d.heroSecondaryCta || 'Learn More'}</Button>
+          <Button href="/support">Get Involved</Button>
+          <Button href="/about" variant="outline">Learn More</Button>
         </div>
       </div>
       <div class="hero-image">
@@ -35,10 +32,10 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
       <div class="about-grid">
         <div class="about-content">
           <h2 data-sb-field-path="aboutHeading">{d.aboutHeading}</h2>
-          <div data-sb-field-path="aboutBody">
-            {aboutParagraphs.map((p: string) => <p>{p}</p>)}
-          </div>
-          <a href={d.aboutLinkHref || '/about'} class="text-link" data-sb-field-path="aboutLinkText">{d.aboutLinkText || 'Learn more about our history and mission →'}</a>
+          <p data-sb-field-path="aboutBody1">{d.aboutBody1}</p>
+          <p data-sb-field-path="aboutBody2">{d.aboutBody2}</p>
+          <p data-sb-field-path="aboutBody3">{d.aboutBody3}</p>
+          <a href="/about" class="text-link">Learn more about our history and mission →</a>
         </div>
         <div class="about-image">
           <img src={d.aboutImage} alt={d.aboutImageAlt} data-sb-field-path="aboutImage" />
@@ -54,18 +51,28 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
         <img src={d.challengeImage} alt={d.challengeImageAlt} data-sb-field-path="challengeImage" />
       </div>
       <div class="challenge-content">
-        <div class="section-label" data-sb-field-path="challengeLabel">{d.challengeLabel || 'The Challenge'}</div>
+        <div class="section-label">The Challenge</div>
         <h2 data-sb-field-path="challengeHeading">{d.challengeHeading}</h2>
         <p data-sb-field-path="challengeBody">{d.challengeBody}</p>
-        <div class="challenge-stats" data-sb-field-path="challengeStats">
-          {d.challengeStats?.map((stat: any, i: number) => (
-            <div class="challenge-stat">
-              <span class="stat-value">{stat.value}</span>
-              <span class="stat-description">{stat.description}</span>
-            </div>
-          ))}
+        <div class="challenge-stats">
+          <div class="challenge-stat">
+            <span class="stat-value" data-sb-field-path="challengeStat1Value">{d.challengeStat1Value}</span>
+            <span class="stat-description" data-sb-field-path="challengeStat1Description">{d.challengeStat1Description}</span>
+          </div>
+          <div class="challenge-stat">
+            <span class="stat-value" data-sb-field-path="challengeStat2Value">{d.challengeStat2Value}</span>
+            <span class="stat-description" data-sb-field-path="challengeStat2Description">{d.challengeStat2Description}</span>
+          </div>
+          <div class="challenge-stat">
+            <span class="stat-value" data-sb-field-path="challengeStat3Value">{d.challengeStat3Value}</span>
+            <span class="stat-description" data-sb-field-path="challengeStat3Description">{d.challengeStat3Description}</span>
+          </div>
+          <div class="challenge-stat">
+            <span class="stat-value" data-sb-field-path="challengeStat4Value">{d.challengeStat4Value}</span>
+            <span class="stat-description" data-sb-field-path="challengeStat4Description">{d.challengeStat4Description}</span>
+          </div>
         </div>
-        <a href={d.challengeLinkHref || '/about/impact'} class="text-link challenge-link" data-sb-field-path="challengeLinkText">{d.challengeLinkText || 'Explore our full impact case →'}</a>
+        <a href="/about/impact" class="text-link challenge-link">Explore our full impact case →</a>
       </div>
     </div>
   </section>
@@ -74,7 +81,7 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
   <section class="section solution-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="solution-header">
-        <div class="section-label" data-sb-field-path="solutionLabel">{d.solutionLabel || 'The Solution'}</div>
+        <div class="section-label">The Solution</div>
         <h2 data-sb-field-path="solutionHeading">{d.solutionHeading}</h2>
         <p data-sb-field-path="solutionBody">{d.solutionBody}</p>
       </div>
@@ -82,19 +89,35 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
         <div class="solution-map">
           <img src={d.solutionMapImage} alt={d.solutionMapImageAlt} data-sb-field-path="solutionMapImage" />
         </div>
-        <div class="solution-components" data-sb-field-path="solutionComponents">
-          {d.solutionComponents?.map((comp: any, i: number) => (
-            <div class="component">
-              <div class="component-icon">
-                <Fragment set:html={comp.icon} />
-              </div>
-              <div class="component-text">
-                <h3>{comp.title}</h3>
-                <p>{comp.description}</p>
-              </div>
+        <div class="solution-components">
+          <div class="component">
+            <div class="component-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c-4.97 0-9-2.686-9-6v-4c0-3.314 4.03-6 9-6s9 2.686 9 6v4c0 3.314-4.03 6-9 6z"/><path d="M12 6v16"/><path d="M8 10l4-4 4 4"/></svg>
             </div>
-          ))}
-          <a href={d.solutionLinkHref || '/progress'} class="text-link" data-sb-field-path="solutionLinkText">{d.solutionLinkText || 'See our progress and milestones →'}</a>
+            <div class="component-text">
+              <h3 data-sb-field-path="solutionComponent1Title">{d.solutionComponent1Title}</h3>
+              <p data-sb-field-path="solutionComponent1Description">{d.solutionComponent1Description}</p>
+            </div>
+          </div>
+          <div class="component">
+            <div class="component-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="18.5" r="3.5"/><circle cx="5.5" cy="5.5" r="3.5"/><path d="M5.5 9v5a7 7 0 0 0 7 7h0"/><path d="M18.5 15V9a7 7 0 0 0-7-7h0"/></svg>
+            </div>
+            <div class="component-text">
+              <h3 data-sb-field-path="solutionComponent2Title">{d.solutionComponent2Title}</h3>
+              <p data-sb-field-path="solutionComponent2Description">{d.solutionComponent2Description}</p>
+            </div>
+          </div>
+          <div class="component">
+            <div class="component-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>
+            </div>
+            <div class="component-text">
+              <h3 data-sb-field-path="solutionComponent3Title">{d.solutionComponent3Title}</h3>
+              <p data-sb-field-path="solutionComponent3Description">{d.solutionComponent3Description}</p>
+            </div>
+          </div>
+          <a href="/progress" class="text-link">See our progress and milestones →</a>
         </div>
       </div>
     </div>
@@ -105,7 +128,7 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
     <div class="section-inner cta-inner">
       <h2 data-sb-field-path="ctaHeading">{d.ctaHeading}</h2>
       <p data-sb-field-path="ctaBody">{d.ctaBody}</p>
-      <Button href={d.ctaPrimaryHref || '/support'} data-sb-field-path="ctaPrimaryLabel">{d.ctaPrimaryLabel || 'Get Involved'}</Button>
+      <Button href="/support">Get Involved</Button>
     </div>
   </section>
 </BaseLayout>
@@ -383,7 +406,7 @@ const aboutParagraphs: string[] = (d.aboutBody || '').split('\n\n').filter(Boole
     justify-content: center;
     flex-shrink: 0;
   }
-  .component-icon :global(svg) {
+  .component-icon svg {
     width: 24px;
     height: 24px;
     color: var(--forest);

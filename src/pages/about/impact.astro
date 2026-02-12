@@ -14,9 +14,23 @@ const sbId = 'src/content/pages/impact.json';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
 
-// Split rich text bodies into paragraphs
-const contextProblemParagraphs: string[] = (d.contextProblemBody || '').split('\n\n').filter(Boolean);
-const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split('\n\n').filter(Boolean);
+// SVG icons for pillar cards (not editable content, kept in template)
+const pillarIcons = [
+  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>`,
+];
+
+// SVG icons for quality of life cards (not editable content, kept in template)
+const qualityIcons = [
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`,
+];
 ---
 
 <BaseLayout
@@ -42,17 +56,15 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
         <p data-sb-field-path="safetyBody">{d.safetyBody}</p>
       </div>
 
-      <div class="stats-row" data-sb-field-path="safetyStats">
-        {d.safetyStats?.map((stat: any, i: number) => (
-          <div>
-            <IconCard
-              statHighlight={stat.value}
-              description={stat.description}
-              sourceUrl={stat.sourceUrl}
-              sourceLabel={stat.sourceLabel}
-              variant="stat"
-            />
-          </div>
+      <div class="stats-row">
+        {d.safetyStats.map((stat: any) => (
+          <IconCard
+            statHighlight={stat.value}
+            description={stat.description}
+            sourceUrl={stat.sourceUrl}
+            sourceLabel={stat.sourceLabel}
+            variant="stat"
+          />
         ))}
       </div>
     </div>
@@ -147,15 +159,15 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
       <div class="context-grid">
         <div class="context-content">
           <h3 data-sb-field-path="contextProblemHeading">{d.contextProblemHeading}</h3>
-          <div data-sb-field-path="contextProblemBody">
-            {contextProblemParagraphs.map((p: string) => <p>{p}</p>)}
-          </div>
+          <p data-sb-field-path="contextProblemBody1">{d.contextProblemBody1}</p>
+          <p data-sb-field-path="contextProblemBody2">{d.contextProblemBody2}</p>
+          <p data-sb-field-path="contextProblemBody3">{d.contextProblemBody3}</p>
         </div>
         <div class="context-content">
           <h3 data-sb-field-path="contextSolutionHeading">{d.contextSolutionHeading}</h3>
-          <div data-sb-field-path="contextSolutionBody">
-            {contextSolutionParagraphs.map((p: string) => <p>{p}</p>)}
-          </div>
+          <p data-sb-field-path="contextSolutionBody1">{d.contextSolutionBody1}</p>
+          <p data-sb-field-path="contextSolutionBody2">{d.contextSolutionBody2}</p>
+          <p data-sb-field-path="contextSolutionBody3">{d.contextSolutionBody3}</p>
         </div>
       </div>
     </div>
@@ -170,37 +182,33 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
         <p data-sb-field-path="economicBody">{d.economicBody}</p>
       </div>
 
-      <div class="research-highlight" data-sb-field-path="researchHighlights">
-        {d.researchHighlights?.map((stat: any, i: number) => (
-          <div>
-            <IconCard
-              statHighlight={stat.value}
-              description={stat.description}
-              sourceUrl={stat.sourceUrl}
-              sourceLabel={stat.sourceLabel}
-              variant="stat-highlight"
-            />
-          </div>
+      <div class="research-highlight">
+        {d.researchHighlights.map((stat: any) => (
+          <IconCard
+            statHighlight={stat.value}
+            description={stat.description}
+            sourceUrl={stat.sourceUrl}
+            sourceLabel={stat.sourceLabel}
+            variant="stat-highlight"
+          />
         ))}
       </div>
     </div>
   </section>
 
   <!-- Economic Pillars Section -->
-  <section class="section pillars-section" data-sb-object-id={sbId}>
+  <section class="section pillars-section">
     <div class="section-inner">
-      <div class="pillars-grid" data-sb-field-path="pillarCards">
-        {d.pillarCards?.map((card: any, i: number) => (
-          <div>
-            <IconCard
-              icon={card.icon}
-              title={card.title}
-              description={card.description}
-              stats={card.stats}
-              detail={card.detail}
-              variant="pillar"
-            />
-          </div>
+      <div class="pillars-grid">
+        {d.pillarCards.map((card: any, i: number) => (
+          <IconCard
+            icon={pillarIcons[i]}
+            title={card.title}
+            description={card.description}
+            stats={card.stats}
+            detail={card.detail}
+            variant="pillar"
+          />
         ))}
       </div>
     </div>
@@ -213,18 +221,16 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
         <h2 data-sb-field-path="evidenceHeading">{d.evidenceHeading}</h2>
         <p data-sb-field-path="evidenceBody">{d.evidenceBody}</p>
       </div>
-      <div class="evidence-grid" data-sb-field-path="evidenceCards">
-        {d.evidenceCards?.map((card: any, i: number) => (
-          <div>
-            <IconCard
-              title={card.title}
-              location={card.location}
-              stats={card.stats}
-              sourceUrl={card.sourceUrl}
-              sourceLabel={card.sourceLabel}
-              variant="evidence"
-            />
-          </div>
+      <div class="evidence-grid">
+        {d.evidenceCards.map((card: any) => (
+          <IconCard
+            title={card.title}
+            location={card.location}
+            stats={card.stats}
+            sourceUrl={card.sourceUrl}
+            sourceLabel={card.sourceLabel}
+            variant="evidence"
+          />
         ))}
       </div>
     </div>
@@ -239,18 +245,16 @@ const contextSolutionParagraphs: string[] = (d.contextSolutionBody || '').split(
         <p data-sb-field-path="qualityBody">{d.qualityBody}</p>
       </div>
 
-      <div class="quality-grid" data-sb-field-path="qualityCards">
-        {d.qualityCards?.map((card: any, i: number) => (
-          <div>
-            <IconCard
-              icon={card.icon}
-              title={card.title}
-              description={card.description}
-              sourceUrl={card.sourceUrl}
-              sourceLabel={card.sourceLabel}
-              variant="dark"
-            />
-          </div>
+      <div class="quality-grid">
+        {d.qualityCards.map((card: any, i: number) => (
+          <IconCard
+            icon={qualityIcons[i]}
+            title={card.title}
+            description={card.description}
+            sourceUrl={card.sourceUrl}
+            sourceLabel={card.sourceLabel}
+            variant="dark"
+          />
         ))}
       </div>
     </div>

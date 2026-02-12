@@ -32,9 +32,6 @@ const resourcesGeoJSON = {
 };
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
-
-const overviewParagraphs = (cd.overviewBody || '').split('\n\n').filter(Boolean);
-const greenwayParagraphs = (cd.greenwayBody || '').split('\n\n').filter(Boolean);
 ---
 
 <BaseLayout
@@ -90,19 +87,19 @@ const greenwayParagraphs = (cd.greenwayBody || '').split('\n\n').filter(Boolean)
       <div class="overview-grid">
         <div class="overview-content">
           <h2 data-sb-field-path="overviewHeading">{cd.overviewHeading}</h2>
-          {overviewParagraphs.map((paragraph: string) => (
-            <p>{paragraph}</p>
-          ))}
+          <p data-sb-field-path="overviewBody1">{cd.overviewBody1}</p>
+          <p data-sb-field-path="overviewBody2">{cd.overviewBody2}</p>
+          <p data-sb-field-path="overviewBody3">{cd.overviewBody3}</p>
         </div>
         <div class="overview-sidebar">
           <h3 data-sb-field-path="sidebarTitle">{cd.sidebarTitle}</h3>
-          <div class="corridor-stats" data-sb-field-path="corridorStats">
-            {cd.corridorStats?.map((stat: any, i: number) => (
-              <div class="stat-item">
-                <span class="stat-label">{stat.label}</span>
-                <span class="stat-value">{stat.value}</span>
-              </div>
-            ))}
+          <div class="corridor-stats">
+            <div class="stat-item"><span class="stat-label">Total Length</span><span class="stat-value" data-sb-field-path="statTotalLength">{cd.statTotalLength}</span></div>
+            <div class="stat-item"><span class="stat-label">Existing Scenic Highway</span><span class="stat-value" data-sb-field-path="statExistingHighway">{cd.statExistingHighway}</span></div>
+            <div class="stat-item"><span class="stat-label">Northeast Extension</span><span class="stat-value" data-sb-field-path="statNortheastExtension">{cd.statNortheastExtension}</span></div>
+            <div class="stat-item"><span class="stat-label">Southwest Extension</span><span class="stat-value" data-sb-field-path="statSouthwestExtension">{cd.statSouthwestExtension}</span></div>
+            <div class="stat-item"><span class="stat-label">Intrinsic Resources</span><span class="stat-value" data-sb-field-path="statIntrinsicResources">{cd.statIntrinsicResources}</span></div>
+            <div class="stat-item"><span class="stat-label">Designation</span><span class="stat-value" data-sb-field-path="statDesignation">{cd.statDesignation}</span></div>
           </div>
         </div>
       </div>
@@ -113,9 +110,9 @@ const greenwayParagraphs = (cd.greenwayBody || '').split('\n\n').filter(Boolean)
     <div class="section-inner">
       <div class="greenway-content">
         <h2 data-sb-field-path="greenwayHeading">{cd.greenwayHeading}</h2>
-        {greenwayParagraphs.map((paragraph: string) => (
-          <p>{paragraph}</p>
-        ))}
+        <p data-sb-field-path="greenwayBody1">{cd.greenwayBody1}</p>
+        <p data-sb-field-path="greenwayBody2">{cd.greenwayBody2}</p>
+        <p data-sb-field-path="greenwayBody3">{cd.greenwayBody3}</p>
       </div>
     </div>
   </section>
@@ -141,10 +138,9 @@ const greenwayParagraphs = (cd.greenwayBody || '').split('\n\n').filter(Boolean)
             class="resource-card"
             data-qualities={resource.data.qualities.join(',')}
             data-index={index}
-            data-sb-object-id={`src/content/resources/${resource.id}.json`}
           >
-            <h3 data-sb-field-path="name">{resource.data.name}</h3>
-            <p data-sb-field-path="description">{resource.data.description}</p>
+            <h3>{resource.data.name}</h3>
+            <p>{resource.data.description}</p>
             <div class="resource-qualities">
               {resource.data.qualities.map(q => <span class="quality-tag">{q}</span>)}
             </div>
