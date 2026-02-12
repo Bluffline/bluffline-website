@@ -69,9 +69,6 @@ const pressReleasesCollection = defineCollection({
     contactEmail: z.string().email().optional(),
     contactPhone: z.string().optional(),
     draft: z.boolean().default(false),
-    featuredImage: z.string().optional(),
-    featuredImageAlt: z.string().optional(),
-    gallery: z.array(z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() })).optional(),
   }),
 });
 

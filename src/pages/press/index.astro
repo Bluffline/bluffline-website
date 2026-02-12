@@ -135,13 +135,13 @@ const assetTabs = [
 
         <!-- Media Kit Panel -->
         <div data-tab-panel="media-kit" hidden>
-          <div class="media-kit-intro" data-sb-object-id={sbId}>
-            <p data-sb-field-path="mediaKitIntro">{pd.mediaKitIntro}</p>
+          <div class="media-kit-intro">
+            <p>Download official Bluffline assets for media use. All materials are free to use with proper attribution.</p>
           </div>
 
           <!-- Boilerplate Section -->
-          <div class="media-kit-section" data-sb-object-id={sbId}>
-            <h3 class="media-kit-section-title" data-sb-field-path="mediaKitAboutTitle">{pd.mediaKitAboutTitle}</h3>
+          <div class="media-kit-section">
+            <h3 class="media-kit-section-title">About the Bluffline</h3>
             <div class="boilerplate-card">
               <div class="boilerplate" data-sb-object-id={sbId}>
                 <p data-sb-field-path="boilerplate">{pd.boilerplate}</p>
@@ -159,9 +159,9 @@ const assetTabs = [
           </div>
 
           <!-- Assets Section with Sub-tabs -->
-          <div class="media-kit-section" data-sb-object-id={sbId}>
-            <h3 class="media-kit-section-title" data-sb-field-path="mediaKitAssetsTitle">{pd.mediaKitAssetsTitle}</h3>
-            <p class="media-kit-section-desc" data-sb-field-path="mediaKitAssetsDescription">{pd.mediaKitAssetsDescription}</p>
+          <div class="media-kit-section">
+            <h3 class="media-kit-section-title">Assets</h3>
+            <p class="media-kit-section-desc">High-quality media assets for editorial and promotional use.</p>
 
             <Tabs id="assets" tabs={assetTabs} defaultTab="logos" variant="pills">
               <!-- Logos Panel -->
@@ -358,10 +358,10 @@ const assetTabs = [
           </div>
 
           <!-- Media Contact Section -->
-          <div class="media-kit-section" data-sb-object-id={sbId}>
-            <h3 class="media-kit-section-title" data-sb-field-path="mediaKitContactTitle">{pd.mediaKitContactTitle}</h3>
+          <div class="media-kit-section">
+            <h3 class="media-kit-section-title">Media Contact</h3>
             <div class="contact-card">
-              <p data-sb-field-path="mediaKitContactDescription">{pd.mediaKitContactDescription}</p>
+              <p>For press inquiries, interviews, or additional information:</p>
               <div class="contact-info">
                 <div class="contact-item" data-sb-object-id={sbId}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
