@@ -9,18 +9,70 @@
   "grantAmountLabel": "Federal Grant",
   "milestonesHeading": "Project Milestones",
   "milestones": [
-    { "title": "Reconnecting Communities Grant Awarded", "description": "$1.2M from U.S. DOT", "date": "Jan 2025", "status": "complete" },
-    { "title": "Master Planning Phase Begins", "description": "Community engagement kickoff", "date": "Q2 2025", "status": "current" },
-    { "title": "Corridor Extension Application", "description": "Southwest extension to Jackson Lakes", "date": "2024", "status": "complete" },
-    { "title": "Scenic Highway Merger", "description": "Unified organization established", "date": "Jul 2024", "status": "complete" },
-    { "title": "Feasibility Studies Complete", "description": "Preliminary engineering", "date": "Q4 2025", "status": "upcoming" },
-    { "title": "Capital Campaign Launch", "description": "Construction funding initiative", "date": "2026", "status": "upcoming" }
+    {
+      "type": "Milestone",
+      "title": "Reconnecting Communities Grant Awarded",
+      "description": "$1.2M from U.S. DOT",
+      "date": "Jan 2025",
+      "status": "complete"
+    },
+    {
+      "type": "Milestone",
+      "title": "Master Planning Phase Begins",
+      "description": "Community engagement kickoff",
+      "date": "Q2 2025",
+      "status": "current"
+    },
+    {
+      "type": "Milestone",
+      "title": "Corridor Extension Application",
+      "description": "Southwest extension to Jackson Lakes",
+      "date": "2024",
+      "status": "complete"
+    },
+    {
+      "type": "Milestone",
+      "title": "Scenic Highway Merger",
+      "description": "Unified organization established",
+      "date": "Jul 2024",
+      "status": "complete"
+    },
+    {
+      "type": "Milestone",
+      "title": "Feasibility Studies Complete",
+      "description": "Preliminary engineering",
+      "date": "Q4 2025",
+      "status": "upcoming"
+    },
+    {
+      "type": "Milestone",
+      "title": "Capital Campaign Launch",
+      "description": "Construction funding initiative",
+      "date": "2026",
+      "status": "upcoming"
+    }
   ],
   "phases": [
-    { "label": "Grant Awarded", "status": "complete" },
-    { "label": "Master Planning", "status": "current" },
-    { "label": "Feasibility Studies", "status": "upcoming" },
-    { "label": "Capital Campaign", "status": "upcoming" }
+    {
+      "type": "Phase",
+      "label": "Grant Awarded",
+      "status": "complete"
+    },
+    {
+      "type": "Phase",
+      "label": "Master Planning",
+      "status": "current"
+    },
+    {
+      "type": "Phase",
+      "label": "Feasibility Studies",
+      "status": "upcoming"
+    },
+    {
+      "type": "Phase",
+      "label": "Capital Campaign",
+      "status": "upcoming"
+    }
   ],
   "updatesHeading": "Latest Updates",
   "ctaTitle": "Stay in the loop",

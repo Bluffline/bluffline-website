@@ -7,12 +7,36 @@
   "overviewBody": "The Bluffline corridor follows a distinctive geological formation that has shaped the region's geography and cultural identity for centuries. While today's bluffs rise prominently along north Escambia Bay, historical mapping shows that this bluff system once continued westward through downtown Pensacola to Naval Air Station Pensacola.\n\nIn 2024, the Bluffline merged with the Scenic Highway Foundation, becoming the managing organization for the Pensacola Scenic Bluffs Highway. This partnership united two complementary visions: the scenic highway's focus on preservation and interpretation with the Bluffline's mission to create safe, connected multimodal infrastructure.\n\nThe corridor we envision today extends the existing scenic highway in both directions—northeast to the University of West Florida and southwest through downtown Pensacola to NAS Pensacola—restoring interpretive continuity to the full historic bluff system.",
   "sidebarTitle": "Corridor at a Glance",
   "corridorStats": [
-    { "label": "Total Length", "value": "~22 miles" },
-    { "label": "Existing Scenic Highway", "value": "~11 miles" },
-    { "label": "Northeast Extension", "value": "~3.35 miles" },
-    { "label": "Southwest Extension", "value": "~7.75 miles" },
-    { "label": "Intrinsic Resources", "value": "27+ sites" },
-    { "label": "Designation", "value": "FL Scenic Highway" }
+    {
+      "type": "CorridorStat",
+      "label": "Total Length",
+      "value": "~22 miles"
+    },
+    {
+      "type": "CorridorStat",
+      "label": "Existing Scenic Highway",
+      "value": "~11 miles"
+    },
+    {
+      "type": "CorridorStat",
+      "label": "Northeast Extension",
+      "value": "~3.35 miles"
+    },
+    {
+      "type": "CorridorStat",
+      "label": "Southwest Extension",
+      "value": "~7.75 miles"
+    },
+    {
+      "type": "CorridorStat",
+      "label": "Intrinsic Resources",
+      "value": "27+ sites"
+    },
+    {
+      "type": "CorridorStat",
+      "label": "Designation",
+      "value": "FL Scenic Highway"
+    }
   ],
   "greenwayHeading": "The greenway within the corridor",
   "greenwayBody": "Within this scenic highway corridor, the Bluffline is advancing a multimodal greenway—a network of trails, protected bike lanes, and water transit connections that will provide safe, car-free access to the waterfront and the resources along it.\n\nThe greenway vision utilizes abandoned rail corridors, utility rights-of-way, and existing public land to create continuous connections. Where the scenic highway provides the framework for preservation and interpretation, the greenway provides the infrastructure for access and mobility.\n\nThis is transportation infrastructure that also serves as access to nature—a corridor that connects people to their environment, to economic opportunity, and to each other.",
