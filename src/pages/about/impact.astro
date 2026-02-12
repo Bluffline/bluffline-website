@@ -200,16 +200,22 @@ const qualityIcons = [
   <section class="section pillars-section">
     <div class="section-inner">
       <div class="pillars-grid">
-        {d.pillarCards.map((card: any, i: number) => (
-          <IconCard
-            icon={pillarIcons[i]}
-            title={card.title}
-            description={card.description}
-            stats={card.stats}
-            detail={card.detail}
-            variant="pillar"
-          />
-        ))}
+        {d.pillarCards.map((card: any, i: number) => {
+          const stats = [
+            card.stat1Value && { value: card.stat1Value, label: card.stat1Label, sourceUrl: card.stat1SourceUrl, sourceLabel: card.stat1SourceLabel },
+            card.stat2Value && { value: card.stat2Value, label: card.stat2Label, sourceUrl: card.stat2SourceUrl, sourceLabel: card.stat2SourceLabel },
+          ].filter(Boolean);
+          return (
+            <IconCard
+              icon={pillarIcons[i]}
+              title={card.title}
+              description={card.description}
+              stats={stats}
+              detail={card.detail}
+              variant="pillar"
+            />
+          );
+        })}
       </div>
     </div>
   </section>
@@ -222,16 +228,23 @@ const qualityIcons = [
         <p data-sb-field-path="evidenceBody">{d.evidenceBody}</p>
       </div>
       <div class="evidence-grid">
-        {d.evidenceCards.map((card: any) => (
-          <IconCard
-            title={card.title}
-            location={card.location}
-            stats={card.stats}
-            sourceUrl={card.sourceUrl}
-            sourceLabel={card.sourceLabel}
-            variant="evidence"
-          />
-        ))}
+        {d.evidenceCards.map((card: any) => {
+          const stats = [
+            card.stat1Value && { value: card.stat1Value, description: card.stat1Description },
+            card.stat2Value && { value: card.stat2Value, description: card.stat2Description },
+            card.stat3Value && { value: card.stat3Value, description: card.stat3Description },
+          ].filter(Boolean);
+          return (
+            <IconCard
+              title={card.title}
+              location={card.location}
+              stats={stats}
+              sourceUrl={card.sourceUrl}
+              sourceLabel={card.sourceLabel}
+              variant="evidence"
+            />
+          );
+        })}
       </div>
     </div>
   </section>
