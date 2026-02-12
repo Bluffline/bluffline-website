@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CallToAction from '../../components/ui/CallToAction.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const releases = await getCollection('press-releases');
+  return releases.map(release => ({
+    params: { slug: release.slug },
+    props: { release },
+  }));
+}
+
+const { release } = Astro.props;
+const { Content } = await release.render();
+
+const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={release.data.title} description={release.data.summary}>
+  <article data-sb-object-id={`src/content/press-releases/${release.slug}.md`}>
+    <header class="article-header">
+      <div class="article-header-inner">
+        <a href="/press#releases" class="article-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          All Press Releases
+        </a>
+        <div class="release-meta">
+          <span class="release-label">Press Release</span>
+          <span class="release-date" data-sb-field-path="pubDate">{formattedDate}</span>
+        </div>
+        <h1 data-sb-field-path="title">{release.data.title}</h1>
+        <p class="article-subtitle" data-sb-field-path="summary">{release.data.summary}</p>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <div class="article-content" data-sb-field-path="body">
+        <Content />
+
+        {(release.data.contactName || release.data.contactEmail || release.data.contactPhone) && (
+          <div class="contact-box">
+            <h4>Media Contact</h4>
+            {release.data.contactName && <p class="contact-name">{release.data.contactName}</p>}
+            {release.data.contactEmail && (
+              <p><a href={`mailto:${release.data.contactEmail}`}>{release.data.contactEmail}</a></p>
+            )}
+            {release.data.contactPhone && <p>{release.data.contactPhone}</p>}
+          </div>
+        )}
+      </div>
+    </div>
+  </article>
+
+  <CallToAction
+    title="Get involved in the planning process"
+    description="Community participation directly shapes outcomes. Sign up to receive updates about public meetings, workshops, and opportunities to provide input."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+  />
+</BaseLayout>
+
+<style>
+  .article-header {
+    background: var(--cream);
+    padding: 3rem 1.5rem;
+    margin-top: calc(73px + var(--banner-height, 0px));
+  }
+
+  @media (min-width: 768px) {
+    .article-header {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .article-header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    transition: gap 0.2s ease;
+  }
+
+  .article-back:hover {
+    gap: 0.75rem;
+  }
+
+  .article-back svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .release-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .release-label {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--forest);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+  }
+
+  .release-date {
+    font-size: 0.9rem;
+    color: rgba(45, 48, 71, 0.6);
+  }
+
+  .article-header h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .article-subtitle {
+    font-size: 1.15rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+  }
+
+  .article-body {
+    padding: 3rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .article-body {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .article-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .article-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .article-content :global(h2) {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--navy);
+  }
+
+  .article-content :global(h3) {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--navy);
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .article-content :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+
+  .article-content :global(strong) {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .article-content :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+    margin: 2.5rem 0;
+  }
+
+  .article-content :global(em) {
+    font-style: italic;
+  }
+
+  .contact-box {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--mist);
+    border-radius: 12px;
+  }
+
+  .contact-box h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-box p {
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-box .contact-name {
+    font-weight: 500;
+    color: var(--navy);
+  }
+
+  .contact-box a {
+    color: var(--forest);
+    text-decoration: none;
+  }
+
+  .contact-box a:hover {
+    text-decoration: underline;
+  }
+</style>
