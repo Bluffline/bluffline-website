@@ -3,30 +3,34 @@ interface Props {
   label?: string;
   title: string;
   description?: string;
+  sbObjectId?: string;
+  labelFieldPath?: string;
+  titleFieldPath?: string;
+  descriptionFieldPath?: string;
 }
 
-const { label, title, description } = Astro.props;
+const { label, title, description, sbObjectId, labelFieldPath, titleFieldPath, descriptionFieldPath } = Astro.props;
 ---
 
-<section class="page-hero">
+<section class="page-hero" data-sb-object-id={sbObjectId}>
   <div class="page-hero-inner">
-    {label && <p class="section-label">{label}</p>}
-    <h1>{title}</h1>
-    {description && <p>{description}</p>}
+    {label && <p class="section-label" data-sb-field-path={labelFieldPath}>{label}</p>}
+    <h1 data-sb-field-path={titleFieldPath}>{title}</h1>
+    {description && <p data-sb-field-path={descriptionFieldPath}>{description}</p>}
     <slot />
   </div>
 </section>
 
 <style>
   .page-hero {
-    padding: 8rem 1.5rem 4rem;
+    padding: calc(8rem + var(--banner-height, 0px)) 1.5rem 4rem;
     background: linear-gradient(135deg, var(--mist) 0%, var(--cream) 100%);
     position: relative;
   }
 
   @media (min-width: 768px) {
     .page-hero {
-      padding: 10rem 3rem 5rem;
+      padding: calc(10rem + var(--banner-height, 0px)) 3rem 5rem;
     }
   }
 

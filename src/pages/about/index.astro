@@ -7,7 +7,11 @@ import IconCard from '../../components/content/IconCard.astro';
 import DocumentCard from '../../components/content/DocumentCard.astro';
 import TimelineItem from '../../components/content/TimelineItem.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'about');
+const d = page.data;
+const sbId = 'src/content/pages/about.json';
 
 const boardMembers = await getCollection('board-members');
 const timelineEntries = await getCollection('timeline');
@@ -78,26 +82,30 @@ const documents = [
   description="The story of the Bluffline — six decades of advocacy, a historic merger, and a bold vision for Pensacola's multimodal future."
 >
   <PageHero
-    label="About"
-    title="Six decades of advocacy. One transformative vision."
-    description="The Bluffline is the product of generations of residents who believed Pensacola deserved better connections to its waterfront, its neighborhoods, and its natural landscape."
+    label={d.heroLabel}
+    title={d.heroTitle}
+    description={d.heroDescription}
+    sbObjectId={sbId}
+    labelFieldPath="heroLabel"
+    titleFieldPath="heroTitle"
+    descriptionFieldPath="heroDescription"
   />
 
-  <section class="section purpose-section">
+  <section class="section purpose-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="purpose-content">
-        <p class="purpose-statement">We exist to help Pensacola residents reconnect with their bodies, their environment, and each other.</p>
-        <p>That purpose drives everything we do—from the infrastructure we build to the policies we advocate for to the way we engage with the communities we serve. We believe that safe, accessible paths for walking and cycling aren't luxuries. They're essential infrastructure for healthy, thriving neighborhoods.</p>
-        <p>Our vision is a Pensacola where all our neighbors have access to safe active transit infrastructure, attainable workforce housing, economic opportunity, and a healthy environment. The Bluffline is how we get there.</p>
+        <p class="purpose-statement" data-sb-field-path="purposeStatement">{d.purposeStatement}</p>
+        <p data-sb-field-path="purposeBody1">{d.purposeBody1}</p>
+        <p data-sb-field-path="purposeBody2">{d.purposeBody2}</p>
       </div>
     </div>
   </section>
 
-  <section class="section history-section">
+  <section class="section history-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="section-header">
-        <h2>A Vision Six Decades in the Making</h2>
-        <p>The idea of connecting Pensacola's bluffs to the bay isn't new. For generations, advocates have championed this corridor—through newspaper editorials, planning studies, and grassroots organizing.</p>
+        <h2 data-sb-field-path="historyHeading">{d.historyHeading}</h2>
+        <p data-sb-field-path="historyDescription">{d.historyDescription}</p>
       </div>
       <div class="timeline">
         {sortedTimeline.map((entry) => (
@@ -107,45 +115,46 @@ const documents = [
             description={entry.data.description}
             images={entry.data.images}
             entryId={entry.id}
+            sbObjectId={`src/content/timeline/${entry.id}.json`}
           />
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section merger-section">
+  <section class="section merger-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="merger-grid">
         <div class="merger-content">
-          <h2>The 2024 Merger: Taking the Baton</h2>
-          <p>In 2024, the Pensacola Scenic Highway Foundation—stewards of the scenic byway since its designation—merged with Bluffline, Inc. This wasn't an acquisition. It was a passing of the torch.</p>
-          <p>The Foundation's leadership recognized that the corridor's future required an organization focused not just on preservation, but on building new infrastructure. By joining forces, we combined decades of institutional knowledge with fresh momentum and a clear multimodal mission.</p>
-          <p>Today, Bluffline, Inc. serves as the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Scenic Highway—and the driving force behind the 20-mile greenway that will finally connect NAS Pensacola to UWF.</p>
+          <h2 data-sb-field-path="mergerHeading">{d.mergerHeading}</h2>
+          <p data-sb-field-path="mergerBody1">{d.mergerBody1}</p>
+          <p data-sb-field-path="mergerBody2">{d.mergerBody2}</p>
+          <p data-sb-field-path="mergerBody3">{d.mergerBody3}</p>
         </div>
         <div class="merger-highlight">
-          <h3>What the Merger Means</h3>
+          <h3 data-sb-field-path="mergerHighlightTitle">{d.mergerHighlightTitle}</h3>
           <div class="merger-stat">
-            <div class="merger-stat-value">16+ years</div>
-            <div class="merger-stat-label">of scenic highway stewardship transferred</div>
+            <div class="merger-stat-value" data-sb-field-path="mergerStat1Value">{d.mergerStat1Value}</div>
+            <div class="merger-stat-label" data-sb-field-path="mergerStat1Label">{d.mergerStat1Label}</div>
           </div>
           <div class="merger-stat">
-            <div class="merger-stat-value">One organization</div>
-            <div class="merger-stat-label">for preservation and construction</div>
+            <div class="merger-stat-value" data-sb-field-path="mergerStat2Value">{d.mergerStat2Value}</div>
+            <div class="merger-stat-label" data-sb-field-path="mergerStat2Label">{d.mergerStat2Label}</div>
           </div>
           <div class="merger-stat">
-            <div class="merger-stat-value">Unified voice</div>
-            <div class="merger-stat-label">for the corridor's future</div>
+            <div class="merger-stat-value" data-sb-field-path="mergerStat3Value">{d.mergerStat3Value}</div>
+            <div class="merger-stat-label" data-sb-field-path="mergerStat3Label">{d.mergerStat3Label}</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section values-section">
+  <section class="section values-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="section-header">
-        <h2>Our Values</h2>
-        <p>These principles guide every decision we make—from how we engage with communities to how we steward public resources.</p>
+        <h2 data-sb-field-path="valuesHeading">{d.valuesHeading}</h2>
+        <p data-sb-field-path="valuesDescription">{d.valuesDescription}</p>
       </div>
       <div class="values-grid">
         {values.map(value => (
@@ -159,11 +168,11 @@ const documents = [
     </div>
   </section>
 
-  <section class="section leadership-section">
+  <section class="section leadership-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="section-header">
-        <h2>Board & Leadership</h2>
-        <p>Bluffline, Inc. is governed by a volunteer board of directors who bring expertise in finance, law, environmental stewardship, and community engagement.</p>
+        <h2 data-sb-field-path="leadershipHeading">{d.leadershipHeading}</h2>
+        <p data-sb-field-path="leadershipDescription">{d.leadershipDescription}</p>
       </div>
       <div class="leadership-grid">
         {activeMembers.map((member) => (
@@ -173,6 +182,7 @@ const documents = [
             role={member.data.role}
             bio={member.data.bio}
             photo={member.data.photo}
+            sbObjectId={`src/content/board-members/${member.id}.json`}
           />
         ))}
       </div>
@@ -180,8 +190,8 @@ const documents = [
       {emeritusMembers.length > 0 && (
         <div class="emeritus-section">
           <div class="emeritus-header">
-            <h3>Founders & Emeritus</h3>
-            <p>We honor those whose vision and early leadership made Bluffline, Inc. possible.</p>
+            <h3 data-sb-field-path="emeritusHeading">{d.emeritusHeading}</h3>
+            <p data-sb-field-path="emeritusDescription">{d.emeritusDescription}</p>
           </div>
           <div class="emeritus-grid">
             {emeritusMembers.map((member) => (
@@ -191,6 +201,7 @@ const documents = [
                 role={member.data.role}
                 bio={member.data.bio}
                 photo={member.data.photo}
+                sbObjectId={`src/content/board-members/${member.id}.json`}
               />
             ))}
           </div>
@@ -199,11 +210,11 @@ const documents = [
     </div>
   </section>
 
-  <section class="section documents-section">
+  <section class="section documents-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="section-header">
-        <h2>Documents & Transparency</h2>
-        <p>Transparency is one of our core values. Here you'll find our public accountability documents and organizational filings.</p>
+        <h2 data-sb-field-path="documentsHeading">{d.documentsHeading}</h2>
+        <p data-sb-field-path="documentsDescription">{d.documentsDescription}</p>
       </div>
       <div class="documents-grid">
         {documents.map(doc => (
@@ -220,10 +231,13 @@ const documents = [
   </section>
 
   <CallToAction
-    title="Explore the corridor"
-    description="See the full route connecting NAS Pensacola to UWF—and the diverse cultural, historical, and natural resources along the way."
+    title={d.ctaTitle}
+    description={d.ctaDescription}
     primaryLabel="View the Corridor"
     primaryHref="/about/corridor"
+    sbObjectId={sbId}
+    titleFieldPath="ctaTitle"
+    descriptionFieldPath="ctaDescription"
   />
 
   <MediaLightbox />

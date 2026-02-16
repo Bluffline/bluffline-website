@@ -1,11 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 
 import scenicHighwayData from '../../data/scenic-highway.json';
 import planningCorridorData from '../../data/planning-corridor.json';
+
+const page = await getEntry('pages', 'corridor');
+const cd = page.data;
+const sbId = 'src/content/pages/corridor.json';
 
 const resources = await getCollection('resources');
 
@@ -35,9 +39,13 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   description="A scenic corridor tracing Pensacola's historic bay bluffs—connecting neighborhoods, natural areas, and cultural landmarks from NAS Pensacola to UWF."
 >
   <PageHero
-    label="The Corridor"
-    title="From the University of West Florida to Naval Air Station Pensacola"
-    description="A scenic corridor tracing Pensacola's historic bay bluffs—connecting neighborhoods, natural areas, and cultural landmarks through a unified multimodal vision."
+    label={cd.heroLabel}
+    title={cd.heroTitle}
+    description={cd.heroDescription}
+    sbObjectId={sbId}
+    labelFieldPath="heroLabel"
+    titleFieldPath="heroTitle"
+    descriptionFieldPath="heroDescription"
   />
 
   <section class="map-section">
@@ -74,46 +82,46 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     </div>
   </section>
 
-  <section class="section overview-section">
+  <section class="section overview-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="overview-grid">
         <div class="overview-content">
-          <h2>A unified vision for Pensacola's waterfront</h2>
-          <p>The Bluffline corridor follows a distinctive geological formation that has shaped the region's geography and cultural identity for centuries. While today's bluffs rise prominently along north Escambia Bay, historical mapping shows that this bluff system once continued westward through downtown Pensacola to Naval Air Station Pensacola.</p>
-          <p>In 2024, the Bluffline merged with the Scenic Highway Foundation, becoming the managing organization for the Pensacola Scenic Bluffs Highway. This partnership united two complementary visions: the scenic highway's focus on preservation and interpretation with the Bluffline's mission to create safe, connected multimodal infrastructure.</p>
-          <p>The corridor we envision today extends the existing scenic highway in both directions—northeast to the University of West Florida and southwest through downtown Pensacola to NAS Pensacola—restoring interpretive continuity to the full historic bluff system.</p>
+          <h2 data-sb-field-path="overviewHeading">{cd.overviewHeading}</h2>
+          <p data-sb-field-path="overviewBody1">{cd.overviewBody1}</p>
+          <p data-sb-field-path="overviewBody2">{cd.overviewBody2}</p>
+          <p data-sb-field-path="overviewBody3">{cd.overviewBody3}</p>
         </div>
         <div class="overview-sidebar">
-          <h3>Corridor at a Glance</h3>
+          <h3 data-sb-field-path="sidebarTitle">{cd.sidebarTitle}</h3>
           <div class="corridor-stats">
-            <div class="stat-item"><span class="stat-label">Total Length</span><span class="stat-value">~22 miles</span></div>
-            <div class="stat-item"><span class="stat-label">Existing Scenic Highway</span><span class="stat-value">~11 miles</span></div>
-            <div class="stat-item"><span class="stat-label">Northeast Extension</span><span class="stat-value">~3.35 miles</span></div>
-            <div class="stat-item"><span class="stat-label">Southwest Extension</span><span class="stat-value">~7.75 miles</span></div>
-            <div class="stat-item"><span class="stat-label">Intrinsic Resources</span><span class="stat-value">27+ sites</span></div>
-            <div class="stat-item"><span class="stat-label">Designation</span><span class="stat-value">FL Scenic Highway</span></div>
+            <div class="stat-item"><span class="stat-label">Total Length</span><span class="stat-value" data-sb-field-path="statTotalLength">{cd.statTotalLength}</span></div>
+            <div class="stat-item"><span class="stat-label">Existing Scenic Highway</span><span class="stat-value" data-sb-field-path="statExistingHighway">{cd.statExistingHighway}</span></div>
+            <div class="stat-item"><span class="stat-label">Northeast Extension</span><span class="stat-value" data-sb-field-path="statNortheastExtension">{cd.statNortheastExtension}</span></div>
+            <div class="stat-item"><span class="stat-label">Southwest Extension</span><span class="stat-value" data-sb-field-path="statSouthwestExtension">{cd.statSouthwestExtension}</span></div>
+            <div class="stat-item"><span class="stat-label">Intrinsic Resources</span><span class="stat-value" data-sb-field-path="statIntrinsicResources">{cd.statIntrinsicResources}</span></div>
+            <div class="stat-item"><span class="stat-label">Designation</span><span class="stat-value" data-sb-field-path="statDesignation">{cd.statDesignation}</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section greenway-section">
+  <section class="section greenway-section" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="greenway-content">
-        <h2>The greenway within the corridor</h2>
-        <p>Within this scenic highway corridor, the Bluffline is advancing a multimodal greenway—a network of trails, protected bike lanes, and water transit connections that will provide safe, car-free access to the waterfront and the resources along it.</p>
-        <p>The greenway vision utilizes abandoned rail corridors, utility rights-of-way, and existing public land to create continuous connections. Where the scenic highway provides the framework for preservation and interpretation, the greenway provides the infrastructure for access and mobility.</p>
-        <p>This is transportation infrastructure that also serves as access to nature—a corridor that connects people to their environment, to economic opportunity, and to each other.</p>
+        <h2 data-sb-field-path="greenwayHeading">{cd.greenwayHeading}</h2>
+        <p data-sb-field-path="greenwayBody1">{cd.greenwayBody1}</p>
+        <p data-sb-field-path="greenwayBody2">{cd.greenwayBody2}</p>
+        <p data-sb-field-path="greenwayBody3">{cd.greenwayBody3}</p>
       </div>
     </div>
   </section>
 
   <section class="section resources-section" id="resources">
     <div class="section-inner">
-      <div class="section-header">
-        <h2>Intrinsic resources</h2>
-        <p>The corridor connects a diverse collection of cultural, historical, archaeological, recreational, natural, and scenic resources—assets that make this corridor unique and worth protecting.</p>
+      <div class="section-header" data-sb-object-id={sbId}>
+        <h2 data-sb-field-path="resourcesHeading">{cd.resourcesHeading}</h2>
+        <p data-sb-field-path="resourcesDescription">{cd.resourcesDescription}</p>
       </div>
       <div class="filter-controls">
         <button class="filter-btn active" data-filter="all">All</button>
@@ -149,11 +157,14 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   </section>
 
   <CallToAction
-    title="See our progress"
-    description="From federal grants to community engagement—track how the Bluffline is moving from vision to reality."
+    title={cd.ctaTitle}
+    description={cd.ctaDescription}
     primaryLabel="View Progress"
     primaryHref="/progress"
     variant="mist"
+    sbObjectId={sbId}
+    titleFieldPath="ctaTitle"
+    descriptionFieldPath="ctaDescription"
   />
 </BaseLayout>
 

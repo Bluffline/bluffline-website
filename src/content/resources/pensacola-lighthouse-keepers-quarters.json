@@ -1,7 +1,11 @@
 {
+  "type": "Resource",
   "name": "Pensacola Lighthouse & Keepers Quarters",
   "description": "Completed in 1859, the 150-foot lighthouse features its original first-order Fresnel lens. Visitors can climb 177 steps for panoramic views of Pensacola Pass, the Gulf, and surrounding forts.",
-  "qualities": ["Historical", "Scenic"],
+  "qualities": [
+    "Historical",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.3455555556,
     "lng": -87.3080555556

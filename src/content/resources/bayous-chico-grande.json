@@ -1,7 +1,12 @@
 {
+  "type": "Resource",
   "name": "Bayous Chico & Grande",
   "description": "Major tidal bayous framing the western approach to NAS Pensacola. Bayou Chico features marinas and ecological restoration zones, while Bayou Grande retains natural marshes, maritime forests, and sand beaches.",
-  "qualities": ["Recreational", "Natural", "Scenic"],
+  "qualities": [
+    "Recreational",
+    "Natural",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.38819725,
     "lng": -87.2739478

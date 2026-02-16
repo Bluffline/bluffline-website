@@ -1,4 +1,5 @@
 ---
+type: PressRelease
 title: "Bluffline Awarded $1.2 Million Federal Grant for Escambia Bay Waterfront Access Study"
 pubDate: 2025-01-15
 summary: "The U.S. Department of Transportation has awarded Bluffline, Inc. a $1.2 million grant to conduct a comprehensive waterfront access study along Escambia Bay."

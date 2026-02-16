@@ -1,7 +1,13 @@
 {
+  "type": "Resource",
   "name": "Fountain Park and Seville Square",
   "description": "Neighboring parks including the 1-acre Fountain Park with decorative fountain and Seville Square, originally a 1752 Spanish outpost. Hosts major festivals including Pensacola JazzFest, Seafood Festival, and Great Gulfcoast Arts Festival.",
-  "qualities": ["Cultural", "Historical", "Recreational", "Scenic"],
+  "qualities": [
+    "Cultural",
+    "Historical",
+    "Recreational",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.4093649,
     "lng": -87.2094146

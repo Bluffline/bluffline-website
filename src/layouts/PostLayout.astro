@@ -10,9 +10,10 @@ interface Props {
   authorTitle?: string;
   featuredImage?: string;
   featuredImageAlt?: string;
+  sbObjectId?: string;
 }
 
-const { title, description, pubDate, author, authorTitle, featuredImage, featuredImageAlt } = Astro.props;
+const { title, description, pubDate, author, authorTitle, featuredImage, featuredImageAlt, sbObjectId } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -24,10 +25,10 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
 ---
 
 <BaseLayout title={title} description={description}>
-  <article>
+  <article data-sb-object-id={sbObjectId}>
     {featuredImage && (
       <div class="article-featured-image">
-        <img src={featuredImage} alt={featuredImageAlt || ''} />
+        <img src={featuredImage} alt={featuredImageAlt || ''} data-sb-field-path="featuredImage" />
       </div>
     )}
 
@@ -39,22 +40,22 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
           </svg>
           All Updates
         </a>
-        <p class="article-date">{formattedDate}</p>
-        <h1>{title}</h1>
-        {description && <p class="article-subtitle">{description}</p>}
+        <p class="article-date" data-sb-field-path="pubDate">{formattedDate}</p>
+        <h1 data-sb-field-path="title">{title}</h1>
+        {description && <p class="article-subtitle" data-sb-field-path="description">{description}</p>}
       </div>
     </header>
 
     <div class="article-body">
-      <div class="article-content">
+      <div class="article-content" data-sb-field-path="body">
         <slot />
 
         {author && (
           <div class="article-author">
             <div class="author-avatar">{authorInitials}</div>
             <div>
-              <p class="author-name">{author}</p>
-              {authorTitle && <p class="author-title">{authorTitle}</p>}
+              <p class="author-name" data-sb-field-path="author">{author}</p>
+              {authorTitle && <p class="author-title" data-sb-field-path="authorTitle">{authorTitle}</p>}
             </div>
           </div>
         )}
@@ -76,7 +77,7 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
     height: 40vh;
     min-height: 300px;
     max-height: 500px;
-    margin-top: 73px;
+    margin-top: calc(73px + var(--banner-height, 0px));
     overflow: hidden;
   }
 

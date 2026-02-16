@@ -3,8 +3,9 @@ import { z, defineCollection } from 'astro:content';
 const updatesCollection = defineCollection({
   type: 'content',
   schema: z.object({
+    type: z.string().optional(),
     title: z.string(),
-    pubDate: z.date(),
+    pubDate: z.coerce.date(),
     description: z.string(),
     author: z.string().optional(),
     authorTitle: z.string().optional(),
@@ -19,17 +20,19 @@ const updatesCollection = defineCollection({
 const pressCollection = defineCollection({
   type: 'data',
   schema: z.object({
+    type: z.string().optional(),
     outlet: z.string(),
     title: z.string(),
     date: z.coerce.date(),
     link: z.string().url(),
-    type: z.enum(['article', 'radio', 'tv', 'podcast']).default('article'),
+    mediaType: z.enum(['article', 'radio', 'tv', 'podcast']).default('article'),
   }),
 });
 
 const documentsCollection = defineCollection({
   type: 'data',
   schema: z.object({
+    type: z.string().optional(),
     title: z.string(),
     agency: z.string(),
     year: z.number(),
@@ -44,6 +47,7 @@ const documentsCollection = defineCollection({
 const resourcesCollection = defineCollection({
   type: 'data',
   schema: z.object({
+    type: z.string().optional(),
     name: z.string(),
     description: z.string(),
     qualities: z.array(z.enum(['Cultural', 'Historical', 'Archaeological', 'Recreational', 'Natural', 'Scenic'])),
@@ -57,8 +61,9 @@ const resourcesCollection = defineCollection({
 const pressReleasesCollection = defineCollection({
   type: 'content',
   schema: z.object({
+    type: z.string().optional(),
     title: z.string(),
-    pubDate: z.date(),
+    pubDate: z.coerce.date(),
     summary: z.string(),
     contactName: z.string().optional(),
     contactEmail: z.string().email().optional(),
@@ -70,6 +75,7 @@ const pressReleasesCollection = defineCollection({
 const boardMembersCollection = defineCollection({
   type: 'data',
   schema: z.object({
+    type: z.string().optional(),
     name: z.string(),
     title: z.string(),
     role: z.enum(['chair', 'vice-president', 'treasurer', 'secretary', 'board-member', 'staff', 'emeritus']),
@@ -82,6 +88,7 @@ const boardMembersCollection = defineCollection({
 const timelineCollection = defineCollection({
   type: 'data',
   schema: z.object({
+    type: z.string().optional(),
     date: z.string(),
     title: z.string(),
     description: z.string(),
@@ -98,6 +105,7 @@ const timelineCollection = defineCollection({
 const testimonialsCollection = defineCollection({
   type: 'data',
   schema: z.object({
+    type: z.string().optional(),
     quote: z.string(),
     author: z.string(),
     title: z.string(),
@@ -106,6 +114,11 @@ const testimonialsCollection = defineCollection({
     pdfFile: z.string(),
     order: z.number().optional(),
   }),
+});
+
+const pagesCollection = defineCollection({
+  type: 'data',
+  schema: z.record(z.any()),
 });
 
 export const collections = {
@@ -117,4 +130,5 @@ export const collections = {
   'board-members': boardMembersCollection,
   'timeline': timelineCollection,
   'testimonials': testimonialsCollection,
+  'pages': pagesCollection,
 };

@@ -23,18 +23,18 @@ const formatDate = (date: Date) => date.toLocaleDateString('en-US', {
   <!-- Featured Latest Post -->
   {featured && (
     <section class="featured-section">
-      <div class="featured-inner">
+      <div class="featured-inner" data-sb-object-id={`src/content/updates/${featured.slug}.md`}>
         {featured.data.featuredImage && (
           <div class="featured-image">
-            <img src={featured.data.featuredImage} alt={featured.data.featuredImageAlt || ''} />
+            <img src={featured.data.featuredImage} alt={featured.data.featuredImageAlt || ''} data-sb-field-path="featuredImage" />
           </div>
         )}
         <div class="featured-overlay">
           <div class="featured-content">
             <span class="featured-label">Latest Update</span>
-            <time class="featured-date">{formatDate(featured.data.pubDate)}</time>
-            <h1>{featured.data.title}</h1>
-            <p>{featured.data.description}</p>
+            <time class="featured-date" data-sb-field-path="pubDate">{formatDate(featured.data.pubDate)}</time>
+            <h1 data-sb-field-path="title">{featured.data.title}</h1>
+            <p data-sb-field-path="description">{featured.data.description}</p>
             <a href={`/progress/updates/${featured.slug}`} class="featured-link">
               Read the full story
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -51,14 +51,14 @@ const formatDate = (date: Date) => date.toLocaleDateString('en-US', {
       <div class="updates-inner">
         <div class="updates-timeline">
           {rest.map(update => (
-            <a href={`/progress/updates/${update.slug}`} class="timeline-item">
+            <a href={`/progress/updates/${update.slug}`} class="timeline-item" data-sb-object-id={`src/content/updates/${update.slug}.md`}>
               <div class="timeline-marker">
                 <div class="timeline-dot"></div>
               </div>
               <div class="timeline-content">
-                <time>{formatDate(update.data.pubDate)}</time>
-                <h3>{update.data.title}</h3>
-                <p>{update.data.description}</p>
+                <time data-sb-field-path="pubDate">{formatDate(update.data.pubDate)}</time>
+                <h3 data-sb-field-path="title">{update.data.title}</h3>
+                <p data-sb-field-path="description">{update.data.description}</p>
                 <span class="timeline-link">
                   Read more
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

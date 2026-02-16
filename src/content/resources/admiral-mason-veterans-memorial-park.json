@@ -1,7 +1,13 @@
 {
+  "type": "Resource",
   "name": "Admiral Mason Park & Veterans Memorial Park",
   "description": "An 11-acre waterfront landscape featuring Wall South, the first permanent half-scale replica of the Vietnam Veterans Memorial, along with monuments to multiple American conflicts.",
-  "qualities": ["Historical", "Recreational", "Natural", "Scenic"],
+  "qualities": [
+    "Historical",
+    "Recreational",
+    "Natural",
+    "Scenic"
+  ],
   "coordinates": {
     "lat": 30.407719,
     "lng": -87.213836

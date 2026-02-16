@@ -127,14 +127,14 @@ h1, h2, h3, h4 {
 
 /* Page hero styles */
 .page-hero {
-  padding: 8rem 1.5rem 4rem;
+  padding: calc(8rem + var(--banner-height, 0px)) 1.5rem 4rem;
   background: linear-gradient(135deg, var(--mist) 0%, var(--cream) 100%);
   position: relative;
 }
 
 @media (min-width: 768px) {
   .page-hero {
-    padding: 10rem 3rem 5rem;
+    padding: calc(10rem + var(--banner-height, 0px)) 3rem 5rem;
   }
 }
 

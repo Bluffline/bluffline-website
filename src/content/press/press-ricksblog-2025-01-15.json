@@ -1,7 +1,8 @@
 {
+  "type": "Press",
   "outlet": "Rick's Blog",
   "title": "Bluffline secures $1.2 million DOT grant",
   "date": "2025-01-15",
   "link": "https://ricksblog.biz/bluffline-secures-1-2-million-dot-grant/",
-  "type": "article"
+  "mediaType": "article"
 }

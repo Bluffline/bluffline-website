@@ -4,9 +4,10 @@ interface Props {
   pubDate: Date;
   summary: string;
   slug: string;
+  sbObjectId?: string;
 }
 
-const { title, pubDate, summary, slug } = Astro.props;
+const { title, pubDate, summary, slug, sbObjectId } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -15,10 +16,10 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 });
 ---
 
-<a href={`/press/${slug}`} class="release-card">
-  <p class="release-date">{formattedDate}</p>
-  <h3>{title}</h3>
-  <p class="release-summary">{summary}</p>
+<a href={`/press/${slug}`} class="release-card" data-sb-object-id={sbObjectId}>
+  <p class="release-date" data-sb-field-path="pubDate">{formattedDate}</p>
+  <h3 data-sb-field-path="title">{title}</h3>
+  <p class="release-summary" data-sb-field-path="summary">{summary}</p>
   <span class="release-link">
     Read full release
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

@@ -1,7 +1,12 @@
 {
+  "type": "Resource",
   "name": "Miraflores Park",
   "description": "Historically known as Havana Square, featuring a 1934 Boy Scout Building recognized on the National Register. In 2021, human remains were discovered, revealing the park was used as an African American or Creole burial ground during the 19th century.",
-  "qualities": ["Historical", "Archaeological", "Recreational"],
+  "qualities": [
+    "Historical",
+    "Archaeological",
+    "Recreational"
+  ],
   "coordinates": {
     "lat": 30.4217,
     "lng": -87.1952

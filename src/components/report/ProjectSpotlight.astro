@@ -1,4 +1,7 @@
 ---
+import PhaseTracker from '../ui/PhaseTracker.astro';
+import type { Phase } from '../ui/PhaseTracker.astro';
+
 interface Props {
   title: string;
   subtitle?: string;
@@ -21,6 +24,16 @@ const statusConfig = {
 };
 
 const currentStatus = statusConfig[status];
+
+const statusOrder = ['planning', 'funded', 'in-delivery', 'complete'] as const;
+const currentIndex = statusOrder.indexOf(status);
+
+const phases: Phase[] = [
+  { label: 'Planning', status: currentIndex > 0 ? 'complete' : currentIndex === 0 ? 'current' : 'upcoming' },
+  { label: 'Funded', status: currentIndex > 1 ? 'complete' : currentIndex === 1 ? 'current' : 'upcoming' },
+  { label: 'In Delivery', status: currentIndex > 2 ? 'complete' : currentIndex === 2 ? 'current' : 'upcoming' },
+  { label: 'Complete', status: currentIndex > 3 ? 'complete' : currentIndex === 3 ? 'current' : 'upcoming' },
+];
 ---
 
 <article class="project-spotlight">
@@ -48,27 +61,7 @@ const currentStatus = statusConfig[status];
     </div>
 
     <div class="spotlight-status-bar">
-      <div class="status-track">
-        <div class="status-step" data-active={(status === 'planning' || status === 'funded' || status === 'in-delivery' || status === 'complete').toString()}>
-          <div class="status-dot"></div>
-          <span>Planning</span>
-        </div>
-        <div class="status-connector" data-active={(status === 'funded' || status === 'in-delivery' || status === 'complete').toString()}></div>
-        <div class="status-step" data-active={(status === 'funded' || status === 'in-delivery' || status === 'complete').toString()}>
-          <div class="status-dot"></div>
-          <span>Funded</span>
-        </div>
-        <div class="status-connector" data-active={(status === 'in-delivery' || status === 'complete').toString()}></div>
-        <div class="status-step" data-active={(status === 'in-delivery' || status === 'complete').toString()} data-current={(status === 'in-delivery').toString()}>
-          <div class="status-dot"></div>
-          <span>In Delivery</span>
-        </div>
-        <div class="status-connector" data-active={(status === 'complete').toString()}></div>
-        <div class="status-step" data-active={(status === 'complete').toString()}>
-          <div class="status-dot"></div>
-          <span>Complete</span>
-        </div>
-      </div>
+      <PhaseTracker phases={phases} />
       {targetDate && (
         <div class="target-date">
           <span class="target-label">Target completion:</span>
@@ -97,6 +90,7 @@ const currentStatus = statusConfig[status];
     padding: 2rem;
     border: 1px solid rgba(45, 48, 71, 0.08);
     box-shadow: 0 4px 16px rgba(45, 48, 71, 0.04);
+    overflow: hidden;
   }
 
   @media (min-width: 900px) {
@@ -111,6 +105,7 @@ const currentStatus = statusConfig[status];
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    min-width: 0;
   }
 
   .spotlight-subtitle {
@@ -169,83 +164,6 @@ const currentStatus = statusConfig[status];
   .spotlight-status-bar {
     padding-top: 1.5rem;
     border-top: 1px solid rgba(45, 48, 71, 0.08);
-  }
-
-  .status-track {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 1rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-  }
-
-  .status-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .status-step .status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(45, 48, 71, 0.15);
-    transition: all 0.3s ease;
-  }
-
-  .status-step[data-active="true"] .status-dot {
-    background: var(--spring);
-  }
-
-  .status-step[data-current="true"] .status-dot {
-    background: var(--forest);
-    box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25);
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% {
-      box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25);
-    }
-    50% {
-      box-shadow: 0 0 0 8px rgba(59, 94, 68, 0.15);
-    }
-  }
-
-  .status-step span {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--navy);
-    opacity: 0.4;
-    white-space: nowrap;
-  }
-
-  .status-step[data-active="true"] span {
-    opacity: 0.8;
-  }
-
-  .status-step[data-current="true"] span {
-    color: var(--forest);
-    opacity: 1;
-    font-weight: 600;
-  }
-
-  .status-connector {
-    flex: 1;
-    min-width: 20px;
-    max-width: 60px;
-    height: 2px;
-    background: rgba(45, 48, 71, 0.1);
-    margin: 0 0.25rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .status-connector[data-active="true"] {
-    background: var(--spring);
   }
 
   .target-date {
