@@ -30,12 +30,12 @@
             "description": "fatalities—9 pedestrians and 2 cyclists killed"
         },
         {
-            "value": "17.8%",
-            "description": "of Ferry Pass residents live within a 10-minute walk of a park"
-        },
-        {
             "value": "4,400",
             "description": "households in the corridor lack access to a vehicle"
+        },
+        {
+            "value": "17.8%",
+            "description": "of Ferry Pass residents live within a 10-minute walk of a park"
         }
     ],
     "challengeLinkText": "Explore our full impact case →",
