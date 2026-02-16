@@ -549,19 +549,6 @@ export default defineStackbitConfig({
                   { name: "description", type: "text", required: true },
                   { name: "iconKey", type: "string" },
                   { name: "detail", type: "text" },
-                  {
-                    name: "stats",
-                    type: "list",
-                    items: {
-                      type: "object",
-                      fields: [
-                        { name: "value", type: "string", required: true },
-                        { name: "label", type: "string", required: true },
-                        { name: "sourceUrl", type: "url" },
-                        { name: "sourceLabel", type: "string" },
-                      ],
-                    },
-                  },
                 ],
               },
             },
@@ -577,17 +564,6 @@ export default defineStackbitConfig({
                   { name: "location", type: "string", required: true },
                   { name: "sourceUrl", type: "url" },
                   { name: "sourceLabel", type: "string" },
-                  {
-                    name: "stats",
-                    type: "list",
-                    items: {
-                      type: "object",
-                      fields: [
-                        { name: "value", type: "string", required: true },
-                        { name: "description", type: "string", required: true },
-                      ],
-                    },
-                  },
                 ],
               },
             },
