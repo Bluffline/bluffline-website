@@ -130,16 +130,16 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         <button class="filter-btn" data-filter="Scenic">Scenic</button>
       </div>
       <div class="resources-grid" id="resources-grid">
-        {resources.map((resource, index) => (
+        {(resources ?? []).map((resource, index) => (
           <div
             class="resource-card"
-            data-qualities={resource.data.qualities.join(',')}
+            data-qualities={(resource.data.qualities ?? []).join(',')}
             data-index={index}
           >
             <h3>{resource.data.name}</h3>
             <p>{resource.data.description}</p>
             <div class="resource-qualities">
-              {resource.data.qualities.map(q => <span class="quality-tag">{q}</span>)}
+              {(resource.data.qualities ?? []).map(q => <span class="quality-tag">{q}</span>)}
             </div>
           </div>
         ))}
