@@ -3,6 +3,10 @@
   "heroLabel": "Our Friends",
   "heroTitle": "Voices of Support",
   "heroDescription": "Civic leaders, elected officials, and community partners share why they support the Bluffline vision.",
+  "testimonialsHeading": "Letters of Support",
+  "testimonialsDescription": "Leaders across Pensacola have endorsed the Bluffline's vision for a safer, more connected community.",
   "ctaTitle": "Add your voice",
-  "ctaDescription": "Join the growing coalition of supporters working to make the Bluffline a reality."
+  "ctaDescription": "Join the growing coalition of supporters working to make the Bluffline a reality.",
+  "ctaPrimaryLabel": "Get Involved",
+  "ctaPrimaryHref": "/support"
 }

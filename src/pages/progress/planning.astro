@@ -4,6 +4,7 @@ import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import IconCard from '../../components/content/IconCard.astro';
 import { getCollection, getEntry } from 'astro:content';
+import { renderParagraphs } from '../../utils/render-paragraphs';
 
 const page = await getEntry('pages', 'planning');
 const pd = page.data;
@@ -43,8 +44,7 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
   <section class="planning-intro" data-sb-object-id={sbId}>
     <div class="section-inner">
       <div class="intro-content">
-        <p data-sb-field-path="introBody1">{pd.introBody1}</p>
-        <p data-sb-field-path="introBody2">{pd.introBody2}</p>
+        <div class="intro-content" data-sb-field-path="introBody" set:html={renderParagraphs(pd.introBody)} />
       </div>
     </div>
   </section>
@@ -85,8 +85,8 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
   <CallToAction
     title={pd.ctaTitle}
     description={pd.ctaDescription}
-    primaryLabel="Get in Touch"
-    primaryHref="/support"
+    primaryLabel={pd.ctaPrimaryLabel}
+    primaryHref={pd.ctaPrimaryHref}
     variant="mist"
     sbObjectId={sbId}
     titleFieldPath="ctaTitle"
