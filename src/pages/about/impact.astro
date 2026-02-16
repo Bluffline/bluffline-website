@@ -42,7 +42,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       </div>
 
       <div class="stats-row">
-        {d.safetyStats.map((stat: any) => (
+        {(d.safetyStats ?? []).map((stat: any) => (
           <IconCard
             statHighlight={stat.value}
             description={stat.description}
@@ -164,7 +164,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       </div>
 
       <div class="research-highlight">
-        {d.researchHighlights.map((stat: any) => (
+        {(d.researchHighlights ?? []).map((stat: any) => (
           <IconCard
             statHighlight={stat.value}
             description={stat.description}
@@ -181,7 +181,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   <section class="section pillars-section">
     <div class="section-inner">
       <div class="pillars-grid">
-        {d.pillarCards.map((card: any, i: number) => (
+        {(d.pillarCards ?? []).map((card: any, i: number) => (
           <IconCard
             icon={getIcon(card.iconKey)}
             title={card.title}
@@ -203,7 +203,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         <p data-sb-field-path="evidenceBody">{d.evidenceBody}</p>
       </div>
       <div class="evidence-grid">
-        {d.evidenceCards.map((card: any) => (
+        {(d.evidenceCards ?? []).map((card: any) => (
           <IconCard
             title={card.title}
             location={card.location}
@@ -227,7 +227,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       </div>
 
       <div class="quality-grid">
-        {d.qualityCards.map((card: any, i: number) => (
+        {(d.qualityCards ?? []).map((card: any, i: number) => (
           <IconCard
             icon={getIcon(card.iconKey)}
             title={card.title}

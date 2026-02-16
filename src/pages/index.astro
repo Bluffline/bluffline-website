@@ -56,7 +56,7 @@ const sbId = 'src/content/pages/home.json';
         <h2 data-sb-field-path="challengeHeading">{d.challengeHeading}</h2>
         <p data-sb-field-path="challengeBody">{d.challengeBody}</p>
         <div class="challenge-stats">
-          {d.challengeStats.map((stat: any, i: number) => (
+          {(d.challengeStats ?? []).map((stat: any, i: number) => (
             <div class="challenge-stat" data-sb-field-path={`.challengeStats[${i}]`}>
               <span class="stat-value" data-sb-field-path=".value">{stat.value}</span>
               <span class="stat-description" data-sb-field-path=".description">{stat.description}</span>
@@ -81,7 +81,7 @@ const sbId = 'src/content/pages/home.json';
           <img src={d.solutionMapImage} alt={d.solutionMapImageAlt} data-sb-field-path="solutionMapImage" />
         </div>
         <div class="solution-components">
-          {d.solutionComponents.map((comp: any, i: number) => (
+          {(d.solutionComponents ?? []).map((comp: any, i: number) => (
             <div class="component" data-sb-field-path={`.solutionComponents[${i}]`}>
               <div class="component-icon" set:html={getIcon(comp.iconKey)} />
               <div class="component-text">

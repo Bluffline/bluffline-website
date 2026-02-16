@@ -93,7 +93,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         <div class="overview-sidebar">
           <h3 data-sb-field-path="sidebarTitle">{cd.sidebarTitle}</h3>
           <div class="corridor-stats">
-            {cd.sidebarStats.map((stat: any, i: number) => (
+            {(cd.sidebarStats ?? []).map((stat: any, i: number) => (
               <div class="sidebar-stat" data-sb-field-path={`.sidebarStats[${i}]`}>
                 <div class="stat-label" data-sb-field-path=".label">{stat.label}</div>
                 <div class="stat-value" data-sb-field-path=".value">{stat.value}</div>
