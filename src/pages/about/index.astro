@@ -131,7 +131,7 @@ const documents = [
         </div>
         <div class="merger-highlight">
           <h3 data-sb-field-path="mergerHighlightTitle">{d.mergerHighlightTitle}</h3>
-          {d.mergerStats.map((stat: any, i: number) => (
+          {(d.mergerStats ?? []).map((stat: any, i: number) => (
             <div class="merger-stat" data-sb-field-path={`.mergerStats[${i}]`}>
               <div class="merger-stat-value" data-sb-field-path=".value">{stat.value}</div>
               <div class="merger-stat-label" data-sb-field-path=".label">{stat.label}</div>
