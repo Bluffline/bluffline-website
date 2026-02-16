@@ -39,7 +39,7 @@ const sbId = 'src/content/pages/support.json';
       <p class="tax-note" data-sb-field-path="taxNote">{d.taxNote}</p>
 
       <div class="member-portal">
-        <p>Already a member? <a href="https://checkout.bluffline.org/p/login/cN23cocuDcJp74IeUU">Manage your membership</a></p>
+        <p data-sb-field-path="memberPortalText">{d.memberPortalText} <a href={d.memberPortalHref} data-sb-field-path="memberPortalLinkText">{d.memberPortalLinkText}</a></p>
       </div>
     </div>
   </section>

@@ -6,6 +6,9 @@
   "membershipHeading": "Become a supporting member",
   "membershipDescription": "Supporting members fuel the Bluffline's work—from community engagement to advocacy to construction.",
   "taxNote": "Bluffline, Inc. is a 501(c)(3) nonprofit. Your contribution is tax-deductible.",
+  "memberPortalText": "Already a member?",
+  "memberPortalLinkText": "Manage your membership",
+  "memberPortalHref": "https://checkout.bluffline.org/p/login/cN23cocuDcJp74IeUU",
   "otherWaysHeading": "Other ways to help",
   "otherWaysDescription": "Not ready to become a member? There are other ways to support the corridor."
 }

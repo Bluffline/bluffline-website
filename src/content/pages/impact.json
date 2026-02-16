@@ -3,81 +3,36 @@
   "heroLabel": "Impact",
   "heroTitle": "Transforming connectivity into community value",
   "heroDescription": "The Bluffline converts non-motorized connectivity into safety, economic development, and quality of life improvements for Pensacola and Northwest Florida.",
-
   "safetyLabel": "Safety & Access",
   "safetyHeading": "A safer corridor for everyone",
   "safetyBody": "Florida consistently ranks among the most dangerous states for pedestrians and cyclists. Within the Bluffline corridor, the lack of safe infrastructure forces people walking and biking onto high-speed roads designed exclusively for motor vehicles.",
-
   "safetyStats": [
-    {
-      "value": "271",
-      "description": "Pedestrian and cyclist crashes in the Bluffline corridor (2022-2025)",
-      "sourceUrl": "https://s4.geoplan.ufl.edu/",
-      "sourceLabel": "Signal Four Analytics"
-    },
-    {
-      "value": "11",
-      "description": "Fatalities in the corridor—9 pedestrians and 2 cyclists killed",
-      "sourceUrl": "https://s4.geoplan.ufl.edu/",
-      "sourceLabel": "Signal Four Analytics"
-    },
-    {
-      "value": "268",
-      "description": "People injured in the corridor, including 28 serious injuries",
-      "sourceUrl": "https://s4.geoplan.ufl.edu/",
-      "sourceLabel": "Signal Four Analytics"
-    },
-    {
-      "value": "60%",
-      "description": "Reduction in injury rates with off-road greenways",
-      "sourceUrl": "https://greattrailsstatecoalition.org/benefits-of-trails/",
-      "sourceLabel": "Great Trails State Coalition"
-    }
+    { "value": "271", "description": "Pedestrian and cyclist crashes in the Bluffline corridor (2022-2025)", "sourceUrl": "https://s4.geoplan.ufl.edu/", "sourceLabel": "Signal Four Analytics" },
+    { "value": "11", "description": "Fatalities in the corridor—9 pedestrians and 2 cyclists killed", "sourceUrl": "https://s4.geoplan.ufl.edu/", "sourceLabel": "Signal Four Analytics" },
+    { "value": "268", "description": "People injured in the corridor, including 28 serious injuries", "sourceUrl": "https://s4.geoplan.ufl.edu/", "sourceLabel": "Signal Four Analytics" },
+    { "value": "60%", "description": "Reduction in injury rates with off-road greenways", "sourceUrl": "https://greattrailsstatecoalition.org/benefits-of-trails/", "sourceLabel": "Great Trails State Coalition" }
   ],
-
   "mapCaption": "Pedestrian and cyclist crashes within and adjacent to the Bluffline planning corridor (2022-2025). The Bluffline will provide a safe, separated alternative to these high-risk roads.",
   "mapSourceText": "Signal Four Analytics",
   "mapSourceUrl": "https://s4.geoplan.ufl.edu/",
   "mapSourceAgency": "Florida Department of Transportation",
-
   "contextProblemHeading": "The problem: Roads designed for cars, not people",
-  "contextProblemBody1": "The Pensacola metro area's road network was designed primarily for high-speed motor vehicle traffic. Wide lanes, minimal sidewalks, and nonexistent bike infrastructure force pedestrians and cyclists into dangerous situations.",
-  "contextProblemBody2": "Smart Growth America's \"Dangerous by Design\" report consistently ranks Florida among the deadliest states for people walking. Nine of the top 20 most dangerous metropolitan areas for pedestrians are located in Florida.",
-  "contextProblemBody3": "The consequences are stark: within the Bluffline corridor alone, 271 crashes involving pedestrians and cyclists have occurred since 2022—resulting in 11 deaths and 268 injuries, including 28 serious injuries.",
+  "contextProblemBody": "The Pensacola metro area's road network was designed primarily for high-speed motor vehicle traffic. Wide lanes, minimal sidewalks, and nonexistent bike infrastructure force pedestrians and cyclists into dangerous situations.\n\nSmart Growth America's \"Dangerous by Design\" report consistently ranks Florida among the deadliest states for people walking. Nine of the top 20 most dangerous metropolitan areas for pedestrians are located in Florida.\n\nThe consequences are stark: within the Bluffline corridor alone, 271 crashes involving pedestrians and cyclists have occurred since 2022—resulting in 11 deaths and 268 injuries, including 28 serious injuries.",
   "contextSolutionHeading": "The solution: Separated infrastructure saves lives",
-  "contextSolutionBody1": "Research consistently shows that separated greenways and trails dramatically reduce injury rates for pedestrians and cyclists. Off-road facilities reduce crash rates by up to 60% compared to on-street facilities.",
-  "contextSolutionBody2": "The Bluffline provides this separated infrastructure—utilizing abandoned rail corridors, utility rights-of-way, and existing public land to create continuous, car-free connections throughout the corridor.",
-  "contextSolutionBody3": "Beyond preventing crashes, the Bluffline enables a transportation option for the many Pensacola residents who cannot drive, cannot afford a car, or simply choose not to use one for every trip.",
-
+  "contextSolutionBody": "Research consistently shows that separated greenways and trails dramatically reduce injury rates for pedestrians and cyclists. Off-road facilities reduce crash rates by up to 60% compared to on-street facilities.\n\nThe Bluffline provides this separated infrastructure—utilizing abandoned rail corridors, utility rights-of-way, and existing public land to create continuous, car-free connections throughout the corridor.\n\nBeyond preventing crashes, the Bluffline enables a transportation option for the many Pensacola residents who cannot drive, cannot afford a car, or simply choose not to use one for every trip.",
   "economicLabel": "Economic Development",
   "economicHeading": "Converting connectivity into economic value",
   "economicBody": "Decades of research demonstrate that trail infrastructure generates significant economic returns—from increased property values and tourism spending to job creation and reduced healthcare costs.",
-
   "researchHighlights": [
-    {
-      "value": "$1.72",
-      "description": "returned for every $1 invested in trail construction from local business activity alone",
-      "sourceUrl": "https://greattrailsstatecoalition.org/benefits-of-trails/",
-      "sourceLabel": "Great Trails State Coalition"
-    },
-    {
-      "value": "9.6",
-      "description": "jobs supported per $1 million invested in trail construction",
-      "sourceUrl": "https://www.greenwaysfoundation.org/news/cultivating-prosperity-how-trails-become-engines-of-local-economic-growth",
-      "sourceLabel": "Greenways Foundation"
-    },
-    {
-      "value": "$3",
-      "description": "in healthcare cost savings for every $1 invested in trail infrastructure",
-      "sourceUrl": "https://www.americantrails.org/resources/why-trails-matter-trails-and-greenways-promote-walking",
-      "sourceLabel": "American Heart Association via American Trails"
-    }
+    { "value": "$1.72", "description": "returned for every $1 invested in trail construction from local business activity alone", "sourceUrl": "https://greattrailsstatecoalition.org/benefits-of-trails/", "sourceLabel": "Great Trails State Coalition" },
+    { "value": "9.6", "description": "jobs supported per $1 million invested in trail construction", "sourceUrl": "https://www.greenwaysfoundation.org/news/cultivating-prosperity-how-trails-become-engines-of-local-economic-growth", "sourceLabel": "Greenways Foundation" },
+    { "value": "$3", "description": "in healthcare cost savings for every $1 invested in trail infrastructure", "sourceUrl": "https://www.americantrails.org/resources/why-trails-matter-trails-and-greenways-promote-walking", "sourceLabel": "American Heart Association via American Trails" }
   ],
-
   "pillarCards": [
     {
       "title": "Neighborhood Revitalization",
       "description": "Reactivating underutilized land and addressing long-standing blight in West Pensacola and Ferry Pass through safe, high-quality public infrastructure.",
+      "iconKey": "home",
       "detail": "Trail projects consistently catalyze private investment in adjacent properties. The Atlanta BeltLine generated $4.6 billion in private development from a $559 million public investment—an <a href=\"https://www.fhwa.dot.gov/ipd/value_capture/case_studies/atlanta_beltline_tax_allocation_district.aspx\" target=\"_blank\" rel=\"noopener\">8.5:1 return</a>.",
       "stats": [
         { "value": "5-11%", "label": "Average property value increase near trails", "sourceUrl": "https://headwaterseconomics.org/trail/43-property-recreation-values-urban-greenways/", "sourceLabel": "Headwaters Economics" },
@@ -87,6 +42,7 @@
     {
       "title": "Military & Defense Readiness",
       "description": "Improving safety, access, and quality of life around NAS Pensacola and Corry Station, supporting cadets, service members, and installation compatibility.",
+      "iconKey": "shield",
       "detail": "Safe, car-free connections benefit military personnel who may not have personal vehicles, especially students and trainees. Quality of life improvements also support installation encroachment compatibility goals.",
       "stats": [
         { "value": "NAS Pensacola", "label": "Home of Naval Aviation, training 60,000+ annually", "sourceUrl": "https://www.cnic.navy.mil/regions/cnrse/installations/nas_pensacola.html", "sourceLabel": "U.S. Navy" },
@@ -96,6 +52,7 @@
     {
       "title": "Workforce & Employment Access",
       "description": "Providing safe, non-vehicular connections to major employment hubs, reducing transportation barriers for workers in car-constrained households.",
+      "iconKey": "workforce",
       "detail": "For households without reliable vehicle access, the Bluffline provides a genuine transportation alternative connecting residential areas to employment centers, healthcare, education, and essential services.",
       "stats": [
         { "value": "7.6%", "label": "Escambia County households without vehicle access", "sourceUrl": "https://data.census.gov/table/ACSST5Y2022.S0802?q=commuting&g=050XX00US12033", "sourceLabel": "U.S. Census ACS" },
@@ -105,6 +62,7 @@
     {
       "title": "Talent, Tourism & Quality of Life",
       "description": "Strengthening Pensacola's competitiveness for employers, students, and visitors by expanding waterfront access and outdoor recreation.",
+      "iconKey": "smile",
       "detail": "Trail networks are increasingly cited as key amenities in talent attraction and retention. Expanding waterfront access positions Pensacola competitively against peer cities investing in quality of life infrastructure.",
       "stats": [
         { "value": "$3,700", "label": "Average annual spending by trail users on equipment & services", "sourceUrl": "https://openbooks.lib.msu.edu/michigantrails/chapter/the-economic-benefits-of-trails-and-trail-building/", "sourceLabel": "Michigan State University" },
@@ -112,92 +70,29 @@
       ]
     }
   ],
-
   "evidenceHeading": "Proven returns from peer projects",
   "evidenceBody": "Trail projects across the country demonstrate consistent economic returns. Here's what similar investments have achieved.",
-
   "evidenceCards": [
-    {
-      "title": "Atlanta BeltLine",
-      "location": "Atlanta, GA",
-      "sourceUrl": "https://beltline.org/",
-      "sourceLabel": "Atlanta BeltLine, Inc.",
-      "stats": [
-        { "value": "$10B", "description": "total economic impact" },
-        { "value": "50,000", "description": "permanent jobs created" },
-        { "value": "8.5:1", "description": "return on investment" }
-      ]
-    },
-    {
-      "title": "Circuit Trails",
-      "location": "Philadelphia, PA",
-      "sourceUrl": "https://www.railstotrails.org/trailblog/new-research-finds-public-investment-in-trails-walking-and-biking-infrastructure-delivers-potential-economic-benefits-of-138-5-billion-annually/",
-      "sourceLabel": "Rails to Trails Conservancy",
-      "stats": [
-        { "value": "$795M", "description": "annual healthcare savings" },
-        { "value": "800 mi", "description": "regional trail network" },
-        { "value": "$200M+", "description": "recent funding secured" }
-      ]
-    },
-    {
-      "title": "Peachtree Creek Greenway",
-      "location": "Atlanta, GA",
-      "sourceUrl": "https://peachtreecreek.org/economicimpactstudy/",
-      "sourceLabel": "Peachtree Creek Greenway",
-      "stats": [
-        { "value": "$13.76", "description": "return per $1 invested" },
-        { "value": "228", "description": "permanent jobs projected" },
-        { "value": "$159M", "description": "property value increase" }
-      ]
-    },
-    {
-      "title": "Carolina Thread Trail",
-      "location": "NC/SC Region",
-      "sourceUrl": "https://www.carolinathreadtrail.org/trail-benefits/",
-      "sourceLabel": "Carolina Thread Trail",
-      "stats": [
-        { "value": "$174M", "description": "construction stimulus per 300 mi" },
-        { "value": "3,200", "description": "jobs per 300 miles" },
-        { "value": "$128M", "description": "annual tourism activity" }
-      ]
-    }
+    { "title": "Atlanta BeltLine", "location": "Atlanta, GA", "sourceUrl": "https://beltline.org/", "sourceLabel": "Atlanta BeltLine, Inc.", "stats": [{ "value": "$10B", "description": "total economic impact" }, { "value": "50,000", "description": "permanent jobs created" }, { "value": "8.5:1", "description": "return on investment" }] },
+    { "title": "Circuit Trails", "location": "Philadelphia, PA", "sourceUrl": "https://www.railstotrails.org/trailblog/new-research-finds-public-investment-in-trails-walking-and-biking-infrastructure-delivers-potential-economic-benefits-of-138-5-billion-annually/", "sourceLabel": "Rails to Trails Conservancy", "stats": [{ "value": "$795M", "description": "annual healthcare savings" }, { "value": "800 mi", "description": "regional trail network" }, { "value": "$200M+", "description": "recent funding secured" }] },
+    { "title": "Peachtree Creek Greenway", "location": "Atlanta, GA", "sourceUrl": "https://peachtreecreek.org/economicimpactstudy/", "sourceLabel": "Peachtree Creek Greenway", "stats": [{ "value": "$13.76", "description": "return per $1 invested" }, { "value": "228", "description": "permanent jobs projected" }, { "value": "$159M", "description": "property value increase" }] },
+    { "title": "Carolina Thread Trail", "location": "NC/SC Region", "sourceUrl": "https://www.carolinathreadtrail.org/trail-benefits/", "sourceLabel": "Carolina Thread Trail", "stats": [{ "value": "$174M", "description": "construction stimulus per 300 mi" }, { "value": "3,200", "description": "jobs per 300 miles" }, { "value": "$128M", "description": "annual tourism activity" }] }
   ],
-
   "qualityLabel": "Quality of Life",
   "qualityHeading": "Building a healthier, more connected community",
   "qualityBody": "Beyond economic metrics, the Bluffline creates fundamental improvements to daily life—healthier residents, stronger neighborhoods, and expanded access to nature and recreation.",
-
   "qualityCards": [
-    {
-      "title": "Health & Wellness",
-      "description": "Regular trail users experience lower rates of diabetes, high blood pressure, and obesity. They file 14% fewer health claims and spend 30% fewer days in the hospital.",
-      "sourceUrl": "https://www.railstotrails.org/benefits-of-trails/",
-      "sourceLabel": "Rails to Trails Conservancy"
-    },
-    {
-      "title": "Community Connection",
-      "description": "Trails create shared public spaces that bring neighbors together. They provide safe routes for children walking to school and seniors accessing services."
-    },
-    {
-      "title": "Waterfront Access",
-      "description": "The Bluffline opens Pensacola Bay's northern shore to residents who currently have no safe way to reach it. This is bayfront access for the entire community."
-    },
-    {
-      "title": "Outdoor Recreation",
-      "description": "The outdoor recreation economy generates $1.2 trillion annually nationwide. The Bluffline positions Pensacola to capture more of this growing sector.",
-      "sourceUrl": "https://www.bea.gov/news/2024/outdoor-recreation-satellite-account-us-and-states-2023",
-      "sourceLabel": "Bureau of Economic Analysis"
-    },
-    {
-      "title": "Transportation Choice",
-      "description": "The Bluffline gives residents a genuine alternative to driving—not because they have to, but because they can choose the mode that works best for each trip."
-    },
-    {
-      "title": "Equity & Access",
-      "description": "Trail infrastructure provides disproportionate benefits to lower-income households, who are more likely to walk or bike out of necessity. The Bluffline is infrastructure for everyone."
-    }
+    { "title": "Health & Wellness", "description": "Regular trail users experience lower rates of diabetes, high blood pressure, and obesity. They file 14% fewer health claims and spend 30% fewer days in the hospital.", "iconKey": "health", "sourceUrl": "https://www.railstotrails.org/benefits-of-trails/", "sourceLabel": "Rails to Trails Conservancy" },
+    { "title": "Community Connection", "description": "Trails create shared public spaces that bring neighbors together. They provide safe routes for children walking to school and seniors accessing services.", "iconKey": "community" },
+    { "title": "Waterfront Access", "description": "The Bluffline opens Pensacola Bay's northern shore to residents who currently have no safe way to reach it. This is bayfront access for the entire community.", "iconKey": "waterfront" },
+    { "title": "Outdoor Recreation", "description": "The outdoor recreation economy generates $1.2 trillion annually nationwide. The Bluffline positions Pensacola to capture more of this growing sector.", "iconKey": "recreation", "sourceUrl": "https://www.bea.gov/news/2024/outdoor-recreation-satellite-account-us-and-states-2023", "sourceLabel": "Bureau of Economic Analysis" },
+    { "title": "Transportation Choice", "description": "The Bluffline gives residents a genuine alternative to driving—not because they have to, but because they can choose the mode that works best for each trip.", "iconKey": "transportation" },
+    { "title": "Equity & Access", "description": "Trail infrastructure provides disproportionate benefits to lower-income households, who are more likely to walk or bike out of necessity. The Bluffline is infrastructure for everyone.", "iconKey": "equity" }
   ],
-
   "ctaTitle": "Help us build the Bluffline",
-  "ctaDescription": "Every mile of safe trail infrastructure prevents injuries, creates jobs, and improves quality of life. Join us in making the Bluffline a reality."
+  "ctaDescription": "Every mile of safe trail infrastructure prevents injuries, creates jobs, and improves quality of life. Join us in making the Bluffline a reality.",
+  "ctaPrimaryLabel": "Get Involved",
+  "ctaPrimaryHref": "/support",
+  "ctaSecondaryLabel": "See Our Progress",
+  "ctaSecondaryHref": "/progress"
 }

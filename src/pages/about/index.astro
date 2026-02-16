@@ -7,6 +7,7 @@ import IconCard from '../../components/content/IconCard.astro';
 import DocumentCard from '../../components/content/DocumentCard.astro';
 import TimelineItem from '../../components/content/TimelineItem.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
+import { renderParagraphs } from '../../utils/render-paragraphs';
 import { getCollection, getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'about');
@@ -95,8 +96,7 @@ const documents = [
     <div class="section-inner">
       <div class="purpose-content">
         <p class="purpose-statement" data-sb-field-path="purposeStatement">{d.purposeStatement}</p>
-        <p data-sb-field-path="purposeBody1">{d.purposeBody1}</p>
-        <p data-sb-field-path="purposeBody2">{d.purposeBody2}</p>
+        <div data-sb-field-path="purposeBody" set:html={renderParagraphs(d.purposeBody)} />
       </div>
     </div>
   </section>
@@ -127,24 +127,16 @@ const documents = [
       <div class="merger-grid">
         <div class="merger-content">
           <h2 data-sb-field-path="mergerHeading">{d.mergerHeading}</h2>
-          <p data-sb-field-path="mergerBody1">{d.mergerBody1}</p>
-          <p data-sb-field-path="mergerBody2">{d.mergerBody2}</p>
-          <p data-sb-field-path="mergerBody3">{d.mergerBody3}</p>
+          <div data-sb-field-path="mergerBody" set:html={renderParagraphs(d.mergerBody)} />
         </div>
         <div class="merger-highlight">
           <h3 data-sb-field-path="mergerHighlightTitle">{d.mergerHighlightTitle}</h3>
-          <div class="merger-stat">
-            <div class="merger-stat-value" data-sb-field-path="mergerStat1Value">{d.mergerStat1Value}</div>
-            <div class="merger-stat-label" data-sb-field-path="mergerStat1Label">{d.mergerStat1Label}</div>
-          </div>
-          <div class="merger-stat">
-            <div class="merger-stat-value" data-sb-field-path="mergerStat2Value">{d.mergerStat2Value}</div>
-            <div class="merger-stat-label" data-sb-field-path="mergerStat2Label">{d.mergerStat2Label}</div>
-          </div>
-          <div class="merger-stat">
-            <div class="merger-stat-value" data-sb-field-path="mergerStat3Value">{d.mergerStat3Value}</div>
-            <div class="merger-stat-label" data-sb-field-path="mergerStat3Label">{d.mergerStat3Label}</div>
-          </div>
+          {d.mergerStats.map((stat: any, i: number) => (
+            <div class="merger-stat" data-sb-field-path={`.mergerStats[${i}]`}>
+              <div class="merger-stat-value" data-sb-field-path=".value">{stat.value}</div>
+              <div class="merger-stat-label" data-sb-field-path=".label">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -233,8 +225,8 @@ const documents = [
   <CallToAction
     title={d.ctaTitle}
     description={d.ctaDescription}
-    primaryLabel="View the Corridor"
-    primaryHref="/about/corridor"
+    primaryLabel={d.ctaPrimaryLabel}
+    primaryHref={d.ctaPrimaryHref}
     sbObjectId={sbId}
     titleFieldPath="ctaTitle"
     descriptionFieldPath="ctaDescription"

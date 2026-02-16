@@ -39,6 +39,10 @@ const sortedTestimonials = testimonials.sort((a, b) => {
 
   <section class="section testimonials-section">
     <div class="section-inner">
+      <div class="section-header" data-sb-object-id={sbId}>
+        <h2 data-sb-field-path="testimonialsHeading">{pd.testimonialsHeading}</h2>
+        <p data-sb-field-path="testimonialsDescription">{pd.testimonialsDescription}</p>
+      </div>
       {sortedTestimonials.length > 0 ? (
         <div class="testimonials-grid">
           {sortedTestimonials.map((testimonial) => (
@@ -63,8 +67,8 @@ const sortedTestimonials = testimonials.sort((a, b) => {
   <CallToAction
     title={pd.ctaTitle}
     description={pd.ctaDescription}
-    primaryLabel="Get Involved"
-    primaryHref="/support"
+    primaryLabel={pd.ctaPrimaryLabel}
+    primaryHref={pd.ctaPrimaryHref}
     variant="forest"
     sbObjectId={sbId}
     titleFieldPath="ctaTitle"

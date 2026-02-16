@@ -3,9 +3,10 @@
   "heroLabel": "Progress",
   "heroTitle": "Grounded in adopted plans",
   "heroDescription": "The Bluffline isn't a new idea—it builds on decades of planning and policy that have consistently identified this corridor as a regional priority.",
-  "introBody1": "Every segment of the Bluffline corridor appears in at least one adopted plan from a local, regional, or state agency. This isn't coincidence—it reflects a consistent regional vision for multimodal connectivity that has emerged through multiple public planning processes over the past two decades.",
-  "introBody2": "The plans below represent the policy foundation that the Bluffline builds upon. They demonstrate that this corridor has been identified as a priority by the City of Pensacola, Escambia County, the Florida-Alabama Transportation Planning Organization, and the State of Florida.",
+  "introBody": "Every segment of the Bluffline corridor appears in at least one adopted plan from a local, regional, or state agency. This isn't coincidence—it reflects a consistent regional vision for multimodal connectivity that has emerged through multiple public planning processes over the past two decades.\n\nThe plans below represent the policy foundation that the Bluffline builds upon. They demonstrate that this corridor has been identified as a priority by the City of Pensacola, Escambia County, the Florida-Alabama Transportation Planning Organization, and the State of Florida.",
   "plansHeading": "Adopted Plans",
   "ctaTitle": "Questions about planning?",
-  "ctaDescription": "We're happy to discuss how the Bluffline fits into the broader planning landscape and answer questions about specific plans or policies."
+  "ctaDescription": "We're happy to discuss how the Bluffline fits into the broader planning landscape and answer questions about specific plans or policies.",
+  "ctaPrimaryLabel": "Get in Touch",
+  "ctaPrimaryHref": "/support"
 }

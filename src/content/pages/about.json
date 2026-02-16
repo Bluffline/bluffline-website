@@ -4,21 +4,17 @@
   "heroTitle": "Six decades of advocacy. One transformative vision.",
   "heroDescription": "The Bluffline is the product of generations of residents who believed Pensacola deserved better connections to its waterfront, its neighborhoods, and its natural landscape.",
   "purposeStatement": "We exist to help Pensacola residents reconnect with their bodies, their environment, and each other.",
-  "purposeBody1": "That purpose drives everything we do—from the infrastructure we build to the policies we advocate for to the way we engage with the communities we serve. We believe that safe, accessible paths for walking and cycling aren't luxuries. They're essential infrastructure for healthy, thriving neighborhoods.",
-  "purposeBody2": "Our vision is a Pensacola where all our neighbors have access to safe active transit infrastructure, attainable workforce housing, economic opportunity, and a healthy environment. The Bluffline is how we get there.",
+  "purposeBody": "That purpose drives everything we do—from the infrastructure we build to the policies we advocate for to the way we engage with the communities we serve. We believe that safe, accessible paths for walking and cycling aren't luxuries. They're essential infrastructure for healthy, thriving neighborhoods.\n\nOur vision is a Pensacola where all our neighbors have access to safe active transit infrastructure, attainable workforce housing, economic opportunity, and a healthy environment. The Bluffline is how we get there.",
   "historyHeading": "A Vision Six Decades in the Making",
   "historyDescription": "The idea of connecting Pensacola's bluffs to the bay isn't new. For generations, advocates have championed this corridor—through newspaper editorials, planning studies, and grassroots organizing.",
   "mergerHeading": "The 2024 Merger: Taking the Baton",
-  "mergerBody1": "In 2024, the Pensacola Scenic Highway Foundation—stewards of the scenic byway since its designation—merged with Bluffline, Inc. This wasn't an acquisition. It was a passing of the torch.",
-  "mergerBody2": "The Foundation's leadership recognized that the corridor's future required an organization focused not just on preservation, but on building new infrastructure. By joining forces, we combined decades of institutional knowledge with fresh momentum and a clear multimodal mission.",
-  "mergerBody3": "Today, Bluffline, Inc. serves as the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Scenic Highway—and the driving force behind the 20-mile greenway that will finally connect NAS Pensacola to UWF.",
+  "mergerBody": "In 2024, the Pensacola Scenic Highway Foundation—stewards of the scenic byway since its designation—merged with Bluffline, Inc. This wasn't an acquisition. It was a passing of the torch.\n\nThe Foundation's leadership recognized that the corridor's future required an organization focused not just on preservation, but on building new infrastructure. By joining forces, we combined decades of institutional knowledge with fresh momentum and a clear multimodal mission.\n\nToday, Bluffline, Inc. serves as the Corridor Management Entity for the Pensacola Scenic Bay Bluffs Scenic Highway—and the driving force behind the 20-mile greenway that will finally connect NAS Pensacola to UWF.",
   "mergerHighlightTitle": "What the Merger Means",
-  "mergerStat1Value": "16+ years",
-  "mergerStat1Label": "of scenic highway stewardship transferred",
-  "mergerStat2Value": "One organization",
-  "mergerStat2Label": "for preservation and construction",
-  "mergerStat3Value": "Unified voice",
-  "mergerStat3Label": "for the corridor's future",
+  "mergerStats": [
+    { "value": "16+ years", "label": "of scenic highway stewardship transferred" },
+    { "value": "One organization", "label": "for preservation and construction" },
+    { "value": "Unified voice", "label": "for the corridor's future" }
+  ],
   "valuesHeading": "Our Values",
   "valuesDescription": "These principles guide every decision we make—from how we engage with communities to how we steward public resources.",
   "leadershipHeading": "Board & Leadership",
@@ -28,5 +24,7 @@
   "documentsHeading": "Documents & Transparency",
   "documentsDescription": "Transparency is one of our core values. Here you'll find our public accountability documents and organizational filings.",
   "ctaTitle": "Explore the corridor",
-  "ctaDescription": "See the full route connecting NAS Pensacola to UWF—and the diverse cultural, historical, and natural resources along the way."
+  "ctaDescription": "See the full route connecting NAS Pensacola to UWF—and the diverse cultural, historical, and natural resources along the way.",
+  "ctaPrimaryLabel": "View the Corridor",
+  "ctaPrimaryHref": "/about/corridor"
 }
