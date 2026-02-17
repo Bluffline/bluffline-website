@@ -8,15 +8,7 @@ export default defineConfig({
   },
   vite: {
     server: {
-      // Keep this list explicit so Visual Editor preview hosts work without
-      // opening dev server access to arbitrary domains.
-      allowedHosts: [
-        'localhost',
-        '127.0.0.1',
-        '.netlify.app',
-        '.netlify.com',
-        '.netlify.live'
-      ],
+      allowedHosts: ['.netlify.app', '.netlify.com'],
       hmr: {
         path: '/vite-hmr/'
       }
