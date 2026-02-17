@@ -23,7 +23,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('en-US', {
   <!-- Featured Latest Post -->
   {featured && (
     <section class="featured-section">
-      <div class="featured-inner".md`}>
+      <div class="featured-inner">
         {featured.data.featuredImage && (
           <div class="featured-image">
             <img src={featured.data.featuredImage} alt={featured.data.featuredImageAlt || ''} />
@@ -51,7 +51,7 @@ const formatDate = (date: Date) => date.toLocaleDateString('en-US', {
       <div class="updates-inner">
         <div class="updates-timeline">
           {rest.map(update => (
-            <a href={`/progress/updates/${update.slug}`} class="timeline-item".md`}>
+            <a href={`/progress/updates/${update.slug}`} class="timeline-item">
               <div class="timeline-marker">
                 <div class="timeline-dot"></div>
               </div>
