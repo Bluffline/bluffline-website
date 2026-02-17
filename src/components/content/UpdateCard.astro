@@ -6,10 +6,9 @@ interface Props {
   slug: string;
   featuredImage?: string;
   featuredImageAlt?: string;
-  sbObjectId?: string;
 }
 
-const { title, date, excerpt, slug, featuredImage, featuredImageAlt, sbObjectId } = Astro.props;
+const { title, date, excerpt, slug, featuredImage, featuredImageAlt } = Astro.props;
 
 const formattedDate = date.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -18,16 +17,16 @@ const formattedDate = date.toLocaleDateString('en-US', {
 });
 ---
 
-<a href={`/progress/updates/${slug}`} class:list={['update-card', { 'has-image': featuredImage }]} data-sb-object-id={sbObjectId}>
+<a href={`/progress/updates/${slug}`} class:list={['update-card', { 'has-image': featuredImage }]}>
   {featuredImage && (
     <div class="update-card-image">
-      <img src={featuredImage} alt={featuredImageAlt || ''} loading="lazy" data-sb-field-path="featuredImage" />
+      <img src={featuredImage} alt={featuredImageAlt || ''} loading="lazy" />
     </div>
   )}
   <div class="update-card-content">
-    <p class="update-card-date" data-sb-field-path="pubDate">{formattedDate}</p>
-    <h3 data-sb-field-path="title">{title}</h3>
-    {excerpt && <p class="update-card-excerpt" data-sb-field-path="description">{excerpt}</p>}
+    <p class="update-card-date">{formattedDate}</p>
+    <h3>{title}</h3>
+    {excerpt && <p class="update-card-excerpt">{excerpt}</p>}
     <span class="update-card-link">
       Read more
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

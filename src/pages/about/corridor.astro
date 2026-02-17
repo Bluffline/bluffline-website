@@ -9,7 +9,7 @@ import planningCorridorData from '../../data/planning-corridor.json';
 
 const page = await getEntry('pages', 'corridor');
 const cd = page.data;
-const sbId = 'src/content/pages/corridor.json';
+
 
 const resources = await getCollection('resources');
 
@@ -42,10 +42,6 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     label={cd.heroLabel}
     title={cd.heroTitle}
     description={cd.heroDescription}
-    sbObjectId={sbId}
-    labelFieldPath="heroLabel"
-    titleFieldPath="heroTitle"
-    descriptionFieldPath="heroDescription"
   />
 
   <section class="map-section">
@@ -82,46 +78,46 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     </div>
   </section>
 
-  <section class="section overview-section" data-sb-object-id={sbId}>
+  <section class="section overview-section">
     <div class="section-inner">
       <div class="overview-grid">
         <div class="overview-content">
-          <h2 data-sb-field-path="overviewHeading">{cd.overviewHeading}</h2>
-          <p data-sb-field-path="overviewBody1">{cd.overviewBody1}</p>
-          <p data-sb-field-path="overviewBody2">{cd.overviewBody2}</p>
-          <p data-sb-field-path="overviewBody3">{cd.overviewBody3}</p>
+          <h2>{cd.overviewHeading}</h2>
+          <p>{cd.overviewBody1}</p>
+          <p>{cd.overviewBody2}</p>
+          <p>{cd.overviewBody3}</p>
         </div>
         <div class="overview-sidebar">
-          <h3 data-sb-field-path="sidebarTitle">{cd.sidebarTitle}</h3>
+          <h3>{cd.sidebarTitle}</h3>
           <div class="corridor-stats">
-            <div class="stat-item"><span class="stat-label">Total Length</span><span class="stat-value" data-sb-field-path="statTotalLength">{cd.statTotalLength}</span></div>
-            <div class="stat-item"><span class="stat-label">Existing Scenic Highway</span><span class="stat-value" data-sb-field-path="statExistingHighway">{cd.statExistingHighway}</span></div>
-            <div class="stat-item"><span class="stat-label">Northeast Extension</span><span class="stat-value" data-sb-field-path="statNortheastExtension">{cd.statNortheastExtension}</span></div>
-            <div class="stat-item"><span class="stat-label">Southwest Extension</span><span class="stat-value" data-sb-field-path="statSouthwestExtension">{cd.statSouthwestExtension}</span></div>
-            <div class="stat-item"><span class="stat-label">Intrinsic Resources</span><span class="stat-value" data-sb-field-path="statIntrinsicResources">{cd.statIntrinsicResources}</span></div>
-            <div class="stat-item"><span class="stat-label">Designation</span><span class="stat-value" data-sb-field-path="statDesignation">{cd.statDesignation}</span></div>
+            <div class="stat-item"><span class="stat-label">Total Length</span><span class="stat-value">{cd.statTotalLength}</span></div>
+            <div class="stat-item"><span class="stat-label">Existing Scenic Highway</span><span class="stat-value">{cd.statExistingHighway}</span></div>
+            <div class="stat-item"><span class="stat-label">Northeast Extension</span><span class="stat-value">{cd.statNortheastExtension}</span></div>
+            <div class="stat-item"><span class="stat-label">Southwest Extension</span><span class="stat-value">{cd.statSouthwestExtension}</span></div>
+            <div class="stat-item"><span class="stat-label">Intrinsic Resources</span><span class="stat-value">{cd.statIntrinsicResources}</span></div>
+            <div class="stat-item"><span class="stat-label">Designation</span><span class="stat-value">{cd.statDesignation}</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section greenway-section" data-sb-object-id={sbId}>
+  <section class="section greenway-section">
     <div class="section-inner">
       <div class="greenway-content">
-        <h2 data-sb-field-path="greenwayHeading">{cd.greenwayHeading}</h2>
-        <p data-sb-field-path="greenwayBody1">{cd.greenwayBody1}</p>
-        <p data-sb-field-path="greenwayBody2">{cd.greenwayBody2}</p>
-        <p data-sb-field-path="greenwayBody3">{cd.greenwayBody3}</p>
+        <h2>{cd.greenwayHeading}</h2>
+        <p>{cd.greenwayBody1}</p>
+        <p>{cd.greenwayBody2}</p>
+        <p>{cd.greenwayBody3}</p>
       </div>
     </div>
   </section>
 
   <section class="section resources-section" id="resources">
     <div class="section-inner">
-      <div class="section-header" data-sb-object-id={sbId}>
-        <h2 data-sb-field-path="resourcesHeading">{cd.resourcesHeading}</h2>
-        <p data-sb-field-path="resourcesDescription">{cd.resourcesDescription}</p>
+      <div class="section-header">
+        <h2>{cd.resourcesHeading}</h2>
+        <p>{cd.resourcesDescription}</p>
       </div>
       <div class="filter-controls">
         <button class="filter-btn active" data-filter="all">All</button>
@@ -162,9 +158,6 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     primaryLabel="View Progress"
     primaryHref="/progress"
     variant="mist"
-    sbObjectId={sbId}
-    titleFieldPath="ctaTitle"
-    descriptionFieldPath="ctaDescription"
   />
 </BaseLayout>
 

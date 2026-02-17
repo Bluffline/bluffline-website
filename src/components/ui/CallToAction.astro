@@ -8,9 +8,6 @@ interface Props {
   secondaryLabel?: string;
   variant?: 'forest' | 'mist';
   kitFormId?: string;
-  sbObjectId?: string;
-  titleFieldPath?: string;
-  descriptionFieldPath?: string;
 }
 
 const {
@@ -22,16 +19,13 @@ const {
   secondaryLabel,
   variant = 'forest',
   kitFormId,
-  sbObjectId,
-  titleFieldPath,
-  descriptionFieldPath,
 } = Astro.props;
 ---
 
-<section class:list={['cta-section', variant]} data-sb-object-id={sbObjectId}>
+<section class:list={['cta-section', variant]}>
   <div class="cta-inner">
-    <h2 data-sb-field-path={titleFieldPath}>{title}</h2>
-    {description && <p data-sb-field-path={descriptionFieldPath}>{description}</p>}
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
     <div class="cta-buttons">
       {kitFormId ? (
         <button class="btn" data-formkit-toggle={kitFormId}>{primaryLabel}</button>

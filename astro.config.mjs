@@ -6,12 +6,4 @@ export default defineConfig({
   build: {
     format: 'directory'
   },
-  vite: {
-    server: {
-      allowedHosts: ['.netlify.app', '.netlify.com'],
-      hmr: {
-        path: '/vite-hmr/'
-      }
-    }
-  }
 });

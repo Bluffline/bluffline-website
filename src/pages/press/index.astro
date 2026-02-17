@@ -12,8 +12,8 @@ import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
 import path from 'node:path';
 
 const page = await getEntry('pages', 'press');
-const pd = page.data;
-const sbId = 'src/content/pages/press.json';
+
+
 
 // Fetch press coverage (external news)
 const pressItems = await getCollection('press');
@@ -84,10 +84,6 @@ const assetTabs = [
     label={pd.heroLabel}
     title={pd.heroTitle}
     description={pd.heroDescription}
-    sbObjectId={sbId}
-    labelFieldPath="heroLabel"
-    titleFieldPath="heroTitle"
-    descriptionFieldPath="heroDescription"
   />
 
   <section class="tabs-section">
@@ -106,7 +102,6 @@ const assetTabs = [
                     date={item.data.date}
                     link={item.data.link}
                     type={item.data.mediaType}
-                    sbObjectId={`src/content/press/${item.id}.json`}
                   />
                 ))}
               </div>
@@ -124,7 +119,6 @@ const assetTabs = [
                   pubDate={release.data.pubDate}
                   summary={release.data.summary}
                   slug={release.slug}
-                  sbObjectId={`src/content/press-releases/${release.slug}.md`}
                 />
               ))}
             </div>
@@ -143,8 +137,8 @@ const assetTabs = [
           <div class="media-kit-section">
             <h3 class="media-kit-section-title">About the Bluffline</h3>
             <div class="boilerplate-card">
-              <div class="boilerplate" data-sb-object-id={sbId}>
-                <p data-sb-field-path="boilerplate">{pd.boilerplate}</p>
+              <div class="boilerplate">
+                <p>{pd.boilerplate}</p>
               </div>
               <div class="boilerplate-actions">
                 <button class="copy-boilerplate" aria-label="Copy boilerplate text">
@@ -363,9 +357,9 @@ const assetTabs = [
             <div class="contact-card">
               <p>For press inquiries, interviews, or additional information:</p>
               <div class="contact-info">
-                <div class="contact-item" data-sb-object-id={sbId}>
+                <div class="contact-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  <a href={`mailto:${pd.mediaContactEmail}`} data-sb-field-path="mediaContactEmail">{pd.mediaContactEmail}</a>
+                  <a href={`mailto:${pd.mediaContactEmail}`}>{pd.mediaContactEmail}</a>
                 </div>
               </div>
             </div>
@@ -380,9 +374,6 @@ const assetTabs = [
     description={pd.ctaDescription}
     primaryLabel="Get Involved"
     primaryHref="/support"
-    sbObjectId={sbId}
-    titleFieldPath="ctaTitle"
-    descriptionFieldPath="ctaDescription"
   />
 
   <MediaLightbox />

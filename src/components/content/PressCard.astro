@@ -5,10 +5,9 @@ interface Props {
   date: Date;
   link: string;
   type?: 'article' | 'radio' | 'tv' | 'podcast';
-  sbObjectId?: string;
 }
 
-const { outlet, title, date, link, type = 'article', sbObjectId } = Astro.props;
+const { outlet, title, date, link, type = 'article' } = Astro.props;
 
 const formattedDate = date.toLocaleDateString('en-US', {
   month: 'short',
@@ -16,11 +15,11 @@ const formattedDate = date.toLocaleDateString('en-US', {
 });
 ---
 
-<a href={link} class="article-card" target="_blank" rel="noopener" data-sb-object-id={sbObjectId}>
-  <span class="article-date" data-sb-field-path="date">{formattedDate}</span>
+<a href={link} class="article-card" target="_blank" rel="noopener">
+  <span class="article-date">{formattedDate}</span>
   <div class="article-content">
-    <h3 data-sb-field-path="title">{title}</h3>
-    <p class="article-outlet" data-sb-field-path="outlet">{outlet}</p>
+    <h3>{title}</h3>
+    <p class="article-outlet">{outlet}</p>
   </div>
   <div class="article-arrow">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

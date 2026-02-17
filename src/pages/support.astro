@@ -5,7 +5,7 @@ import { getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'support');
 const d = page.data;
-const sbId = 'src/content/pages/support.json';
+
 ---
 
 <BaseLayout 
@@ -16,17 +16,13 @@ const sbId = 'src/content/pages/support.json';
     label={d.heroLabel}
     title={d.heroTitle}
     description={d.heroDescription}
-    sbObjectId={sbId}
-    labelFieldPath="heroLabel"
-    titleFieldPath="heroTitle"
-    descriptionFieldPath="heroDescription"
   />
 
-  <section class="support-section" data-sb-object-id={sbId}>
+  <section class="support-section">
     <div class="section-inner">
       <div class="support-intro">
-        <h2 data-sb-field-path="membershipHeading">{d.membershipHeading}</h2>
-        <p data-sb-field-path="membershipDescription">{d.membershipDescription}</p>
+        <h2>{d.membershipHeading}</h2>
+        <p>{d.membershipDescription}</p>
       </div>
 
       <div class="pricing-table-container">
@@ -36,7 +32,7 @@ const sbId = 'src/content/pages/support.json';
         </stripe-pricing-table>
       </div>
 
-      <p class="tax-note" data-sb-field-path="taxNote">{d.taxNote}</p>
+      <p class="tax-note">{d.taxNote}</p>
 
       <div class="member-portal">
         <p>Already a member? <a href="https://checkout.bluffline.org/p/login/cN23cocuDcJp74IeUU">Manage your membership</a></p>
@@ -44,10 +40,10 @@ const sbId = 'src/content/pages/support.json';
     </div>
   </section>
 
-  <section class="other-ways-section" id="get-involved" data-sb-object-id={sbId}>
+  <section class="other-ways-section" id="get-involved">
     <div class="other-ways-inner">
-      <h2 data-sb-field-path="otherWaysHeading">{d.otherWaysHeading}</h2>
-      <p data-sb-field-path="otherWaysDescription">{d.otherWaysDescription}</p>
+      <h2>{d.otherWaysHeading}</h2>
+      <p>{d.otherWaysDescription}</p>
 
       <form class="involvement-form" name="involvement" method="POST" action="/thank-you/" data-netlify="true">
         <input type="hidden" name="form-name" value="involvement">

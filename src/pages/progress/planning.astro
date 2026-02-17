@@ -6,8 +6,8 @@ import IconCard from '../../components/content/IconCard.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'planning');
-const pd = page.data;
-const sbId = 'src/content/pages/planning.json';
+
+
 
 const allDocuments = await getCollection('documents');
 const plans = allDocuments
@@ -34,25 +34,21 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
     label={pd.heroLabel}
     title={pd.heroTitle}
     description={pd.heroDescription}
-    sbObjectId={sbId}
-    labelFieldPath="heroLabel"
-    titleFieldPath="heroTitle"
-    descriptionFieldPath="heroDescription"
   />
 
-  <section class="planning-intro" data-sb-object-id={sbId}>
+  <section class="planning-intro">
     <div class="section-inner">
       <div class="intro-content">
-        <p data-sb-field-path="introBody1">{pd.introBody1}</p>
-        <p data-sb-field-path="introBody2">{pd.introBody2}</p>
+        <p>{pd.introBody1}</p>
+        <p>{pd.introBody2}</p>
       </div>
     </div>
   </section>
 
   <section class="plans-section">
     <div class="section-inner">
-      <div class="section-header" data-sb-object-id={sbId}>
-        <h2 data-sb-field-path="plansHeading">{pd.plansHeading}</h2>
+      <div class="section-header">
+        <h2>{pd.plansHeading}</h2>
       </div>
       <div class="plans-grid">
         {regularPlans.map(plan => (
@@ -88,9 +84,6 @@ const regularPlans = plans.filter(p => !p.data.title.includes('Scenic Highway'))
     primaryLabel="Get in Touch"
     primaryHref="/support"
     variant="mist"
-    sbObjectId={sbId}
-    titleFieldPath="ctaTitle"
-    descriptionFieldPath="ctaDescription"
   />
 </BaseLayout>
 
