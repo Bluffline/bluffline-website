@@ -8,7 +8,7 @@ import { getCollection, getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'progress');
 const d = page.data;
-const sbId = 'src/content/pages/progress.json';
+
 
 const updates = (await getCollection('updates'))
   .filter(u => !u.data.draft)
@@ -33,22 +33,18 @@ const milestones = [
     label={d.heroLabel}
     title={d.heroTitle}
     description={d.heroDescription}
-    sbObjectId={sbId}
-    labelFieldPath="heroLabel"
-    titleFieldPath="heroTitle"
-    descriptionFieldPath="heroDescription"
   />
 
-  <section class="grant-highlight-section" data-sb-object-id={sbId}>
+  <section class="grant-highlight-section">
     <div class="section-inner">
       <div class="grant-highlight">
         <div>
-          <h3 data-sb-field-path="grantHeading">{d.grantHeading}</h3>
-          <p data-sb-field-path="grantBody">{d.grantBody}</p>
+          <h3>{d.grantHeading}</h3>
+          <p>{d.grantBody}</p>
         </div>
-        <div class="grant-amount" data-sb-field-path="grantAmount">
+        <div class="grant-amount">
           {d.grantAmount}
-          <span data-sb-field-path="grantAmountLabel">{d.grantAmountLabel}</span>
+          <span>{d.grantAmountLabel}</span>
         </div>
       </div>
     </div>
@@ -57,7 +53,7 @@ const milestones = [
   <section class="milestones">
     <div class="milestones-inner">
       <div class="milestones-header">
-        <h2 data-sb-field-path="milestonesHeading">{d.milestonesHeading}</h2>
+        <h2>{d.milestonesHeading}</h2>
       </div>
       <div class="milestones-phase-overview">
         <PhaseTracker
@@ -97,8 +93,8 @@ const milestones = [
 
   <section class="updates-feed">
     <div class="updates-feed-inner">
-      <div class="updates-header" data-sb-object-id={sbId}>
-        <h2 data-sb-field-path="updatesHeading">{d.updatesHeading}</h2>
+      <div class="updates-header">
+        <h2>{d.updatesHeading}</h2>
         <a href="/progress/updates" class="btn btn-outline">View All Updates</a>
       </div>
       <div class="updates-grid">
@@ -110,7 +106,6 @@ const milestones = [
             slug={update.slug}
             featuredImage={update.data.featuredImage}
             featuredImageAlt={update.data.featuredImageAlt}
-            sbObjectId={`src/content/updates/${update.slug}.md`}
           />
         ))}
       </div>
@@ -123,9 +118,6 @@ const milestones = [
     primaryLabel="Subscribe"
     kitFormId="3f946cf4ba"
     variant="mist"
-    sbObjectId={sbId}
-    titleFieldPath="ctaTitle"
-    descriptionFieldPath="ctaDescription"
   />
 </BaseLayout>
 

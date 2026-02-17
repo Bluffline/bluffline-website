@@ -3,20 +3,16 @@ interface Props {
   label?: string;
   title: string;
   description?: string;
-  sbObjectId?: string;
-  labelFieldPath?: string;
-  titleFieldPath?: string;
-  descriptionFieldPath?: string;
 }
 
-const { label, title, description, sbObjectId, labelFieldPath, titleFieldPath, descriptionFieldPath } = Astro.props;
+const { label, title, description } = Astro.props;
 ---
 
-<section class="page-hero" data-sb-object-id={sbObjectId}>
+<section class="page-hero">
   <div class="page-hero-inner">
-    {label && <p class="section-label" data-sb-field-path={labelFieldPath}>{label}</p>}
-    <h1 data-sb-field-path={titleFieldPath}>{title}</h1>
-    {description && <p data-sb-field-path={descriptionFieldPath}>{description}</p>}
+    {label && <p class="section-label">{label}</p>}
+    <h1>{title}</h1>
+    {description && <p>{description}</p>}
     <slot />
   </div>
 </section>
