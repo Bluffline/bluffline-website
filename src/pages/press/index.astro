@@ -12,8 +12,7 @@ import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
 import path from 'node:path';
 
 const page = await getEntry('pages', 'press');
-
-
+const pd = page.data;
 
 // Fetch press coverage (external news)
 const pressItems = await getCollection('press');

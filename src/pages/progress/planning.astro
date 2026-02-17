@@ -6,8 +6,7 @@ import IconCard from '../../components/content/IconCard.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'planning');
-
-
+const pd = page.data;
 
 const allDocuments = await getCollection('documents');
 const plans = allDocuments
