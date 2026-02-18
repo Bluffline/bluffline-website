@@ -6,7 +6,6 @@ The digital home for [The Bluffline](https://bluffline.org), a 20-mile multimoda
 
 - **Framework**: [Astro 4](https://astro.build) — static-first with JavaScript islands where interaction is needed
 - **Content**: Astro Content Collections with Zod schema validation (Markdown + JSON)
-- **CMS**: [Stackbit](https://www.stackbit.com/) — Git-based headless CMS with visual editing
 - **Maps**: [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/) — interactive corridor mapping
 - **Images**: [Sharp](https://sharp.pixelplumbing.com/) — build-time image optimization
 - **Deployment**: [Netlify](https://netlify.com) — automatic deploys from `main`
@@ -18,12 +17,15 @@ The digital home for [The Bluffline](https://bluffline.org), a 20-mile multimoda
 ```
 src/
 ├── components/
-│   ├── content/         # Data-driven cards (UpdateCard, PressCard, BoardMemberCard,
-│   │                    #   DocumentCard, TimelineItem, TestimonialCard)
+│   ├── content/         # Data-driven cards (UpdateCard, PressCard, PressReleaseCard,
+│   │                    #   BoardMemberCard, DocumentCard, TimelineItem,
+│   │                    #   TestimonialCard, EmptyStateCard, IconCard)
 │   ├── nav/             # Header (fixed, with dropdowns) and Footer
-│   ├── ui/              # Reusable primitives (Button, PageHero, CallToAction,
+│   ├── ui/              # Reusable primitives (Button, Logo, PageHero, CallToAction,
 │   │                    #   PhaseTracker, MediaLightbox, AnnouncementBanner, Tabs)
-│   └── report/          # Annual report components (StatCard, MilestoneCard, PhotoGallery)
+│   └── report/          # Annual report components (ReportHero, StatCard, StatGrid,
+│                        #   MilestoneCard, PhotoGallery, AwardFeature, BigQuote,
+│                        #   EventHighlight, PartnerCard, ProjectSpotlight)
 │
 ├── content/             # Content collections (schemas in config.ts)
 │   ├── updates/         # News & milestones (Markdown with frontmatter)
@@ -272,17 +274,13 @@ TypeScript path aliases are configured for clean imports:
 @content/*    → src/content/*
 ```
 
-### Visual Editing with Stackbit
-
-Stackbit provides a visual editing layer on top of the Git-based content. Configuration is in `stackbit.config.ts`. Content models for all collections are mapped for inline editing through the Stackbit interface.
-
 ## Deployment
 
 The site deploys automatically via Netlify when changes are pushed to `main`.
 
 - **Build command**: `npm run build`
 - **Publish directory**: `dist`
-- **Security headers**: CSP, X-Content-Type-Options, and Referrer-Policy are configured in `netlify.toml`
+- **Security headers**: X-Content-Type-Options and Referrer-Policy are configured in `netlify.toml`
 - **Custom 404**: Unmatched routes redirect to a 404 page
 
 ## License
