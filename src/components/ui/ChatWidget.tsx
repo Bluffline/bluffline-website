@@ -153,6 +153,24 @@ export default function ChatWidget() {
           <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontWeight: 600, fontSize: '0.9375rem', flex: 1 }}>
             Ask about The Bluffline
           </span>
+          {isMobile && (
+            <button
+              onClick={toggle}
+              aria-label="Close chat"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#fff',
+                cursor: 'pointer',
+                padding: '0.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <CloseIcon />
+            </button>
+          )}
         </div>
 
         {/* ChatKit fills the remaining panel space */}
@@ -161,7 +179,7 @@ export default function ChatWidget() {
         </div>
       </div>
 
-      {/* ── FAB toggle button ── */}
+      {/* ── FAB toggle button (hidden on mobile when chat is open) ── */}
       <button
         onClick={toggle}
         aria-label={isOpen ? 'Close chat' : 'Open Bluffline assistant'}
@@ -177,7 +195,7 @@ export default function ChatWidget() {
           color: '#fff',
           border: 'none',
           cursor: 'pointer',
-          display: 'flex',
+          display: isMobile && isOpen ? 'none' : 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 4px 16px rgba(65, 82, 31, 0.4)',
