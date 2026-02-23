@@ -55,7 +55,7 @@ export const handler = async (event) => {
         'OpenAI-Beta': 'chatkit_beta=v1',
       },
       body: JSON.stringify({
-        workflow_id: workflowId,
+        workflow: workflowId,
         user: userId,
       }),
     });
