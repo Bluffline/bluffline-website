@@ -1,5 +1,26 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ChatKit, useChatKit } from '@openai/chatkit-react';
+
+// ─── Mobile detection ─────────────────────────────────────────────────────────
+
+const MOBILE_BREAKPOINT = 768;
+
+function useIsMobile() {
+  // Initialize synchronously so there's no layout flash on first render.
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  return isMobile;
+}
 
 // ─── Session fetcher ──────────────────────────────────────────────────────────
 
@@ -64,6 +85,7 @@ function CloseIcon() {
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const getClientSecret = useCallback(
     (existing: string | null | undefined) => fetchClientSecret(existing),
@@ -77,6 +99,35 @@ export default function ChatWidget() {
   const toggle = () => setIsOpen((prev) => !prev);
   const close = () => setIsOpen(false);
 
+  // On mobile the panel fills the entire viewport; on desktop it floats.
+  const panelStyle: React.CSSProperties = isMobile
+    ? {
+        position: 'fixed',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        borderRadius: 0,
+        overflow: 'hidden',
+        display: isOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        zIndex: 1000,
+        background: '#fff',
+      }
+    : {
+        position: 'fixed',
+        bottom: '5.5rem',
+        right: '1.5rem',
+        width: 'min(380px, calc(100vw - 2rem))',
+        height: 'min(600px, calc(100vh - 8rem))',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        boxShadow: '0 8px 32px rgba(45, 48, 71, 0.18)',
+        display: isOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        zIndex: 1000,
+        background: '#fff',
+      };
+
   return (
     <>
       {/* ── Floating panel ── */}
@@ -85,20 +136,7 @@ export default function ChatWidget() {
         aria-label="Bluffline assistant"
         aria-modal="true"
         aria-hidden={!isOpen}
-        style={{
-          position: 'fixed',
-          bottom: '5.5rem',
-          right: '1.5rem',
-          width: 'min(380px, calc(100vw - 2rem))',
-          height: 'min(600px, calc(100vh - 8rem))',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          boxShadow: '0 8px 32px rgba(45, 48, 71, 0.18)',
-          display: isOpen ? 'flex' : 'none',
-          flexDirection: 'column',
-          zIndex: 1000,
-          background: '#fff',
-        }}
+        style={panelStyle}
       >
         {/* Panel header */}
         <div
@@ -143,7 +181,9 @@ export default function ChatWidget() {
         </div>
       </div>
 
-      {/* ── FAB toggle button ── */}
+      {/* ── FAB toggle button ──
+          Hidden on mobile while the panel is open — the header close button
+          handles dismissal, and the FAB would otherwise float over the content. */}
       <button
         onClick={toggle}
         aria-label={isOpen ? 'Close chat' : 'Open Bluffline assistant'}
@@ -159,7 +199,7 @@ export default function ChatWidget() {
           color: '#fff',
           border: 'none',
           cursor: 'pointer',
-          display: 'flex',
+          display: isMobile && isOpen ? 'none' : 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 4px 16px rgba(65, 82, 31, 0.4)',
