@@ -97,7 +97,6 @@ export default function ChatWidget() {
   });
 
   const toggle = () => setIsOpen((prev) => !prev);
-  const close = () => setIsOpen(false);
 
   // On mobile the panel fills the entire viewport; on desktop it floats.
   const panelStyle: React.CSSProperties = isMobile
@@ -154,25 +153,6 @@ export default function ChatWidget() {
           <span style={{ fontFamily: "'Source Sans 3', sans-serif", fontWeight: 600, fontSize: '0.9375rem', flex: 1 }}>
             Ask about The Bluffline
           </span>
-          <button
-            onClick={close}
-            aria-label="Close chat"
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'rgba(255,255,255,0.8)',
-              padding: '0.25rem',
-              display: 'flex',
-              alignItems: 'center',
-              borderRadius: '4px',
-              transition: 'color 0.15s ease',
-            }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = '#fff')}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.8)')}
-          >
-            <CloseIcon />
-          </button>
         </div>
 
         {/* ChatKit fills the remaining panel space */}
@@ -181,9 +161,7 @@ export default function ChatWidget() {
         </div>
       </div>
 
-      {/* ── FAB toggle button ──
-          Hidden on mobile while the panel is open — the header close button
-          handles dismissal, and the FAB would otherwise float over the content. */}
+      {/* ── FAB toggle button ── */}
       <button
         onClick={toggle}
         aria-label={isOpen ? 'Close chat' : 'Open Bluffline assistant'}
@@ -199,7 +177,7 @@ export default function ChatWidget() {
           color: '#fff',
           border: 'none',
           cursor: 'pointer',
-          display: isMobile && isOpen ? 'none' : 'flex',
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 4px 16px rgba(65, 82, 31, 0.4)',
