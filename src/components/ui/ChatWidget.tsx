@@ -109,7 +109,7 @@ export default function ChatWidget() {
         overflow: 'hidden',
         display: isOpen ? 'flex' : 'none',
         flexDirection: 'column',
-        zIndex: 1000,
+        zIndex: 1002,
         background: '#fff',
       }
     : {
@@ -123,7 +123,7 @@ export default function ChatWidget() {
         boxShadow: '0 8px 32px rgba(45, 48, 71, 0.18)',
         display: isOpen ? 'flex' : 'none',
         flexDirection: 'column',
-        zIndex: 1000,
+        zIndex: 1002,
         background: '#fff',
       };
 
@@ -199,7 +199,7 @@ export default function ChatWidget() {
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 4px 16px rgba(65, 82, 31, 0.4)',
-          zIndex: 1001,
+          zIndex: 1003,
           transition: 'background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease',
         }}
         onMouseEnter={(e) => {
