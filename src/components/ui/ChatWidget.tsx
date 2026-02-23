@@ -139,7 +139,7 @@ export default function ChatWidget() {
 
         {/* ChatKit fills the remaining panel space */}
         <div style={{ flex: 1, minHeight: 0 }}>
-          <ChatKit control={control} style={{ width: '100%', height: '100%' }} />
+          <ChatKit control={control} style={{ display: 'block', width: '100%', height: '100%' }} />
         </div>
       </div>
 
