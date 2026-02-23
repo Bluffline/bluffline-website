@@ -2,6 +2,15 @@
   command = "npm run build"
   publish = "dist"
 
+[functions]
+  directory = "netlify/functions"
+
+# Clean URL for the ChatKit session endpoint
+[[redirects]]
+  from = "/api/chatkit/session"
+  to = "/.netlify/functions/chatkit-session"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/404"
