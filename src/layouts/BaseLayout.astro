@@ -54,6 +54,9 @@ const fullTitle = title === 'Home'
   <!-- Floating chat widget (Astro React island, hydrated client-side) -->
   <ChatWidget client:load />
 
+  <!-- ChatKit web component (registers <openai-chatkit> custom element) -->
+  <script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js" async></script>
+
   <!-- Kit (ConvertKit) Modal Script -->
   <script async data-uid="3f946cf4ba" src="https://bluffline.kit.com/3f946cf4ba/index.js"></script>
 </body>
