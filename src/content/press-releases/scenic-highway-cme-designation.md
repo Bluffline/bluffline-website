@@ -12,6 +12,21 @@ contactName: Media Relations
 contactEmail: press@bluffline.org
 draft: false
 contactPhone: (850) 776-0436
+media:
+  - src: '/images/bluffs-aerial-2024.jpg'
+    alt: 'Aerial view of the Pensacola Bay Bluffs Scenic Highway corridor'
+    caption: 'The 10-mile Pensacola Bay Bluffs Scenic Highway corridor as seen from above'
+    credit: 'Bluffline, Inc.'
+    type: 'image'
+  - src: '/images/chimney-park-tracks.jpg'
+    alt: 'View of the corridor from Chimney Park looking along the railroad tracks'
+    caption: 'The Chimney Park segment is one of several public access points along the corridor'
+    credit: 'Bluffline, Inc.'
+    type: 'image'
+  - src: '/images/corridor-map-static.png'
+    alt: 'Map of the Pensacola Bay Bluffs Scenic Highway corridor'
+    caption: 'The corridor spans 10 miles of State Road 292 along Escambia Bay'
+    type: 'image'
 ---
 **PENSACOLA, FL** — Bluffline, Inc. has been designated by the Florida Department of Transportation as the official Corridor Management Entity (CME) for the Pensacola Bay Bluffs Scenic Highway, a 10-mile stretch of State Road 292 recognized for its outstanding natural, cultural, and scenic qualities.
 
