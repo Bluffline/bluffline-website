@@ -70,19 +70,19 @@ const sortedTestimonials = testimonials.sort((a, b) => {
   }
 
   .testimonials-grid {
-    display: grid;
-    gap: 2rem;
+    column-count: 1;
+    column-gap: 2rem;
   }
 
   @media (min-width: 768px) {
     .testimonials-grid {
-      grid-template-columns: repeat(2, 1fr);
+      column-count: 2;
     }
   }
 
   @media (min-width: 1200px) {
     .testimonials-grid {
-      grid-template-columns: repeat(3, 1fr);
+      column-count: 3;
     }
   }
 
