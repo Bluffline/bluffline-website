@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "We believe that our expertise in data-driven decision making and impact analysis will be instrumental in ensuring the Bluffline's success.",
+  "quote": "The Bluffline contributes to the development of resilient communities and aligns with our institution's goal of improving the quality of life for our residents. This project extends into the future we envision for Pensacola by fostering human connectivity across communities along the Bluffline.",
   "author": "Nicole Gislason",
   "title": "Executive Director",
-  "organization": "University of West Florida (Haas Center)",
+  "organization": "University of West Florida Haas Center",
+  "organizationLink": "https://uwf.edu/centers/haas-center/",
   "date": "2023-07-12",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_Haas.pdf",
-  "order": 18
+  "order": 17
 }

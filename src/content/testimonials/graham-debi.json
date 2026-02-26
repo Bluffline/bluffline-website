@@ -1,9 +1,10 @@
 {
   "type": "Testimonial",
-  "quote": "This project is an essential investment in the future of NAS Pensacola and the surrounding community.",
+  "quote": "The Board of Directors of the Coalition has unanimously approved support for The Bluffline's Community Change Grant (CCG) application for the development of the Jackson Lakes Extension. This project will serve as a critical public safety and economic development investment, building on successful outcomes resulting from NAS Pensacola's increased focus on pedestrian livability in recent studies, such as the NAS Pensacola Compatible Use Study and the Emerald Coast Military Installation Resiliency Review (MIRR).",
   "author": "Debi Graham",
-  "title": "Executive Director",
+  "title": "Former director",
   "organization": "Northwest Florida Defense Coalition",
+  "organizationLink": "https://www.nwfldefense.org/",
   "date": "2024-10-02",
   "pdfFile": "/documents/letters/CCGP_LOS_Defense-Task-Force.pdf",
   "order": 3

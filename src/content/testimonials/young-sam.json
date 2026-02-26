@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "The Bluffline project's focus on transportation safety and access, climate change mitigation, and uniting Pensacola's diverse neighborhoods around a shared vision is precisely what our community needs.",
+  "quote": "The Bluffline project's vision of creating a 10-mile greenway from Scenic Heights to West Pensacola highlights the need for affordable housing. As we continue to grow, this greenway will create opportunities for sustainable community impact. At Pensacola Habitat for Humanity, we understand the importance of balancing economic development with community equity. Greenways can increase surrounding property value, but also potentially impact affordable housing. This is why we are committed to ensuring the Bluffline project helps preserve affordable housing opportunities in our city.",
   "author": "Sam Young",
-  "title": "President & CEO",
+  "title": "President/CEO",
   "organization": "Pensacola Habitat for Humanity",
+  "organizationLink": "https://pensacolahabitat.org/",
   "date": "2023-07-20",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_Habitat.pdf",
-  "order": 19
+  "order": 18
 }

@@ -1,9 +1,10 @@
 {
   "type": "Testimonial",
-  "quote": "We believe the Bluffline project will have a significant impact on our community.",
+  "quote": "The initiatives behind this project have demonstrated the creativity, passion, and organization to turn their big vision into reality. As a member of the regional Transportation Planning Organization, the Emerald Coast Regional Council, and our local economic development council, I believe that the Bluffline is an excellent opportunity to bring together our historically divided community and collaborate on a project that will have significant impacts for all of us.",
   "author": "Allison Patton",
-  "title": "City Council Member, District 6",
-  "organization": "City of Pensacola",
+  "title": "Council member, District 6",
+  "organization": "Pensacola City Council",
+  "organizationLink": "https://www.cityofpensacola.com/125/City-Council",
   "date": "2023-07-27",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_Council-Patton.pdf",
   "order": 14

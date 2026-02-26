@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "The Bluffline vision aligns perfectly with my own commitment to smart growth and sustainable development.",
+  "quote": "The Bluffline vision aligns perfectly with my own commitment to smart growth and sustainable development. By improving transportation safety and accessibility, the proposed greenway would do more than just create a physical space for recreation. It would contribute to the overall well-being of our residents and stimulate our local economy by boosting tourism, supporting small businesses, and attracting new residents and businesses to Pensacola.",
   "author": "Casey Jones",
-  "title": "City Council Vice President, District 3",
-  "organization": "City of Pensacola",
+  "title": "Council member, District 3",
+  "organization": "Pensacola City Council",
+  "organizationLink": "https://www.cityofpensacola.com/125/City-Council",
   "date": "2023-07-07",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_Council-Jones.pdf",
-  "order": 13
+  "order": 12
 }
