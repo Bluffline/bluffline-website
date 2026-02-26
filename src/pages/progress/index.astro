@@ -29,10 +29,13 @@ const milestones = [
   title="Progress" 
   description="Track the Bluffline's progress — from federal grants to community engagement to construction milestones."
 >
+  <!-- TODO: Swap hero photo when final assets are provided -->
   <PageHero
     label={d.heroLabel}
     title={d.heroTitle}
     description={d.heroDescription}
+    heroImage="/images/chimney-park-tracks.jpg"
+    heroImageAlt="Rail corridor with historic chimney at Chimney Park"
   />
 
   <section class="grant-highlight-section">
@@ -157,7 +160,7 @@ const milestones = [
   .milestones-header { margin-bottom: 3rem; }
   .milestones-header h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
   .milestones-phase-overview {
-    max-width: 500px;
+    max-width: 800px;
     margin-bottom: 2.5rem;
   }
   .milestone-list { display: grid; gap: 1rem; max-width: 800px; }

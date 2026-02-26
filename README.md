@@ -30,7 +30,7 @@ src/
 ├── content/             # Content collections (schemas in config.ts)
 │   ├── updates/         # News & milestones (Markdown with frontmatter)
 │   ├── press/           # Media coverage (JSON)
-│   ├── press-releases/  # Official press releases (Markdown)
+│   ├── press-releases/  # Official press releases (Markdown, supports media attachments)
 │   ├── board-members/   # Board directory (JSON)
 │   ├── documents/       # Planning docs & studies (JSON)
 │   ├── testimonials/    # Community quotes (JSON)
@@ -39,12 +39,13 @@ src/
 │   └── pages/           # Editable page content (JSON)
 │
 ├── data/                # Static data files for maps and visualizations
+│   ├── brand-colors.json # Canonical color palette (drives Media Kit Color Palette tab)
 │   ├── crash-incidents.json
 │   ├── planning-corridor.json
 │   └── scenic-highway.json
 │
 ├── layouts/
-│   ├── BaseLayout.astro # Master layout (header, footer, meta, fonts)
+│   ├── BaseLayout.astro # Master layout (header, footer, meta, fonts, favicon)
 │   └── PostLayout.astro # Article/update layout with author and date
 │
 ├── pages/               # File-based routing
@@ -52,19 +53,19 @@ src/
 │   ├── support.astro                      # Get Involved CTA
 │   ├── thank-you.astro                    # Post-signup confirmation
 │   ├── about/
-│   │   ├── index.astro                    # Mission, values, board, timeline
+│   │   ├── index.astro                    # Mission, values, board, timeline (hero image)
 │   │   ├── corridor.astro                 # The corridor itself
-│   │   ├── impact.astro                   # Community impact
+│   │   ├── impact.astro                   # Community impact (hero image)
 │   │   └── community-support.astro        # Letters of support
 │   ├── progress/
-│   │   ├── index.astro                    # Phase overview with tracker
-│   │   ├── planning.astro                 # Planning documents
+│   │   ├── index.astro                    # Phase overview with tracker (hero image)
+│   │   ├── planning.astro                 # Planning documents (hero image)
 │   │   └── updates/
 │   │       ├── index.astro                # Updates listing
 │   │       └── [slug].astro               # Individual update
 │   ├── press/
-│   │   ├── index.astro                    # Press coverage listing
-│   │   └── [slug].astro                   # Individual press release
+│   │   ├── index.astro                    # Press coverage, media kit, color palette
+│   │   └── [slug].astro                   # Individual press release (with media attachments)
 │   └── documents/
 │       └── annual-reports/
 │           ├── index.astro                # Reports listing
@@ -77,11 +78,32 @@ src/
     └── media-metadata.ts # EXIF/media helpers
 
 public/
-├── images/              # Site images
+├── images/              # Central asset root
+│   ├── hero/            # Hero/header images (placeholder until final photos provided)
+│   ├── logos/           # Brand logos and favicons (placeholder until provided)
+│   ├── photos/          # General photography
+│   ├── press/           # Press-specific images
+│   ├── video/           # Video assets
+│   └── *.jpg/png        # Existing site images (legacy flat structure)
 ├── documents/
 │   └── letters/         # PDF support letters
-└── media-kit/           # Press/media assets
+└── media-kit/           # Press/media downloadable assets
+    ├── logos/
+    ├── photos/
+    ├── videos/
+    └── audio/
 ```
+
+### Asset Organization
+
+Images and media follow a centralized structure under `public/images/` with clear subfolders:
+
+- **`public/images/hero/`** — Hero/header photos for pages. Currently uses `placeholder.svg`; swap in final photos when available.
+- **`public/images/logos/`** — Brand logos and favicon files. Drop in logo files and they'll be picked up by the favicon links in `BaseLayout.astro`.
+- **`public/images/photos/`** — General high-res photography.
+- **`public/images/press/`** — Press release media attachments.
+- **`public/images/video/`** — Video assets.
+- **`public/media-kit/`** — Downloadable press assets organized by type. These are scanned at build time for the Media Kit tab. Any media attached to press releases is also surfaced in the Media Kit automatically.
 
 ## Content Collections
 
@@ -127,6 +149,26 @@ Media coverage entries. Edit `src/content/press/coverage.json`.
 ### Press Releases
 
 Official releases authored by the organization. Add Markdown files to `src/content/press-releases/`.
+
+Press releases support optional media attachments that are displayed on the release page and automatically propagated to the Media Kit asset library:
+
+```yaml
+---
+title: "Release Title"
+pubDate: 2025-01-15
+summary: "Brief summary"
+contactName: "Media Relations"
+contactEmail: press@bluffline.org
+contactPhone: "(850) 776-0436"
+media:
+  - src: "/images/press/photo.jpg"
+    alt: "Description"
+    caption: "Photo caption"
+    credit: "Photographer name"
+    type: image   # image | video
+draft: false
+---
+```
 
 ### Documents
 
@@ -188,6 +230,26 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 `qualities` options: `Cultural`, `Historical`, `Archaeological`, `Recreational`, `Natural`, `Scenic`
 
+## Media Kit
+
+The Press page (`/press#media-kit`) includes a comprehensive Media Kit with the following tabs:
+
+| Tab | Content |
+|---|---|
+| Logos | Brand logo files from `public/media-kit/logos/` |
+| Photos | High-res photos from `public/media-kit/photos/` + press release attachments |
+| Videos | Video files from `public/media-kit/videos/` + press release video attachments |
+| Audio | Audio files from `public/media-kit/audio/` |
+| Color Palette | Brand color swatches with hex/RGB values and usage notes |
+
+### Color Palette
+
+The Color Palette section is driven by a single canonical data file at `src/data/brand-colors.json`. This file defines each brand color with its name, CSS variable, hex value, RGB value, and usage notes. The Media Kit reads this file at build time to render visible swatches. To update brand colors, edit `brand-colors.json` and the corresponding CSS variables in `src/styles/global.css`.
+
+### Asset Propagation
+
+Media files attached to press releases (via the `media` frontmatter field) are automatically included in the Media Kit's Photos and Videos tabs. This ensures the asset library stays current without manual duplication.
+
 ## Site Architecture
 
 ### Navigation
@@ -195,6 +257,25 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 - **Desktop**: Fixed header with dropdown menus for About and Progress sections
 - **Mobile**: Hamburger toggle with slide-out menu
 - **Primary CTA**: "Get Involved" button appears in the header and throughout the site
+
+### Hero Images
+
+Pages support optional hero images via the `PageHero` component's `heroImage` prop. Current pages with hero images (using placeholder until final photos are provided):
+
+- About (`/about`)
+- Impact (`/about/impact`)
+- Progress (`/progress`)
+- Planning (`/progress/planning`)
+
+To swap in final photos, replace `/images/hero/placeholder.svg` with the actual image files and update the `heroImage` prop on each page.
+
+### Favicon
+
+Favicon links are configured in `BaseLayout.astro` pointing to `public/images/logos/`. Drop in the following files when logo assets are provided:
+- `favicon.svg` (currently a placeholder)
+- `favicon-32x32.png`
+- `favicon-16x16.png`
+- `apple-touch-icon.png`
 
 ### Page Hierarchy
 
@@ -208,13 +289,15 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 | `/progress` | Phase tracker and project overview |
 | `/progress/planning` | Planning documents by government level |
 | `/progress/updates` | News listing |
-| `/press` | Media coverage aggregation |
+| `/press` | Media coverage, press releases, media kit (with color palette) |
 | `/documents/annual-reports` | Annual reports |
 | `/support` | Get Involved — email signup (ConvertKit) |
 
 ## Design System
 
 ### Brand Colors
+
+Defined in `src/styles/global.css` and documented in `src/data/brand-colors.json`:
 
 ```css
 --forest: #41521F;     /* Primary green — buttons, headers */
@@ -235,7 +318,7 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 - `.section` / `.section-inner` — standard page sections with max-width 1400px
 - `.btn` / `.btn-outline` / `.btn-small` — button variants
-- `.page-hero` — page header with gradient background
+- `.page-hero` — page header with gradient background (supports optional hero image)
 - Responsive breakpoints at 768px, 900px, and 1024px (mobile-first)
 
 ## Key Design Principles
