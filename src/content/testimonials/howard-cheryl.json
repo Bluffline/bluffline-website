@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "The Bluffline can serve as a physical and symbolic connector, promoting safe transportation infrastructure, affordable workforce housing, economic opportunity, and a healthy environment.",
+  "quote": "We believe that the Bluffline can serve as a physical and symbolic connector, promoting safe transportation infrastructure, affordable workforce housing, economic opportunity, and a healthy environment. It will also provide a platform for cultural exchange and learning, as it links together different neighborhoods, each with its own unique history and culture.",
   "author": "Cheryl Howard",
   "title": "CEO",
   "organization": "African American Heritage Society of Pensacola",
+  "organizationLink": "https://africanamericanheritagesociety.org/",
   "date": "2023-07-12",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_AAHS.pdf",
-  "order": 8
+  "order": 7
 }

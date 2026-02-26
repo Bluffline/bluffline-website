@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "This project has the potential to be a shining example of how communities can be reconnected and revitalized through active transportation infrastructure.",
+  "quote": "Pensacola has a vibrant community of cyclists and outdoor enthusiasts. However, the lack of a comprehensive and safe network of pathways has limited the potential for biking and walking as a form of everyday transportation. The Bluffline project is poised to change this scenario.",
   "author": "Christian Wagley",
   "title": "Executive Director",
   "organization": "Bike Pensacola",
+  "organizationLink": "https://www.bikepensacola.org/",
   "date": "2023-07-07",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_Bike-Pensacola.pdf",
-  "order": 10
+  "order": 9
 }

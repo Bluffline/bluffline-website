@@ -4,10 +4,11 @@ interface Props {
   author: string;
   title: string;
   organization: string;
+  organizationLink?: string;
   pdfFile: string;
 }
 
-const { quote, author, title, organization, pdfFile } = Astro.props;
+const { quote, author, title, organization, organizationLink, pdfFile } = Astro.props;
 ---
 
 <article class="testimonial-card">
@@ -17,18 +18,27 @@ const { quote, author, title, organization, pdfFile } = Astro.props;
   </blockquote>
   <div class="attribution">
     <p class="author">{author}</p>
-    <p class="title-org"><span>{title}</span>, <span>{organization}</span></p>
+    <p class="title-org">
+      <span>{title}</span>,{' '}
+      {organizationLink ? (
+        <a href={organizationLink} class="org-link" target="_blank" rel="noopener">{organization}</a>
+      ) : (
+        <span>{organization}</span>
+      )}
+    </p>
   </div>
-  <a href={pdfFile} class="pdf-link" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-      <polyline points="14 2 14 8 20 8"></polyline>
-      <line x1="16" y1="13" x2="8" y2="13"></line>
-      <line x1="16" y1="17" x2="8" y2="17"></line>
-      <polyline points="10 9 9 9 8 9"></polyline>
-    </svg>
-    Read Full Letter
-  </a>
+  {pdfFile && (
+    <a href={pdfFile} class="pdf-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      Read Full Letter
+    </a>
+  )}
 </article>
 
 <style>
@@ -93,6 +103,17 @@ const { quote, author, title, organization, pdfFile } = Astro.props;
     font-size: 0.9rem;
     color: var(--navy);
     opacity: 0.7;
+  }
+
+  .org-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.15s ease;
+  }
+
+  .org-link:hover {
+    opacity: 1;
   }
 
   .pdf-link {

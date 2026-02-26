@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "This project represents a unique opportunity to make a lasting, positive impact on our community, and I am excited to see the transformative changes it will bring.",
+  "quote": "The Bluffline represents a significant effort to enhance economic opportunity and inclusive tourism development in our region. The proposed 10-mile greenway would stimulate small businesses, create jobs, and attract tourists \u2014 especially in West Pensacola, a part of our community that was damaged by the construction of I-110 in the 1970\u2019s.",
   "author": "Jeff Bergosh",
-  "title": "Commissioner, District 1",
-  "organization": "Escambia County",
+  "title": "Former commissioner, District 1",
+  "organization": "Escambia County Board of County Commissioners",
+  "organizationLink": "https://myescambia.com/elected-officials/commissioners",
   "date": "2023-07-23",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_County-Bergosh.pdf",
-  "order": 7
+  "order": 6
 }

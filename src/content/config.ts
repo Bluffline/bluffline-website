@@ -117,6 +117,7 @@ const testimonialsCollection = defineCollection({
     author: z.string(),
     title: z.string(),
     organization: z.string(),
+    organizationLink: z.string().url().optional(),
     date: z.coerce.date().optional(),
     pdfFile: z.string(),
     order: z.number().optional(),

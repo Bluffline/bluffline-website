@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "It is crucial that greenway projects like the Bluffline are coordinated with affordable housing strategies to ensure that all residents, regardless of income, can benefit.",
+  "quote": "Research and industry best practices have shown that greenway projects can have a significant impact on affordable housing. Greenways can increase the attractiveness and livability of neighborhoods, potentially leading to increased housing demand and values. However, without careful planning and coordination, this can also lead to displacement of low-income residents. Therefore, it is crucial that greenway projects like the Bluffline are coordinated with affordable housing strategies to ensure that all residents, regardless of income, can benefit.",
   "author": "Crystal Scott",
-  "title": "Chair / Regional Public Affairs and Communications Advisor",
-  "organization": "Pensacola Affordable Housing Advisory Committee / NeighborWorks America",
+  "title": "Regional Public Affairs and Communications Advisor",
+  "organization": "NeighborWorks America",
+  "organizationLink": "https://www.neighborworks.org/",
   "date": "2023-07-14",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_Affordable-Housing-Committee.pdf",
-  "order": 9
+  "order": 8
 }

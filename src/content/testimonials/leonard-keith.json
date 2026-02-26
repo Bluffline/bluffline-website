@@ -1,9 +1,10 @@
 {
   "type": "Testimonial",
-  "quote": "By providing students with a safe and direct route to and from school… this project is critical in reducing environmental and transportation safety risks.",
+  "quote": "The neighborhoods of Warrington and Brownsville, which are the focus of this project, have been designated as a \u201ccorridor of concern\u201d due to persistent challenges associated with high poverty rates, low educational attainment, and various socioeconomic issues. The Bluffline Jackson Lakes Extension project aims to address these challenges by creating safe routes to students attending Global Learning Academy and Warrington Preparatory Academy.",
   "author": "Keith Leonard",
   "title": "Superintendent",
-  "organization": "Escambia County School District",
+  "organization": "Escambia County Public Schools",
+  "organizationLink": "https://www.escambiaschools.org/",
   "date": "2024-09-23",
   "pdfFile": "/documents/letters/CCGP_LOS_ECSD.pdf",
   "order": 4

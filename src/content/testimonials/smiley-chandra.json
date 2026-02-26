@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "The Bluffline project can enhance public spaces, reconnect what was and has been divided, create job opportunities, and stimulate economic growth in underserved areas.",
+  "quote": "The Bluffline project is more than just a trail \u2014 it is a pathway to a healthier, more connected community. By providing a safe, accessible route for pedestrians and cyclists, it encourages physical activity, a key component of health. It also connects neighborhoods, schools, and commercial areas, fostering a sense of community that is vital for mental well-being.",
   "author": "Chandra Smiley",
   "title": "CEO",
   "organization": "Community Health Northwest Florida",
+  "organizationLink": "https://healthcarewithinreach.org/",
   "date": "2023-07-14",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_CHNWF.pdf",
-  "order": 11
+  "order": 10
 }

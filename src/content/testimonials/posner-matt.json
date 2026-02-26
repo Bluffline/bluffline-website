@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "Its planned incorporation of erosion control and stormwater mitigation measures will significantly contribute to the health and sustainability of our bay and inland waterways.",
+  "quote": "The Bluffline project will not only serve as a crucial artery of transportation and mobility for the local community, but its planned incorporation of erosion control and stormwater mitigation measures will significantly contribute to the health and sustainability of our bay and inland waterways.",
   "author": "Matt J. Posner",
   "title": "Executive Director",
   "organization": "Pensacola and Perdido Bays Estuary Program",
+  "organizationLink": "https://www.ppbep.org/",
   "date": "2023-07-12",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_PPBEP.pdf",
-  "order": 20
+  "order": 19
 }

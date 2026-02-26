@@ -1,10 +1,11 @@
 {
   "type": "Testimonial",
-  "quote": "Together, these initiatives can play a transformative role in reshaping our cityscape and fostering a stronger sense of community.",
+  "quote": "The project promises not only to enhance transportation safety and access but also to foster a culture of outdoor recreation and active living \u2014 values that align perfectly with the mission of Ciclovia Pensacola.",
   "author": "Brittany Ellers",
-  "title": "Chair, Board of Directors",
-  "organization": "Ciclovía Pensacola",
+  "title": "Board member",
+  "organization": "Ciclovia Pensacola",
+  "organizationLink": "https://www.facebook.com/CicloviaPensacola/",
   "date": "2023-07-07",
   "pdfFile": "/documents/letters/Community-Connectors_LOS-Signed_Ciclovia.pdf",
-  "order": 12
+  "order": 11
 }
