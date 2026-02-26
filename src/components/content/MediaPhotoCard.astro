@@ -1,0 +1,128 @@
+---
+interface Props {
+  src: string;
+  title: string;
+  description?: string;
+  format?: string;
+  dimensions?: string;
+  size?: string;
+  credit?: string;
+  date?: string;
+}
+
+const { src, title, description = '', dimensions, size, credit, date } = Astro.props;
+const format = Astro.props.format ?? src.split('.').pop()?.toUpperCase() ?? '';
+const filename = src.split('/').pop() ?? '';
+const meta = [format, dimensions, size, credit].filter(Boolean).join(' · ');
+---
+
+<button
+  class="media-item"
+  data-lightbox-trigger
+  data-media-src={src}
+  data-media-type="image"
+  data-media-title={title}
+  data-media-description={description}
+  data-media-format={format}
+  data-media-dimensions={dimensions}
+  data-media-size={size}
+  data-media-credit={credit}
+  data-media-date={date}
+  data-media-download={src}
+  data-media-filename={filename}
+>
+  <div class="media-item-preview photo-preview">
+    <img src={src} alt={title} loading="lazy" />
+  </div>
+  <div class="media-item-info">
+    <span class="media-item-title">{title}</span>
+    <span class="media-item-meta">{meta}</span>
+  </div>
+  <div class="media-item-actions">
+    <span class="preview-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      Preview
+    </span>
+  </div>
+</button>
+
+<style>
+  .media-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+  }
+
+  .media-item:hover {
+    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .media-item:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
+  .media-item-preview {
+    aspect-ratio: 16 / 10;
+    background: var(--mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media-item-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .media-item-title {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .media-item-meta {
+    font-size: 0.8rem;
+    color: rgba(45, 48, 71, 0.6);
+  }
+
+  .media-item-actions {
+    padding: 0 1rem 1rem;
+  }
+
+  .preview-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--forest);
+  }
+
+  .preview-hint svg {
+    width: 14px;
+    height: 14px;
+  }
+</style>
