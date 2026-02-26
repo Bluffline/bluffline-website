@@ -46,6 +46,7 @@ const pressReleaseMedia = sortedReleases
     size: '',
     dimensions: '',
     date: '',
+    videoType: m.type === 'video' ? (() => { const ext = m.src.split('.').pop()?.toLowerCase() || ''; return ext === 'webm' ? 'video/webm' : ext === 'mov' ? 'video/quicktime' : 'video/mp4'; })() : undefined,
   })));
 
 // Load media kit assets with embedded metadata extraction
