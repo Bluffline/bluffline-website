@@ -74,7 +74,7 @@ const pressReleasesCollection = defineCollection({
       alt: z.string().optional(),
       caption: z.string().optional(),
       credit: z.string().optional(),
-      type: z.enum(['image', 'video']).default('image'),
+      type: z.enum(['image', 'video', 'audio']).default('image'),
     })).optional(),
   }),
 });
