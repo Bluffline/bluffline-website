@@ -2,11 +2,11 @@
   "type": "ImpactPage",
   "heroLabel": "Impact",
   "heroTitle": "Transforming connectivity into community value",
-  "heroDescription": "The Bluffline converts non-motorized connectivity into safety, economic development, and quality of life improvements for Pensacola and Northwest Florida.",
+  "heroDescription": "The Bluffline strengthens the corridor's transportation network by adding multimodal connectivity that delivers safety, economic development, and quality of life improvements for Pensacola and Northwest Florida.",
 
   "safetyLabel": "Safety & Access",
   "safetyHeading": "A safer corridor for everyone",
-  "safetyBody": "Florida consistently ranks among the most dangerous states for pedestrians and cyclists. Within the Bluffline corridor, the lack of safe infrastructure forces people walking and biking onto high-speed roads designed exclusively for motor vehicles.",
+  "safetyBody": "Florida consistently ranks among the most dangerous states for pedestrians and cyclists. Within the Bluffline corridor, the lack of dedicated infrastructure for walking and biking means these users share high-speed roads that were not designed to accommodate them safely.",
 
   "safetyStats": [
     {
@@ -40,8 +40,8 @@
   "mapSourceUrl": "https://s4.geoplan.ufl.edu/",
   "mapSourceAgency": "Florida Department of Transportation",
 
-  "contextProblemHeading": "The problem: Roads designed for cars, not people",
-  "contextProblemBody1": "The Pensacola metro area's road network was designed primarily for high-speed motor vehicle traffic. Wide lanes, minimal sidewalks, and nonexistent bike infrastructure force pedestrians and cyclists into dangerous situations.",
+  "contextProblemHeading": "The problem: A transportation network missing a critical layer",
+  "contextProblemBody1": "The Pensacola metro area's road network serves motor vehicle traffic well, but lacks a complementary layer for people walking and biking. Without dedicated facilities, pedestrians and cyclists share high-speed roads in dangerous conditions.",
   "contextProblemBody2": "Smart Growth America's \"Dangerous by Design\" report consistently ranks Florida among the deadliest states for people walking. Nine of the top 20 most dangerous metropolitan areas for pedestrians are located in Florida.",
   "contextProblemBody3": "The consequences are stark: within the Bluffline corridor alone, 271 crashes involving pedestrians and cyclists have occurred since 2022—resulting in 11 deaths and 268 injuries, including 28 serious injuries.",
   "contextSolutionHeading": "The solution: Separated infrastructure saves lives",

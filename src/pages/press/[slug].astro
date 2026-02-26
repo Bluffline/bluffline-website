@@ -44,6 +44,29 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
       <div class="article-content">
         <Content />
 
+        {release.data.media && release.data.media.length > 0 && (
+          <div class="release-media">
+            <h4>Media Attachments</h4>
+            <div class="release-media-grid">
+              {release.data.media.map((item: { src: string; alt?: string; caption?: string; credit?: string; type: string }) => (
+                <figure class="release-media-item">
+                  {item.type === 'video' ? (
+                    <video src={item.src} controls preload="metadata" />
+                  ) : (
+                    <img src={item.src} alt={item.alt || ''} loading="lazy" />
+                  )}
+                  {(item.caption || item.credit) && (
+                    <figcaption>
+                      {item.caption && <span>{item.caption}</span>}
+                      {item.credit && <span class="media-credit">Credit: {item.credit}</span>}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </div>
+        )}
+
         {(release.data.contactName || release.data.contactEmail || release.data.contactPhone) && (
           <div class="contact-box">
             <h4>Media Contact</h4>
@@ -234,5 +257,57 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
 
   .contact-box a:hover {
     text-decoration: underline;
+  }
+
+  /* Media Attachments */
+  .release-media {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.1);
+  }
+
+  .release-media h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+  }
+
+  .release-media-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .release-media-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .release-media-item {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--mist);
+  }
+
+  .release-media-item img,
+  .release-media-item video {
+    width: 100%;
+    display: block;
+  }
+
+  .release-media-item figcaption {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--navy);
+    opacity: 0.75;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .media-credit {
+    font-size: 0.75rem;
+    opacity: 0.6;
   }
 </style>

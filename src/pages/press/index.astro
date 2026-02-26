@@ -10,6 +10,7 @@ import EmptyStateCard from '../../components/content/EmptyStateCard.astro';
 import { getCollection, getEntry } from 'astro:content';
 import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
 import path from 'node:path';
+import brandColors from '../../data/brand-colors.json';
 
 const page = await getEntry('pages', 'press');
 const pd = page.data;
@@ -31,6 +32,21 @@ const years = Object.keys(pressByYear).sort((a, b) => Number(b) - Number(a));
 // Fetch press releases
 const pressReleases = await getCollection('press-releases', ({ data }) => !data.draft);
 const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Collect media from press releases for asset propagation (8.4)
+const pressReleaseMedia = sortedReleases
+  .filter(r => r.data.media && r.data.media.length > 0)
+  .flatMap(r => (r.data.media || []).map((m: { src: string; alt?: string; caption?: string; credit?: string; type: string }) => ({
+    src: m.src,
+    title: m.alt || m.caption || 'Press release media',
+    type: m.type === 'video' ? 'video' as const : 'image' as const,
+    description: m.caption || '',
+    credit: m.credit || 'Bluffline, Inc.',
+    format: m.src.split('.').pop()?.toUpperCase() || '',
+    size: '',
+    dimensions: '',
+    date: '',
+  })));
 
 // Load media kit assets with embedded metadata extraction
 const publicDir = path.join(process.cwd(), 'public');
@@ -66,12 +82,17 @@ const primaryTabs = [
   { id: 'media-kit', label: 'Media Kit' },
 ];
 
+// Merge press release photos into photos list
+const allPhotos = [...photos, ...pressReleaseMedia.filter(m => m.type === 'image')];
+const allVideos = [...videos, ...pressReleaseMedia.filter(m => m.type === 'video')];
+
 // Asset type tabs configuration
 const assetTabs = [
   { id: 'logos', label: 'Logos' },
   { id: 'photos', label: 'Photos' },
   { id: 'videos', label: 'Videos' },
   { id: 'audio', label: 'Audio' },
+  { id: 'colors', label: 'Color Palette' },
 ];
 ---
 
@@ -207,9 +228,9 @@ const assetTabs = [
 
               <!-- Photos Panel -->
               <div data-tab-panel="photos" hidden>
-                {photos.length > 0 ? (
+                {allPhotos.length > 0 ? (
                   <div class="media-grid media-grid-photos">
-                    {photos.map((asset) => (
+                    {allPhotos.map((asset) => (
                       <button
                         class="media-item"
                         data-lightbox-trigger
@@ -255,9 +276,9 @@ const assetTabs = [
 
               <!-- Videos Panel -->
               <div data-tab-panel="videos" hidden>
-                {videos.length > 0 ? (
+                {allVideos.length > 0 ? (
                   <div class="media-grid media-grid-videos">
-                    {videos.map((asset) => (
+                    {allVideos.map((asset) => (
                       <button
                         class="media-item"
                         data-lightbox-trigger
@@ -346,6 +367,28 @@ const assetTabs = [
                     icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`}
                   />
                 )}
+              </div>
+              <!-- Color Palette Panel -->
+              <div data-tab-panel="colors" hidden>
+                <div class="color-palette-intro">
+                  <p>Official Bluffline brand colors. Values are sourced directly from the site's design tokens.</p>
+                </div>
+                <div class="color-palette-grid">
+                  {brandColors.map((color: { name: string; variable: string; hex: string; rgb: string; usage: string }) => (
+                    <div class="color-swatch-card">
+                      <div class="color-swatch" style={`background-color: ${color.hex};`}></div>
+                      <div class="color-info">
+                        <span class="color-name">{color.name}</span>
+                        <div class="color-values">
+                          <span class="color-value"><strong>Hex:</strong> {color.hex}</span>
+                          <span class="color-value"><strong>RGB:</strong> {color.rgb}</span>
+                          <span class="color-value"><strong>CSS:</strong> var({color.variable})</span>
+                        </div>
+                        <span class="color-usage">{color.usage}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Tabs>
           </div>
@@ -811,5 +854,70 @@ const assetTabs = [
 
   .contact-item a:hover {
     text-decoration: underline;
+  }
+
+  /* Color Palette */
+  .color-palette-intro {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.75;
+  }
+
+  .color-palette-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .color-swatch-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .color-swatch {
+    height: 80px;
+    width: 100%;
+  }
+
+  .color-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .color-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--navy);
+  }
+
+  .color-values {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .color-value {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.7;
+    font-family: 'Source Sans 3', monospace;
+  }
+
+  .color-value strong {
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  .color-usage {
+    font-size: 0.85rem;
+    color: var(--navy);
+    opacity: 0.6;
+    line-height: 1.5;
+    margin-top: 0.25rem;
   }
 </style>

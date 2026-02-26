@@ -26,7 +26,7 @@ As the CME, Bluffline will:
 *   **Pursue funding opportunities** for trail development, wayfinding, and other improvements
 *   **Promote the corridor** as a destination for recreation and tourism
 
-The Pensacola Scenic Bay Bluffs Highway was designated as a Florida Scenic Highway in 2018, recognizing its exceptional coastal bluffs, historic neighborhoods, and cultural significance to the Pensacola community.
+The Pensacola Bay Bluffs Scenic Highway was designated as a Florida Scenic Highway in 2018, recognizing its exceptional coastal bluffs, historic neighborhoods, and cultural significance to the Pensacola community.
 
 ## Building on Momentum
 

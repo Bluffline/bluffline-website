@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Forest",
+    "variable": "--forest",
+    "hex": "#41521F",
+    "rgb": "65, 82, 31",
+    "usage": "Primary brand color. Use for headings, CTAs, and interactive elements."
+  },
+  {
+    "name": "Spring",
+    "variable": "--spring",
+    "hex": "#99CC63",
+    "rgb": "153, 204, 99",
+    "usage": "Accent color. Use for highlights, progress indicators, and active states."
+  },
+  {
+    "name": "Navy",
+    "variable": "--navy",
+    "hex": "#2D3047",
+    "rgb": "45, 48, 71",
+    "usage": "Text and dark backgrounds. Primary body text color and footer background."
+  },
+  {
+    "name": "Mist",
+    "variable": "--mist",
+    "hex": "#EFF7FF",
+    "rgb": "239, 247, 255",
+    "usage": "Light background. Use for alternate sections and subtle containers."
+  },
+  {
+    "name": "Water",
+    "variable": "--water",
+    "hex": "#C9FBFF",
+    "rgb": "201, 251, 255",
+    "usage": "Accent background. Use for gradients and hero section highlights."
+  },
+  {
+    "name": "Cream",
+    "variable": "--cream",
+    "hex": "#F8F6F0",
+    "rgb": "248, 246, 240",
+    "usage": "Warm background. Use for content sections and article headers."
+  },
+  {
+    "name": "Warm White",
+    "variable": "--warm-white",
+    "hex": "#FDFCFA",
+    "rgb": "253, 252, 250",
+    "usage": "Page background. The default body background color."
+  }
+]

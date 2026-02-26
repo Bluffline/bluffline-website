@@ -24,7 +24,7 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
 ---
 
 <BaseLayout title={title} description={description}>
-  <article>
+  <article class:list={[{ 'no-featured-image': !featuredImage }]}>
     {featuredImage && (
       <div class="article-featured-image">
         <img src={featuredImage} alt={featuredImageAlt || ''} />
@@ -91,9 +91,17 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
     padding: 3rem 1.5rem;
   }
 
+  .no-featured-image .article-header {
+    padding-top: calc(3rem + 73px + var(--banner-height, 0px));
+  }
+
   @media (min-width: 768px) {
     .article-header {
       padding: 4rem 3rem;
+    }
+
+    .no-featured-image .article-header {
+      padding-top: calc(4rem + 73px + var(--banner-height, 0px));
     }
   }
 
