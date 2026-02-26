@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
+import Tabs from '../../components/ui/Tabs.astro';
+import MediaLightbox from '../../components/ui/MediaLightbox.astro';
+import EmptyStateCard from '../../components/content/EmptyStateCard.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -19,6 +22,27 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric'
 });
+
+type MediaItem = { src: string; alt?: string; caption?: string; credit?: string; type: 'image' | 'video' };
+const media: MediaItem[] = release.data.media || [];
+const photos = media.filter(m => m.type === 'image');
+const videos = media.filter(m => m.type === 'video');
+
+const mediaTabs = [
+  { id: 'photos', label: photos.length ? `Photos (${photos.length})` : 'Photos' },
+  { id: 'videos', label: videos.length ? `Videos (${videos.length})` : 'Videos' },
+];
+
+function getFormat(src: string) {
+  return src.split('.').pop()?.toUpperCase() || '';
+}
+
+function getVideoMimeType(src: string) {
+  const ext = src.split('.').pop()?.toLowerCase() || '';
+  if (ext === 'webm') return 'video/webm';
+  if (ext === 'mov') return 'video/quicktime';
+  return 'video/mp4';
+}
 ---
 
 <BaseLayout title={release.data.title} description={release.data.summary}>
@@ -44,29 +68,6 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
       <div class="article-content">
         <Content />
 
-        {release.data.media && release.data.media.length > 0 && (
-          <div class="release-media">
-            <h4>Media Attachments</h4>
-            <div class="release-media-grid">
-              {release.data.media.map((item: { src: string; alt?: string; caption?: string; credit?: string; type: string }) => (
-                <figure class="release-media-item">
-                  {item.type === 'video' ? (
-                    <video src={item.src} controls preload="metadata" />
-                  ) : (
-                    <img src={item.src} alt={item.alt || ''} loading="lazy" />
-                  )}
-                  {(item.caption || item.credit) && (
-                    <figcaption>
-                      {item.caption && <span>{item.caption}</span>}
-                      {item.credit && <span class="media-credit">Credit: {item.credit}</span>}
-                    </figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
-          </div>
-        )}
-
         {(release.data.contactName || release.data.contactEmail || release.data.contactPhone) && (
           <div class="contact-box">
             <h4>Media Contact</h4>
@@ -78,6 +79,115 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
           </div>
         )}
       </div>
+
+      {media.length > 0 && (
+        <div class="release-media">
+          <div class="release-media-inner">
+            <h4 class="release-media-heading">Media Assets</h4>
+
+            <Tabs id="release-media" tabs={mediaTabs} defaultTab="photos" variant="pills">
+              <!-- Photos panel -->
+              <div data-tab-panel="photos" class="active">
+                {photos.length > 0 ? (
+                  <div class="media-grid">
+                    {photos.map(item => (
+                      <button
+                        class="media-item"
+                        data-lightbox-trigger
+                        data-media-src={item.src}
+                        data-media-type="image"
+                        data-media-title={item.alt || item.caption || item.src.split('/').pop()}
+                        data-media-description={item.caption || ''}
+                        data-media-format={getFormat(item.src)}
+                        data-media-credit={item.credit || ''}
+                        data-media-download={item.src}
+                        data-media-filename={item.src.split('/').pop()}
+                      >
+                        <div class="media-item-preview photo-preview">
+                          <img src={item.src} alt={item.alt || ''} loading="lazy" />
+                        </div>
+                        <div class="media-item-info">
+                          <span class="media-item-title">{item.alt || item.caption || item.src.split('/').pop()}</span>
+                          <span class="media-item-meta">
+                            {getFormat(item.src)}{item.credit ? ` · ${item.credit}` : ''}
+                          </span>
+                        </div>
+                        <div class="media-item-actions">
+                          <span class="preview-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            Preview
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <EmptyStateCard
+                    title="No photos"
+                    description="No photos are attached to this press release."
+                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`}
+                  />
+                )}
+              </div>
+
+              <!-- Videos panel -->
+              <div data-tab-panel="videos" hidden>
+                {videos.length > 0 ? (
+                  <div class="media-grid">
+                    {videos.map(item => (
+                      <button
+                        class="media-item"
+                        data-lightbox-trigger
+                        data-media-src={item.src}
+                        data-media-type="video"
+                        data-media-video-type={getVideoMimeType(item.src)}
+                        data-media-title={item.alt || item.caption || item.src.split('/').pop()}
+                        data-media-description={item.caption || ''}
+                        data-media-format={getFormat(item.src)}
+                        data-media-credit={item.credit || ''}
+                        data-media-download={item.src}
+                        data-media-filename={item.src.split('/').pop()}
+                      >
+                        <div class="media-item-preview video-preview">
+                          <video src={item.src} preload="metadata" />
+                          <div class="video-play-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                              <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="media-item-info">
+                          <span class="media-item-title">{item.alt || item.caption || item.src.split('/').pop()}</span>
+                          <span class="media-item-meta">
+                            {getFormat(item.src)}{item.credit ? ` · ${item.credit}` : ''}
+                          </span>
+                        </div>
+                        <div class="media-item-actions">
+                          <span class="preview-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            Play
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <EmptyStateCard
+                    title="No videos"
+                    description="No videos are attached to this press release."
+                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>`}
+                  />
+                )}
+              </div>
+            </Tabs>
+          </div>
+        </div>
+      )}
     </div>
   </article>
 
@@ -87,6 +197,8 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
     primaryLabel="Get Involved"
     primaryHref="/support"
   />
+
+  <MediaLightbox />
 </BaseLayout>
 
 <style>
@@ -259,55 +371,134 @@ const formattedDate = release.data.pubDate.toLocaleDateString('en-US', {
     text-decoration: underline;
   }
 
-  /* Media Attachments */
+  /* Media Assets section */
   .release-media {
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(45, 48, 71, 0.1);
   }
 
-  .release-media h4 {
+  .release-media-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .release-media-heading {
     font-size: 1rem;
     font-weight: 600;
     color: var(--navy);
     margin-bottom: 1.25rem;
   }
 
-  .release-media-grid {
+  /* Media grid */
+  .media-grid {
     display: grid;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 
-  @media (min-width: 640px) {
-    .release-media-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .release-media-item {
-    border-radius: 8px;
+  .media-item {
+    background: white;
+    border-radius: 12px;
     overflow: hidden;
-    background: var(--mist);
-  }
-
-  .release-media-item img,
-  .release-media-item video {
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
     width: 100%;
-    display: block;
   }
 
-  .release-media-item figcaption {
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
-    color: var(--navy);
-    opacity: 0.75;
+  .media-item:hover {
+    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .media-item:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
+  .media-item-preview {
+    aspect-ratio: 16 / 10;
+    background: var(--mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-preview {
+    background: #000;
+  }
+
+  .video-preview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-play-icon {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .video-play-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--forest);
+    margin-left: 2px;
+  }
+
+  .media-item-info {
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
   }
 
-  .media-credit {
-    font-size: 0.75rem;
-    opacity: 0.6;
+  .media-item-title {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .media-item-meta {
+    font-size: 0.8rem;
+    color: rgba(45, 48, 71, 0.6);
+  }
+
+  .media-item-actions {
+    padding: 0 1rem 1rem;
+  }
+
+  .preview-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--forest);
+  }
+
+  .preview-hint svg {
+    width: 14px;
+    height: 14px;
   }
 </style>
