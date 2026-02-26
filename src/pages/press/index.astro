@@ -7,6 +7,9 @@ import CallToAction from '../../components/ui/CallToAction.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import Tabs from '../../components/ui/Tabs.astro';
 import EmptyStateCard from '../../components/content/EmptyStateCard.astro';
+import MediaPhotoCard from '../../components/content/MediaPhotoCard.astro';
+import MediaVideoCard from '../../components/content/MediaVideoCard.astro';
+import MediaAudioItem from '../../components/content/MediaAudioItem.astro';
 import { getCollection, getEntry } from 'astro:content';
 import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
 import path from 'node:path';
@@ -232,38 +235,16 @@ const assetTabs = [
                 {allPhotos.length > 0 ? (
                   <div class="media-grid media-grid-photos">
                     {allPhotos.map((asset) => (
-                      <button
-                        class="media-item"
-                        data-lightbox-trigger
-                        data-media-src={asset.src}
-                        data-media-type={asset.type}
-                        data-media-title={asset.title}
-                        data-media-description={asset.description}
-                        data-media-format={asset.format}
-                        data-media-dimensions={asset.dimensions}
-                        data-media-size={asset.size}
-                        data-media-credit={asset.credit || 'Bluffline, Inc.'}
-                        data-media-date={asset.date}
-                        data-media-download={asset.src}
-                        data-media-filename={asset.src.split('/').pop()}
-                      >
-                        <div class="media-item-preview photo-preview">
-                          <img src={asset.src} alt={asset.title} loading="lazy" />
-                        </div>
-                        <div class="media-item-info">
-                          <span class="media-item-title">{asset.title}</span>
-                          <span class="media-item-meta">{asset.format}{asset.dimensions && ` · ${asset.dimensions}`}{asset.size && ` · ${asset.size}`}</span>
-                        </div>
-                        <div class="media-item-actions">
-                          <span class="preview-hint">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                              <circle cx="12" cy="12" r="3"/>
-                            </svg>
-                            Preview
-                          </span>
-                        </div>
-                      </button>
+                      <MediaPhotoCard
+                        src={asset.src}
+                        title={asset.title}
+                        description={asset.description}
+                        format={asset.format}
+                        dimensions={asset.dimensions}
+                        size={asset.size}
+                        credit={asset.credit || 'Bluffline, Inc.'}
+                        date={asset.date}
+                      />
                     ))}
                   </div>
                 ) : (
@@ -280,42 +261,16 @@ const assetTabs = [
                 {allVideos.length > 0 ? (
                   <div class="media-grid media-grid-videos">
                     {allVideos.map((asset) => (
-                      <button
-                        class="media-item"
-                        data-lightbox-trigger
-                        data-media-src={asset.src}
-                        data-media-type={asset.type}
-                        data-media-video-type={asset.videoType}
-                        data-media-title={asset.title}
-                        data-media-description={asset.description}
-                        data-media-format={asset.format}
-                        data-media-size={asset.size}
-                        data-media-credit={asset.credit || 'Bluffline, Inc.'}
-                        data-media-date={asset.date}
-                        data-media-download={asset.src}
-                        data-media-filename={asset.src.split('/').pop()}
-                      >
-                        <div class="media-item-preview video-preview">
-                          <video src={asset.src} preload="metadata" />
-                          <div class="video-play-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                              <polygon points="5 3 19 12 5 21 5 3"/>
-                            </svg>
-                          </div>
-                        </div>
-                        <div class="media-item-info">
-                          <span class="media-item-title">{asset.title}</span>
-                          <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
-                        </div>
-                        <div class="media-item-actions">
-                          <span class="preview-hint">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polygon points="5 3 19 12 5 21 5 3"/>
-                            </svg>
-                            Play
-                          </span>
-                        </div>
-                      </button>
+                      <MediaVideoCard
+                        src={asset.src}
+                        title={asset.title}
+                        description={asset.description}
+                        videoType={asset.videoType}
+                        format={asset.format}
+                        size={asset.size}
+                        credit={asset.credit || 'Bluffline, Inc.'}
+                        date={asset.date}
+                      />
                     ))}
                   </div>
                 ) : (
@@ -330,35 +285,16 @@ const assetTabs = [
               <!-- Audio Panel -->
               <div data-tab-panel="audio" hidden>
                 {audio.length > 0 ? (
-                  <div class="media-grid media-grid-audio">
+                  <div class="audio-list">
                     {audio.map((asset) => (
-                      <div class="audio-item">
-                        <div class="audio-item-info">
-                          <div class="audio-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M9 18V5l12-2v13"/>
-                              <circle cx="6" cy="18" r="3"/>
-                              <circle cx="18" cy="16" r="3"/>
-                            </svg>
-                          </div>
-                          <div class="audio-details">
-                            <span class="media-item-title">{asset.title}</span>
-                            <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
-                          </div>
-                        </div>
-                        <audio controls preload="metadata">
-                          <source src={asset.src} type={asset.audioType} />
-                          Your browser does not support the audio element.
-                        </audio>
-                        <a href={asset.src} download class="audio-download">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                          </svg>
-                          Download
-                        </a>
-                      </div>
+                      <MediaAudioItem
+                        src={asset.src}
+                        title={asset.title}
+                        audioType={asset.audioType}
+                        format={asset.format}
+                        size={asset.size}
+                        credit={asset.credit}
+                      />
                     ))}
                   </div>
                 ) : (
@@ -608,37 +544,6 @@ const assetTabs = [
     gap: 1rem;
   }
 
-  .media-item {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(45, 48, 71, 0.08);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
-    width: 100%;
-  }
-
-  .media-item:hover {
-    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .media-item:focus-visible {
-    outline: 2px solid var(--forest);
-    outline-offset: 2px;
-  }
-
-  .media-item-preview {
-    aspect-ratio: 16 / 10;
-    background: var(--mist);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-
   .logo-preview {
     aspect-ratio: 3 / 2;
     padding: 1.5rem;
@@ -652,162 +557,11 @@ const assetTabs = [
     object-fit: contain;
   }
 
-  .photo-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .video-preview {
-    background: #000;
-  }
-
-  .video-preview video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .video-play-icon {
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .video-play-icon svg {
-    width: 24px;
-    height: 24px;
-    color: var(--forest);
-    margin-left: 3px;
-  }
-
-  .media-item-info {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .media-item-title {
-    font-weight: 600;
-    color: var(--navy);
-    font-size: 0.95rem;
-  }
-
-  .media-item-meta {
-    font-size: 0.8rem;
-    color: rgba(45, 48, 71, 0.6);
-  }
-
-  .media-item-actions {
-    padding: 0 1rem 1rem;
-  }
-
-  .preview-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--forest);
-  }
-
-  .preview-hint svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Audio Items */
-  .audio-item {
-    background: white;
-    border-radius: 12px;
-    padding: 1.25rem;
-    border: 1px solid rgba(45, 48, 71, 0.08);
+  /* Audio list */
+  .audio-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-
-  @media (min-width: 640px) {
-    .audio-item {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
-  .audio-item-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex: 1;
-    min-width: 0;
-  }
-
-  .audio-icon {
-    width: 48px;
-    height: 48px;
-    background: var(--mist);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .audio-icon svg {
-    width: 24px;
-    height: 24px;
-    color: var(--forest);
-  }
-
-  .audio-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    min-width: 0;
-  }
-
-  .audio-details .media-item-title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .audio-item audio {
-    flex: 1;
-    min-width: 200px;
-    max-width: 400px;
-    height: 40px;
-  }
-
-  .audio-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1rem;
-    background: var(--forest);
-    color: white;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .audio-download:hover {
-    background: #364519;
-  }
-
-  .audio-download svg {
-    width: 16px;
-    height: 16px;
   }
 
   /* Contact Card in Media Kit */
