@@ -6,9 +6,20 @@ interface Props {
   /** Optional hero image displayed below the text content */
   heroImage?: string;
   heroImageAlt?: string;
+  /** Words to emphasize with italic Fraunces green styling */
+  keywords?: string[];
 }
 
-const { label, title, description, heroImage, heroImageAlt = '' } = Astro.props;
+const { label, title, description, heroImage, heroImageAlt = '', keywords = [] } = Astro.props;
+
+function highlightKeywords(text: string, words: string[]): string {
+  if (!words.length) return text;
+  const escaped = words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const pattern = new RegExp(`\\b(${escaped.join('|')})\\b`, 'gi');
+  return text.replace(pattern, '<span class="hero-keyword">$1</span>');
+}
+
+const highlightedTitle = keywords.length ? highlightKeywords(title, keywords) : null;
 ---
 
 <section class:list={['page-hero', { 'has-image': !!heroImage }]}>
@@ -19,7 +30,7 @@ const { label, title, description, heroImage, heroImageAlt = '' } = Astro.props;
   )}
   <div class="page-hero-inner">
     {label && <p class="section-label">{label}</p>}
-    <h1>{title}</h1>
+    {highlightedTitle ? <h1 set:html={highlightedTitle} /> : <h1>{title}</h1>}
     {description && <p>{description}</p>}
     <slot />
   </div>
