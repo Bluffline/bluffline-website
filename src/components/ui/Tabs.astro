@@ -254,8 +254,18 @@ const {
     border-radius: 8px;
     padding: 4px;
     margin-bottom: 1.5rem;
-    display: inline-flex;
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
     gap: 4px;
+  }
+
+  .tabs-pills .tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .tabs-pills .tab {
