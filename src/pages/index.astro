@@ -13,7 +13,7 @@ const d = page.data;
   <section class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h1>{d.heroTitle}</h1>
+        <h1 set:html={d.heroTitle.replace(/\b(nature|neighbors)\b/gi, '<span class="hero-keyword">$1</span>')} />
         <p>{d.heroSubtitle}</p>
         <div class="hero-buttons">
           <Button href="/support">Get Involved</Button>
