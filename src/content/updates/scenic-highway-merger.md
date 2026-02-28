@@ -16,7 +16,7 @@ The merger, finalized this month, brings together two complementary visions: the
 
 The Foundation's leadership recognized that the corridor's future required an organization focused not just on preservation, but on building new infrastructure. By joining forces, we combined decades of institutional knowledge with fresh momentum and a clear multimodal mission.
 
-Today, Bluffline, Inc. serves as the Corridor Management Entity for the Pensacola Bay Bluffs Scenic Highway—and the driving force behind the 20-mile greenway that will finally connect NAS Pensacola to UWF.
+Today, Bluffline, Inc. serves as the Corridor Management Entity for the Pensacola Scenic Bluffs Scenic Highway—and the driving force behind the 20-mile greenway that will finally connect NAS Pensacola to UWF.
 
 ## What This Means
 

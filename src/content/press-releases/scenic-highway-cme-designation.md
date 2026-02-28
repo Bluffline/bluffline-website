@@ -1,12 +1,12 @@
 ---
 type: PressRelease
 title: >-
-  Bluffline Designated as Corridor Management Entity for Pensacola Bay Bluffs
+  Bluffline Designated as Corridor Management Entity for Pensacola Scenic Bluffs
   Scenic Highway
 pubDate: '2024-09-12'
 summary: >-
   The Florida Department of Transportation has designated Bluffline, Inc. as the
-  official Corridor Management Entity for the Pensacola Bay Bluffs Scenic
+  official Corridor Management Entity for the Pensacola Scenic Bluffs Scenic
   Highway.
 contactName: Media Relations
 contactEmail: press@bluffline.org
@@ -14,8 +14,8 @@ draft: false
 contactPhone: (850) 776-0436
 media:
   - src: '/images/bluffs-aerial-2024.jpg'
-    alt: 'Aerial view of the Pensacola Bay Bluffs Scenic Highway corridor'
-    caption: 'The 10-mile Pensacola Bay Bluffs Scenic Highway corridor as seen from above'
+    alt: 'Aerial view of the Pensacola Scenic Bluffs Scenic Highway corridor'
+    caption: 'The 10-mile Pensacola Scenic Bluffs Scenic Highway corridor as seen from above'
     credit: 'Bluffline, Inc.'
     type: 'image'
   - src: '/images/chimney-park-tracks.jpg'
@@ -24,11 +24,11 @@ media:
     credit: 'Bluffline, Inc.'
     type: 'image'
   - src: '/images/corridor-map-static.png'
-    alt: 'Map of the Pensacola Bay Bluffs Scenic Highway corridor'
+    alt: 'Map of the Pensacola Scenic Bluffs Scenic Highway corridor'
     caption: 'The corridor spans 10 miles of State Road 292 along Escambia Bay'
     type: 'image'
 ---
-**PENSACOLA, FL** — Bluffline, Inc. has been designated by the Florida Department of Transportation as the official Corridor Management Entity (CME) for the Pensacola Bay Bluffs Scenic Highway, a 10-mile stretch of State Road 292 recognized for its outstanding natural, cultural, and scenic qualities.
+**PENSACOLA, FL** — Bluffline, Inc. has been designated by the Florida Department of Transportation as the official Corridor Management Entity (CME) for the Pensacola Scenic Bluffs Scenic Highway, a 10-mile stretch of State Road 292 recognized for its outstanding natural, cultural, and scenic qualities.
 
 The designation formalizes Bluffline's role in protecting and enhancing the corridor's intrinsic resources while advancing multimodal transportation improvements that benefit residents and visitors alike.
 
@@ -41,7 +41,7 @@ As the CME, Bluffline will:
 *   **Pursue funding opportunities** for trail development, wayfinding, and other improvements
 *   **Promote the corridor** as a destination for recreation and tourism
 
-The Pensacola Bay Bluffs Scenic Highway was designated as a Florida Scenic Highway in 2018, recognizing its exceptional coastal bluffs, historic neighborhoods, and cultural significance to the Pensacola community.
+The Pensacola Scenic Bluffs Scenic Highway was designated as a Florida Scenic Highway in 2018, recognizing its exceptional coastal bluffs, historic neighborhoods, and cultural significance to the Pensacola community.
 
 ## Building on Momentum
 
@@ -55,7 +55,7 @@ This designation comes as Bluffline continues to advance its vision for a 20-mil
 
 ## Get Involved
 
-Community members interested in supporting the Pensacola Bay Bluffs Scenic Highway can sign up for updates at bluffline.org or attend upcoming public meetings announced through the organization's newsletter.
+Community members interested in supporting the Pensacola Scenic Bluffs Scenic Highway can sign up for updates at bluffline.org or attend upcoming public meetings announced through the organization's newsletter.
 
 ***
 
