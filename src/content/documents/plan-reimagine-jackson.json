@@ -1,9 +1,10 @@
 {
   "type": "Document",
-  "title": "Reimagine Jackson Street Plan",
+  "title": "Reimagine Jackson Street",
   "agency": "City of Pensacola & Escambia County",
   "year": 2021,
   "documentType": "plan",
   "level": "regional",
-  "description": "This joint city-county plan envisions a transformed Jackson Street corridor with improved multimodal connections, supporting the Bluffline's goal of connecting West Pensacola to downtown."
+  "link": "https://myescambia.com/docs/default-source/upload/Executive-Summary-_Jackson-Street_FINAL.pdf",
+  "description": "Recommends a multiuse path along Ross St/Idlewood Dr to connect nearby neighborhoods to Jackson Lakes—core Bluffline alignment."
 }
