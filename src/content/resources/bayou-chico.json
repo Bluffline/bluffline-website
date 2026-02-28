@@ -1,0 +1,14 @@
+{
+  "type": "Resource",
+  "name": "Bayou Chico",
+  "description": "A tidal bayou on the western fringe of Pensacola that blends an active working waterfront with ongoing ecological restoration. Bayou Chico is home to marinas and boatyards alongside shoreline restoration zones aimed at recovering its once-degraded water quality and native habitats.",
+  "qualities": [
+    "Recreational",
+    "Natural",
+    "Scenic"
+  ],
+  "coordinates": {
+    "lat": 30.403823,
+    "lng": -87.253677
+  }
+}
