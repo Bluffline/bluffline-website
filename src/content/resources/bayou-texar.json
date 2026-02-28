@@ -1,0 +1,14 @@
+{
+  "type": "Resource",
+  "name": "Bayou Texar",
+  "description": "A scenic urban bayou winding through east Pensacola neighborhoods, bordered by mature tree canopy and residential bluffs. Bayou Texar is a popular destination for kayaking, paddleboarding, and shoreline recreation, and supports diverse fish and bird life throughout its tidal waters.",
+  "qualities": [
+    "Recreational",
+    "Natural",
+    "Scenic"
+  ],
+  "coordinates": {
+    "lat": 30.429754,
+    "lng": -87.189720
+  }
+}

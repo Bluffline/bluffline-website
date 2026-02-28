@@ -1,0 +1,14 @@
+{
+  "type": "Resource",
+  "name": "Bayou Grande",
+  "description": "A largely undeveloped tidal bayou bordering NAS Pensacola that retains extensive natural marshes, maritime forests, and sandy beaches. Its protected setting preserves critical wildlife habitat and offers sweeping scenic views across the water.",
+  "qualities": [
+    "Recreational",
+    "Natural",
+    "Scenic"
+  ],
+  "coordinates": {
+    "lat": 30.372039,
+    "lng": -87.279591
+  }
+}
