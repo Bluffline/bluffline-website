@@ -1,9 +1,10 @@
 {
   "type": "Document",
-  "title": "Waterfront Framework Plan",
+  "title": "Pensacola Waterfront Framework Plan",
   "agency": "City of Pensacola",
   "year": 2017,
   "documentType": "plan",
   "level": "city",
-  "description": "This plan guides development along Pensacola's waterfront, including connections between downtown and the bay—a critical link in the Bluffline corridor."
+  "link": "https://www.scapestudio.com/projects/pensacola-waterfront-framework-plan/",
+  "description": "Advances the waterfront vision by linking inland neighborhoods to continuous public access, trails, and destinations along the bay."
 }

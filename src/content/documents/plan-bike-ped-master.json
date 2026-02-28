@@ -1,9 +1,10 @@
 {
   "type": "Document",
-  "title": "Bicycle & Pedestrian Master Plan",
+  "title": "Ped/Bike/Trail Master Plan",
   "agency": "Florida-Alabama Transportation Planning Organization",
-  "year": 2018,
+  "year": 2023,
   "documentType": "plan",
   "level": "regional",
-  "description": "This regional plan specifically identifies the Bluffline corridor as a priority for investment, with recommendations for facility types and connection points."
+  "link": "https://files.ecrc.org/programs/transportation_planning/plans_and_documents/pedbike_2023_master_plan.php",
+  "description": "Explicitly includes Bluffline as a priority project to expand safe, connected walking and biking across the region."
 }
