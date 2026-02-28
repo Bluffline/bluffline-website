@@ -99,11 +99,11 @@ public/
 Images and media follow a centralized structure under `public/images/` with clear subfolders:
 
 - **`public/images/hero/`** — Hero/header photos for pages. Currently uses `placeholder.svg`; swap in final photos when available.
-- **`public/images/logos/`** — Brand logos and favicon files. Drop in logo files and they'll be picked up by the favicon links in `BaseLayout.astro`.
+- **`public/images/logos/`** — Site operational assets: the header logo and favicon files used by `BaseLayout.astro`. Not for press download.
 - **`public/images/photos/`** — General high-res photography.
 - **`public/images/press/`** — Press release media attachments.
 - **`public/images/video/`** — Video assets.
-- **`public/media-kit/`** — Downloadable press assets organized by type. These are scanned at build time for the Media Kit tab. Any media attached to press releases is also surfaced in the Media Kit automatically.
+- **`public/media-kit/`** — Press-ready downloadable assets organized by type. Scanned at build time for the Media Kit tab. Drop logo variants (color, reverse, etc.) in `logos/`; photos in `photos/`; and so on. Keep separate from `public/images/` — these are curated for journalists, not site operations. Any media attached to press releases is also surfaced in the Media Kit automatically.
 
 ## Content Collections
 
@@ -236,7 +236,7 @@ The Press page (`/press#media-kit`) includes a comprehensive Media Kit with the 
 
 | Tab | Content |
 |---|---|
-| Logos | Brand logo files from `public/media-kit/logos/` |
+| Logos | Press-ready logo variants from `public/media-kit/logos/` (separate from site operational logos in `public/images/logos/`) |
 | Photos | High-res photos from `public/media-kit/photos/` + press release attachments |
 | Videos | Video files from `public/media-kit/videos/` + press release video attachments |
 | Audio | Audio files from `public/media-kit/audio/` |
