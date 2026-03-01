@@ -150,6 +150,7 @@ const projectsCollection = defineCollection({
       nodeRef: z.string().optional(),
     })),
     outputs: z.array(z.string()).optional(),
+    segments: z.any().optional(),
     relatedLinks: z.array(z.object({
       label: z.string(),
       href: z.string(),

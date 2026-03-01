@@ -20,6 +20,7 @@ interface Project {
   color?: string;
   milestones: Milestone[];
   outputs?: string[];
+  segments?: any;
 }
 
 interface Props {
@@ -57,6 +58,7 @@ const nodeLabels: Record<string, string> = {
   data-project-title={project.shortTitle}
   data-project-nodes={project.nodes.join(',')}
   data-project-color={project.color || ''}
+  data-project-segments={project.segments ? JSON.stringify(project.segments) : ''}
 >
   <div class="card-header">
     <div>
