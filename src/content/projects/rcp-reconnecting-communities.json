@@ -1,0 +1,71 @@
+{
+  "title": "USDOT Reconnecting Communities Pilot",
+  "shortTitle": "RCP Planning Grant",
+  "status": "pending",
+  "funder": "U.S. Department of Transportation",
+  "program": "Reconnecting Communities Pilot Program",
+  "amount": "$1.2 million",
+  "awardDate": "December 2024",
+  "description": "Federal planning grant funding master planning, feasibility studies, and preliminary design for the two Bluffline priority nodes — Jackson Lakes/West Pensacola and Ferry Pass/UWF. This work will produce the foundational plans needed to advance these nodes toward construction funding.",
+  "nodes": ["jackson-lakes", "ferry-pass", "uwf"],
+  "milestones": [
+    {
+      "title": "Grant Announced",
+      "description": "$1.2M awarded by USDOT through the Reconnecting Communities Pilot Program.",
+      "date": "December 2024",
+      "status": "complete"
+    },
+    {
+      "title": "Grant Agreement Execution",
+      "description": "Finalizing the federal grant agreement with USDOT. Full obligation of funds is pending completion of this process — a necessary step before planning work can formally begin.",
+      "date": "In Progress",
+      "status": "current"
+    },
+    {
+      "title": "Program Management & Work Plan",
+      "description": "Establishing coordination structure, roles, budget management, and reporting systems for the planning program.",
+      "date": "Q2 2025",
+      "status": "current"
+    },
+    {
+      "title": "Stakeholder Mapping & Engagement Strategy",
+      "description": "Identifying corridor stakeholders and building a public outreach plan that meaningfully reaches communities in West Pensacola and Ferry Pass.",
+      "date": "Q2–Q3 2025",
+      "status": "current"
+    },
+    {
+      "title": "Community Visioning",
+      "description": "Public sessions to define shared goals and guiding values for both priority nodes before design decisions are made.",
+      "date": "Late 2025–Early 2026",
+      "status": "upcoming"
+    },
+    {
+      "title": "Master Planning & Alternatives Analysis",
+      "description": "Studying alignment and design options at both nodes, evaluating tradeoffs, and identifying the preferred path forward — the Locally Preferred Alternative.",
+      "date": "2026",
+      "status": "upcoming",
+      "nodeRef": "Both priority nodes"
+    },
+    {
+      "title": "Feasibility Studies",
+      "description": "Technical analysis of alignment options, utility and ownership constraints, rail interfaces, and waterfront conditions at the two priority nodes.",
+      "date": "2026",
+      "status": "upcoming",
+      "nodeRef": "Jackson Lakes & Ferry Pass/UWF"
+    },
+    {
+      "title": "Preliminary Design",
+      "description": "Early engineering drawings establishing preferred alignments, typical sections, and crossing concepts — the foundation for future construction-ready plans.",
+      "date": "2026–2027",
+      "status": "upcoming",
+      "nodeRef": "Jackson Lakes & Ferry Pass/UWF"
+    }
+  ],
+  "outputs": [
+    "Community-endorsed vision and Locally Preferred Alternative for both nodes",
+    "Feasibility studies documenting constraints, opportunities, and cost ranges",
+    "Preliminary engineering drawings at both priority nodes",
+    "Foundation for subsequent construction funding applications"
+  ],
+  "draft": false
+}

@@ -1,0 +1,395 @@
+---
+export interface CorridorNode {
+  id: string;
+  label: string;
+  sublabel: string;
+  description: string;
+  position: string;
+  coordinates: [number, number];
+  waterTransit?: boolean;
+}
+
+interface Props {
+  nodes: CorridorNode[];
+  activeProjectNodes?: string[];
+  projectColor?: string;
+  interactive?: boolean;
+}
+
+const { nodes, activeProjectNodes = [], projectColor, interactive = true } = Astro.props;
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
+---
+
+<div
+  id="bluffline-map"
+  class="corridor-map"
+  data-nodes={JSON.stringify(nodes)}
+  data-active-nodes={JSON.stringify(activeProjectNodes)}
+  data-project-color={projectColor}
+  data-interactive={interactive.toString()}
+></div>
+
+<style>
+  .corridor-map {
+    width: 100%;
+    height: 480px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  @media (max-width: 767px) {
+    .corridor-map { height: 300px; }
+  }
+
+  :global(.corridor-map .mapboxgl-popup-content) {
+    padding: 0.875rem 1rem;
+    border-radius: 10px;
+    max-width: 260px;
+    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.12);
+  }
+  :global(.corridor-map .mapboxgl-popup-content h3) {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--navy, #2D3047);
+    margin: 0 0 0.125rem 0;
+    line-height: 1.3;
+  }
+  :global(.corridor-map .mapboxgl-popup-content .node-sublabel) {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--forest, #41521F);
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+  :global(.corridor-map .mapboxgl-popup-content p) {
+    font-size: 0.825rem;
+    color: var(--navy, #2D3047);
+    opacity: 0.75;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.5;
+  }
+  :global(.corridor-map .mapboxgl-popup-content .node-projects) {
+    font-size: 0.75rem;
+    color: var(--forest, #41521F);
+    font-weight: 500;
+    margin: 0;
+    padding-top: 0.375rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+  }
+  :global(.corridor-map .mapboxgl-popup-close-button) {
+    font-size: 1.25rem;
+    padding: 0.25rem 0.5rem;
+    color: var(--navy, #2D3047);
+    opacity: 0.5;
+  }
+  :global(.corridor-map .mapboxgl-popup-close-button:hover) {
+    opacity: 1;
+    background: transparent;
+  }
+  :global(.corridor-map .mapboxgl-ctrl-group) {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+
+  :global(.corridor-map .node-marker) {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2D3047;
+    border: 2.5px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  :global(.corridor-map .node-marker.highlighted) {
+    width: 18px;
+    height: 18px;
+    background: #99CC63;
+    border-color: white;
+    box-shadow: 0 0 0 4px rgba(153, 204, 99, 0.3), 0 2px 8px rgba(0,0,0,0.15);
+  }
+  :global(.corridor-map .node-marker.dimmed) {
+    opacity: 0.35;
+  }
+  :global(.corridor-map .node-marker.water-transit) {
+    border-radius: 3px;
+    transform: rotate(45deg);
+  }
+  :global(.corridor-map .node-marker.water-transit.highlighted) {
+    border-radius: 4px;
+  }
+
+  :global(.corridor-map .node-label) {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #2D3047;
+    text-shadow: 0 0 4px white, 0 0 4px white, 0 0 4px white, 0 0 4px white;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  :global(.corridor-map .node-label.dimmed) {
+    opacity: 0.3;
+  }
+  :global(.corridor-map .node-label.highlighted) {
+    color: #41521F;
+    font-weight: 700;
+    font-size: 12px;
+  }
+</style>
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+
+<script define:vars={{ MAPBOX_TOKEN }}>
+  const script = document.createElement('script');
+  script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js';
+  script.onload = initCorridorMap;
+  document.head.appendChild(script);
+
+  function initCorridorMap() {
+    const container = document.getElementById('bluffline-map');
+    if (!container) return;
+
+    const nodes = JSON.parse(container.dataset.nodes || '[]');
+    const isInteractive = container.dataset.interactive !== 'false';
+
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+
+    const map = new mapboxgl.Map({
+      container: 'bluffline-map',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [-87.22, 30.46],
+      zoom: 10,
+      attributionControl: false,
+    });
+
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+    map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
+
+    // Corridor alignment as a simplified centerline
+    const corridorLine = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [-87.303, 30.369],
+          [-87.300, 30.375],
+          [-87.298, 30.382],
+          [-87.293, 30.390],
+          [-87.285, 30.400],
+          [-87.278, 30.408],
+          [-87.273, 30.413],
+          [-87.268, 30.418],
+          [-87.260, 30.424],
+          [-87.250, 30.428],
+          [-87.240, 30.430],
+          [-87.230, 30.430],
+          [-87.222, 30.432],
+          [-87.218, 30.436],
+          [-87.213, 30.442],
+          [-87.207, 30.448],
+          [-87.200, 30.453],
+          [-87.197, 30.460],
+          [-87.194, 30.467],
+          [-87.192, 30.472],
+          [-87.192, 30.478],
+          [-87.191, 30.484],
+          [-87.189, 30.491],
+          [-87.190, 30.497],
+          [-87.195, 30.501],
+          [-87.202, 30.506],
+          [-87.208, 30.510],
+          [-87.211, 30.514],
+          [-87.215, 30.518],
+          [-87.220, 30.518],
+          [-87.228, 30.520],
+          [-87.235, 30.521],
+          [-87.242, 30.525],
+          [-87.248, 30.530],
+          [-87.251, 30.537],
+          [-87.253, 30.545],
+          [-87.252, 30.550],
+          [-87.249, 30.557],
+          [-87.244, 30.563],
+          [-87.238, 30.570],
+          [-87.230, 30.575],
+          [-87.221, 30.579],
+          [-87.215, 30.580],
+        ]
+      }
+    };
+
+    // Store markers and labels for highlight control
+    const markerElements = {};
+    const labelElements = {};
+    let activePopup = null;
+
+    map.on('load', () => {
+      // Add corridor line — background glow
+      map.addSource('corridor', {
+        type: 'geojson',
+        data: corridorLine,
+      });
+      map.addLayer({
+        id: 'corridor-glow',
+        type: 'line',
+        source: 'corridor',
+        paint: {
+          'line-color': '#41521F',
+          'line-width': 8,
+          'line-opacity': 0.12,
+          'line-blur': 4,
+        },
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round',
+        },
+      });
+      map.addLayer({
+        id: 'corridor-line',
+        type: 'line',
+        source: 'corridor',
+        paint: {
+          'line-color': '#41521F',
+          'line-width': 3,
+          'line-opacity': 0.7,
+        },
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round',
+        },
+      });
+
+      // Add node markers
+      nodes.forEach((node) => {
+        // Marker dot
+        const markerEl = document.createElement('div');
+        markerEl.className = 'node-marker';
+        if (node.waterTransit) {
+          markerEl.classList.add('water-transit');
+        }
+        markerEl.dataset.nodeId = node.id;
+
+        const marker = new mapboxgl.Marker({ element: markerEl, anchor: 'center' })
+          .setLngLat(node.coordinates)
+          .addTo(map);
+
+        markerElements[node.id] = markerEl;
+
+        // Label
+        const labelEl = document.createElement('div');
+        labelEl.className = 'node-label';
+        labelEl.textContent = node.label;
+
+        const labelMarker = new mapboxgl.Marker({ element: labelEl, anchor: 'top', offset: [0, 10] })
+          .setLngLat(node.coordinates)
+          .addTo(map);
+
+        labelElements[node.id] = labelEl;
+
+        // Click/hover popup
+        if (isInteractive) {
+          markerEl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (activePopup) activePopup.remove();
+
+            // Find which projects touch this node
+            const projectCards = document.querySelectorAll('[data-project-nodes]');
+            const touchingProjects = [];
+            projectCards.forEach((card) => {
+              const cardNodes = card.dataset.projectNodes.split(',');
+              if (cardNodes.includes(node.id)) {
+                touchingProjects.push(card.dataset.projectTitle || 'Unnamed project');
+              }
+            });
+
+            let projectsHtml = '';
+            if (touchingProjects.length > 0) {
+              projectsHtml = `<p class="node-projects">Active project: ${touchingProjects.join(', ')}</p>`;
+            }
+
+            activePopup = new mapboxgl.Popup({ offset: 12, closeButton: true })
+              .setLngLat(node.coordinates)
+              .setHTML(`
+                <h3>${node.label}</h3>
+                <p class="node-sublabel">${node.sublabel}</p>
+                <p>${node.description}</p>
+                ${projectsHtml}
+              `)
+              .addTo(map);
+          });
+
+          markerEl.addEventListener('mouseenter', () => {
+            // Highlight project cards that include this node
+            const projectCards = document.querySelectorAll('[data-project-nodes]');
+            projectCards.forEach((card) => {
+              const cardNodes = card.dataset.projectNodes.split(',');
+              if (cardNodes.includes(node.id)) {
+                card.classList.add('map-highlighted');
+              }
+            });
+          });
+
+          markerEl.addEventListener('mouseleave', () => {
+            document.querySelectorAll('[data-project-nodes]').forEach((card) => {
+              card.classList.remove('map-highlighted');
+            });
+          });
+        }
+      });
+
+      // Fit bounds to show corridor
+      const bounds = new mapboxgl.LngLatBounds();
+      corridorLine.geometry.coordinates.forEach((coord) => {
+        bounds.extend(coord);
+      });
+      map.fitBounds(bounds, { padding: 50 });
+    });
+
+    // Expose highlight API for project card interaction
+    window.blufflineMap = {
+      highlightProjectNodes(nodeIds, color) {
+        const highlightColor = color || '#99CC63';
+
+        // Highlight matching markers, dim others
+        Object.keys(markerElements).forEach((id) => {
+          const el = markerElements[id];
+          const labelEl = labelElements[id];
+          if (nodeIds.includes(id)) {
+            el.classList.add('highlighted');
+            el.classList.remove('dimmed');
+            el.style.background = highlightColor;
+            if (labelEl) {
+              labelEl.classList.add('highlighted');
+              labelEl.classList.remove('dimmed');
+            }
+          } else {
+            el.classList.add('dimmed');
+            el.classList.remove('highlighted');
+            el.style.background = '';
+            if (labelEl) {
+              labelEl.classList.add('dimmed');
+              labelEl.classList.remove('highlighted');
+            }
+          }
+        });
+      },
+
+      resetHighlights() {
+        Object.keys(markerElements).forEach((id) => {
+          const el = markerElements[id];
+          const labelEl = labelElements[id];
+          el.classList.remove('highlighted', 'dimmed');
+          el.style.background = '';
+          if (labelEl) {
+            labelEl.classList.remove('highlighted', 'dimmed');
+          }
+        });
+      },
+    };
+  }
+</script>
