@@ -31,7 +31,7 @@ const { phases, variant = 'light' } = Astro.props;
       {i < phases.length - 1 && (
         <div
           class="phase-connector"
-          data-filled={(phase.status === 'complete').toString()}
+          data-filled={(phase.status === 'complete' || phase.status === 'current').toString()}
         ></div>
       )}
     </>

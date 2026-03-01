@@ -4,97 +4,239 @@ import PageHero from '../../components/ui/PageHero.astro';
 import PhaseTracker from '../../components/ui/PhaseTracker.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
 import UpdateCard from '../../components/content/UpdateCard.astro';
+import CorridorMap from '../../components/ui/CorridorMap.astro';
+import ProjectCard from '../../components/content/ProjectCard.astro';
+import MilestoneList from '../../components/content/MilestoneList.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'progress');
 const d = page.data;
-
 
 const updates = (await getCollection('updates'))
   .filter(u => !u.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const milestones = [
-  { title: "Reconnecting Communities Grant Awarded", description: "$1.2M from U.S. DOT", date: "Jan 2025", status: "complete" },
-  { title: "Master Planning Phase Begins", description: "Community engagement kickoff", date: "Q2 2025", status: "current" },
-  { title: "Corridor Extension Application", description: "Southwest extension to Jackson Lakes", date: "2024", status: "complete" },
-  { title: "Scenic Highway Merger", description: "Unified organization established", date: "Jul 2024", status: "complete" },
-  { title: "Feasibility Studies Complete", description: "Preliminary engineering", date: "Q4 2025", status: "upcoming" },
-  { title: "Capital Campaign Launch", description: "Construction funding initiative", date: "2026", status: "upcoming" },
+const allProjects = (await getCollection('projects'))
+  .filter(p => !p.data.draft);
+
+// Sort: active first, then pending, then pursuing, then complete
+const statusOrder = { active: 0, pending: 1, pursuing: 2, complete: 3 };
+const projects = allProjects.sort(
+  (a, b) => (statusOrder[a.data.status] ?? 99) - (statusOrder[b.data.status] ?? 99)
+);
+
+// The default detail project is the first active or pending project
+const detailProject = projects.find(p => p.data.status === 'active' || p.data.status === 'pending') || projects[0];
+
+// Corridor nodes — stable geographic reference
+const corridorNodes = [
+  {
+    id: "corry-station",
+    label: "Corry Station",
+    sublabel: "U.S. Navy Center of Excellence",
+    description: "Southwestern terminus. Major military employment center; many personnel lack vehicles.",
+    position: "southwest",
+    coordinates: [-87.303, 30.369] as [number, number],
+  },
+  {
+    id: "jackson-lakes",
+    label: "Jackson Lakes",
+    sublabel: "West Pensacola",
+    description: "~70-acre county-owned waterfront property anchored by historic Galvez Spring. A priority node for transformation.",
+    position: "west",
+    coordinates: [-87.273, 30.415] as [number, number],
+    waterTransit: true,
+  },
+  {
+    id: "maritime-park",
+    label: "Maritime Park",
+    sublabel: "Downtown Waterfront",
+    description: "Community Maritime Park and Bruce Beach; port-adjacent civic anchor.",
+    position: "central",
+    coordinates: [-87.228, 30.430] as [number, number],
+    waterTransit: true,
+  },
+  {
+    id: "chimney-park",
+    label: "Chimney Park",
+    sublabel: "Bay Bluffs Corridor",
+    description: "Rail corridor runs parallel to shoreline here; exposed to tidal flooding and storm surge.",
+    position: "east-central",
+    coordinates: [-87.197, 30.460] as [number, number],
+    waterTransit: true,
+  },
+  {
+    id: "ellyson",
+    label: "Ellyson Industrial Park",
+    sublabel: "Ferry Pass Corridor",
+    description: "Major employment corridor; large pavement expanses, limited shade, challenging travel conditions.",
+    position: "northeast",
+    coordinates: [-87.192, 30.492] as [number, number],
+  },
+  {
+    id: "ferry-pass",
+    label: "Ferry Pass",
+    sublabel: "Atwood Community",
+    description: "Disadvantaged neighborhood where many residents lack vehicle access. RCP priority node.",
+    position: "north",
+    coordinates: [-87.215, 30.518] as [number, number],
+  },
+  {
+    id: "uwf",
+    label: "University of West Florida",
+    sublabel: "Ferry Pass / UWF",
+    description: "Northeastern terminus. Major education and employment anchor; planned Bluffs Industrial Campus on Escambia River.",
+    position: "north",
+    coordinates: [-87.215, 30.553] as [number, number],
+    waterTransit: true,
+  },
 ];
+
+// Program stages for the arc diagram
+const programStages = [
+  { label: 'Set up the program', status: 'complete' as const },
+  { label: 'Engage the community', status: 'current' as const },
+  { label: 'Agree on a vision', status: 'current' as const },
+  { label: 'Study the options', status: 'current' as const },
+  { label: 'Align funding & governance', status: 'upcoming' as const },
+  { label: 'Environmental review', status: 'upcoming' as const },
+  { label: 'Final design & permitting', status: 'upcoming' as const },
+  { label: 'Build', status: 'upcoming' as const },
+  { label: 'Monitor & maintain', status: 'upcoming' as const },
+];
+
+// Status labels for detail section
+const statusLabels: Record<string, string> = {
+  active: 'Active',
+  pending: 'Pending Obligation',
+  pursuing: 'Pursuing',
+  complete: 'Complete',
+};
 ---
 
-<BaseLayout 
-  title="Progress" 
-  description="Track the Bluffline's progress — from federal grants to community engagement to construction milestones."
+<BaseLayout
+  title="Progress"
+  description="Track the Bluffline's progress — a 20-mile regional transportation program advancing through coordinated planning and public investment."
 >
-  <!-- TODO: Swap hero photo when final assets are provided -->
+  <!-- Section 1: Hero -->
   <PageHero
     label={d.heroLabel}
     title={d.heroTitle}
     description={d.heroDescription}
     heroImage="/images/chimney-park-tracks.jpg"
     heroImageAlt="Rail corridor with historic chimney at Chimney Park"
-    keywords={["connected"]}
+    keywords={["disciplined"]}
   />
 
-  <section class="grant-highlight-section">
-    <div class="section-inner">
-      <div class="grant-highlight">
-        <div>
-          <h3>{d.grantHeading}</h3>
-          <p>{d.grantBody}</p>
-        </div>
-        <div class="grant-amount">
-          {d.grantAmount}
-          <span>{d.grantAmountLabel}</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="milestones">
-    <div class="milestones-inner">
-      <div class="milestones-header">
-        <h2>{d.milestonesHeading}</h2>
-      </div>
-      <div class="milestones-phase-overview">
-        <PhaseTracker
-          phases={[
-            { label: 'Grant Awarded', status: 'complete' },
-            { label: 'Master Planning', status: 'current' },
-            { label: 'Feasibility Studies', status: 'upcoming' },
-            { label: 'Capital Campaign', status: 'upcoming' },
-          ]}
+  <!-- Section 2: Program Map + Project Cards -->
+  <section class="map-projects-section">
+    <div class="map-projects-inner">
+      <div class="map-column">
+        <CorridorMap
+          nodes={corridorNodes}
+          interactive={true}
         />
       </div>
-      <div class="milestone-list">
-        {milestones.map(m => (
-          <div class="milestone-item">
-            <div class={`milestone-status ${m.status}`}>
-              {m.status === 'complete' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              )}
-              {m.status === 'current' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <circle cx="12" cy="12" r="4"/>
-                </svg>
-              )}
-            </div>
-            <div class="milestone-content">
-              <h4>{m.title}</h4>
-              <p>{m.description}</p>
-            </div>
-            <div class="milestone-date">{m.date}</div>
-          </div>
-        ))}
+      <div class="cards-column">
+        <div class="cards-heading">
+          <h2>Active Projects</h2>
+          <p>Each project advances a piece of the corridor. Select a project to see which nodes it touches.</p>
+        </div>
+        <div class="project-cards-stack">
+          {projects.map((project, i) => (
+            <ProjectCard
+              project={project.data}
+              isActive={project === detailProject}
+            />
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Section 3: Active Project Detail -->
+  {detailProject && (
+    <section class="project-detail-section" id="project-detail">
+      <div class="project-detail-inner">
+        <div class="detail-header">
+          <div class="detail-label">What's Happening Now</div>
+          <h2>{detailProject.data.title}</h2>
+          <div class="detail-meta">
+            <span class="detail-meta-item">
+              <strong>Funder:</strong> {detailProject.data.funder}
+            </span>
+            <span class="detail-meta-item">
+              <strong>Program:</strong> {detailProject.data.program}
+            </span>
+            {detailProject.data.amount && (
+              <span class="detail-meta-item">
+                <strong>Award:</strong> {detailProject.data.amount}
+              </span>
+            )}
+            {detailProject.data.awardDate && (
+              <span class="detail-meta-item">
+                <strong>Announced:</strong> {detailProject.data.awardDate}
+              </span>
+            )}
+            <span class="detail-meta-item">
+              <strong>Status:</strong> {statusLabels[detailProject.data.status]}
+            </span>
+          </div>
+        </div>
+
+        <div class="detail-body">
+          <div class="detail-main">
+            <p class="detail-description">{detailProject.data.description}</p>
+
+            {detailProject.data.status === 'pursuing' ? (
+              <div class="pursuing-notice">
+                <p>We've submitted an application for this funding. If awarded, this project would advance work at {detailProject.data.nodes.length} corridor nodes.</p>
+              </div>
+            ) : (
+              <div class="milestone-section">
+                <h3>Project Milestones</h3>
+                <MilestoneList milestones={detailProject.data.milestones} />
+              </div>
+            )}
+          </div>
+
+          {detailProject.data.outputs && detailProject.data.outputs.length > 0 && (
+            <div class="detail-sidebar">
+              <h3>What This Project Produces</h3>
+              <ul class="outputs-list">
+                {detailProject.data.outputs.map(output => (
+                  <li>{output}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Section 4: The Program Arc -->
+  <section class="program-arc-section">
+    <div class="program-arc-inner">
+      <div class="program-arc-header">
+        <h2>How the Bluffline advances</h2>
+        <p>The Bluffline will be built through a structured, stage-gated process &mdash; each phase producing specific deliverables and a clear decision point before the next phase begins. This discipline ensures that every dollar is spent on the right work at the right time, and that communities shape decisions before engineering locks them in.</p>
+      </div>
+
+      <div class="stage-diagram">
+        <PhaseTracker
+          phases={programStages}
+        />
+      </div>
+
+      <div class="program-arc-note">
+        <p>Different parts of the corridor will move through these stages at different paces, depending on funding. We are actively pursuing federal, state, and local funding to advance the next phases of work &mdash; and we will move where funding allows. What won't change is the process: every segment will go through the same rigorous planning and community engagement before a shovel goes in the ground.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Updates Feed -->
   <section class="updates-feed">
     <div class="updates-feed-inner">
       <div class="updates-header">
@@ -116,6 +258,7 @@ const milestones = [
     </div>
   </section>
 
+  <!-- Section 6: Call to Action -->
   <CallToAction
     title={d.ctaTitle}
     description={d.ctaDescription}
@@ -126,76 +269,254 @@ const milestones = [
 </BaseLayout>
 
 <style>
-  .grant-highlight-section { background: var(--forest); color: white; padding: 3rem 0; }
-  @media (min-width: 768px) { .grant-highlight-section { padding: 4rem 0; } }
-  .grant-highlight {
-    display: grid;
-    gap: 2rem;
-    align-items: center;
+  /* ============================================
+     Section 2: Map + Project Cards
+     ============================================ */
+  .map-projects-section {
+    padding: 4rem 0;
+    background: var(--cream);
   }
   @media (min-width: 768px) {
-    .grant-highlight { grid-template-columns: 1fr auto; padding: 0; }
-  }
-  .grant-highlight h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
-  .grant-highlight p { opacity: 0.9; line-height: 1.6; }
-  .grant-highlight a { color: var(--spring); text-decoration: underline; text-underline-offset: 2px; }
-  .grant-highlight a:hover { color: white; }
-  .grant-amount {
-    font-family: 'Fraunces', serif;
-    font-size: 3rem;
-    font-weight: 500;
-    text-align: center;
-  }
-  .grant-amount span {
-    display: block;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    opacity: 0.8;
-    margin-top: 0.25rem;
+    .map-projects-section { padding: 5rem 0; }
   }
 
-  .milestones { padding: 5rem 0; background: var(--cream); }
-  .milestones-inner { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
-  @media (min-width: 768px) { .milestones-inner { padding: 0 3rem; } }
-  .milestones-header { margin-bottom: 3rem; }
-  .milestones-header h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-  .milestones-phase-overview {
+  .map-projects-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .map-projects-inner { padding: 0 3rem; }
+  }
+  @media (min-width: 1024px) {
+    .map-projects-inner {
+      grid-template-columns: 55fr 45fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+  }
+
+  .map-column {
+    position: relative;
+    min-height: 300px;
+  }
+  @media (min-width: 1024px) {
+    .map-column {
+      position: sticky;
+      top: 6rem;
+      min-height: 480px;
+    }
+  }
+
+  .cards-heading {
+    margin-bottom: 1.5rem;
+  }
+  .cards-heading h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .cards-heading p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.6;
+  }
+
+  .project-cards-stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  /* ============================================
+     Section 3: Active Project Detail
+     ============================================ */
+  .project-detail-section {
+    padding: 5rem 0;
+    background: var(--warm-white);
+  }
+  .project-detail-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .project-detail-inner { padding: 0 3rem; }
+  }
+
+  .detail-header {
+    margin-bottom: 2.5rem;
     max-width: 800px;
+  }
+  .detail-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .detail-header h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+  .detail-meta-item {
+    font-size: 0.875rem;
+    color: var(--navy);
+    opacity: 0.7;
+  }
+  .detail-meta-item strong {
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  .detail-body {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .detail-body {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .detail-description {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.65;
+    margin-bottom: 2rem;
+  }
+
+  .milestone-section h3 {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+
+  .pursuing-notice {
+    background: var(--mist);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .pursuing-notice p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .detail-sidebar {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  @media (min-width: 1024px) {
+    .detail-sidebar {
+      position: sticky;
+      top: 6rem;
+    }
+  }
+  .detail-sidebar h3 {
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+  }
+  .outputs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+  .outputs-list li {
+    font-size: 0.925rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.5;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .outputs-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--spring);
+  }
+
+  /* ============================================
+     Section 4: Program Arc
+     ============================================ */
+  .program-arc-section {
+    padding: 5rem 0;
+    background: var(--cream);
+  }
+  @media (min-width: 768px) {
+    .program-arc-section { padding: 7rem 0; }
+  }
+  .program-arc-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .program-arc-inner { padding: 0 3rem; }
+  }
+
+  .program-arc-header {
+    max-width: 750px;
     margin-bottom: 2.5rem;
   }
-  .milestone-list { display: grid; gap: 1rem; max-width: 800px; }
-  .milestone-item {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 1.25rem;
-    align-items: center;
-    background: white;
-    padding: 1.25rem 1.5rem;
-    border-radius: 12px;
+  .program-arc-header h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 1.25rem;
   }
-  .milestone-status {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .program-arc-header p {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.65;
   }
-  .milestone-status.complete { background: var(--spring); }
-  .milestone-status.complete svg { width: 16px; height: 16px; color: var(--forest); }
-  .milestone-status.upcoming { background: var(--mist); border: 2px dashed rgba(45, 48, 71, 0.2); }
-  .milestone-status.current { background: var(--forest); animation: pulse-status 2s ease-in-out infinite; }
-  .milestone-status.current svg { width: 16px; height: 16px; color: white; }
-  @keyframes pulse-status {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(59, 94, 68, 0.25); }
-    50% { box-shadow: 0 0 0 8px rgba(59, 94, 68, 0.15); }
-  }
-  .milestone-content h4 { font-size: 1rem; font-weight: 500; margin-bottom: 0.125rem; font-family: 'Source Sans 3', sans-serif; }
-  .milestone-content p { font-size: 0.875rem; color: rgba(45, 48, 71, 0.6); }
-  .milestone-date { font-size: 0.875rem; color: rgba(45, 48, 71, 0.5); text-align: right; white-space: nowrap; }
 
+  .stage-diagram {
+    max-width: 900px;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 0;
+  }
+
+  .program-arc-note {
+    max-width: 750px;
+    background: var(--warm-white);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--spring);
+  }
+  .program-arc-note p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.7;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ============================================
+     Section 5: Updates Feed
+     ============================================ */
   .updates-feed { padding: 5rem 0; background: var(--warm-white); }
   .updates-feed-inner { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
   @media (min-width: 768px) { .updates-feed-inner { padding: 0 3rem; } }
@@ -212,3 +533,42 @@ const milestones = [
   @media (min-width: 768px) { .updates-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1024px) { .updates-grid { grid-template-columns: repeat(3, 1fr); } }
 </style>
+
+<script is:inline>
+  // Project card ↔ Map interaction
+  (function() {
+    const cards = document.querySelectorAll('.project-card');
+
+    cards.forEach(function(card) {
+      const nodeIds = (card.dataset.projectNodes || '').split(',').filter(Boolean);
+      const color = card.dataset.projectColor || '';
+
+      card.addEventListener('mouseenter', function() {
+        if (window.blufflineMap) {
+          window.blufflineMap.highlightProjectNodes(nodeIds, color);
+        }
+        // Mark this card as active, dim others
+        cards.forEach(function(c) {
+          if (c !== card) c.classList.add('dimmed-card');
+        });
+      });
+
+      card.addEventListener('mouseleave', function() {
+        if (window.blufflineMap) {
+          window.blufflineMap.resetHighlights();
+        }
+        cards.forEach(function(c) {
+          c.classList.remove('dimmed-card');
+        });
+      });
+
+      // On click, scroll to detail section
+      card.addEventListener('click', function() {
+        var detail = document.getElementById('project-detail');
+        if (detail) {
+          detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
+</script>

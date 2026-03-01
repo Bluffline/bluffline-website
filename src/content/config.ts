@@ -129,6 +129,35 @@ const pagesCollection = defineCollection({
   schema: z.record(z.any()),
 });
 
+const projectsCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    shortTitle: z.string(),
+    status: z.enum(['active', 'pending', 'complete', 'pursuing']),
+    funder: z.string(),
+    program: z.string(),
+    amount: z.string().optional(),
+    awardDate: z.string().optional(),
+    description: z.string(),
+    nodes: z.array(z.string()),
+    color: z.string().optional(),
+    milestones: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+      date: z.string(),
+      status: z.enum(['complete', 'current', 'upcoming']),
+      nodeRef: z.string().optional(),
+    })),
+    outputs: z.array(z.string()).optional(),
+    relatedLinks: z.array(z.object({
+      label: z.string(),
+      href: z.string(),
+    })).optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   'updates': updatesCollection,
   'press': pressCollection,
@@ -139,4 +168,5 @@ export const collections = {
   'timeline': timelineCollection,
   'testimonials': testimonialsCollection,
   'pages': pagesCollection,
+  'projects': projectsCollection,
 };
