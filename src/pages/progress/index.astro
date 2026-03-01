@@ -29,69 +29,14 @@ const projects = allProjects.sort(
 // The default detail project is the first active or pending project
 const detailProject = projects.find(p => p.data.status === 'active' || p.data.status === 'pending') || projects[0];
 
-// Corridor nodes — stable geographic reference
-const corridorNodes = [
-  {
-    id: "corry-station",
-    label: "Corry Station",
-    sublabel: "U.S. Navy Center of Excellence",
-    description: "Southwestern terminus. Major military employment center; many personnel lack vehicles.",
-    position: "southwest",
-    coordinates: [-87.303, 30.369] as [number, number],
-  },
-  {
-    id: "jackson-lakes",
-    label: "Jackson Lakes",
-    sublabel: "West Pensacola",
-    description: "~70-acre county-owned waterfront property anchored by historic Galvez Spring. A priority node for transformation.",
-    position: "west",
-    coordinates: [-87.273, 30.415] as [number, number],
-    waterTransit: true,
-  },
-  {
-    id: "maritime-park",
-    label: "Maritime Park",
-    sublabel: "Downtown Waterfront",
-    description: "Community Maritime Park and Bruce Beach; port-adjacent civic anchor.",
-    position: "central",
-    coordinates: [-87.228, 30.430] as [number, number],
-    waterTransit: true,
-  },
-  {
-    id: "chimney-park",
-    label: "Chimney Park",
-    sublabel: "Bay Bluffs Corridor",
-    description: "Rail corridor runs parallel to shoreline here; exposed to tidal flooding and storm surge.",
-    position: "east-central",
-    coordinates: [-87.197, 30.460] as [number, number],
-    waterTransit: true,
-  },
-  {
-    id: "ellyson",
-    label: "Ellyson Industrial Park",
-    sublabel: "Ferry Pass Corridor",
-    description: "Major employment corridor; large pavement expanses, limited shade, challenging travel conditions.",
-    position: "northeast",
-    coordinates: [-87.192, 30.492] as [number, number],
-  },
-  {
-    id: "ferry-pass",
-    label: "Ferry Pass",
-    sublabel: "Atwood Community",
-    description: "Disadvantaged neighborhood where many residents lack vehicle access. RCP priority node.",
-    position: "north",
-    coordinates: [-87.215, 30.518] as [number, number],
-  },
-  {
-    id: "uwf",
-    label: "University of West Florida",
-    sublabel: "Ferry Pass / UWF",
-    description: "Northeastern terminus. Major education and employment anchor; planned Bluffs Industrial Campus on Escambia River.",
-    position: "north",
-    coordinates: [-87.215, 30.553] as [number, number],
-    waterTransit: true,
-  },
-];
+// Collect all project segment data for the map
+const allProjectSegments = projects
+  .filter(p => p.data.segments?.features?.length > 0)
+  .map(p => ({
+    id: p.data.shortTitle,
+    color: p.data.color || '#99CC63',
+    segments: p.data.segments,
+  }));
 
 // Program stages for the arc diagram
 const programStages = [
@@ -134,14 +79,15 @@ const statusLabels: Record<string, string> = {
     <div class="map-projects-inner">
       <div class="map-column">
         <CorridorMap
-          nodes={corridorNodes}
+          allProjectSegments={allProjectSegments}
           interactive={true}
         />
+        <p class="map-note">The shaded area shows the planning corridor &mdash; the geography being studied. The specific trail alignment within this corridor will be determined through the master planning process, informed by community input, engineering feasibility, and environmental review.</p>
       </div>
       <div class="cards-column">
         <div class="cards-heading">
           <h2>Active Projects</h2>
-          <p>Each project advances a piece of the corridor. Select a project to see which nodes it touches.</p>
+          <p>Each project advances a piece of the corridor. Hover a project to see its geography on the map.</p>
         </div>
         <div class="project-cards-stack">
           {projects.map((project, i) => (
@@ -308,6 +254,15 @@ const statusLabels: Record<string, string> = {
       top: 6rem;
       min-height: 480px;
     }
+  }
+
+  .map-note {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.5;
+    line-height: 1.5;
+    margin-top: 0.75rem;
+    font-style: italic;
   }
 
   .cards-heading {
@@ -540,18 +495,12 @@ const statusLabels: Record<string, string> = {
     var cards = document.querySelectorAll('.project-card');
 
     cards.forEach(function(card) {
-      var nodeIds = (card.dataset.projectNodes || '').split(',').filter(Boolean);
+      var projectTitle = card.dataset.projectTitle || '';
       var color = card.dataset.projectColor || '';
-      var segmentsData = null;
-      try {
-        if (card.dataset.projectSegments) {
-          segmentsData = JSON.parse(card.dataset.projectSegments);
-        }
-      } catch (e) {}
 
       card.addEventListener('mouseenter', function() {
         if (window.blufflineMap) {
-          window.blufflineMap.highlightProjectNodes(nodeIds, color, segmentsData);
+          window.blufflineMap.highlightProject(projectTitle, color);
         }
         cards.forEach(function(c) {
           if (c !== card) c.classList.add('dimmed-card');
@@ -567,7 +516,6 @@ const statusLabels: Record<string, string> = {
         });
       });
 
-      // On mobile tap / click, scroll to detail section
       card.addEventListener('click', function() {
         var detail = document.getElementById('project-detail');
         if (detail) {
