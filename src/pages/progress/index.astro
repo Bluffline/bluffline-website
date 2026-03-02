@@ -70,6 +70,8 @@ const statusLabels: Record<string, string> = {
     title={d.heroTitle}
     description={d.heroDescription}
     keywords={["disciplined"]}
+    heroImage="/images/chimney-park-tracks.jpg"
+    heroImageAlt="Railroad tracks along the Bluffline corridor at Chimney Park"
   />
 
   <!-- Section 2: The Program Arc -->
@@ -84,6 +86,7 @@ const statusLabels: Record<string, string> = {
       <div class="stage-diagram-container">
         <PhaseTracker
           phases={programStages}
+          variant="dark"
         />
       </div>
 
@@ -111,6 +114,7 @@ const statusLabels: Record<string, string> = {
       </div>
       <div class="cards-column">
         <div class="cards-heading">
+          <p class="section-label">Current Funding</p>
           <h2>Active Projects</h2>
           <p>Each funded project advances a section of the planning corridor shown at left. The specific alignment will be determined through the master planning process. Hover a project to see its geography.</p>
         </div>
@@ -130,58 +134,60 @@ const statusLabels: Record<string, string> = {
   {detailProject && (
     <section class="project-detail-section" id="project-detail">
       <div class="project-detail-inner">
-        <div class="detail-header">
-          <div class="detail-label">What's Happening Now</div>
-          <h2>{detailProject.data.title}</h2>
-          <div class="detail-meta">
-            <span class="detail-meta-item">
-              <strong>Funder:</strong> {detailProject.data.funder}
-            </span>
-            <span class="detail-meta-item">
-              <strong>Program:</strong> {detailProject.data.program}
-            </span>
-            {detailProject.data.amount && (
+        <div class="detail-card">
+          <div class="detail-header">
+            <div class="detail-label">What's Happening Now</div>
+            <h2>{detailProject.data.title}</h2>
+            <div class="detail-meta">
               <span class="detail-meta-item">
-                <strong>Award:</strong> {detailProject.data.amount}
+                <strong>Funder:</strong> {detailProject.data.funder}
               </span>
-            )}
-            {detailProject.data.awardDate && (
               <span class="detail-meta-item">
-                <strong>Announced:</strong> {detailProject.data.awardDate}
+                <strong>Program:</strong> {detailProject.data.program}
               </span>
-            )}
-            <span class="detail-meta-item">
-              <strong>Status:</strong> {statusLabels[detailProject.data.status]}
-            </span>
-          </div>
-        </div>
-
-        <div class="detail-body">
-          <div class="detail-main">
-            <p class="detail-description">{detailProject.data.description}</p>
-
-            {detailProject.data.status === 'pursuing' ? (
-              <div class="pursuing-notice">
-                <p>We've submitted an application for this funding. If awarded, this project would advance work at {detailProject.data.nodes.length} corridor nodes.</p>
-              </div>
-            ) : (
-              <div class="milestone-section">
-                <h3>Project Milestones</h3>
-                <MilestoneList milestones={detailProject.data.milestones} />
-              </div>
-            )}
-          </div>
-
-          {detailProject.data.outputs && detailProject.data.outputs.length > 0 && (
-            <div class="detail-sidebar">
-              <h3>What This Project Produces</h3>
-              <ul class="outputs-list">
-                {detailProject.data.outputs.map(output => (
-                  <li>{output}</li>
-                ))}
-              </ul>
+              {detailProject.data.amount && (
+                <span class="detail-meta-item">
+                  <strong>Award:</strong> {detailProject.data.amount}
+                </span>
+              )}
+              {detailProject.data.awardDate && (
+                <span class="detail-meta-item">
+                  <strong>Announced:</strong> {detailProject.data.awardDate}
+                </span>
+              )}
+              <span class="detail-meta-item">
+                <strong>Status:</strong> {statusLabels[detailProject.data.status]}
+              </span>
             </div>
-          )}
+          </div>
+
+          <div class="detail-body">
+            <div class="detail-main">
+              <p class="detail-description">{detailProject.data.description}</p>
+
+              {detailProject.data.status === 'pursuing' ? (
+                <div class="pursuing-notice">
+                  <p>We've submitted an application for this funding. If awarded, this project would advance work at {detailProject.data.nodes.length} corridor nodes.</p>
+                </div>
+              ) : (
+                <div class="milestone-section">
+                  <h3>Project Milestones</h3>
+                  <MilestoneList milestones={detailProject.data.milestones} />
+                </div>
+              )}
+            </div>
+
+            {detailProject.data.outputs && detailProject.data.outputs.length > 0 && (
+              <div class="detail-sidebar">
+                <h3>What This Project Produces</h3>
+                <ul class="outputs-list">
+                  {detailProject.data.outputs.map(output => (
+                    <li>{output}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
@@ -191,7 +197,10 @@ const statusLabels: Record<string, string> = {
   <section class="updates-feed">
     <div class="updates-feed-inner">
       <div class="updates-header">
-        <h2>{d.updatesHeading}</h2>
+        <div>
+          <p class="section-label">From the Field</p>
+          <h2>{d.updatesHeading}</h2>
+        </div>
         <a href="/progress/updates" class="btn btn-outline">View All Updates</a>
       </div>
       <div class="updates-grid">
@@ -239,7 +248,7 @@ const statusLabels: Record<string, string> = {
     .map-projects-inner {
       max-width: none;
       margin: 0;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr min(50%, 680px);
       gap: 0;
       align-items: start;
     }
@@ -287,6 +296,11 @@ const statusLabels: Record<string, string> = {
     display: grid;
     gap: 1rem;
   }
+  :global(.project-card.dimmed-card) {
+    opacity: 0.45;
+    transform: scale(0.98);
+    transition: all 0.25s ease;
+  }
 
   /* ============================================
      Section 3: Active Project Detail
@@ -295,6 +309,17 @@ const statusLabels: Record<string, string> = {
     padding: 5rem 0;
     background: var(--warm-white);
   }
+  .project-detail-section::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 10%,
+      rgba(153, 204, 99, 0.3) 50%,
+      transparent 90%
+    );
+  }
   .project-detail-inner {
     max-width: 1400px;
     margin: 0 auto;
@@ -302,6 +327,17 @@ const statusLabels: Record<string, string> = {
   }
   @media (min-width: 768px) {
     .project-detail-inner { padding: 0 3rem; }
+  }
+
+  .detail-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    border-left: 4px solid var(--spring);
+    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.04);
+  }
+  @media (min-width: 768px) {
+    .detail-card { padding: 3rem; }
   }
 
   .detail-header {
@@ -422,7 +458,7 @@ const statusLabels: Record<string, string> = {
      ============================================ */
   .program-arc-section {
     padding: 5rem 0;
-    background: var(--cream);
+    background: var(--navy);
   }
   @media (min-width: 768px) {
     .program-arc-section { padding: 7rem 0; }
@@ -442,18 +478,22 @@ const statusLabels: Record<string, string> = {
   }
   .program-arc-header h2 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--navy);
+    color: white;
     margin-bottom: 1.25rem;
+  }
+  .program-arc-header .section-label {
+    color: var(--spring);
   }
   .program-arc-header > p:not(.section-label) {
     font-size: 1.05rem;
-    color: var(--navy);
-    opacity: 0.75;
+    color: white;
+    opacity: 0.8;
     line-height: 1.65;
   }
 
   .stage-diagram-container {
-    background: var(--warm-white);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 1.75rem 1.5rem;
     margin-bottom: 2.5rem;
@@ -475,19 +515,20 @@ const statusLabels: Record<string, string> = {
     }
   }
   .arc-detail-card {
-    background: var(--warm-white);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 1.75rem 2rem;
   }
   .arc-detail-card h3 {
     font-size: 1.1rem;
-    color: var(--navy);
+    color: white;
     margin-bottom: 0.75rem;
   }
   .arc-detail-card p {
     font-size: 0.925rem;
-    color: var(--navy);
-    opacity: 0.7;
+    color: white;
+    opacity: 0.75;
     line-height: 1.6;
     margin: 0;
   }
