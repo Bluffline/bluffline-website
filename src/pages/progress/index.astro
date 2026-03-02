@@ -82,12 +82,11 @@ const statusLabels: Record<string, string> = {
           allProjectSegments={allProjectSegments}
           interactive={true}
         />
-        <p class="map-note">The shaded area shows the planning corridor &mdash; the geography being studied. The specific trail alignment within this corridor will be determined through the master planning process, informed by community input, engineering feasibility, and environmental review.</p>
       </div>
       <div class="cards-column">
         <div class="cards-heading">
           <h2>Active Projects</h2>
-          <p>Each project advances a piece of the corridor. Hover a project to see its geography on the map.</p>
+          <p>Each funded project advances a section of the planning corridor shown at left. The specific alignment will be determined through the master planning process. Hover a project to see its geography.</p>
         </div>
         <div class="project-cards-stack">
           {projects.map((project, i) => (
@@ -166,18 +165,26 @@ const statusLabels: Record<string, string> = {
   <section class="program-arc-section">
     <div class="program-arc-inner">
       <div class="program-arc-header">
+        <p class="section-label">The Process</p>
         <h2>How the Bluffline advances</h2>
-        <p>The Bluffline will be built through a structured, stage-gated process &mdash; each phase producing specific deliverables and a clear decision point before the next phase begins. This discipline ensures that every dollar is spent on the right work at the right time, and that communities shape decisions before engineering locks them in.</p>
+        <p>The Bluffline will be built through a structured, stage-gated process. Each phase produces specific deliverables and a clear decision point before the next begins &mdash; ensuring that every dollar is spent on the right work at the right time, and that communities shape decisions before engineering locks them in.</p>
       </div>
 
-      <div class="stage-diagram">
+      <div class="stage-diagram-container">
         <PhaseTracker
           phases={programStages}
         />
       </div>
 
-      <div class="program-arc-note">
-        <p>Different parts of the corridor will move through these stages at different paces, depending on funding. We are actively pursuing federal, state, and local funding to advance the next phases of work &mdash; and we will move where funding allows. What won't change is the process: every segment will go through the same rigorous planning and community engagement before a shovel goes in the ground.</p>
+      <div class="arc-details">
+        <div class="arc-detail-card">
+          <h3>Community before concrete</h3>
+          <p>There is no predetermined alignment for the Bluffline. The corridor shown on the map is a planning area &mdash; the geography being studied. Where the trail actually goes will be the product of sustained community engagement, feasibility analysis, and design work at each section. That's the whole point of stages 1 through 3: communities define the vision before engineers draw the lines.</p>
+        </div>
+        <div class="arc-detail-card">
+          <h3>Funded in phases, not all at once</h3>
+          <p>Different parts of the corridor will move through these stages at different paces, depending on funding. We are actively pursuing federal, state, and local funding to advance the next phases &mdash; and we will move where funding allows. What won't change is the process: every segment goes through the same rigorous planning before a shovel goes in the ground.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -219,27 +226,21 @@ const statusLabels: Record<string, string> = {
      Section 2: Map + Project Cards
      ============================================ */
   .map-projects-section {
-    padding: 4rem 0;
+    padding: 0;
     background: var(--cream);
-  }
-  @media (min-width: 768px) {
-    .map-projects-section { padding: 5rem 0; }
   }
 
   .map-projects-inner {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0;
     display: grid;
-    gap: 2rem;
-  }
-  @media (min-width: 768px) {
-    .map-projects-inner { padding: 0 3rem; }
+    gap: 0;
   }
   @media (min-width: 1024px) {
     .map-projects-inner {
       grid-template-columns: 55fr 45fr;
-      gap: 2.5rem;
+      gap: 0;
       align-items: start;
     }
   }
@@ -251,18 +252,20 @@ const statusLabels: Record<string, string> = {
   @media (min-width: 1024px) {
     .map-column {
       position: sticky;
-      top: 6rem;
+      top: 0;
       min-height: 480px;
     }
   }
 
-  .map-note {
-    font-size: 0.8rem;
-    color: var(--navy);
-    opacity: 0.5;
-    line-height: 1.5;
-    margin-top: 0.75rem;
-    font-style: italic;
+
+  .cards-column {
+    padding: 2rem 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .cards-column { padding: 2.5rem 2.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .cards-column { padding: 2.5rem 3rem 2.5rem 2.5rem; }
   }
 
   .cards-heading {
@@ -434,38 +437,57 @@ const statusLabels: Record<string, string> = {
 
   .program-arc-header {
     max-width: 750px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
   .program-arc-header h2 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: var(--navy);
     margin-bottom: 1.25rem;
   }
-  .program-arc-header p {
+  .program-arc-header > p:not(.section-label) {
     font-size: 1.05rem;
     color: var(--navy);
     opacity: 0.75;
     line-height: 1.65;
   }
 
-  .stage-diagram {
-    max-width: 900px;
-    margin-bottom: 2.5rem;
-    padding: 1.5rem 0;
-  }
-
-  .program-arc-note {
-    max-width: 750px;
+  .stage-diagram-container {
     background: var(--warm-white);
     border-radius: 12px;
-    padding: 1.5rem 2rem;
-    border-left: 3px solid var(--spring);
+    padding: 1.75rem 1.5rem;
+    margin-bottom: 2.5rem;
   }
-  .program-arc-note p {
-    font-size: 0.95rem;
+  @media (min-width: 768px) {
+    .stage-diagram-container {
+      padding: 2rem 2.5rem;
+    }
+  }
+
+  .arc-details {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .arc-details {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+  .arc-detail-card {
+    background: var(--warm-white);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+  }
+  .arc-detail-card h3 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .arc-detail-card p {
+    font-size: 0.925rem;
     color: var(--navy);
     opacity: 0.7;
-    line-height: 1.65;
+    line-height: 1.6;
     margin: 0;
   }
 
