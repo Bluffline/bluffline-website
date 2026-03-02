@@ -86,6 +86,9 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   .corridor-map-wrapper {
     position: relative;
     overflow: hidden;
+    /* Ensure no extra space from inline descendants (e.g. async-loaded canvas) */
+    line-height: 0;
+    font-size: 0;
   }
 
   .corridor-map {
@@ -93,6 +96,12 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     height: 70vh;
     min-height: 300px;
     touch-action: pan-y;
+  }
+
+  /* Preemptively block-format the Mapbox canvas so it never creates inline gaps
+     even during the brief window before mapbox-gl.css finishes loading. */
+  .corridor-map canvas {
+    display: block;
   }
   @media (min-width: 768px) {
     .corridor-map {
@@ -311,8 +320,6 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   }
 </style>
 
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
-
 <script define:vars={{ MAPBOX_TOKEN, corridorData, scenicHighwayData }}>
   // Legend toggle (no Mapbox dependency)
   (function() {
@@ -325,6 +332,15 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       });
     }
   })();
+
+  // Load Mapbox CSS into <head> to keep the component body free of inline elements
+  // that could create anonymous inline boxes and add unwanted height to the map column.
+  if (!document.querySelector('link[href*="mapbox-gl.css"]')) {
+    var mapboxCss = document.createElement('link');
+    mapboxCss.rel = 'stylesheet';
+    mapboxCss.href = 'https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css';
+    document.head.appendChild(mapboxCss);
+  }
 
   const mapboxScript = document.createElement('script');
   mapboxScript.src = 'https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js';
@@ -472,6 +488,10 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       });
 
       map.fitBounds(bounds, { padding: 40 });
+
+      // Force canvas to match its container after layout settles — prevents
+      // sub-pixel gaps caused by DPR rounding during initial render.
+      setTimeout(function() { map.resize(); }, 50);
 
       // ─── Fullscreen toggle ─────────────────────────────────────────────────
       var wrapper = document.getElementById('corridor-map-wrapper');

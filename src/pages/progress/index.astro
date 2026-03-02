@@ -72,7 +72,35 @@ const statusLabels: Record<string, string> = {
     keywords={["disciplined"]}
   />
 
-  <!-- Section 2: Program Map + Project Cards -->
+  <!-- Section 2: The Program Arc -->
+  <section class="program-arc-section">
+    <div class="program-arc-inner">
+      <div class="program-arc-header">
+        <p class="section-label">The Process</p>
+        <h2>How the Bluffline advances</h2>
+        <p>The Bluffline will be built through a structured, stage-gated process. Each phase produces specific deliverables and a clear decision point before the next begins &mdash; ensuring that every dollar is spent on the right work at the right time, and that communities shape decisions before engineering locks them in.</p>
+      </div>
+
+      <div class="stage-diagram-container">
+        <PhaseTracker
+          phases={programStages}
+        />
+      </div>
+
+      <div class="arc-details">
+        <div class="arc-detail-card">
+          <h3>Community before concrete</h3>
+          <p>There is no predetermined alignment for the Bluffline. The corridor shown on the map is a planning area &mdash; the geography being studied. Where the trail actually goes will be the product of sustained community engagement, feasibility analysis, and design work at each section. That's the whole point of stages 1 through 3: communities define the vision before engineers draw the lines.</p>
+        </div>
+        <div class="arc-detail-card">
+          <h3>Funded in phases, not all at once</h3>
+          <p>Different parts of the corridor will move through these stages at different paces, depending on funding. We are actively pursuing federal, state, and local funding to advance the next phases &mdash; and we will move where funding allows. What won't change is the process: every segment goes through the same rigorous planning before a shovel goes in the ground.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Program Map + Project Cards -->
   <section class="map-projects-section">
     <div class="map-projects-inner">
       <div class="map-column">
@@ -98,7 +126,7 @@ const statusLabels: Record<string, string> = {
     </div>
   </section>
 
-  <!-- Section 3: Active Project Detail -->
+  <!-- Section 4: Active Project Detail -->
   {detailProject && (
     <section class="project-detail-section" id="project-detail">
       <div class="project-detail-inner">
@@ -159,34 +187,6 @@ const statusLabels: Record<string, string> = {
     </section>
   )}
 
-  <!-- Section 4: The Program Arc -->
-  <section class="program-arc-section">
-    <div class="program-arc-inner">
-      <div class="program-arc-header">
-        <p class="section-label">The Process</p>
-        <h2>How the Bluffline advances</h2>
-        <p>The Bluffline will be built through a structured, stage-gated process. Each phase produces specific deliverables and a clear decision point before the next begins &mdash; ensuring that every dollar is spent on the right work at the right time, and that communities shape decisions before engineering locks them in.</p>
-      </div>
-
-      <div class="stage-diagram-container">
-        <PhaseTracker
-          phases={programStages}
-        />
-      </div>
-
-      <div class="arc-details">
-        <div class="arc-detail-card">
-          <h3>Community before concrete</h3>
-          <p>There is no predetermined alignment for the Bluffline. The corridor shown on the map is a planning area &mdash; the geography being studied. Where the trail actually goes will be the product of sustained community engagement, feasibility analysis, and design work at each section. That's the whole point of stages 1 through 3: communities define the vision before engineers draw the lines.</p>
-        </div>
-        <div class="arc-detail-card">
-          <h3>Funded in phases, not all at once</h3>
-          <p>Different parts of the corridor will move through these stages at different paces, depending on funding. We are actively pursuing federal, state, and local funding to advance the next phases &mdash; and we will move where funding allows. What won't change is the process: every segment goes through the same rigorous planning before a shovel goes in the ground.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Section 5: Updates Feed -->
   <section class="updates-feed">
     <div class="updates-feed-inner">
@@ -239,7 +239,7 @@ const statusLabels: Record<string, string> = {
     .map-projects-inner {
       max-width: none;
       margin: 0;
-      grid-template-columns: 1fr min(45%, 630px);
+      grid-template-columns: 1fr 1fr;
       gap: 0;
       align-items: start;
     }
