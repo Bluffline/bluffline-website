@@ -56,20 +56,29 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   </button>
 
   <div class="map-legend">
-    <div class="legend-item">
-      <div class="legend-polygon"></div>
-      <span>Planning Corridor</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-line scenic"></div>
-      <span>Scenic Highway</span>
-    </div>
-    {allProjectSegments.length > 0 && (
+    <div class="legend-content">
       <div class="legend-item">
-        <div class="legend-line project"></div>
-        <span>Active Project Segments</span>
+        <div class="legend-polygon"></div>
+        <span>Planning Corridor</span>
       </div>
-    )}
+      <div class="legend-item">
+        <div class="legend-line scenic"></div>
+        <span>Scenic Highway</span>
+      </div>
+      {allProjectSegments.length > 0 && (
+        <div class="legend-item">
+          <div class="legend-line project"></div>
+          <span>Active Project Segments</span>
+        </div>
+      )}
+    </div>
+    <button class="legend-toggle" aria-label="Toggle map legend" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+    </button>
   </div>
 </div>
 
@@ -81,10 +90,14 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 
   .corridor-map {
     width: 100%;
-    height: 480px;
+    height: 70vh;
+    min-height: 300px;
   }
-  @media (max-width: 767px) {
-    .corridor-map { height: 300px; }
+  @media (min-width: 768px) {
+    .corridor-map {
+      min-height: 480px;
+      max-height: 700px;
+    }
   }
 
   /* Fullscreen button */
@@ -136,42 +149,53 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   :global(.corridor-map-wrapper.fullscreen) .fullscreen-btn .icon-collapse { display: block; }
   :global(.corridor-map-wrapper.fullscreen) .map-legend {
     bottom: 20px;
-    left: 20px;
     right: 20px;
-  }
-  @media (min-width: 768px) {
-    :global(.corridor-map-wrapper.fullscreen) .map-legend {
-      left: auto;
-      right: 20px;
-    }
   }
 
   /* Legend */
   .map-legend {
     position: absolute;
     bottom: 12px;
-    left: 12px;
     right: 12px;
     z-index: 10;
     display: flex;
-    gap: 0.75rem 1.25rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  /* Info toggle button — visible only on mobile */
+  .legend-toggle {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    color: var(--navy);
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .legend-toggle:hover { background: var(--mist); transform: scale(1.05); }
+
+  /* Legend content panel — hidden on mobile until toggled */
+  .legend-content {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(8px);
     padding: 0.625rem 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
-  @media (min-width: 768px) {
-    .map-legend {
-      left: auto;
-      right: 12px;
-      bottom: 12px;
-      max-width: fit-content;
-      padding: 0.75rem 1.25rem;
-    }
-  }
+  .map-legend.legend-open .legend-content { display: flex; }
+
   .legend-item {
     display: flex;
     align-items: center;
@@ -194,11 +218,35 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     border-radius: 2px;
     flex-shrink: 0;
   }
-  .legend-line.scenic {
-    background: var(--forest);
-  }
-  .legend-line.project {
-    background: var(--spring);
+  .legend-line.scenic { background: var(--forest); }
+  .legend-line.project { background: var(--spring); }
+
+  /* Desktop: always show full legend, hide the toggle button */
+  @media (min-width: 768px) {
+    .map-legend {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      max-width: fit-content;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .legend-toggle { display: none; }
+    .legend-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      background: none;
+      backdrop-filter: none;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
   }
 
   /* Popup styles */
@@ -239,6 +287,18 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
 
 <script define:vars={{ MAPBOX_TOKEN, corridorData, scenicHighwayData }}>
+  // Legend toggle (no Mapbox dependency)
+  (function() {
+    var legend = document.querySelector('#corridor-map-wrapper .map-legend');
+    var toggleBtn = document.querySelector('#corridor-map-wrapper .legend-toggle');
+    if (legend && toggleBtn) {
+      toggleBtn.addEventListener('click', function() {
+        legend.classList.toggle('legend-open');
+        toggleBtn.setAttribute('aria-expanded', legend.classList.contains('legend-open').toString());
+      });
+    }
+  })();
+
   const mapboxScript = document.createElement('script');
   mapboxScript.src = 'https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js';
   mapboxScript.onload = initCorridorMap;
