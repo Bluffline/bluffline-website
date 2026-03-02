@@ -352,6 +352,8 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 
     // Cooperative gestures — prevent accidental zoom when scrolling past the map
     map.scrollZoom.disable();
+    map.touchZoomRotate.disable();
+    map.touchPitch.disable();
 
     // Track corridor bounds for fitBounds
     const bounds = new mapboxgl.LngLatBounds();
@@ -482,8 +484,12 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         // In fullscreen, allow free scroll-to-zoom; otherwise keep cooperative mode
         if (isFs) {
           map.scrollZoom.enable();
+          map.touchZoomRotate.enable();
+          map.touchPitch.enable();
         } else {
           map.scrollZoom.disable();
+          map.touchZoomRotate.disable();
+          map.touchPitch.disable();
         }
         setTimeout(function() {
           map.resize();
@@ -526,6 +532,15 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
             map.scrollZoom.disable();
           }, 400);
         } else {
+          showGestureHint();
+        }
+      }, { passive: true });
+
+      // Mobile: show hint when user tries to pinch-zoom on the map
+      container.addEventListener('touchstart', function(e) {
+        if (wrapper.classList.contains('fullscreen')) return;
+        if (e.touches.length >= 2) {
+          gestureOverlay.textContent = 'Use fullscreen to zoom the map';
           showGestureHint();
         }
       }, { passive: true });
