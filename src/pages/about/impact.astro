@@ -106,45 +106,54 @@ const qualityIcons = [
         </button>
       </div>
       <div class="map-legend" id="map-legend">
-        <div class="legend-item">
-          <div class="legend-polygon"></div>
-          <span>Bluffline Corridor</span>
-        </div>
-        <div class="legend-heatmap">
-          <div class="legend-item legend-heatmap-item">
-            <div class="legend-heatmap-block">
-              <div class="legend-heatmap-gradient"></div>
-              <div class="legend-heatmap-labels">
-                <span>Low</span>
-                <span>High</span>
+        <div class="legend-content">
+          <div class="legend-item">
+            <div class="legend-polygon"></div>
+            <span>Bluffline Corridor</span>
+          </div>
+          <div class="legend-heatmap">
+            <div class="legend-item legend-heatmap-item">
+              <div class="legend-heatmap-block">
+                <div class="legend-heatmap-gradient"></div>
+                <div class="legend-heatmap-labels">
+                  <span>Low</span>
+                  <span>High</span>
+                </div>
               </div>
+              <span>Crash Density</span>
             </div>
-            <span>Crash Density</span>
+          </div>
+          <div class="legend-points" style="display: none;">
+            <div class="legend-item">
+              <div class="legend-fatal"></div>
+              <span>Fatality</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-serious"></div>
+              <span>Serious Injury</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-injury"></div>
+              <span>Injury</span>
+            </div>
+            <div class="legend-divider"></div>
+            <div class="legend-item">
+              <div class="legend-shape-circle"></div>
+              <span>Pedestrian</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-shape-square"></div>
+              <span>Cyclist</span>
+            </div>
           </div>
         </div>
-        <div class="legend-points" style="display: none;">
-          <div class="legend-item">
-            <div class="legend-fatal"></div>
-            <span>Fatality</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-serious"></div>
-            <span>Serious Injury</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-injury"></div>
-            <span>Injury</span>
-          </div>
-          <div class="legend-divider"></div>
-          <div class="legend-item">
-            <div class="legend-shape-circle"></div>
-            <span>Pedestrian</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-shape-square"></div>
-            <span>Cyclist</span>
-          </div>
-        </div>
+        <button class="legend-toggle" aria-label="Toggle map legend" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </button>
       </div>
     </div>
     <div class="map-context">
@@ -354,6 +363,31 @@ const qualityIcons = [
   #safety-map {
     width: 100%;
     height: 100%;
+    touch-action: pan-y;
+  }
+
+  :global(.map-gesture-overlay) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 48, 71, 0.45);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+    border-radius: inherit;
+  }
+  :global(.map-gesture-overlay.visible) {
+    opacity: 1;
   }
 
   .map-controls {
@@ -405,31 +439,79 @@ const qualityIcons = [
     }
   }
 
+  /* Legend container — column layout, bottom-right, same pattern as CorridorMap */
   .map-legend {
     position: absolute;
     bottom: 12px;
-    left: 12px;
     right: 12px;
     z-index: 10;
     display: flex;
-    gap: 0.5rem 1rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  /* Info toggle button — visible only on mobile */
+  .legend-toggle {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    color: var(--navy);
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .legend-toggle:hover { background: var(--mist); transform: scale(1.05); }
+
+  /* Legend content panel — hidden on mobile until toggled */
+  .legend-content {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem 1rem;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(8px);
     padding: 0.625rem 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
   }
+  .map-legend.legend-open .legend-content { display: flex; }
+
+  /* Desktop: always show full legend, hide the toggle button */
   @media (min-width: 768px) {
     .map-legend {
-      left: auto;
-      right: 12px;
-      bottom: 12px;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
       max-width: fit-content;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
       padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .legend-toggle { display: none; }
+    .legend-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      background: none;
+      backdrop-filter: none;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
     }
   }
+
   .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--navy); white-space: nowrap; }
   .legend-polygon {
     width: 16px;
@@ -547,14 +629,7 @@ const qualityIcons = [
   }
   .map-wrapper.fullscreen .map-legend {
     bottom: 20px;
-    left: 20px;
     right: 20px;
-  }
-  @media (min-width: 768px) {
-    .map-wrapper.fullscreen .map-legend {
-      left: auto;
-      right: 20px;
-    }
   }
 
   .map-context {
@@ -748,6 +823,11 @@ const qualityIcons = [
     });
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    // Cooperative gestures — prevent accidental zoom when scrolling past the map
+    map.scrollZoom.disable();
+    map.touchZoomRotate.disable();
+    map.touchPitch.disable();
 
     map.on('load', () => {
       // Add Planning Corridor (polygon) as context
@@ -1042,15 +1122,23 @@ const qualityIcons = [
 
       function toggleFullscreen() {
         mapWrapper.classList.toggle('fullscreen');
-        document.body.style.overflow = mapWrapper.classList.contains('fullscreen') ? 'hidden' : '';
+        var isFs = mapWrapper.classList.contains('fullscreen');
+        document.body.style.overflow = isFs ? 'hidden' : '';
+
+        // In fullscreen, allow free scroll-to-zoom; otherwise keep cooperative mode
+        if (isFs) {
+          map.scrollZoom.enable();
+          map.touchZoomRotate.enable();
+          map.touchPitch.enable();
+        } else {
+          map.scrollZoom.disable();
+          map.touchZoomRotate.disable();
+          map.touchPitch.disable();
+        }
 
         setTimeout(() => {
           map.resize();
-          if (mapWrapper.classList.contains('fullscreen')) {
-            map.fitBounds(bounds, { padding: 60 });
-          } else {
-            map.fitBounds(bounds, { padding: 40 });
-          }
+          map.fitBounds(bounds, { padding: isFs ? 60 : 40 });
         }, 100);
       }
 
@@ -1061,6 +1149,60 @@ const qualityIcons = [
           toggleFullscreen();
         }
       });
+
+      // ─── Gesture overlay hint ──────────────────────────────────────────────
+      var gestureOverlay = document.createElement('div');
+      gestureOverlay.className = 'map-gesture-overlay';
+      gestureOverlay.setAttribute('aria-hidden', 'true');
+      var isMac = /Mac|iPhone|iPad/.test(navigator.platform || '');
+      gestureOverlay.textContent = isMac ? 'Use ⌘ + scroll to zoom' : 'Use Ctrl + scroll to zoom';
+      mapWrapper.appendChild(gestureOverlay);
+
+      var hintTimer;
+      function showGestureHint() {
+        gestureOverlay.classList.add('visible');
+        clearTimeout(hintTimer);
+        hintTimer = setTimeout(function() {
+          gestureOverlay.classList.remove('visible');
+        }, 1500);
+      }
+
+      const safetyMapEl = document.getElementById('safety-map');
+      safetyMapEl.addEventListener('wheel', function(e) {
+        if (mapWrapper.classList.contains('fullscreen')) return;
+        if (e.ctrlKey || e.metaKey) {
+          map.scrollZoom.enable();
+          clearTimeout(hintTimer);
+          hintTimer = setTimeout(function() {
+            map.scrollZoom.disable();
+          }, 400);
+        } else {
+          showGestureHint();
+        }
+      }, { passive: true });
+
+      // Mobile: show hint when user tries to pinch-zoom on the map
+      safetyMapEl.addEventListener('touchstart', function(e) {
+        if (mapWrapper.classList.contains('fullscreen')) return;
+        if (e.touches.length >= 2) {
+          gestureOverlay.textContent = 'Use fullscreen to zoom the map';
+          showGestureHint();
+        }
+      }, { passive: true });
     });
   }
+</script>
+
+<script is:inline>
+  // Legend toggle for safety map
+  (function() {
+    var legend = document.querySelector('#safety-map-wrapper .map-legend');
+    var toggleBtn = document.querySelector('#safety-map-wrapper .legend-toggle');
+    if (legend && toggleBtn) {
+      toggleBtn.addEventListener('click', function() {
+        legend.classList.toggle('legend-open');
+        toggleBtn.setAttribute('aria-expanded', legend.classList.contains('legend-open').toString());
+      });
+    }
+  })();
 </script>

@@ -190,6 +190,31 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   #corridor-map {
     width: 100%;
     height: 100%;
+    touch-action: pan-y;
+  }
+
+  :global(.map-gesture-overlay) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 48, 71, 0.45);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+    border-radius: inherit;
+  }
+  :global(.map-gesture-overlay.visible) {
+    opacity: 1;
   }
 
   /* Fullscreen button */
@@ -504,6 +529,11 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
+    // Cooperative gestures — prevent accidental zoom when scrolling past the map
+    map.scrollZoom.disable();
+    map.touchZoomRotate.disable();
+    map.touchPitch.disable();
+
     map.on('load', () => {
       // Add Planning Corridor (polygon) - rendered first (bottom layer)
       map.addSource('planning-corridor', {
@@ -605,17 +635,24 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 
       function toggleFullscreen() {
         mapWrapper.classList.toggle('fullscreen');
-        document.body.style.overflow = mapWrapper.classList.contains('fullscreen') ? 'hidden' : '';
+        var isFs = mapWrapper.classList.contains('fullscreen');
+        document.body.style.overflow = isFs ? 'hidden' : '';
+
+        // In fullscreen, allow free scroll-to-zoom; otherwise keep cooperative mode
+        if (isFs) {
+          map.scrollZoom.enable();
+          map.touchZoomRotate.enable();
+          map.touchPitch.enable();
+        } else {
+          map.scrollZoom.disable();
+          map.touchZoomRotate.disable();
+          map.touchPitch.disable();
+        }
 
         // Resize the map after the CSS transition
         setTimeout(() => {
           map.resize();
-          // Re-fit bounds when entering fullscreen for better view
-          if (mapWrapper.classList.contains('fullscreen')) {
-            map.fitBounds(bounds, { padding: 60 });
-          } else {
-            map.fitBounds(bounds, { padding: 50 });
-          }
+          map.fitBounds(bounds, { padding: isFs ? 60 : 50 });
         }, 100);
       }
 
@@ -627,6 +664,46 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
           toggleFullscreen();
         }
       });
+
+      // ─── Gesture overlay hint ──────────────────────────────────────────────
+      var gestureOverlay = document.createElement('div');
+      gestureOverlay.className = 'map-gesture-overlay';
+      gestureOverlay.setAttribute('aria-hidden', 'true');
+      var isMac = /Mac|iPhone|iPad/.test(navigator.platform || '');
+      gestureOverlay.textContent = isMac ? 'Use ⌘ + scroll to zoom' : 'Use Ctrl + scroll to zoom';
+      mapWrapper.appendChild(gestureOverlay);
+
+      var hintTimer;
+      function showGestureHint() {
+        gestureOverlay.classList.add('visible');
+        clearTimeout(hintTimer);
+        hintTimer = setTimeout(function() {
+          gestureOverlay.classList.remove('visible');
+        }, 1500);
+      }
+
+      const corridorMapEl = document.getElementById('corridor-map');
+      corridorMapEl.addEventListener('wheel', function(e) {
+        if (mapWrapper.classList.contains('fullscreen')) return;
+        if (e.ctrlKey || e.metaKey) {
+          map.scrollZoom.enable();
+          clearTimeout(hintTimer);
+          hintTimer = setTimeout(function() {
+            map.scrollZoom.disable();
+          }, 400);
+        } else {
+          showGestureHint();
+        }
+      }, { passive: true });
+
+      // Mobile: show hint when user tries to pinch-zoom on the map
+      corridorMapEl.addEventListener('touchstart', function(e) {
+        if (mapWrapper.classList.contains('fullscreen')) return;
+        if (e.touches.length >= 2) {
+          gestureOverlay.textContent = 'Use fullscreen to zoom the map';
+          showGestureHint();
+        }
+      }, { passive: true });
     });
   }
 </script>
