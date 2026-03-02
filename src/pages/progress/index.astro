@@ -239,7 +239,9 @@ const statusLabels: Record<string, string> = {
   }
   @media (min-width: 1024px) {
     .map-projects-inner {
-      grid-template-columns: 55fr 45fr;
+      max-width: none;
+      margin: 0;
+      grid-template-columns: 1fr min(45%, 630px);
       gap: 0;
       align-items: start;
     }
@@ -266,7 +268,7 @@ const statusLabels: Record<string, string> = {
     .cards-column { padding: 2.5rem 2.5rem; }
   }
   @media (min-width: 1024px) {
-    .cards-column { padding: 2.5rem 3rem 2.5rem 2.5rem; }
+    .cards-column { padding: 2.5rem max(3rem, calc((100vw - 1400px) / 2 + 3rem)) 2.5rem 2.5rem; }
   }
 
   .cards-heading {
