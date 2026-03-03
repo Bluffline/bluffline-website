@@ -5,6 +5,8 @@ pubDate: 2024-07-22
 description: "Join us July 30 at the Lexington Terrace Community Center to help shape the first phase of the Bluffline"
 author: "Jarah Jacquay"
 authorTitle: "Co-founder & President"
+featuredImage: "/images/jackson-lakes-open-house-map-review.jpg"
+featuredImageAlt: "Community members review an aerial map of Jackson Lakes at the July 2024 open house"
 tags: ["community", "engagement", "jackson lakes"]
 status: "engagement"
 draft: false
