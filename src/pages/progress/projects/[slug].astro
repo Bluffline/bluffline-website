@@ -1,0 +1,486 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CorridorMap from '../../../components/ui/CorridorMap.astro';
+import MilestoneList from '../../../components/content/MilestoneList.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects')).filter(p => !p.data.draft);
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const d = project.data;
+
+const statusLabels: Record<string, string> = {
+  active: 'Active',
+  pending: 'Pending Obligation',
+  pursuing: 'Pursuing',
+  complete: 'Complete',
+};
+
+const nodeLabels: Record<string, string> = {
+  'corry-station': 'Corry Station',
+  'jackson-lakes': 'Jackson Lakes',
+  'maritime-park': 'Maritime Park',
+  'chimney-park': 'Chimney Park',
+  'ellyson': 'Ellyson',
+  'ferry-pass': 'Ferry Pass',
+  'uwf': 'UWF',
+};
+
+// Build segment data for the mini map (just this project)
+const projectSegments = d.segments?.features?.length > 0
+  ? [{ id: d.shortTitle, color: d.color || '#99CC63', segments: d.segments }]
+  : [];
+
+const completedCount = d.milestones.filter(m => m.status === 'complete').length;
+const totalCount = d.milestones.length;
+const progressPct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+---
+
+<BaseLayout
+  title={d.shortTitle}
+  description={d.description}
+>
+  <!-- Hero -->
+  <section class="project-hero">
+    <div class="project-hero-inner">
+      <a href="/progress" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        All Projects
+      </a>
+
+      <div class="hero-title-row">
+        <div class="hero-accent" style={`background: ${d.color || 'var(--spring)'}`}></div>
+        <div>
+          <h1>{d.title}</h1>
+          <div class="hero-meta">
+            <span class:list={['status-badge', d.status]}>
+              {statusLabels[d.status]}
+            </span>
+            <span class="meta-item"><strong>Funder:</strong> {d.funder}</span>
+            <span class="meta-item"><strong>Program:</strong> {d.program}</span>
+            {d.amount && <span class="meta-item"><strong>Award:</strong> {d.amount}</span>}
+            {d.awardDate && <span class="meta-item"><strong>Announced:</strong> {d.awardDate}</span>}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <section class="project-body">
+    <div class="project-body-inner">
+      <!-- Main column -->
+      <div class="main-column">
+        <p class="project-description">{d.description}</p>
+
+        {d.status === 'pursuing' ? (
+          <div class="pursuing-notice">
+            <h3>Application Submitted</h3>
+            <p>We've submitted an application for this funding. If awarded, this project would advance work at {d.nodes.length} corridor node{d.nodes.length !== 1 ? 's' : ''}.</p>
+          </div>
+        ) : (
+          <div class="milestones-section">
+            <div class="milestones-header">
+              <h2>Project Milestones</h2>
+              <div class="progress-summary">
+                <div class="progress-bar-track">
+                  <div class="progress-bar-fill" style={`width: ${progressPct}%`}></div>
+                </div>
+                <span class="progress-text">{completedCount} of {totalCount} complete</span>
+              </div>
+            </div>
+            <MilestoneList milestones={d.milestones} projectColor={d.color} />
+          </div>
+        )}
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        {d.outputs && d.outputs.length > 0 && (
+          <div class="sidebar-card">
+            <h3>What This Project Produces</h3>
+            <ul class="outputs-list">
+              {d.outputs.map(output => (
+                <li>{output}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div class="sidebar-card">
+          <h3>Corridor Nodes</h3>
+          <div class="node-pills">
+            {d.nodes.map(nodeId => (
+              <span class="node-pill">{nodeLabels[nodeId] || nodeId}</span>
+            ))}
+          </div>
+        </div>
+
+        {projectSegments.length > 0 && (
+          <div class="sidebar-map">
+            <h3>Project Geography</h3>
+            <div class="mini-map-wrapper">
+              <CorridorMap
+                allProjectSegments={projectSegments}
+                interactive={false}
+              />
+            </div>
+          </div>
+        )}
+
+        {d.relatedLinks && d.relatedLinks.length > 0 && (
+          <div class="sidebar-card">
+            <h3>Related Links</h3>
+            <ul class="related-links">
+              {d.relatedLinks.map(link => (
+                <li>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="project-bottom">
+    <div class="project-bottom-inner">
+      <a href="/progress" class="btn btn-outline">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to All Projects
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ─── Hero ─────────────────────────────────────────────── */
+  .project-hero {
+    padding: calc(6rem + var(--banner-height, 0px)) 1.5rem 2.5rem;
+    background: var(--cream);
+  }
+  @media (min-width: 768px) {
+    .project-hero {
+      padding: calc(8rem + var(--banner-height, 0px)) 3rem 3rem;
+    }
+  }
+
+  .project-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--forest);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: opacity 0.2s ease;
+  }
+  .back-link:hover {
+    opacity: 0.7;
+  }
+
+  .hero-title-row {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .hero-accent {
+    width: 4px;
+    min-height: 100%;
+    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+
+  .hero-title-row h1 {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .meta-item {
+    font-size: 0.875rem;
+    color: var(--navy);
+    opacity: 0.7;
+  }
+  .meta-item strong {
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  .status-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.625rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .status-badge.active {
+    background: rgba(65, 82, 31, 0.1);
+    color: var(--forest);
+  }
+  .status-badge.pending {
+    background: rgba(212, 160, 23, 0.12);
+    color: #9a7410;
+  }
+  .status-badge.pursuing {
+    background: var(--mist);
+    color: var(--navy);
+    opacity: 0.7;
+  }
+  .status-badge.complete {
+    background: rgba(153, 204, 99, 0.15);
+    color: var(--forest);
+  }
+
+  /* ─── Body ─────────────────────────────────────────────── */
+  .project-body {
+    padding: 3rem 1.5rem;
+    background: var(--warm-white);
+  }
+  @media (min-width: 768px) {
+    .project-body {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .project-body-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .project-body-inner {
+      grid-template-columns: 1.4fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  /* ─── Main column ──────────────────────────────────────── */
+  .project-description {
+    font-size: 1.1rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .milestones-section {
+    /* no extra wrapper styles needed */
+  }
+
+  .milestones-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .milestones-header h2 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: var(--navy);
+    margin: 0;
+  }
+
+  .progress-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .progress-bar-track {
+    width: 80px;
+    height: 4px;
+    background: var(--mist);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--spring);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+  .progress-text {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  .pursuing-notice {
+    background: var(--mist);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .pursuing-notice h3 {
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .pursuing-notice p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ─── Sidebar ──────────────────────────────────────────── */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    .sidebar {
+      position: sticky;
+      top: 6rem;
+      align-self: start;
+    }
+  }
+
+  .sidebar-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .sidebar-card h3,
+  .sidebar-map h3 {
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .outputs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .outputs-list li {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.5;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .outputs-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--spring);
+  }
+
+  .node-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .node-pill {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    background: var(--mist);
+    color: var(--navy);
+    border-radius: 100px;
+  }
+
+  .sidebar-map {
+    padding: 0;
+  }
+
+  .mini-map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .mini-map-wrapper :global(.corridor-map) {
+    height: 280px;
+    min-height: 200px;
+  }
+
+  .related-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .related-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.9rem;
+    color: var(--forest);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .related-links a:hover {
+    opacity: 0.7;
+  }
+
+  /* ─── Bottom CTA ───────────────────────────────────────── */
+  .project-bottom {
+    padding: 2rem 1.5rem 4rem;
+    background: var(--warm-white);
+  }
+  @media (min-width: 768px) {
+    .project-bottom {
+      padding: 2rem 3rem 5rem;
+    }
+  }
+  .project-bottom-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
