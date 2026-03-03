@@ -5,8 +5,8 @@ pubDate: 2025-02-01
 description: "Bluffline, Inc. hosts a salon-style evening event featuring the visionary behind Greenville's urban transformation"
 author: "T.S. Strickland"
 authorTitle: "Director of Strategy & Communications"
-featuredImage: "/images/mayor-knox-white-keynote.jpg"
-featuredImageAlt: "Mayor Knox White of Greenville, South Carolina speaking at the Bluffline event at the Pensacola Opera Center"
+featuredImage: "/images/knox-white-event-audience.jpg"
+featuredImageAlt: "Attendees at the Bluffline event at the Pensacola Opera Center featuring Mayor Knox White of Greenville, South Carolina"
 tags: ["events", "greenways", "economic development"]
 status: "engagement"
 draft: false
@@ -14,7 +14,7 @@ draft: false
 
 Bluffline, Inc. is bringing one of the South's most influential urban leaders to Pensacola. Greenville, South Carolina, Mayor Knox White will headline a special evening event on Thursday, Feb. 6, from 5:30 to 7:30 p.m. at the Pensacola Opera Center.
 
-A nationally recognized leader in urban revitalization and economic development, Mayor White has spearheaded transformative projects such as the Swamp Rabbit Trail and Unity Park, positioning Greenville as a model city for sustainable growth and community engagement.
+A nationally recognized leader in urban revitalization and economic development, Mayor White has spearheaded transformative projects such as the Swamp Rabbit Trail and Unity Park, positioning Greenville as a model city for sustainable growth and community engagement. Under his nearly three-decade tenure, Greenville has become one of the Southeast's most cited examples of how thoughtful investment in public space can anchor broader economic and cultural renewal.
 
 The event will feature a keynote address by Mayor White, an interactive Q&A session, and a brief award presentation honoring local contributions to Pensacola's greenway initiatives. Attendees will enjoy wine and light hors d'oeuvres while engaging with local leaders, planners, and community advocates who share a vision for a greener, more connected Pensacola.
 

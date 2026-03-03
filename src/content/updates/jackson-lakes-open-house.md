@@ -35,9 +35,9 @@ The neighborhoods of Warrington and Brownsville struggle with low educational at
 
 ## Come Share Your Vision
 
-These ideas have gained renewed momentum in recent years, thanks to the public's growing desire for healthy, active transportation options and the coincident growth in traffic-related injuries and fatalities on high-speed, car-dominated roadways.
+These ideas have gained renewed momentum in recent years, thanks to the public's growing desire for healthy, active transportation options and the coincident growth in traffic-related injuries and fatalities on high-speed, car-dominated roadways. The open house is designed to channel that energy into concrete decisions — giving residents an opportunity to weigh in on what the project should prioritize, how it should be designed, and what role the community will play going forward.
 
 > "The Bluffline is a grassroots initiative, and we want to ensure that it reflects the hopes and desires of as diverse a cross-section of our neighbors as possible. If you want to help unite our city's neighborhoods around a shared vision for a safer, healthier, more sustainable and more equitable future, we want you involved."
-> — Jarah Jacquay
+> — Jarah Jacquay, Co-founder & President, Bluffline, Inc.
 
 The open house is free and open to all. Join us July 30 at the Lexington Terrace Community Center, in West Pensacola.
