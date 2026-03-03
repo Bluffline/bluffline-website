@@ -5,7 +5,7 @@ pubDate: 2025-02-01
 description: "Bluffline, Inc. hosts a salon-style evening event featuring the visionary behind Greenville's urban transformation"
 author: "T.S. Strickland"
 authorTitle: "Director of Strategy & Communications"
-featuredImage: "/images/knox-white-event-audience.jpg"
+featuredImage: "/images/events/knox-white-event-audience.jpg"
 featuredImageAlt: "Attendees at the Bluffline event at the Pensacola Opera Center featuring Mayor Knox White of Greenville, South Carolina"
 tags: ["events", "greenways", "economic development"]
 status: "engagement"

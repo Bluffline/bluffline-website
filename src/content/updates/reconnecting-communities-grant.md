@@ -5,7 +5,7 @@ pubDate: 2025-01-15
 description: "Escambia Bay Waterfront Access Study will fund master planning, feasibility studies, and preliminary designs"
 author: "T.S. Strickland"
 authorTitle: "Director of Strategy & Communications"
-featuredImage: "/images/corridor-bayou-aerial-2022.jpg"
+featuredImage: "/images/aerial/corridor-bayou-aerial-2022.jpg"
 featuredImageAlt: "Aerial view of the Bluffline corridor along the bay, with railroad tracks, riprap shoreline, and lush waterfront greenery"
 tags: ["grant", "funding", "planning"]
 status: "funded"
