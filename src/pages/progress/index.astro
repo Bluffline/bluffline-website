@@ -6,7 +6,6 @@ import CallToAction from '../../components/ui/CallToAction.astro';
 import UpdateCard from '../../components/content/UpdateCard.astro';
 import CorridorMap from '../../components/ui/CorridorMap.astro';
 import ProjectCard from '../../components/content/ProjectCard.astro';
-import MilestoneList from '../../components/content/MilestoneList.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'progress');
@@ -25,9 +24,6 @@ const statusOrder = { active: 0, pending: 1, pursuing: 2, complete: 3 };
 const projects = allProjects.sort(
   (a, b) => (statusOrder[a.data.status] ?? 99) - (statusOrder[b.data.status] ?? 99)
 );
-
-// The default detail project is the first active or pending project
-const detailProject = projects.find(p => p.data.status === 'active' || p.data.status === 'pending') || projects[0];
 
 // Collect all project segment data for the map
 const allProjectSegments = projects
@@ -51,13 +47,6 @@ const programStages = [
   { label: 'Monitor & maintain', status: 'upcoming' as const },
 ];
 
-// Status labels for detail section
-const statusLabels: Record<string, string> = {
-  active: 'Active',
-  pending: 'Pending Obligation',
-  pursuing: 'Pursuing',
-  complete: 'Complete',
-};
 ---
 
 <BaseLayout
@@ -118,80 +107,29 @@ const statusLabels: Record<string, string> = {
           <h2>Active Projects</h2>
           <p>Each funded project advances a section of the planning corridor shown at left. The specific alignment will be determined through the master planning process. Hover a project to see its geography.</p>
         </div>
-        <div class="project-cards-stack">
-          {projects.map((project, i) => (
-            <ProjectCard
-              project={project.data}
-              isActive={project === detailProject}
-            />
-          ))}
+        <div class="carousel-wrapper">
+          <div class="project-carousel" id="project-carousel">
+            {projects.map((project) => (
+              <ProjectCard
+                project={project.data}
+                href={`/progress/projects/${project.id}`}
+              />
+            ))}
+          </div>
+          <button class="carousel-arrow carousel-arrow-left" id="carousel-prev" aria-label="Previous project">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="carousel-arrow carousel-arrow-right" id="carousel-next" aria-label="Next project">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Section 4: Active Project Detail -->
-  {detailProject && (
-    <section class="project-detail-section" id="project-detail">
-      <div class="project-detail-inner">
-        <div class="detail-card">
-          <div class="detail-header">
-            <div class="detail-label">What's Happening Now</div>
-            <h2>{detailProject.data.title}</h2>
-            <div class="detail-meta">
-              <span class="detail-meta-item">
-                <strong>Funder:</strong> {detailProject.data.funder}
-              </span>
-              <span class="detail-meta-item">
-                <strong>Program:</strong> {detailProject.data.program}
-              </span>
-              {detailProject.data.amount && (
-                <span class="detail-meta-item">
-                  <strong>Award:</strong> {detailProject.data.amount}
-                </span>
-              )}
-              {detailProject.data.awardDate && (
-                <span class="detail-meta-item">
-                  <strong>Announced:</strong> {detailProject.data.awardDate}
-                </span>
-              )}
-              <span class="detail-meta-item">
-                <strong>Status:</strong> {statusLabels[detailProject.data.status]}
-              </span>
-            </div>
-          </div>
-
-          <div class="detail-body">
-            <div class="detail-main">
-              <p class="detail-description">{detailProject.data.description}</p>
-
-              {detailProject.data.status === 'pursuing' ? (
-                <div class="pursuing-notice">
-                  <p>We've submitted an application for this funding. If awarded, this project would advance work at {detailProject.data.nodes.length} corridor nodes.</p>
-                </div>
-              ) : (
-                <div class="milestone-section">
-                  <h3>Project Milestones</h3>
-                  <MilestoneList milestones={detailProject.data.milestones} />
-                </div>
-              )}
-            </div>
-
-            {detailProject.data.outputs && detailProject.data.outputs.length > 0 && (
-              <div class="detail-sidebar">
-                <h3>What This Project Produces</h3>
-                <ul class="outputs-list">
-                  {detailProject.data.outputs.map(output => (
-                    <li>{output}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- Section 5: Updates Feed -->
   <section class="updates-feed">
@@ -248,7 +186,7 @@ const statusLabels: Record<string, string> = {
     .map-projects-inner {
       max-width: none;
       margin: 0;
-      grid-template-columns: 1fr min(50%, 680px);
+      grid-template-columns: 1fr 1fr;
       gap: 0;
       align-items: start;
     }
@@ -267,7 +205,6 @@ const statusLabels: Record<string, string> = {
     }
   }
 
-
   .cards-column {
     padding: 2rem 1.5rem;
   }
@@ -275,7 +212,10 @@ const statusLabels: Record<string, string> = {
     .cards-column { padding: 2.5rem 2.5rem; }
   }
   @media (min-width: 1024px) {
-    .cards-column { padding: 2.5rem max(3rem, calc((100vw - 1400px) / 2 + 3rem)) 2.5rem 2.5rem; }
+    .cards-column {
+      padding: 2.5rem 2.5rem;
+      overflow: hidden;
+    }
   }
 
   .cards-heading {
@@ -292,165 +232,82 @@ const statusLabels: Record<string, string> = {
     opacity: 0.6;
   }
 
-  .project-cards-stack {
-    display: grid;
-    gap: 1rem;
+  /* Carousel */
+  .carousel-wrapper {
+    position: relative;
   }
+
+  .project-carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .project-carousel::-webkit-scrollbar {
+    display: none;
+  }
+  .project-carousel :global(.project-card) {
+    scroll-snap-align: start;
+    min-width: 300px;
+    max-width: 360px;
+    flex: 0 0 auto;
+  }
+  @media (max-width: 1023px) {
+    .project-carousel :global(.project-card) {
+      min-width: 280px;
+      max-width: 320px;
+    }
+  }
+
+  /* Carousel arrows */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(45, 48, 71, 0.1);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    transition: all 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .carousel-arrow.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .carousel-arrow:hover {
+    background: white;
+    box-shadow: 0 3px 12px rgba(45, 48, 71, 0.15);
+    transform: translateY(-50%) scale(1.05);
+  }
+  .carousel-arrow-left {
+    left: -12px;
+  }
+  .carousel-arrow-right {
+    right: -12px;
+  }
+  @media (max-width: 1023px) {
+    .carousel-arrow-left { left: -4px; }
+    .carousel-arrow-right { right: -4px; }
+  }
+
   :global(.project-card.dimmed-card) {
     opacity: 0.45;
     transform: scale(0.98);
     transition: all 0.25s ease;
-  }
-
-  /* ============================================
-     Section 3: Active Project Detail
-     ============================================ */
-  .project-detail-section {
-    padding: 5rem 0;
-    background: var(--warm-white);
-  }
-  .project-detail-section::before {
-    content: '';
-    display: block;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 10%,
-      rgba(153, 204, 99, 0.3) 50%,
-      transparent 90%
-    );
-  }
-  .project-detail-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .project-detail-inner { padding: 0 3rem; }
-  }
-
-  .detail-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
-    border-left: 4px solid var(--spring);
-    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.04);
-  }
-  @media (min-width: 768px) {
-    .detail-card { padding: 3rem; }
-  }
-
-  .detail-header {
-    margin-bottom: 2.5rem;
-    max-width: 800px;
-  }
-  .detail-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--forest);
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-  .detail-header h2 {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--navy);
-    margin-bottom: 1rem;
-  }
-  .detail-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-  }
-  .detail-meta-item {
-    font-size: 0.875rem;
-    color: var(--navy);
-    opacity: 0.7;
-  }
-  .detail-meta-item strong {
-    font-weight: 600;
-    opacity: 1;
-  }
-
-  .detail-body {
-    display: grid;
-    gap: 3rem;
-  }
-  @media (min-width: 1024px) {
-    .detail-body {
-      grid-template-columns: 1.5fr 1fr;
-      gap: 4rem;
-    }
-  }
-
-  .detail-description {
-    font-size: 1.05rem;
-    color: var(--navy);
-    opacity: 0.8;
-    line-height: 1.65;
-    margin-bottom: 2rem;
-  }
-
-  .milestone-section h3 {
-    font-size: 1.25rem;
-    color: var(--navy);
-    margin-bottom: 1.5rem;
-  }
-
-  .pursuing-notice {
-    background: var(--mist);
-    border-radius: 12px;
-    padding: 1.5rem;
-  }
-  .pursuing-notice p {
-    font-size: 0.95rem;
-    color: var(--navy);
-    opacity: 0.75;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .detail-sidebar {
-    background: var(--cream);
-    border-radius: 16px;
-    padding: 2rem;
-  }
-  @media (min-width: 1024px) {
-    .detail-sidebar {
-      position: sticky;
-      top: 6rem;
-    }
-  }
-  .detail-sidebar h3 {
-    font-size: 1.15rem;
-    color: var(--navy);
-    margin-bottom: 1.25rem;
-  }
-  .outputs-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.875rem;
-  }
-  .outputs-list li {
-    font-size: 0.925rem;
-    color: var(--navy);
-    opacity: 0.8;
-    line-height: 1.5;
-    padding-left: 1.25rem;
-    position: relative;
-  }
-  .outputs-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.5em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--spring);
   }
 
   /* ============================================
@@ -579,13 +436,40 @@ const statusLabels: Record<string, string> = {
           c.classList.remove('dimmed-card');
         });
       });
-
-      card.addEventListener('click', function() {
-        var detail = document.getElementById('project-detail');
-        if (detail) {
-          detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
     });
+  })();
+
+  // Carousel arrow navigation
+  (function() {
+    var carousel = document.getElementById('project-carousel');
+    var prevBtn = document.getElementById('carousel-prev');
+    var nextBtn = document.getElementById('carousel-next');
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    function updateArrows() {
+      var scrollLeft = carousel.scrollLeft;
+      var maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      prevBtn.classList.toggle('visible', scrollLeft > 8);
+      nextBtn.classList.toggle('visible', scrollLeft < maxScroll - 8);
+    }
+
+    function getScrollAmount() {
+      var firstCard = carousel.querySelector('.project-card');
+      if (!firstCard) return 300;
+      return firstCard.offsetWidth + 16; // card width + gap
+    }
+
+    prevBtn.addEventListener('click', function() {
+      carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', function() {
+      carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+
+    carousel.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+
+    // Initial check after layout settles
+    setTimeout(updateArrows, 100);
   })();
 </script>
