@@ -65,7 +65,10 @@ const totalCount = project.milestones.length;
       </div>
       <span class="progress-label">{completedCount} of {totalCount} milestones complete</span>
     </div>
-    <span class="card-view-link">View project details &rarr;</span>
+    <span class="card-view-link">
+      View project details
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </span>
   </a>
 ) : (
   <div
@@ -208,15 +211,18 @@ const totalCount = project.milestones.length;
   }
 
   .card-view-link {
-    display: block;
-    margin-top: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.06);
     font-size: 0.825rem;
     font-weight: 500;
     color: var(--forest);
-    opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: gap 0.2s ease;
   }
   .project-card:hover .card-view-link {
-    opacity: 1;
+    gap: 0.5rem;
   }
 </style>
