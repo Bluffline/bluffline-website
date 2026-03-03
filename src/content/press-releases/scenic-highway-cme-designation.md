@@ -1,62 +1,38 @@
 ---
 type: PressRelease
-title: >-
-  Bluffline Designated as Corridor Management Entity for Pensacola Scenic Bluffs
-  Scenic Highway
-pubDate: '2024-09-12'
-summary: >-
-  The Florida Department of Transportation has designated Bluffline, Inc. as the
-  official Corridor Management Entity for the Pensacola Scenic Bluffs Scenic
-  Highway.
+title: "Greenville's Mayor Knox White to Speak in Pensacola on Parks, Greenways, and Economic Growth"
+pubDate: 2025-02-01
+summary: "Bluffline, Inc. is hosting a special salon-style evening event featuring Greenville, South Carolina, Mayor Knox White, a nationally recognized leader in urban revitalization whose transformative projects have made Greenville a model city for sustainable growth."
 contactName: Media Relations
 contactEmail: press@bluffline.org
-draft: false
 contactPhone: (850) 776-0436
-media:
-  - src: '/images/bluffs-aerial-2024.jpg'
-    alt: 'Aerial view of the Pensacola Scenic Bluffs Scenic Highway corridor'
-    caption: 'The 10-mile Pensacola Scenic Bluffs Scenic Highway corridor as seen from above'
-    credit: 'Bluffline, Inc.'
-    type: 'image'
-  - src: '/images/chimney-park-tracks.jpg'
-    alt: 'View of the corridor from Chimney Park looking along the railroad tracks'
-    caption: 'The Chimney Park segment is one of several public access points along the corridor'
-    credit: 'Bluffline, Inc.'
-    type: 'image'
-  - src: '/images/corridor-map-static.png'
-    alt: 'Map of the Pensacola Scenic Bluffs Scenic Highway corridor'
-    caption: 'The corridor spans 10 miles of State Road 292 along Escambia Bay'
-    type: 'image'
+draft: false
 ---
-**PENSACOLA, FL** — Bluffline, Inc. has been designated by the Florida Department of Transportation as the official Corridor Management Entity (CME) for the Pensacola Scenic Bluffs Scenic Highway, a 10-mile stretch of State Road 292 recognized for its outstanding natural, cultural, and scenic qualities.
 
-The designation formalizes Bluffline's role in protecting and enhancing the corridor's intrinsic resources while advancing multimodal transportation improvements that benefit residents and visitors alike.
+*Bluffline, Inc. Hosts Salon-Style Event Featuring the Visionary Behind Greenville's Urban Transformation*
 
-## What This Means
+PENSACOLA, Fla. (Feb. 1, 2025) — Bluffline, Inc. is bringing one of the South's most influential urban leaders to Pensacola. Greenville, South Carolina, Mayor Knox White will headline a special evening event on Thursday, Feb. 6, from 5:30 to 7:30 p.m. at the Pensacola Opera Center.
 
-As the CME, Bluffline will:
+A nationally recognized leader in urban revitalization and economic development, Mayor White has spearheaded transformative projects such as the Swamp Rabbit Trail and Unity Park, positioning Greenville as a model city for sustainable growth and community engagement.
 
-*   **Coordinate planning efforts** among local governments, state agencies, and community stakeholders
-*   **Advocate for corridor preservation** and enhancement through the scenic highway program
-*   **Pursue funding opportunities** for trail development, wayfinding, and other improvements
-*   **Promote the corridor** as a destination for recreation and tourism
+The event will feature a keynote address by Mayor White, an interactive Q&A session, and a brief award presentation honoring local contributions to Pensacola's greenway initiatives. Attendees will enjoy wine and light hors d'oeuvres while engaging with local leaders, planners, and community advocates who share a vision for a greener, more connected Pensacola.
 
-The Pensacola Scenic Bluffs Scenic Highway was designated as a Florida Scenic Highway in 2018, recognizing its exceptional coastal bluffs, historic neighborhoods, and cultural significance to the Pensacola community.
+"Mayor White's leadership has reshaped Greenville, proving that public spaces can be powerful catalysts for economic and social revitalization," said T.S. Strickland, Bluffline co-founder and director of strategy and communications. "As our community works to expand greenway access through The Bluffline, the Hollice T. Williams Greenway and other projects, his insights will help guide our efforts."
 
-## Building on Momentum
+Admission to the event is free, but space is limited, and RSVPs are required.
 
-This designation comes as Bluffline continues to advance its vision for a 20-mile multimodal corridor connecting major destinations across Pensacola. Recent milestones include:
+## Event Details
 
-*   Completion of the Bluffline Master Plan
-*   Community engagement with over 1,000 residents
-*   Partnerships with Escambia County, City of Pensacola, and regional transit agencies
+- **Location:** Pensacola Opera Center, 75 South Tarragona Street, Pensacola, FL
+- **Date:** Thursday, Feb. 6, 2025
+- **Time:** 5:30 – 7:30 p.m.
 
-"The scenic highway designation provides a valuable framework for protecting what makes this corridor special while we work to improve connectivity and access," noted Bluffline representatives.
+## About Mayor Knox White
 
-## Get Involved
+First elected in 1995, Mayor Knox White has transformed Greenville into a thriving, nationally recognized urban hub. His leadership on projects like the Reedy River Master Plan, Swamp Rabbit Trail, and Unity Park has helped attract investment, improve quality of life, and drive economic growth.
 
-Community members interested in supporting the Pensacola Scenic Bluffs Scenic Highway can sign up for updates at bluffline.org or attend upcoming public meetings announced through the organization's newsletter.
+## Parking Information
 
-***
+Paid parking is available south of the Opera Center, with the lot entrance on Brue Street (marked with the Pensacola Opera logo). Parking fees benefit the Pensacola Opera. Parking in the private lot to the north is not permitted and may result in a ticket.
 
-*Bluffline, Inc. is a 501(c)(3) nonprofit organization advancing a 20-mile multimodal corridor connecting the University of West Florida to Naval Air Station Pensacola.*
+This event is a rare opportunity to hear from a nationally recognized leader in urban transformation and explore how Pensacola can leverage public spaces, greenways, and parks to drive economic and community development.
