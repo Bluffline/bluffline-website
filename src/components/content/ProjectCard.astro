@@ -16,10 +16,8 @@ interface Project {
   amount?: string;
   awardDate?: string;
   description: string;
-  nodes: string[];
   color?: string;
   milestones: Milestone[];
-  outputs?: string[];
   segments?: any;
 }
 
@@ -40,17 +38,6 @@ const statusLabels: Record<string, string> = {
 
 const completedCount = project.milestones.filter(m => m.status === 'complete').length;
 const totalCount = project.milestones.length;
-
-// Node labels for display
-const nodeLabels: Record<string, string> = {
-  'corry-station': 'Corry Station',
-  'jackson-lakes': 'Jackson Lakes',
-  'maritime-park': 'Maritime Park',
-  'chimney-park': 'Chimney Park',
-  'ellyson': 'Ellyson',
-  'ferry-pass': 'Ferry Pass',
-  'uwf': 'UWF',
-};
 ---
 
 {href ? (
@@ -59,7 +46,6 @@ const nodeLabels: Record<string, string> = {
     href={href}
     data-project-id={project.shortTitle}
     data-project-title={project.shortTitle}
-    data-project-nodes={project.nodes.join(',')}
     data-project-color={project.color || ''}
     data-project-segments={project.segments ? JSON.stringify(project.segments) : ''}
   >
@@ -78,11 +64,6 @@ const nodeLabels: Record<string, string> = {
         <div class="progress-bar-fill" style={`width: ${(completedCount / totalCount) * 100}%`}></div>
       </div>
       <span class="progress-label">{completedCount} of {totalCount} milestones complete</span>
-    </div>
-    <div class="card-nodes">
-      {project.nodes.map(nodeId => (
-        <span class="node-pill">{nodeLabels[nodeId] || nodeId}</span>
-      ))}
     </div>
     <span class="card-view-link">View project details &rarr;</span>
   </a>
@@ -91,7 +72,6 @@ const nodeLabels: Record<string, string> = {
     class:list={['project-card', { active: isActive }]}
     data-project-id={project.shortTitle}
     data-project-title={project.shortTitle}
-    data-project-nodes={project.nodes.join(',')}
     data-project-color={project.color || ''}
     data-project-segments={project.segments ? JSON.stringify(project.segments) : ''}
   >
@@ -110,11 +90,6 @@ const nodeLabels: Record<string, string> = {
         <div class="progress-bar-fill" style={`width: ${(completedCount / totalCount) * 100}%`}></div>
       </div>
       <span class="progress-label">{completedCount} of {totalCount} milestones complete</span>
-    </div>
-    <div class="card-nodes">
-      {project.nodes.map(nodeId => (
-        <span class="node-pill">{nodeLabels[nodeId] || nodeId}</span>
-      ))}
     </div>
   </div>
 )}
@@ -230,21 +205,6 @@ const nodeLabels: Record<string, string> = {
     font-size: 0.75rem;
     color: var(--navy);
     opacity: 0.5;
-  }
-
-  .card-nodes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-  }
-  .node-pill {
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.2rem 0.5rem;
-    background: var(--mist);
-    color: var(--navy);
-    border-radius: 100px;
-    opacity: 0.7;
   }
 
   .card-view-link {

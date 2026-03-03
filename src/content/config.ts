@@ -140,7 +140,8 @@ const projectsCollection = defineCollection({
     amount: z.string().optional(),
     awardDate: z.string().optional(),
     description: z.string(),
-    nodes: z.array(z.string()),
+    featuredImage: z.string().optional(),
+    featuredImageAlt: z.string().optional(),
     color: z.string().optional(),
     milestones: z.array(z.object({
       title: z.string(),
@@ -149,7 +150,6 @@ const projectsCollection = defineCollection({
       status: z.enum(['complete', 'current', 'upcoming']),
       nodeRef: z.string().optional(),
     })),
-    outputs: z.array(z.string()).optional(),
     segments: z.any().optional(),
     relatedLinks: z.array(z.object({
       label: z.string(),
