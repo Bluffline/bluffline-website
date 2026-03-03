@@ -1,0 +1,516 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PhaseTracker from '../../../components/ui/PhaseTracker.astro';
+import CorridorMap from '../../../components/ui/CorridorMap.astro';
+import MilestoneList from '../../../components/content/MilestoneList.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects')).filter(p => !p.data.draft);
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const d = project.data;
+
+const statusLabels: Record<string, string> = {
+  active: 'Active',
+  pending: 'Pending Obligation',
+  pursuing: 'Pursuing',
+  complete: 'Complete',
+};
+
+const projectSegments = d.segments?.features?.length > 0
+  ? [{ id: d.shortTitle, color: d.color || '#99CC63', segments: d.segments }]
+  : [];
+
+const nodeLabels: Record<string, string> = {
+  'corry-station': 'Corry Station',
+  'jackson-lakes': 'Jackson Lakes',
+  'maritime-park': 'Maritime Park',
+  'chimney-park': 'Chimney Park',
+  'ellyson': 'Ellyson',
+  'ferry-pass': 'Ferry Pass',
+  'uwf': 'UWF',
+};
+---
+
+<BaseLayout
+  title={d.shortTitle}
+  description={d.description}
+>
+  <!-- Hero -->
+  {d.heroImage ? (
+    <section class="project-hero has-image">
+      <img src={d.heroImage} alt={d.heroImageAlt || d.title} class="hero-image" />
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <a href="/progress" class="back-link">&larr; All Projects</a>
+          <h1>{d.title}</h1>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="project-hero">
+      <div class="hero-content">
+        <a href="/progress" class="back-link">&larr; All Projects</a>
+        <h1>{d.title}</h1>
+      </div>
+    </section>
+  )}
+
+  <!-- Metadata Bar -->
+  <section class="meta-section">
+    <div class="meta-inner">
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Funder</span>
+          <span class="meta-value">{d.funder}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Program</span>
+          <span class="meta-value">{d.program}</span>
+        </div>
+        {d.partner && (
+          <div class="meta-item">
+            <span class="meta-label">Partner</span>
+            <span class="meta-value">{d.partner}</span>
+          </div>
+        )}
+        {d.amount && (
+          <div class="meta-item">
+            <span class="meta-label">Award</span>
+            <span class="meta-value">{d.amount}</span>
+          </div>
+        )}
+        {d.awardDate && (
+          <div class="meta-item">
+            <span class="meta-label">Announced</span>
+            <span class="meta-value">{d.awardDate}</span>
+          </div>
+        )}
+        {d.targetDate && (
+          <div class="meta-item">
+            <span class="meta-label">Target</span>
+            <span class="meta-value">{d.targetDate}</span>
+          </div>
+        )}
+        <div class="meta-item">
+          <span class="meta-label">Status</span>
+          <span class:list={['status-badge', d.status]}>{statusLabels[d.status]}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase Tracker -->
+  {d.phases && d.phases.length > 0 && (
+    <section class="phase-section">
+      <div class="phase-inner">
+        <PhaseTracker phases={d.phases} />
+      </div>
+    </section>
+  )}
+
+  <!-- Project Map -->
+  {projectSegments.length > 0 && (
+    <section class="map-section">
+      <CorridorMap
+        allProjectSegments={projectSegments}
+        interactive={true}
+      />
+    </section>
+  )}
+
+  <!-- Description -->
+  <section class="content-section">
+    <div class="content-inner">
+      <p class="project-description">{d.description}</p>
+
+      <!-- Corridor Nodes -->
+      {d.nodes.length > 0 && (
+        <div class="node-pills">
+          {d.nodes.map(nodeId => (
+            <span class="node-pill">{nodeLabels[nodeId] || nodeId}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Two-Column Body: Milestones + Sidebar -->
+  <section class="body-section">
+    <div class="body-inner">
+      <div class="body-main">
+        {d.status === 'pursuing' ? (
+          <div class="pursuing-notice">
+            <p>We've submitted an application for this funding. If awarded, this project would advance work at {d.nodes.length} corridor nodes.</p>
+          </div>
+        ) : (
+          <div class="milestone-section">
+            <h2>Project Milestones</h2>
+            <MilestoneList milestones={d.milestones} />
+          </div>
+        )}
+      </div>
+
+      {((d.outputs && d.outputs.length > 0) || (d.relatedLinks && d.relatedLinks.length > 0)) && (
+        <aside class="body-sidebar">
+          {d.outputs && d.outputs.length > 0 && (
+            <div class="sidebar-card">
+              <h3>What This Project Produces</h3>
+              <ul class="outputs-list">
+                {d.outputs.map(output => (
+                  <li>{output}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {d.relatedLinks && d.relatedLinks.length > 0 && (
+            <div class="sidebar-card">
+              <h3>Related Links</h3>
+              <ul class="links-list">
+                {d.relatedLinks.map(link => (
+                  <li><a href={link.href}>{link.label}</a></li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </aside>
+      )}
+    </div>
+  </section>
+
+  <!-- Bottom Back Link -->
+  <section class="back-section">
+    <div class="back-inner">
+      <a href="/progress" class="back-link">&larr; Back to Progress</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ============================================
+     Hero
+     ============================================ */
+  .project-hero {
+    background: var(--navy);
+    padding: 4rem 1.5rem 3rem;
+  }
+  .project-hero.has-image {
+    position: relative;
+    padding: 0;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+  }
+  @media (min-width: 768px) {
+    .project-hero { padding: 5rem 3rem 3.5rem; }
+    .project-hero.has-image { min-height: 400px; }
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: linear-gradient(to top, rgba(45, 48, 71, 0.85) 0%, transparent 100%);
+    padding: 4rem 1.5rem 3rem;
+  }
+  @media (min-width: 768px) {
+    .hero-overlay { padding: 5rem 3rem 3.5rem; }
+  }
+
+  .hero-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--spring);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: opacity 0.2s ease;
+  }
+  .back-link:hover {
+    opacity: 0.8;
+  }
+
+  .project-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: white;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  /* ============================================
+     Metadata Bar
+     ============================================ */
+  .meta-section {
+    background: var(--warm-white);
+    border-bottom: 1px solid rgba(45, 48, 71, 0.06);
+    padding: 1.5rem 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .meta-section { padding: 2rem 3rem; }
+  }
+  .meta-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .meta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: flex-start;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .meta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    opacity: 0.5;
+    font-weight: 600;
+  }
+  .meta-value {
+    font-size: 0.9rem;
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .status-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.625rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  .status-badge.active {
+    background: rgba(65, 82, 31, 0.1);
+    color: var(--forest);
+  }
+  .status-badge.pending {
+    background: rgba(212, 160, 23, 0.12);
+    color: #9a7410;
+  }
+  .status-badge.pursuing {
+    background: var(--mist);
+    color: var(--navy);
+    opacity: 0.7;
+  }
+  .status-badge.complete {
+    background: rgba(153, 204, 99, 0.15);
+    color: var(--forest);
+  }
+
+  /* ============================================
+     Phase Tracker
+     ============================================ */
+  .phase-section {
+    background: var(--warm-white);
+    padding: 0 1.5rem 2rem;
+  }
+  @media (min-width: 768px) {
+    .phase-section { padding: 0 3rem 2.5rem; }
+  }
+  .phase-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--mist);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .phase-inner { padding: 1.75rem 2rem; }
+  }
+
+  /* ============================================
+     Map
+     ============================================ */
+  .map-section {
+    background: var(--cream);
+  }
+
+  /* ============================================
+     Content / Description
+     ============================================ */
+  .content-section {
+    padding: 3rem 1.5rem 2rem;
+    background: var(--warm-white);
+  }
+  @media (min-width: 768px) {
+    .content-section { padding: 4rem 3rem 2.5rem; }
+  }
+  .content-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .project-description {
+    font-size: 1.1rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0;
+  }
+  .node-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .node-pill {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.625rem;
+    background: var(--mist);
+    color: var(--navy);
+    border-radius: 100px;
+    opacity: 0.7;
+  }
+
+  /* ============================================
+     Two-Column Body
+     ============================================ */
+  .body-section {
+    padding: 2rem 1.5rem 5rem;
+    background: var(--warm-white);
+  }
+  @media (min-width: 768px) {
+    .body-section { padding: 2.5rem 3rem 6rem; }
+  }
+  .body-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .body-inner {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .milestone-section h2 {
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+
+  .pursuing-notice {
+    background: var(--mist);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .pursuing-notice p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .body-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  @media (min-width: 1024px) {
+    .body-sidebar {
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+    }
+  }
+  .sidebar-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .sidebar-card h3 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+  }
+  .outputs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+  .outputs-list li {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.5;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+  .outputs-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--spring);
+  }
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+  .links-list a {
+    font-size: 0.9rem;
+    color: var(--forest);
+    text-decoration: none;
+  }
+  .links-list a:hover {
+    text-decoration: underline;
+  }
+
+  /* ============================================
+     Bottom Back Link
+     ============================================ */
+  .back-section {
+    padding: 2rem 1.5rem 4rem;
+    background: var(--warm-white);
+  }
+  @media (min-width: 768px) {
+    .back-section { padding: 2rem 3rem 5rem; }
+  }
+  .back-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .back-section .back-link {
+    color: var(--forest);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+</style>

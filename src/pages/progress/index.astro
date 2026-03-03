@@ -6,7 +6,6 @@ import CallToAction from '../../components/ui/CallToAction.astro';
 import UpdateCard from '../../components/content/UpdateCard.astro';
 import CorridorMap from '../../components/ui/CorridorMap.astro';
 import ProjectCard from '../../components/content/ProjectCard.astro';
-import MilestoneList from '../../components/content/MilestoneList.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 const page = await getEntry('pages', 'progress');
@@ -25,9 +24,6 @@ const statusOrder = { active: 0, pending: 1, pursuing: 2, complete: 3 };
 const projects = allProjects.sort(
   (a, b) => (statusOrder[a.data.status] ?? 99) - (statusOrder[b.data.status] ?? 99)
 );
-
-// The default detail project is the first active or pending project
-const detailProject = projects.find(p => p.data.status === 'active' || p.data.status === 'pending') || projects[0];
 
 // Collect all project segment data for the map
 const allProjectSegments = projects
@@ -51,13 +47,6 @@ const programStages = [
   { label: 'Monitor & maintain', status: 'upcoming' as const },
 ];
 
-// Status labels for detail section
-const statusLabels: Record<string, string> = {
-  active: 'Active',
-  pending: 'Pending Obligation',
-  pursuing: 'Pursuing',
-  complete: 'Complete',
-};
 ---
 
 <BaseLayout
@@ -103,95 +92,32 @@ const statusLabels: Record<string, string> = {
     </div>
   </section>
 
-  <!-- Section 3: Program Map + Project Cards -->
-  <section class="map-projects-section">
-    <div class="map-projects-inner">
-      <div class="map-column">
-        <CorridorMap
-          allProjectSegments={allProjectSegments}
-          interactive={true}
-        />
+  <!-- Section 3: Full-Width Corridor Map -->
+  <section class="map-section">
+    <CorridorMap
+      allProjectSegments={allProjectSegments}
+      interactive={true}
+    />
+  </section>
+
+  <!-- Section 4: Horizontally-Scrolling Project Cards -->
+  <section class="projects-section">
+    <div class="projects-inner">
+      <div class="projects-heading">
+        <p class="section-label">Current Funding</p>
+        <h2>Active Projects</h2>
+        <p>Each funded project advances a section of the planning corridor shown above. Hover a project to highlight its geography on the map.</p>
       </div>
-      <div class="cards-column">
-        <div class="cards-heading">
-          <p class="section-label">Current Funding</p>
-          <h2>Active Projects</h2>
-          <p>Each funded project advances a section of the planning corridor shown at left. The specific alignment will be determined through the master planning process. Hover a project to see its geography.</p>
-        </div>
-        <div class="project-cards-stack">
-          {projects.map((project, i) => (
-            <ProjectCard
-              project={project.data}
-              isActive={project === detailProject}
-            />
-          ))}
-        </div>
+      <div class="project-cards-row">
+        {projects.map(project => (
+          <ProjectCard
+            project={project.data}
+            slug={project.id}
+          />
+        ))}
       </div>
     </div>
   </section>
-
-  <!-- Section 4: Active Project Detail -->
-  {detailProject && (
-    <section class="project-detail-section" id="project-detail">
-      <div class="project-detail-inner">
-        <div class="detail-card">
-          <div class="detail-header">
-            <div class="detail-label">What's Happening Now</div>
-            <h2>{detailProject.data.title}</h2>
-            <div class="detail-meta">
-              <span class="detail-meta-item">
-                <strong>Funder:</strong> {detailProject.data.funder}
-              </span>
-              <span class="detail-meta-item">
-                <strong>Program:</strong> {detailProject.data.program}
-              </span>
-              {detailProject.data.amount && (
-                <span class="detail-meta-item">
-                  <strong>Award:</strong> {detailProject.data.amount}
-                </span>
-              )}
-              {detailProject.data.awardDate && (
-                <span class="detail-meta-item">
-                  <strong>Announced:</strong> {detailProject.data.awardDate}
-                </span>
-              )}
-              <span class="detail-meta-item">
-                <strong>Status:</strong> {statusLabels[detailProject.data.status]}
-              </span>
-            </div>
-          </div>
-
-          <div class="detail-body">
-            <div class="detail-main">
-              <p class="detail-description">{detailProject.data.description}</p>
-
-              {detailProject.data.status === 'pursuing' ? (
-                <div class="pursuing-notice">
-                  <p>We've submitted an application for this funding. If awarded, this project would advance work at {detailProject.data.nodes.length} corridor nodes.</p>
-                </div>
-              ) : (
-                <div class="milestone-section">
-                  <h3>Project Milestones</h3>
-                  <MilestoneList milestones={detailProject.data.milestones} />
-                </div>
-              )}
-            </div>
-
-            {detailProject.data.outputs && detailProject.data.outputs.length > 0 && (
-              <div class="detail-sidebar">
-                <h3>What This Project Produces</h3>
-                <ul class="outputs-list">
-                  {detailProject.data.outputs.map(output => (
-                    <li>{output}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- Section 5: Updates Feed -->
   <section class="updates-feed">
@@ -230,227 +156,65 @@ const statusLabels: Record<string, string> = {
 
 <style>
   /* ============================================
-     Section 2: Map + Project Cards
+     Section 3: Full-Width Corridor Map
      ============================================ */
-  .map-projects-section {
-    padding: 0;
+  .map-section {
     background: var(--cream);
   }
 
-  .map-projects-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0;
-    display: grid;
-    gap: 0;
-  }
-  @media (min-width: 1024px) {
-    .map-projects-inner {
-      max-width: none;
-      margin: 0;
-      grid-template-columns: 1fr min(50%, 680px);
-      gap: 0;
-      align-items: start;
-    }
-  }
-
-  .map-column {
-    position: relative;
-    min-height: 300px;
-  }
-  @media (min-width: 1024px) {
-    .map-column {
-      position: sticky;
-      top: 0;
-      min-height: 480px;
-      align-self: start;
-    }
-  }
-
-
-  .cards-column {
-    padding: 2rem 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .cards-column { padding: 2.5rem 2.5rem; }
-  }
-  @media (min-width: 1024px) {
-    .cards-column { padding: 2.5rem max(3rem, calc((100vw - 1400px) / 2 + 3rem)) 2.5rem 2.5rem; }
-  }
-
-  .cards-heading {
-    margin-bottom: 1.5rem;
-  }
-  .cards-heading h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-  .cards-heading p {
-    font-size: 0.95rem;
-    color: var(--navy);
-    opacity: 0.6;
-  }
-
-  .project-cards-stack {
-    display: grid;
-    gap: 1rem;
-  }
-  :global(.project-card.dimmed-card) {
-    opacity: 0.45;
-    transform: scale(0.98);
-    transition: all 0.25s ease;
-  }
-
   /* ============================================
-     Section 3: Active Project Detail
+     Section 4: Horizontally-Scrolling Project Cards
      ============================================ */
-  .project-detail-section {
-    padding: 5rem 0;
-    background: var(--warm-white);
+  .projects-section {
+    padding: 3rem 0 4rem;
+    background: var(--cream);
   }
-  .project-detail-section::before {
-    content: '';
-    display: block;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 10%,
-      rgba(153, 204, 99, 0.3) 50%,
-      transparent 90%
-    );
-  }
-  .project-detail-inner {
+
+  .projects-inner {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
   @media (min-width: 768px) {
-    .project-detail-inner { padding: 0 3rem; }
+    .projects-inner { padding: 0 3rem; }
   }
 
-  .detail-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
-    border-left: 4px solid var(--spring);
-    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.04);
-  }
-  @media (min-width: 768px) {
-    .detail-card { padding: 3rem; }
-  }
-
-  .detail-header {
-    margin-bottom: 2.5rem;
-    max-width: 800px;
-  }
-  .detail-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--forest);
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-  .detail-header h2 {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--navy);
-    margin-bottom: 1rem;
-  }
-  .detail-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-  }
-  .detail-meta-item {
-    font-size: 0.875rem;
-    color: var(--navy);
-    opacity: 0.7;
-  }
-  .detail-meta-item strong {
-    font-weight: 600;
-    opacity: 1;
-  }
-
-  .detail-body {
-    display: grid;
-    gap: 3rem;
-  }
-  @media (min-width: 1024px) {
-    .detail-body {
-      grid-template-columns: 1.5fr 1fr;
-      gap: 4rem;
-    }
-  }
-
-  .detail-description {
-    font-size: 1.05rem;
-    color: var(--navy);
-    opacity: 0.8;
-    line-height: 1.65;
-    margin-bottom: 2rem;
-  }
-
-  .milestone-section h3 {
-    font-size: 1.25rem;
-    color: var(--navy);
+  .projects-heading {
     margin-bottom: 1.5rem;
   }
-
-  .pursuing-notice {
-    background: var(--mist);
-    border-radius: 12px;
-    padding: 1.5rem;
+  .projects-heading h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--navy);
+    margin-bottom: 0.5rem;
   }
-  .pursuing-notice p {
+  .projects-heading p {
     font-size: 0.95rem;
     color: var(--navy);
-    opacity: 0.75;
-    line-height: 1.6;
-    margin: 0;
+    opacity: 0.6;
   }
 
-  .detail-sidebar {
-    background: var(--cream);
-    border-radius: 16px;
-    padding: 2rem;
-  }
-  @media (min-width: 1024px) {
-    .detail-sidebar {
-      position: sticky;
-      top: 6rem;
-    }
-  }
-  .detail-sidebar h3 {
-    font-size: 1.15rem;
-    color: var(--navy);
-    margin-bottom: 1.25rem;
-  }
-  .outputs-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .project-cards-row {
     display: flex;
-    flex-direction: column;
-    gap: 0.875rem;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
   }
-  .outputs-list li {
-    font-size: 0.925rem;
-    color: var(--navy);
-    opacity: 0.8;
-    line-height: 1.5;
-    padding-left: 1.25rem;
-    position: relative;
-  }
-  .outputs-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.5em;
-    width: 6px;
+  .project-cards-row::-webkit-scrollbar {
     height: 6px;
-    border-radius: 50%;
-    background: var(--spring);
+  }
+  .project-cards-row::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .project-cards-row::-webkit-scrollbar-thumb {
+    background: rgba(45, 48, 71, 0.15);
+    border-radius: 3px;
+  }
+  :global(.project-card.dimmed-card) {
+    opacity: 0.45;
+    transform: scale(0.98);
+    transition: all 0.25s ease;
   }
 
   /* ============================================
@@ -554,7 +318,7 @@ const statusLabels: Record<string, string> = {
 </style>
 
 <script is:inline>
-  // Project card ↔ Map interaction
+  // Project card ↔ Map interaction (hover highlights only)
   (function() {
     var cards = document.querySelectorAll('.project-card');
 
@@ -578,13 +342,6 @@ const statusLabels: Record<string, string> = {
         cards.forEach(function(c) {
           c.classList.remove('dimmed-card');
         });
-      });
-
-      card.addEventListener('click', function() {
-        var detail = document.getElementById('project-detail');
-        if (detail) {
-          detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
       });
     });
   })();

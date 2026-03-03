@@ -142,6 +142,15 @@ const projectsCollection = defineCollection({
     description: z.string(),
     nodes: z.array(z.string()),
     color: z.string().optional(),
+    heroImage: z.string().optional(),
+    heroImageAlt: z.string().optional(),
+    phases: z.array(z.object({
+      label: z.string(),
+      status: z.enum(['complete', 'current', 'upcoming']),
+      sublabel: z.string().optional(),
+    })).optional(),
+    targetDate: z.string().optional(),
+    partner: z.string().optional(),
     milestones: z.array(z.object({
       title: z.string(),
       description: z.string(),

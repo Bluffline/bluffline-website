@@ -25,10 +25,11 @@ interface Project {
 
 interface Props {
   project: Project;
+  slug: string;
   isActive?: boolean;
 }
 
-const { project, isActive = false } = Astro.props;
+const { project, slug, isActive = false } = Astro.props;
 
 const statusLabels: Record<string, string> = {
   active: 'Active',
@@ -60,40 +61,49 @@ const nodeLabels: Record<string, string> = {
   data-project-color={project.color || ''}
   data-project-segments={project.segments ? JSON.stringify(project.segments) : ''}
 >
-  <div class="card-header">
-    <div>
-      <h3 class="card-title">{project.shortTitle}</h3>
-      <p class="card-funder">{project.funder} &middot; {project.program}</p>
+  <a href={`/progress/projects/${slug}`} class="card-link">
+    <div class="card-header">
+      <div>
+        <h3 class="card-title">{project.shortTitle}</h3>
+        <p class="card-funder">{project.funder} &middot; {project.program}</p>
+      </div>
+      <span class:list={['status-badge', project.status]}>
+        {statusLabels[project.status]}
+      </span>
     </div>
-    <span class:list={['status-badge', project.status]}>
-      {statusLabels[project.status]}
-    </span>
-  </div>
 
-  <p class="card-description">{project.description}</p>
+    <p class="card-description">{project.description}</p>
 
-  <div class="card-progress">
-    <div class="progress-bar-track">
-      <div class="progress-bar-fill" style={`width: ${(completedCount / totalCount) * 100}%`}></div>
+    <div class="card-progress">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" style={`width: ${(completedCount / totalCount) * 100}%`}></div>
+      </div>
+      <span class="progress-label">{completedCount} of {totalCount} milestones complete</span>
     </div>
-    <span class="progress-label">{completedCount} of {totalCount} milestones complete</span>
-  </div>
 
-  <div class="card-nodes">
-    {project.nodes.map(nodeId => (
-      <span class="node-pill">{nodeLabels[nodeId] || nodeId}</span>
-    ))}
-  </div>
+    <div class="card-nodes">
+      {project.nodes.map(nodeId => (
+        <span class="node-pill">{nodeLabels[nodeId] || nodeId}</span>
+      ))}
+    </div>
+  </a>
 </div>
 
 <style>
   .project-card {
     background: white;
     border-radius: 12px;
-    padding: 1.5rem;
     border: 1.5px solid rgba(45, 48, 71, 0.08);
-    cursor: pointer;
     transition: all 0.25s ease;
+    width: 340px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+  .card-link {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
   }
   .project-card:hover,
   .project-card.active {

@@ -8,6 +8,13 @@
   "awardDate": "December 2024",
   "description": "Federal planning grant funding master planning, feasibility studies, and preliminary design for the two Bluffline priority nodes — Jackson Lakes/West Pensacola and Ferry Pass/UWF. This work will produce the foundational plans needed to advance these nodes toward construction funding.",
   "nodes": ["jackson-lakes", "ferry-pass", "uwf"],
+  "phases": [
+    { "label": "Award", "status": "complete", "sublabel": "Dec 2024" },
+    { "label": "Obligation", "status": "current", "sublabel": "2025–2026" },
+    { "label": "Planning", "status": "upcoming", "sublabel": "2026–2027" },
+    { "label": "Design", "status": "upcoming", "sublabel": "2027–2028" }
+  ],
+  "targetDate": "2028",
   "milestones": [
     {
       "title": "Grant Announced",
