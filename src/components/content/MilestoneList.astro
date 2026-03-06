@@ -37,9 +37,6 @@ const { milestones, projectColor } = Astro.props;
         <div class="milestone-header">
           <div class="milestone-title-row">
             <h4>{milestone.title}</h4>
-            {milestone.nodeRef && (
-              <span class="node-badge">{milestone.nodeRef}</span>
-            )}
           </div>
           <span class="milestone-date">{milestone.date}</span>
         </div>
@@ -165,16 +162,6 @@ const { milestones, projectColor } = Astro.props;
   }
   .upcoming .milestone-title-row h4 {
     opacity: 0.6;
-  }
-
-  .node-badge {
-    font-size: 0.65rem;
-    font-weight: 500;
-    padding: 0.15rem 0.5rem;
-    background: var(--mist);
-    color: var(--forest);
-    border-radius: 100px;
-    white-space: nowrap;
   }
 
   .milestone-date {

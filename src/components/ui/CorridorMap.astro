@@ -496,21 +496,35 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       // ─── Fullscreen toggle ─────────────────────────────────────────────────
       var wrapper = document.getElementById('corridor-map-wrapper');
       var fsBtn = document.getElementById('corridor-fullscreen-btn');
+      var wrapperPlaceholder = null;
 
       function toggleFullscreen() {
-        wrapper.classList.toggle('fullscreen');
-        var isFs = wrapper.classList.contains('fullscreen');
-        document.body.style.overflow = isFs ? 'hidden' : '';
-        // In fullscreen, allow free scroll-to-zoom; otherwise keep cooperative mode
+        var isFs = !wrapper.classList.contains('fullscreen');
+
         if (isFs) {
+          // Move wrapper to <body> so it escapes any sticky/stacking context
+          wrapperPlaceholder = document.createComment('corridor-map-placeholder');
+          wrapper.parentNode.insertBefore(wrapperPlaceholder, wrapper);
+          document.body.appendChild(wrapper);
+          wrapper.classList.add('fullscreen');
+          document.body.style.overflow = 'hidden';
           map.scrollZoom.enable();
           map.touchZoomRotate.enable();
           map.touchPitch.enable();
         } else {
+          // Move wrapper back to its original position
+          wrapper.classList.remove('fullscreen');
+          document.body.style.overflow = '';
           map.scrollZoom.disable();
           map.touchZoomRotate.disable();
           map.touchPitch.disable();
+          if (wrapperPlaceholder && wrapperPlaceholder.parentNode) {
+            wrapperPlaceholder.parentNode.insertBefore(wrapper, wrapperPlaceholder);
+            wrapperPlaceholder.parentNode.removeChild(wrapperPlaceholder);
+            wrapperPlaceholder = null;
+          }
         }
+
         setTimeout(function() {
           map.resize();
           map.fitBounds(bounds, { padding: isFs ? 60 : 40 });
