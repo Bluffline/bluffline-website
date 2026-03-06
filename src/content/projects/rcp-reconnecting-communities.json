@@ -72,7 +72,7 @@
   "reportPhases": [
     { "label": "Award Received", "sublabel": "Late 2024", "status": "complete" },
     { "label": "Admin. Transition", "sublabel": "Early 2025", "status": "complete" },
-    { "label": "Obligation Secured", "sublabel": "2025", "status": "current" },
+    { "label": "Finalizing Award Agreement", "sublabel": "2025–2026", "status": "current" },
     { "label": "Master Planning Begins", "sublabel": "2026+", "status": "upcoming" }
   ],
   "segments": {
