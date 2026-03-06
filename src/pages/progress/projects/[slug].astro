@@ -230,10 +230,8 @@ const progressPct = totalCount > 0 ? Math.round((completedCount / totalCount) * 
     }
     .map-column :global(.corridor-map-wrapper) {
       height: 100%;
-    }
-    .map-column :global(.corridor-map) {
-      height: 100%;
       max-height: none;
+      min-height: 0;
     }
   }
 </style>
