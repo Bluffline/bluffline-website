@@ -183,6 +183,7 @@ const programStages = [
   .map-column {
     position: relative;
     min-height: 300px;
+    min-width: 0;
   }
   @media (min-width: 1024px) {
     .map-column {
@@ -200,6 +201,7 @@ const programStages = [
 
   .cards-column {
     padding: 2rem 1.5rem;
+    min-width: 0;
   }
   @media (min-width: 768px) {
     .cards-column { padding: 2.5rem 2.5rem; }
@@ -236,8 +238,7 @@ const programStages = [
 
   :global(.project-card.dimmed-card) {
     opacity: 0.45;
-    transform: scale(0.98);
-    transition: all 0.25s ease;
+    transition: opacity 0.25s ease;
   }
 
   /* ============================================
