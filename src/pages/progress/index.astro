@@ -263,7 +263,8 @@ const programStages = [
     flex: 0 0 auto;
   }
   .project-carousel :global(.project-card:only-child) {
-    flex: 1 0 auto;
+    flex: 1 0 0;
+    min-width: 0;
     max-width: none;
   }
   @media (max-width: 1023px) {
@@ -272,6 +273,7 @@ const programStages = [
       max-width: 320px;
     }
     .project-carousel :global(.project-card:only-child) {
+      min-width: 0;
       max-width: none;
     }
   }
