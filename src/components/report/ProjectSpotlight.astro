@@ -1,0 +1,264 @@
+---
+import PhaseTracker from '../ui/PhaseTracker.astro';
+import type { Phase } from '../ui/PhaseTracker.astro';
+
+interface ProjectData {
+  title: string;
+  shortTitle: string;
+  status: 'active' | 'pending' | 'complete' | 'pursuing';
+  funder: string | string[];
+  partners?: string[];
+  description: string;
+  featuredImage?: string;
+  featuredImageAlt?: string;
+  milestones: { status: 'complete' | 'current' | 'upcoming'; date: string }[];
+}
+
+interface Props {
+  project: ProjectData;
+  /** Report-specific label shown above the title (e.g. "First Bluffline Project") */
+  subtitle?: string;
+  /** CTA link to the full project detail page */
+  href?: string;
+}
+
+const { project, subtitle, href } = Astro.props;
+
+// Derive display values from project data
+const title = project.shortTitle;
+const description = project.description;
+const funderDisplay = Array.isArray(project.funder)
+  ? project.funder.join(' & ')
+  : project.funder;
+const partnersDisplay = project.partners?.join(', ');
+const imageSrc = project.featuredImage;
+const imageAlt = project.featuredImageAlt || title;
+
+// Target date = last upcoming milestone's date
+const lastUpcoming = [...project.milestones].reverse().find(m => m.status === 'upcoming');
+const targetDate = lastUpcoming?.date;
+
+// Map project status to 4-step lifecycle position
+const statusMap = {
+  pursuing: 0,   // Planning
+  pending:  1,   // Funded
+  active:   2,   // In Delivery
+  complete: 3,   // Complete
+} as const;
+const currentIndex = statusMap[project.status] ?? 0;
+
+const statusConfig = {
+  pursuing: { label: 'Planning',     color: 'var(--navy)',   bg: 'rgba(255,255,255,0.95)' },
+  pending:  { label: 'Funded',       color: 'var(--forest)', bg: 'rgba(255,255,255,0.95)' },
+  active:   { label: 'In Delivery',  color: 'var(--forest)', bg: 'rgba(255,255,255,0.95)' },
+  complete: { label: 'Complete',     color: 'var(--forest)', bg: 'var(--spring)' },
+};
+const currentStatus = statusConfig[project.status] ?? statusConfig.pursuing;
+
+const phaseLabels = ['Planning', 'Funded', 'In Delivery', 'Complete'] as const;
+const phases: Phase[] = phaseLabels.map((label, i) => ({
+  label,
+  status: i < currentIndex ? 'complete' : i === currentIndex ? 'current' : 'upcoming',
+}));
+---
+
+<article class="project-spotlight">
+  <div class="spotlight-content">
+    <div class="spotlight-header">
+      {subtitle && <span class="spotlight-subtitle">{subtitle}</span>}
+      <h3 class="spotlight-title">{title}</h3>
+    </div>
+
+    <p class="spotlight-description">{description}</p>
+
+    <div class="spotlight-meta">
+      {partnersDisplay && (
+        <div class="meta-item">
+          <span class="meta-label">Partners</span>
+          <span class="meta-value">{partnersDisplay}</span>
+        </div>
+      )}
+      {funderDisplay && (
+        <div class="meta-item">
+          <span class="meta-label">Funding</span>
+          <span class="meta-value">{funderDisplay}</span>
+        </div>
+      )}
+    </div>
+
+    <div class="spotlight-status-bar">
+      <PhaseTracker phases={phases} />
+      {targetDate && (
+        <div class="target-date">
+          <span class="target-label">Target completion:</span>
+          <span class="target-value">{targetDate}</span>
+        </div>
+      )}
+    </div>
+
+    {href && (
+      <a href={href} class="spotlight-cta">
+        View full project
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+    )}
+  </div>
+
+  {imageSrc && (
+    <div class="spotlight-image">
+      <img src={imageSrc} alt={imageAlt} loading="lazy" />
+      <div class="image-badge" style={`background: ${currentStatus.bg}; color: ${currentStatus.color}`}>
+        {currentStatus.label}
+      </div>
+    </div>
+  )}
+</article>
+
+<style>
+  .project-spotlight {
+    display: grid;
+    gap: 2rem;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.04);
+    overflow: hidden;
+  }
+
+  @media (min-width: 900px) {
+    .project-spotlight {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 2.5rem;
+    }
+  }
+
+  .spotlight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .spotlight-subtitle {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .spotlight-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--navy);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .spotlight-description {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .spotlight-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    opacity: 0.5;
+    font-weight: 600;
+  }
+
+  .meta-value {
+    font-size: 0.95rem;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  .spotlight-status-bar {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .target-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .target-label {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.5;
+  }
+
+  .target-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--forest);
+  }
+
+  .spotlight-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .spotlight-cta:hover {
+    gap: 0.625rem;
+  }
+
+  .spotlight-image {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: var(--mist);
+  }
+
+  .spotlight-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+</style>

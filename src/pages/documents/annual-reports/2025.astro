@@ -5,7 +5,8 @@ import BigQuote from '../../../components/report/BigQuote.astro';
 import StatCard from '../../../components/report/StatCard.astro';
 import MilestoneCard from '../../../components/report/MilestoneCard.astro';
 import PartnerCard from '../../../components/report/PartnerCard.astro';
-import ProjectCard from '../../../components/content/ProjectCard.astro';
+import ProjectSpotlight from '../../../components/report/ProjectSpotlight.astro';
+import PhaseTracker from '../../../components/ui/PhaseTracker.astro';
 import EventHighlight from '../../../components/report/EventHighlight.astro';
 import AwardFeature from '../../../components/report/AwardFeature.astro';
 import TestimonialCard from '../../../components/content/TestimonialCard.astro';
@@ -20,10 +21,11 @@ const featuredTestimonials = allTestimonials.filter(t =>
   ['reeves-dc', 'hofberger-robert', 'diaz-joe'].includes(t.id)
 );
 
-// Get projects for the project card sections
+// Get projects for the project spotlight sections
 const allProjects = await getCollection('projects');
 const chimneyParkProject = allProjects.find(p => p.id === 'chimney-park');
 const rcpProject = allProjects.find(p => p.id === 'rcp-reconnecting-communities');
+const rcpPhases = rcpProject?.data.reportPhases ?? [];
 
 // Get planning documents for the document section
 const allDocuments = await getCollection('documents');
@@ -291,8 +293,9 @@ const knoxWhiteGallery = [
         <p>Chimney Park represents our first tangible, visible project—proof that the Bluffline is moving from plans to places.</p>
       </div>
 
-      <ProjectCard
+      <ProjectSpotlight
         project={chimneyParkProject!.data}
+        subtitle="First Bluffline Project"
         href="/progress/projects/chimney-park"
       />
     </div>
@@ -311,10 +314,7 @@ const knoxWhiteGallery = [
           <p class="federal-lead">At the end of 2024, we received a $1.2 million USDOT Reconnecting Communities award. In 2025, we faced a critical challenge: ensuring that award survived a federal administration transition.</p>
 
           <div class="federal-timeline">
-            <ProjectCard
-              project={rcpProject!.data}
-              href="/progress/projects/rcp-reconnecting-communities"
-            />
+            <PhaseTracker variant="dark" phases={rcpPhases} />
           </div>
 
           <div class="obligation-explainer">

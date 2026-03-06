@@ -135,7 +135,8 @@ const projectsCollection = defineCollection({
     title: z.string(),
     shortTitle: z.string(),
     status: z.enum(['active', 'pending', 'complete', 'pursuing']),
-    funder: z.string(),
+    funder: z.union([z.string(), z.array(z.string())]),
+    partners: z.array(z.string()).optional(),
     program: z.string(),
     amount: z.string().optional(),
     awardDate: z.string().optional(),
@@ -150,6 +151,11 @@ const projectsCollection = defineCollection({
       status: z.enum(['complete', 'current', 'upcoming']),
       nodeRef: z.string().optional(),
     })),
+    reportPhases: z.array(z.object({
+      label: z.string(),
+      sublabel: z.string().optional(),
+      status: z.enum(['complete', 'current', 'upcoming']),
+    })).optional(),
     segments: z.any().optional(),
     relatedLinks: z.array(z.object({
       label: z.string(),

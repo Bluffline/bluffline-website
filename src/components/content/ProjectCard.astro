@@ -11,7 +11,8 @@ interface Project {
   title: string;
   shortTitle: string;
   status: 'active' | 'pending' | 'complete' | 'pursuing';
-  funder: string;
+  funder: string | string[];
+  partners?: string[];
   program: string;
   amount?: string;
   awardDate?: string;
@@ -38,6 +39,7 @@ const statusLabels: Record<string, string> = {
 
 const completedCount = project.milestones.filter(m => m.status === 'complete').length;
 const totalCount = project.milestones.length;
+const funderDisplay = Array.isArray(project.funder) ? project.funder.join(' & ') : project.funder;
 ---
 
 {href ? (
@@ -52,7 +54,10 @@ const totalCount = project.milestones.length;
     <div class="card-header">
       <div>
         <h3 class="card-title">{project.shortTitle}</h3>
-        <p class="card-funder">{project.funder} &middot; {project.program}</p>
+        <p class="card-funder">{funderDisplay} &middot; {project.program}</p>
+        {project.partners && project.partners.length > 0 && (
+          <p class="card-partners">With {project.partners.join(', ')}</p>
+        )}
       </div>
       <span class:list={['status-badge', project.status]}>
         {statusLabels[project.status]}
@@ -81,7 +86,10 @@ const totalCount = project.milestones.length;
     <div class="card-header">
       <div>
         <h3 class="card-title">{project.shortTitle}</h3>
-        <p class="card-funder">{project.funder} &middot; {project.program}</p>
+        <p class="card-funder">{funderDisplay} &middot; {project.program}</p>
+        {project.partners && project.partners.length > 0 && (
+          <p class="card-partners">With {project.partners.join(', ')}</p>
+        )}
       </div>
       <span class:list={['status-badge', project.status]}>
         {statusLabels[project.status]}
@@ -146,6 +154,13 @@ const totalCount = project.milestones.length;
     color: var(--navy);
     opacity: 0.55;
     margin: 0.25rem 0 0 0;
+  }
+
+  .card-partners {
+    font-size: 0.75rem;
+    color: var(--navy);
+    opacity: 0.45;
+    margin: 0.2rem 0 0 0;
   }
 
   .status-badge {

@@ -436,6 +436,7 @@ const programStages = [
       card.addEventListener('mouseenter', function() {
         if (window.blufflineMap) {
           window.blufflineMap.highlightProject(projectTitle, color);
+          window.blufflineMap.fitToProject(projectTitle);
         }
         cards.forEach(function(c) {
           if (c !== card) c.classList.add('dimmed-card');
@@ -445,6 +446,7 @@ const programStages = [
       card.addEventListener('mouseleave', function() {
         if (window.blufflineMap) {
           window.blufflineMap.resetHighlights();
+          window.blufflineMap.resetView();
         }
         cards.forEach(function(c) {
           c.classList.remove('dimmed-card');

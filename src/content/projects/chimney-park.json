@@ -2,15 +2,16 @@
   "title": "Chimney Park Revitalization",
   "shortTitle": "Chimney Park",
   "status": "active",
-  "funder": "NextEra Energy Foundation",
+  "funder": ["NextEra Energy Foundation"],
+  "partners": ["City of Pensacola", "HALFF Associates"],
   "program": "Community Revitalization",
-  "description": "A partnership with the City of Pensacola to beautify and refresh Chimney Park, creating an early visible win along the corridor. This project demonstrates that the Bluffline isn't just about planning—it's about building.",
+  "description": "In partnership with the City of Pensacola and HALFF Associates, Bluffline is revitalizing Chimney Park — improving landscaping, access, and public amenities to create a welcoming greenspace along the corridor for Pensacola residents.",
   "featuredImage": "/images/sites/chimney-park-railroad-tracks.jpg",
   "featuredImageAlt": "View of Chimney Park from the railroad tracks",
   "milestones": [
     {
       "title": "Project Scoped",
-      "description": "Partnership with City of Pensacola established and project scope defined.",
+      "description": "Partnership with the City of Pensacola and HALFF Associates established and project scope defined.",
       "date": "2024",
       "status": "complete"
     },
@@ -21,21 +22,27 @@
       "status": "complete"
     },
     {
-      "title": "Design Complete",
-      "description": "Construction documents and design finalized.",
-      "date": "Early 2025",
+      "title": "Community Engagement",
+      "description": "Outreach to neighbors and park users to inform the design and understand community priorities.",
+      "date": "Fall 2024",
       "status": "complete"
     },
     {
-      "title": "Construction",
-      "description": "Groundwork, landscaping, and improvements underway at Chimney Park.",
+      "title": "Design",
+      "description": "HALFF Associates developing construction documents based on community input.",
       "date": "2025–2026",
       "status": "current"
     },
     {
+      "title": "Construction",
+      "description": "Groundwork, landscaping, and public amenity improvements at Chimney Park.",
+      "date": "Winter 2026",
+      "status": "upcoming"
+    },
+    {
       "title": "Project Complete",
-      "description": "Chimney Park revitalization open to the public.",
-      "date": "2026",
+      "description": "Chimney Park open to the public with completed improvements.",
+      "date": "2027",
       "status": "upcoming"
     }
   ],

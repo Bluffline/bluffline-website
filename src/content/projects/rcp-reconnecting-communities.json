@@ -2,7 +2,8 @@
   "title": "USDOT Reconnecting Communities Pilot",
   "shortTitle": "Escambia Bay Waterfront Access Study",
   "status": "pending",
-  "funder": "U.S. Department of Transportation",
+  "funder": ["U.S. Department of Transportation"],
+  "partners": ["Escambia County"],
   "program": "Reconnecting Communities Pilot Program",
   "amount": "$1.2 million",
   "awardDate": "December 2024",
@@ -67,6 +68,12 @@
       "status": "upcoming",
       "nodeRef": "Ferry Pass primary"
     }
+  ],
+  "reportPhases": [
+    { "label": "Award Received", "sublabel": "Late 2024", "status": "complete" },
+    { "label": "Admin. Transition", "sublabel": "Early 2025", "status": "complete" },
+    { "label": "Obligation Secured", "sublabel": "2025", "status": "current" },
+    { "label": "Master Planning Begins", "sublabel": "2026+", "status": "upcoming" }
   ],
   "segments": {
     "type": "FeatureCollection",
