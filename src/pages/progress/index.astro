@@ -430,6 +430,16 @@ const programStages = [
     var cards = document.querySelectorAll('.project-card');
     var leaveTimer = null;
 
+    function resetState() {
+      clearTimeout(leaveTimer);
+      leaveTimer = null;
+      if (window.blufflineMap) {
+        window.blufflineMap.resetHighlights();
+        window.blufflineMap.resetView();
+      }
+      cards.forEach(function(c) { c.classList.remove('dimmed-card'); });
+    }
+
     cards.forEach(function(card) {
       var projectTitle = card.dataset.projectTitle || '';
       var color = card.dataset.projectColor || '';
@@ -448,15 +458,17 @@ const programStages = [
       });
 
       card.addEventListener('mouseleave', function() {
-        leaveTimer = setTimeout(function() {
-          if (window.blufflineMap) {
-            window.blufflineMap.resetHighlights();
-            window.blufflineMap.resetView();
-          }
-          cards.forEach(function(c) { c.classList.remove('dimmed-card'); });
-        }, 80);
+        leaveTimer = setTimeout(resetState, 80);
       });
     });
+
+    // Immediately reset when the mouse exits the carousel container entirely
+    var carousel = document.getElementById('project-carousel');
+    if (carousel) {
+      carousel.addEventListener('mouseleave', function() {
+        resetState();
+      });
+    }
   })();
 
   // Carousel arrow navigation
