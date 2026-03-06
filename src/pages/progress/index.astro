@@ -107,25 +107,13 @@ const programStages = [
           <h2>Active Projects</h2>
           <p>Each funded project advances a section of the planning corridor shown at left. The specific alignment will be determined through the master planning process. Hover a project to see its geography.</p>
         </div>
-        <div class="carousel-wrapper">
-          <div class="project-carousel" id="project-carousel">
-            {projects.map((project) => (
-              <ProjectCard
-                project={project.data}
-                href={`/progress/projects/${project.id}`}
-              />
-            ))}
-          </div>
-          <button class="carousel-arrow carousel-arrow-left" id="carousel-prev" aria-label="Previous project">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-          <button class="carousel-arrow carousel-arrow-right" id="carousel-next" aria-label="Next project">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
+        <div class="project-list" id="project-list">
+          {projects.map((project) => (
+            <ProjectCard
+              project={project.data}
+              href={`/progress/projects/${project.id}`}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -219,7 +207,6 @@ const programStages = [
   @media (min-width: 1024px) {
     .cards-column {
       padding: 2.5rem 2.5rem;
-      overflow: hidden;
     }
   }
 
@@ -237,85 +224,14 @@ const programStages = [
     opacity: 0.6;
   }
 
-  /* Carousel */
-  .carousel-wrapper {
-    position: relative;
-  }
-
-  .project-carousel {
+  /* Project list */
+  .project-list {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 0.5rem;
   }
-  .project-carousel::-webkit-scrollbar {
-    display: none;
-  }
-  .project-carousel :global(.project-card) {
-    scroll-snap-align: start;
-    min-width: 300px;
-    max-width: 360px;
-    flex: 0 0 auto;
-  }
-  .project-carousel :global(.project-card:only-child) {
-    flex: 1 0 0;
-    min-width: 0;
-    max-width: none;
-  }
-  @media (max-width: 1023px) {
-    .project-carousel :global(.project-card) {
-      min-width: 280px;
-      max-width: 320px;
-    }
-    .project-carousel :global(.project-card:only-child) {
-      min-width: 0;
-      max-width: none;
-    }
-  }
-
-  /* Carousel arrows */
-  .carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px);
-    border: 1.5px solid rgba(45, 48, 71, 0.1);
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.1);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--navy);
-    transition: all 0.2s ease;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .carousel-arrow.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .carousel-arrow:hover {
-    background: white;
-    box-shadow: 0 3px 12px rgba(45, 48, 71, 0.15);
-    transform: translateY(-50%) scale(1.05);
-  }
-  .carousel-arrow-left {
-    left: -12px;
-  }
-  .carousel-arrow-right {
-    right: -12px;
-  }
-  @media (max-width: 1023px) {
-    .carousel-arrow-left { left: -4px; }
-    .carousel-arrow-right { right: -4px; }
+  .project-list :global(.project-card) {
+    width: 100%;
   }
 
   :global(.project-card.dimmed-card) {
@@ -430,6 +346,16 @@ const programStages = [
     var cards = document.querySelectorAll('.project-card');
     var leaveTimer = null;
 
+    function resetState() {
+      clearTimeout(leaveTimer);
+      leaveTimer = null;
+      if (window.blufflineMap) {
+        window.blufflineMap.resetHighlights();
+        window.blufflineMap.resetView();
+      }
+      cards.forEach(function(c) { c.classList.remove('dimmed-card'); });
+    }
+
     cards.forEach(function(card) {
       var projectTitle = card.dataset.projectTitle || '';
       var color = card.dataset.projectColor || '';
@@ -448,48 +374,16 @@ const programStages = [
       });
 
       card.addEventListener('mouseleave', function() {
-        leaveTimer = setTimeout(function() {
-          if (window.blufflineMap) {
-            window.blufflineMap.resetHighlights();
-            window.blufflineMap.resetView();
-          }
-          cards.forEach(function(c) { c.classList.remove('dimmed-card'); });
-        }, 80);
+        leaveTimer = setTimeout(resetState, 80);
       });
     });
-  })();
 
-  // Carousel arrow navigation
-  (function() {
-    var carousel = document.getElementById('project-carousel');
-    var prevBtn = document.getElementById('carousel-prev');
-    var nextBtn = document.getElementById('carousel-next');
-    if (!carousel || !prevBtn || !nextBtn) return;
-
-    function updateArrows() {
-      var scrollLeft = carousel.scrollLeft;
-      var maxScroll = carousel.scrollWidth - carousel.clientWidth;
-      prevBtn.classList.toggle('visible', scrollLeft > 8);
-      nextBtn.classList.toggle('visible', scrollLeft < maxScroll - 8);
+    // Immediately reset when the mouse exits the project list entirely
+    var list = document.getElementById('project-list');
+    if (list) {
+      list.addEventListener('mouseleave', function() {
+        resetState();
+      });
     }
-
-    function getScrollAmount() {
-      var firstCard = carousel.querySelector('.project-card');
-      if (!firstCard) return 300;
-      return firstCard.offsetWidth + 16; // card width + gap
-    }
-
-    prevBtn.addEventListener('click', function() {
-      carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-    });
-    nextBtn.addEventListener('click', function() {
-      carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-    });
-
-    carousel.addEventListener('scroll', updateArrows, { passive: true });
-    window.addEventListener('resize', updateArrows);
-
-    // Initial check after layout settles
-    setTimeout(updateArrows, 100);
   })();
 </script>
