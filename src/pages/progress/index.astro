@@ -428,29 +428,33 @@ const programStages = [
   // Project card ↔ Map interaction
   (function() {
     var cards = document.querySelectorAll('.project-card');
+    var leaveTimer = null;
 
     cards.forEach(function(card) {
       var projectTitle = card.dataset.projectTitle || '';
       var color = card.dataset.projectColor || '';
 
       card.addEventListener('mouseenter', function() {
+        clearTimeout(leaveTimer);
+        leaveTimer = null;
         if (window.blufflineMap) {
           window.blufflineMap.highlightProject(projectTitle, color);
           window.blufflineMap.fitToProject(projectTitle);
         }
         cards.forEach(function(c) {
           if (c !== card) c.classList.add('dimmed-card');
+          else c.classList.remove('dimmed-card');
         });
       });
 
       card.addEventListener('mouseleave', function() {
-        if (window.blufflineMap) {
-          window.blufflineMap.resetHighlights();
-          window.blufflineMap.resetView();
-        }
-        cards.forEach(function(c) {
-          c.classList.remove('dimmed-card');
-        });
+        leaveTimer = setTimeout(function() {
+          if (window.blufflineMap) {
+            window.blufflineMap.resetHighlights();
+            window.blufflineMap.resetView();
+          }
+          cards.forEach(function(c) { c.classList.remove('dimmed-card'); });
+        }, 80);
       });
     });
   })();

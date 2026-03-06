@@ -650,13 +650,13 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       fitToProject: function(projectId) {
         var pb = projectBoundsMap[projectId];
         if (pb && !pb.isEmpty()) {
-          map.fitBounds(pb, { padding: 80, duration: 500 });
+          map.fitBounds(pb, { padding: 80, duration: 800 });
         }
       },
 
       /** Reset the map view to the full corridor bounds. */
       resetView: function() {
-        map.fitBounds(corridorBounds, { padding: 40, duration: 500 });
+        map.fitBounds(corridorBounds, { padding: 40, duration: 800 });
       },
     };
   }
