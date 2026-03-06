@@ -4,9 +4,9 @@ import ReportHero from '../../../components/report/ReportHero.astro';
 import BigQuote from '../../../components/report/BigQuote.astro';
 import StatCard from '../../../components/report/StatCard.astro';
 import MilestoneCard from '../../../components/report/MilestoneCard.astro';
-import PhaseTracker from '../../../components/ui/PhaseTracker.astro';
 import PartnerCard from '../../../components/report/PartnerCard.astro';
 import ProjectSpotlight from '../../../components/report/ProjectSpotlight.astro';
+import PhaseTracker from '../../../components/ui/PhaseTracker.astro';
 import EventHighlight from '../../../components/report/EventHighlight.astro';
 import AwardFeature from '../../../components/report/AwardFeature.astro';
 import TestimonialCard from '../../../components/content/TestimonialCard.astro';
@@ -20,6 +20,12 @@ const allTestimonials = await getCollection('testimonials');
 const featuredTestimonials = allTestimonials.filter(t =>
   ['reeves-dc', 'hofberger-robert', 'diaz-joe'].includes(t.id)
 );
+
+// Get projects for the project spotlight sections
+const allProjects = await getCollection('projects');
+const chimneyParkProject = allProjects.find(p => p.id === 'chimney-park');
+const rcpProject = allProjects.find(p => p.id === 'rcp-reconnecting-communities');
+const rcpPhases = rcpProject?.data.reportPhases ?? [];
 
 // Get planning documents for the document section
 const allDocuments = await getCollection('documents');
@@ -288,15 +294,9 @@ const knoxWhiteGallery = [
       </div>
 
       <ProjectSpotlight
-        title="Chimney Park"
+        project={chimneyParkProject!.data}
         subtitle="First Bluffline Project"
-        description="A partnership with the City of Pensacola to beautify and refresh Chimney Park, creating an early visible win along the corridor. This project demonstrates that the Bluffline isn't just about planning—it's about building."
-        status="in-delivery"
-        partner="City of Pensacola"
-        funder="NextEra Energy Foundation"
-        targetDate="2026"
-        imageSrc="/images/sites/chimney-park-railroad-tracks.jpg"
-        imageAlt="View of Chimney Park from the railroad tracks"
+        href="/progress/projects/chimney-park"
       />
     </div>
   </section>
@@ -314,15 +314,7 @@ const knoxWhiteGallery = [
           <p class="federal-lead">At the end of 2024, we received a $1.2 million USDOT Reconnecting Communities award. In 2025, we faced a critical challenge: ensuring that award survived a federal administration transition.</p>
 
           <div class="federal-timeline">
-            <PhaseTracker
-              variant="dark"
-              phases={[
-                { label: 'Award Received', sublabel: 'Late 2024', status: 'complete' },
-                { label: 'Admin. Transition', sublabel: 'Early 2025', status: 'complete' },
-                { label: 'Obligation Secured', sublabel: '2025', status: 'current' },
-                { label: 'Master Planning Begins', sublabel: '2026+', status: 'upcoming' },
-              ]}
-            />
+            <PhaseTracker variant="dark" phases={rcpPhases} />
           </div>
 
           <div class="obligation-explainer">

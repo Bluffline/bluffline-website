@@ -1,0 +1,65 @@
+{
+  "title": "Chimney Park Revitalization",
+  "shortTitle": "Chimney Park",
+  "status": "active",
+  "funder": ["NextEra Energy Foundation"],
+  "partners": ["City of Pensacola", "HALFF Associates"],
+  "program": "Community Revitalization",
+  "description": "In partnership with the City of Pensacola and HALFF Associates, Bluffline is revitalizing Chimney Park — improving landscaping, access, and public amenities to create a welcoming greenspace along the corridor for Pensacola residents.",
+  "featuredImage": "/images/sites/chimney-park-railroad-tracks.jpg",
+  "featuredImageAlt": "View of Chimney Park from the railroad tracks",
+  "milestones": [
+    {
+      "title": "Project Scoped",
+      "description": "Partnership with the City of Pensacola and HALFF Associates established and project scope defined.",
+      "date": "2024",
+      "status": "complete"
+    },
+    {
+      "title": "Funding Secured",
+      "description": "NextEra Energy Foundation grant awarded.",
+      "date": "2024",
+      "status": "complete"
+    },
+    {
+      "title": "Community Engagement",
+      "description": "Outreach to neighbors and park users to inform the design and understand community priorities.",
+      "date": "Fall 2024",
+      "status": "complete"
+    },
+    {
+      "title": "Design",
+      "description": "HALFF Associates developing construction documents based on community input.",
+      "date": "2025–2026",
+      "status": "current"
+    },
+    {
+      "title": "Construction",
+      "description": "Groundwork, landscaping, and public amenity improvements at Chimney Park.",
+      "date": "Winter 2026",
+      "status": "upcoming"
+    },
+    {
+      "title": "Project Complete",
+      "description": "Chimney Park open to the public with completed improvements.",
+      "date": "2027",
+      "status": "upcoming"
+    }
+  ],
+  "segments": {
+    "type": "FeatureCollection",
+    "name": "Chimney Park",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features": [
+      {
+        "type": "Feature",
+        "properties": { "Name": "Chimney Park", "tessellate": -1, "extrude": 0, "visibility": -1 },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [ [ [ -87.162974020470315, 30.480173220175491, 0.0 ], [ -87.162667122046088, 30.480029376376699, 0.0 ], [ -87.161989250817641, 30.480980619001041, 0.0 ], [ -87.162471300286356, 30.481189979632259, 0.0 ], [ -87.162974020470315, 30.480173220175491, 0.0 ] ] ]
+        }
+      }
+    ]
+  },
+  "draft": false
+}

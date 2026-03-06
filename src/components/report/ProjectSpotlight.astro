@@ -2,38 +2,64 @@
 import PhaseTracker from '../ui/PhaseTracker.astro';
 import type { Phase } from '../ui/PhaseTracker.astro';
 
-interface Props {
+interface ProjectData {
   title: string;
-  subtitle?: string;
+  shortTitle: string;
+  status: 'active' | 'pending' | 'complete' | 'pursuing';
+  funder: string | string[];
+  partners?: string[];
   description: string;
-  status: 'planning' | 'funded' | 'in-delivery' | 'complete';
-  targetDate?: string;
-  partner?: string;
-  funder?: string;
-  imageSrc?: string;
-  imageAlt?: string;
+  featuredImage?: string;
+  featuredImageAlt?: string;
+  milestones: { status: 'complete' | 'current' | 'upcoming'; date: string }[];
 }
 
-const { title, subtitle, description, status, targetDate, partner, funder, imageSrc, imageAlt } = Astro.props;
+interface Props {
+  project: ProjectData;
+  /** Report-specific label shown above the title (e.g. "First Bluffline Project") */
+  subtitle?: string;
+  /** CTA link to the full project detail page */
+  href?: string;
+}
+
+const { project, subtitle, href } = Astro.props;
+
+// Derive display values from project data
+const title = project.shortTitle;
+const description = project.description;
+const funderDisplay = Array.isArray(project.funder)
+  ? project.funder.join(' & ')
+  : project.funder;
+const partnersDisplay = project.partners?.join(', ');
+const imageSrc = project.featuredImage;
+const imageAlt = project.featuredImageAlt || title;
+
+// Target date = last upcoming milestone's date
+const lastUpcoming = [...project.milestones].reverse().find(m => m.status === 'upcoming');
+const targetDate = lastUpcoming?.date;
+
+// Map project status to 4-step lifecycle position
+const statusMap = {
+  pursuing: 0,   // Planning
+  pending:  1,   // Funded
+  active:   2,   // In Delivery
+  complete: 3,   // Complete
+} as const;
+const currentIndex = statusMap[project.status] ?? 0;
 
 const statusConfig = {
-  planning: { label: 'Planning', color: 'var(--navy)', bg: 'rgba(255, 255, 255, 0.95)' },
-  funded: { label: 'Funded', color: 'var(--forest)', bg: 'rgba(255, 255, 255, 0.95)' },
-  'in-delivery': { label: 'In Delivery', color: 'var(--forest)', bg: 'rgba(255, 255, 255, 0.95)' },
-  complete: { label: 'Complete', color: 'var(--forest)', bg: 'var(--spring)' }
+  pursuing: { label: 'Planning',     color: 'var(--navy)',   bg: 'rgba(255,255,255,0.95)' },
+  pending:  { label: 'Funded',       color: 'var(--forest)', bg: 'rgba(255,255,255,0.95)' },
+  active:   { label: 'In Delivery',  color: 'var(--forest)', bg: 'rgba(255,255,255,0.95)' },
+  complete: { label: 'Complete',     color: 'var(--forest)', bg: 'var(--spring)' },
 };
+const currentStatus = statusConfig[project.status] ?? statusConfig.pursuing;
 
-const currentStatus = statusConfig[status];
-
-const statusOrder = ['planning', 'funded', 'in-delivery', 'complete'] as const;
-const currentIndex = statusOrder.indexOf(status);
-
-const phases: Phase[] = [
-  { label: 'Planning', status: currentIndex > 0 ? 'complete' : currentIndex === 0 ? 'current' : 'upcoming' },
-  { label: 'Funded', status: currentIndex > 1 ? 'complete' : currentIndex === 1 ? 'current' : 'upcoming' },
-  { label: 'In Delivery', status: currentIndex > 2 ? 'complete' : currentIndex === 2 ? 'current' : 'upcoming' },
-  { label: 'Complete', status: currentIndex > 3 ? 'complete' : currentIndex === 3 ? 'current' : 'upcoming' },
-];
+const phaseLabels = ['Planning', 'Funded', 'In Delivery', 'Complete'] as const;
+const phases: Phase[] = phaseLabels.map((label, i) => ({
+  label,
+  status: i < currentIndex ? 'complete' : i === currentIndex ? 'current' : 'upcoming',
+}));
 ---
 
 <article class="project-spotlight">
@@ -46,16 +72,16 @@ const phases: Phase[] = [
     <p class="spotlight-description">{description}</p>
 
     <div class="spotlight-meta">
-      {partner && (
+      {partnersDisplay && (
         <div class="meta-item">
-          <span class="meta-label">Partner</span>
-          <span class="meta-value">{partner}</span>
+          <span class="meta-label">Partners</span>
+          <span class="meta-value">{partnersDisplay}</span>
         </div>
       )}
-      {funder && (
+      {funderDisplay && (
         <div class="meta-item">
           <span class="meta-label">Funding</span>
-          <span class="meta-value">{funder}</span>
+          <span class="meta-value">{funderDisplay}</span>
         </div>
       )}
     </div>
@@ -69,11 +95,20 @@ const phases: Phase[] = [
         </div>
       )}
     </div>
+
+    {href && (
+      <a href={href} class="spotlight-cta">
+        View full project
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+    )}
   </div>
 
   {imageSrc && (
     <div class="spotlight-image">
-      <img src={imageSrc} alt={imageAlt || title} loading="lazy" />
+      <img src={imageSrc} alt={imageAlt} loading="lazy" />
       <div class="image-badge" style={`background: ${currentStatus.bg}; color: ${currentStatus.color}`}>
         {currentStatus.label}
       </div>
@@ -170,6 +205,7 @@ const phases: Phase[] = [
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: 0.75rem;
   }
 
   .target-label {
@@ -182,6 +218,21 @@ const phases: Phase[] = [
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--forest);
+  }
+
+  .spotlight-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .spotlight-cta:hover {
+    gap: 0.625rem;
   }
 
   .spotlight-image {

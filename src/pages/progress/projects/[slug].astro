@@ -27,6 +27,10 @@ const projectSegments = d.segments?.features?.length > 0
   ? [{ id: d.shortTitle, color: d.color || '#99CC63', segments: d.segments }]
   : [];
 
+const funderDisplay = Array.isArray(d.funder) ? d.funder.join(', ') : d.funder;
+const funderLabel = Array.isArray(d.funder) && d.funder.length > 1 ? 'Funders' : 'Funder';
+const partnersLabel = d.partners && d.partners.length > 1 ? 'Partners' : 'Partner';
+
 const completedCount = d.milestones.filter(m => m.status === 'complete').length;
 const totalCount = d.milestones.length;
 const progressPct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
@@ -44,7 +48,10 @@ const progressPct = totalCount > 0 ? Math.round((completedCount / totalCount) * 
     heroImageAlt={d.featuredImageAlt}
   >
     <div class="hero-meta">
-      <span class="meta-item"><strong>Funder:</strong> {d.funder}</span>
+      <span class="meta-item"><strong>{funderLabel}:</strong> {funderDisplay}</span>
+      {d.partners && d.partners.length > 0 && (
+        <span class="meta-item"><strong>{partnersLabel}:</strong> {d.partners.join(', ')}</span>
+      )}
       <span class="meta-item"><strong>Program:</strong> {d.program}</span>
       {d.amount && <span class="meta-item"><strong>Award:</strong> {d.amount}</span>}
       {d.awardDate && <span class="meta-item"><strong>Announced:</strong> {d.awardDate}</span>}
@@ -91,6 +98,7 @@ const progressPct = totalCount > 0 ? Math.round((completedCount / totalCount) * 
         <div class="map-column">
           <CorridorMap
             allProjectSegments={projectSegments}
+            focusProjectId={d.shortTitle}
             interactive={true}
           />
         </div>
