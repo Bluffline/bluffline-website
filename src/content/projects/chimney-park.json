@@ -1,0 +1,58 @@
+{
+  "title": "Chimney Park Revitalization",
+  "shortTitle": "Chimney Park",
+  "status": "active",
+  "funder": "NextEra Energy Foundation",
+  "program": "Community Revitalization",
+  "description": "A partnership with the City of Pensacola to beautify and refresh Chimney Park, creating an early visible win along the corridor. This project demonstrates that the Bluffline isn't just about planning—it's about building.",
+  "featuredImage": "/images/sites/chimney-park-railroad-tracks.jpg",
+  "featuredImageAlt": "View of Chimney Park from the railroad tracks",
+  "milestones": [
+    {
+      "title": "Project Scoped",
+      "description": "Partnership with City of Pensacola established and project scope defined.",
+      "date": "2024",
+      "status": "complete"
+    },
+    {
+      "title": "Funding Secured",
+      "description": "NextEra Energy Foundation grant awarded.",
+      "date": "2024",
+      "status": "complete"
+    },
+    {
+      "title": "Design Complete",
+      "description": "Construction documents and design finalized.",
+      "date": "Early 2025",
+      "status": "complete"
+    },
+    {
+      "title": "Construction",
+      "description": "Groundwork, landscaping, and improvements underway at Chimney Park.",
+      "date": "2025–2026",
+      "status": "current"
+    },
+    {
+      "title": "Project Complete",
+      "description": "Chimney Park revitalization open to the public.",
+      "date": "2026",
+      "status": "upcoming"
+    }
+  ],
+  "segments": {
+    "type": "FeatureCollection",
+    "name": "Chimney Park",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features": [
+      {
+        "type": "Feature",
+        "properties": { "Name": "Chimney Park", "tessellate": -1, "extrude": 0, "visibility": -1 },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [ [ [ -87.162974020470315, 30.480173220175491, 0.0 ], [ -87.162667122046088, 30.480029376376699, 0.0 ], [ -87.161989250817641, 30.480980619001041, 0.0 ], [ -87.162471300286356, 30.481189979632259, 0.0 ], [ -87.162974020470315, 30.480173220175491, 0.0 ] ] ]
+        }
+      }
+    ]
+  },
+  "draft": false
+}
