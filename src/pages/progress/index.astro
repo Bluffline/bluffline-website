@@ -350,11 +350,13 @@ const programStages = [
     function resetState() {
       clearTimeout(leaveTimer);
       leaveTimer = null;
-      if (window.blufflineMap) {
-        window.blufflineMap.resetHighlights();
-        window.blufflineMap.resetView();
-      }
       cards.forEach(function(c) { c.classList.remove('dimmed-card'); });
+      if (window.blufflineMap) {
+        try {
+          window.blufflineMap.resetHighlights();
+          window.blufflineMap.resetView();
+        } catch (e) {}
+      }
     }
 
     cards.forEach(function(card) {
