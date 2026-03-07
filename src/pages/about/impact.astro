@@ -516,8 +516,8 @@ const qualityIcons = [
   .legend-polygon {
     width: 16px;
     height: 10px;
-    background: rgba(65, 82, 31, 0.2);
-    border: 2px solid var(--forest);
+    background: rgba(65, 82, 31, 0.15);
+    border: 1.5px dashed var(--forest);
     border-radius: 2px;
     flex-shrink: 0;
   }
@@ -850,8 +850,9 @@ const qualityIcons = [
         source: 'planning-corridor',
         paint: {
           'line-color': '#41521F',
-          'line-width': 2,
-          'line-opacity': 0.6,
+          'line-width': 1.5,
+          'line-opacity': 0.25,
+          'line-dasharray': [3, 2],
         },
       });
 

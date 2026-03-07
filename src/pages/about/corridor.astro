@@ -292,8 +292,8 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   .legend-polygon {
     width: 18px;
     height: 12px;
-    background: rgba(65, 82, 31, 0.2);
-    border: 2px solid var(--forest);
+    background: rgba(65, 82, 31, 0.15);
+    border: 1.5px dashed var(--forest);
     border-radius: 2px;
     flex-shrink: 0;
   }
@@ -555,7 +555,9 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         source: 'planning-corridor',
         paint: {
           'line-color': '#41521F',
-          'line-width': 2,
+          'line-width': 1.5,
+          'line-opacity': 0.25,
+          'line-dasharray': [3, 2],
         },
       });
 
