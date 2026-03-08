@@ -92,7 +92,19 @@ const programStages = [
     </div>
   </section>
 
-  <!-- Section 3: Program Map + Project Cards -->
+  <!-- Section 3: Planning Bridge -->
+  <section class="planning-bridge-section">
+    <div class="planning-bridge-inner">
+      <div class="planning-bridge-content">
+        <p class="section-label">The Foundation</p>
+        <h2>Grounded in adopted plans</h2>
+        <p>Every segment of the Bluffline corridor appears in at least one adopted plan from a local, regional, or state agency. This isn't coincidence — it reflects a consistent regional vision that has emerged through multiple public planning processes over the past two decades, backed by the City of Pensacola, Escambia County, the Florida-Alabama Transportation Planning Organization, and the State of Florida.</p>
+        <a href="/progress/planning" class="btn btn-outline">See the plans &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Program Map + Project Cards -->
   <section class="map-projects-section">
     <div class="map-projects-inner">
       <div class="map-column">
@@ -156,7 +168,43 @@ const programStages = [
 
 <style>
   /* ============================================
-     Section 2: Map + Project Cards
+     Section 3: Planning Bridge
+     ============================================ */
+  .planning-bridge-section {
+    padding: 5rem 0;
+    background: var(--warm-white);
+  }
+  @media (min-width: 768px) {
+    .planning-bridge-section { padding: 7rem 0; }
+  }
+
+  .planning-bridge-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .planning-bridge-inner { padding: 0 3rem; }
+  }
+
+  .planning-bridge-content {
+    max-width: 680px;
+  }
+  .planning-bridge-content h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .planning-bridge-content p {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.8;
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ============================================
+     Section 4: Map + Project Cards
      ============================================ */
   .map-projects-section {
     padding: 0;
