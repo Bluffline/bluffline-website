@@ -12,6 +12,12 @@ export async function getStaticPaths() {
 
 const { update } = Astro.props;
 const { Content } = await update.render();
+
+const allUpdates = await getCollection('updates');
+const suggestedUpdates = allUpdates
+  .filter(u => !u.data.draft && u.slug !== update.slug)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
 ---
 
 <PostLayout
@@ -22,6 +28,7 @@ const { Content } = await update.render();
   authorTitle={update.data.authorTitle}
   featuredImage={update.data.featuredImage}
   featuredImageAlt={update.data.featuredImageAlt}
+  suggestedUpdates={suggestedUpdates}
 >
   <Content />
 </PostLayout>

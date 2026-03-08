@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import CallToAction from '../components/ui/CallToAction.astro';
+import UpdateCard from '../components/content/UpdateCard.astro';
 
 interface Props {
   title: string;
@@ -10,9 +11,10 @@ interface Props {
   authorTitle?: string;
   featuredImage?: string;
   featuredImageAlt?: string;
+  suggestedUpdates?: Array<{ slug: string; data: { title: string; pubDate: Date; description?: string; featuredImage?: string; featuredImageAlt?: string } }>;
 }
 
-const { title, description, pubDate, author, authorTitle, featuredImage, featuredImageAlt } = Astro.props;
+const { title, description, pubDate, author, authorTitle, featuredImage, featuredImageAlt, suggestedUpdates = [] } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -61,6 +63,26 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
       </div>
     </div>
   </article>
+
+  {suggestedUpdates.length > 0 && (
+    <section class="more-updates">
+      <div class="more-updates-inner">
+        <h2>More Updates</h2>
+        <div class="more-updates-grid">
+          {suggestedUpdates.map(u => (
+            <UpdateCard
+              title={u.data.title}
+              date={u.data.pubDate}
+              excerpt={u.data.description}
+              slug={u.slug}
+              featuredImage={u.data.featuredImage}
+              featuredImageAlt={u.data.featuredImageAlt}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <CallToAction
     title="Get involved in the planning process"
@@ -227,5 +249,39 @@ const authorInitials = author?.split(' ').map(n => n[0]).join('') || '';
   .author-title {
     font-size: 0.875rem;
     color: rgba(45, 48, 71, 0.6);
+  }
+
+  .more-updates {
+    background: var(--cream);
+    padding: 4rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .more-updates {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .more-updates-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .more-updates h2 {
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 2rem;
+  }
+
+  .more-updates-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .more-updates-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
   }
 </style>
