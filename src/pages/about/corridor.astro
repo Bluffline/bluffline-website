@@ -73,6 +73,10 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
             <span>Bluffline Scenic Highway</span>
           </div>
           <div class="legend-item">
+            <div class="legend-line proposed"></div>
+            <span>Proposed Extensions</span>
+          </div>
+          <div class="legend-item">
             <div class="legend-point"></div>
             <span>Intrinsic Resource</span>
           </div>
@@ -303,6 +307,16 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     background: var(--forest);
     border-radius: 2px;
     flex-shrink: 0;
+  }
+  .legend-line.proposed {
+    background: repeating-linear-gradient(
+      to right,
+      var(--forest) 0px,
+      var(--forest) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    border-radius: 0;
   }
   .legend-point {
     width: 10px;
@@ -566,13 +580,27 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'geojson',
         data: scenicHighwayData,
       });
+      // Existing designated highway — solid line
       map.addLayer({
         id: 'scenic-highway-line',
         type: 'line',
         source: 'scenic-highway',
+        filter: ['==', ['get', 'Name'], 'Pensacola Scenic Bluffs Highway'],
         paint: {
           'line-color': '#41521F',
           'line-width': 4,
+        },
+      });
+      // Proposed extensions — dotted line
+      map.addLayer({
+        id: 'scenic-highway-proposed-line',
+        type: 'line',
+        source: 'scenic-highway',
+        filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
+        paint: {
+          'line-color': '#41521F',
+          'line-width': 4,
+          'line-dasharray': [3, 3],
         },
       });
 

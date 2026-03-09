@@ -69,6 +69,10 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         <div class="legend-line scenic"></div>
         <span>Scenic Highway</span>
       </div>
+      <div class="legend-item">
+        <div class="legend-line scenic proposed"></div>
+        <span>Proposed Extensions</span>
+      </div>
       {allProjectSegments.length > 0 && (
         <div class="legend-item">
           <div class="legend-line project"></div>
@@ -237,6 +241,16 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
     flex-shrink: 0;
   }
   .legend-line.scenic { background: var(--forest); }
+  .legend-line.proposed {
+    background: repeating-linear-gradient(
+      to right,
+      var(--forest) 0px,
+      var(--forest) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    border-radius: 0;
+  }
   .legend-line.project { background: var(--spring); }
 
   /* Desktop: always show full legend, hide the toggle button */
@@ -420,10 +434,12 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
 
       // ─── Scenic highway centerline ────────────────────────────────────────
       map.addSource('scenic-highway', { type: 'geojson', data: scenicHighwayData });
+      // Existing designated highway — glow
       map.addLayer({
         id: 'scenic-highway-glow',
         type: 'line',
         source: 'scenic-highway',
+        filter: ['==', ['get', 'Name'], 'Pensacola Scenic Bluffs Highway'],
         paint: {
           'line-color': '#41521F',
           'line-width': 10,
@@ -432,11 +448,36 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         },
         layout: { 'line-cap': 'round', 'line-join': 'round' },
       });
+      // Existing designated highway — solid main line
       map.addLayer({
         id: 'scenic-highway-line',
         type: 'line',
         source: 'scenic-highway',
+        filter: ['==', ['get', 'Name'], 'Pensacola Scenic Bluffs Highway'],
         paint: { 'line-color': '#41521F', 'line-width': 3, 'line-opacity': 0.6 },
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+      });
+      // Proposed extensions — glow
+      map.addLayer({
+        id: 'scenic-highway-proposed-glow',
+        type: 'line',
+        source: 'scenic-highway',
+        filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
+        paint: {
+          'line-color': '#41521F',
+          'line-width': 10,
+          'line-opacity': 0.08,
+          'line-blur': 5,
+        },
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+      });
+      // Proposed extensions — dotted main line
+      map.addLayer({
+        id: 'scenic-highway-proposed-line',
+        type: 'line',
+        source: 'scenic-highway',
+        filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
+        paint: { 'line-color': '#41521F', 'line-width': 3, 'line-opacity': 0.6, 'line-dasharray': [3, 3] },
         layout: { 'line-cap': 'round', 'line-join': 'round' },
       });
 
