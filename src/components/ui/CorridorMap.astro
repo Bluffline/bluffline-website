@@ -242,13 +242,10 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
   }
   .legend-line.scenic { background: var(--forest); }
   .legend-line.proposed {
-    background: repeating-linear-gradient(
-      to right,
-      var(--forest) 0px,
-      var(--forest) 6px,
-      transparent 6px,
-      transparent 8px
-    );
+    height: 4px;
+    background: radial-gradient(circle, var(--navy) 2px, transparent 2px);
+    background-size: 8px 4px;
+    background-position: 0 center;
     border-radius: 0;
   }
   .legend-line.project { background: var(--spring); }
@@ -464,7 +461,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         source: 'scenic-highway',
         filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
         paint: {
-          'line-color': '#41521F',
+          'line-color': '#2D3047',
           'line-width': 10,
           'line-opacity': 0.08,
           'line-blur': 5,
@@ -477,7 +474,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'line',
         source: 'scenic-highway',
         filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
-        paint: { 'line-color': '#41521F', 'line-width': 3, 'line-opacity': 0.6, 'line-dasharray': [6, 2] },
+        paint: { 'line-color': '#2D3047', 'line-width': 4, 'line-opacity': 0.7, 'line-dasharray': [0, 1.5] },
         layout: { 'line-cap': 'round', 'line-join': 'round' },
       });
 
