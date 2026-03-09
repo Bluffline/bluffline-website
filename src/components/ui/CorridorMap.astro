@@ -247,7 +247,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
       var(--forest) 0px,
       var(--forest) 6px,
       transparent 6px,
-      transparent 12px
+      transparent 8px
     );
     border-radius: 0;
   }
@@ -477,7 +477,7 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU
         type: 'line',
         source: 'scenic-highway',
         filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
-        paint: { 'line-color': '#41521F', 'line-width': 3, 'line-opacity': 0.6, 'line-dasharray': [3, 3] },
+        paint: { 'line-color': '#41521F', 'line-width': 3, 'line-opacity': 0.6, 'line-dasharray': [6, 2] },
         layout: { 'line-cap': 'round', 'line-join': 'round' },
       });
 
