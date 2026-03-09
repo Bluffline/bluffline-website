@@ -14,6 +14,9 @@ import DocumentCard from '../../../components/content/DocumentCard.astro';
 import MediaLightbox from '../../../components/ui/MediaLightbox.astro';
 import Button from '../../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
+import scenicHighwayData from '../../../data/scenic-highway.json';
+import planningCorridorData from '../../../data/planning-corridor.json';
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmx1ZmZsaW5lIiwiYSI6ImNtbDU4cWx6cDAxODAzZXBzYXU0ZjVsODkifQ.EQ96tyAGq1SRs0PTaXgcag';
 
 // Get testimonials for the featured voices
 const allTestimonials = await getCollection('testimonials');
@@ -43,6 +46,7 @@ const knoxWhiteGallery = [
 ---
 
 <BaseLayout title="2025 Annual Report | Bluffline">
+  <link slot="head" href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
   <!-- Hero Section -->
   <ReportHero
     year="2025"
@@ -132,7 +136,21 @@ const knoxWhiteGallery = [
         </div>
 
         <div class="expansion-map">
-          <img src="/images/maps/fdot-scenic-bluffs-highway-extension-map.jpg" alt="Map showing the expanded Bluffline corridor from UWF to Naval Air Station Pensacola" loading="lazy" />
+          <div id="annual-report-map"></div>
+          <div class="ar-map-legend">
+            <div class="ar-legend-item">
+              <div class="ar-legend-polygon"></div>
+              <span>Planning Corridor</span>
+            </div>
+            <div class="ar-legend-item">
+              <div class="ar-legend-line solid"></div>
+              <span>Scenic Highway</span>
+            </div>
+            <div class="ar-legend-item">
+              <div class="ar-legend-line dotted"></div>
+              <span>Proposed Extensions</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -697,11 +715,49 @@ const knoxWhiteGallery = [
     box-shadow: 0 4px 24px rgba(45, 48, 71, 0.1);
   }
 
-  .expansion-map img {
+  #annual-report-map {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 420px;
     display: block;
+  }
+
+  .ar-map-legend {
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    border-top: 1px solid rgba(65, 82, 31, 0.12);
+  }
+  .ar-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--navy);
+  }
+  .ar-legend-polygon {
+    width: 18px;
+    height: 12px;
+    background: rgba(65, 82, 31, 0.07);
+    border: 1.5px dashed var(--forest);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .ar-legend-line {
+    width: 20px;
+    height: 3px;
+    flex-shrink: 0;
+  }
+  .ar-legend-line.solid {
+    background: var(--forest);
+    border-radius: 2px;
+  }
+  .ar-legend-line.dotted {
+    background: radial-gradient(circle, var(--forest) 2px, transparent 2px);
+    background-size: 8px 3px;
+    background-position: 0 center;
+    border-radius: 0;
   }
 
   /* Merger/Unified Organization */
@@ -1208,3 +1264,65 @@ const knoxWhiteGallery = [
     background: var(--forest);
   }
 </style>
+
+<script define:vars={{ MAPBOX_TOKEN, scenicHighwayData, planningCorridorData }}>
+  var script = document.createElement('script');
+  script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js';
+  script.onload = function () {
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+
+    var map = new mapboxgl.Map({
+      container: 'annual-report-map',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [-87.22, 30.47],
+      zoom: 9.5,
+      scrollZoom: false,
+      cooperativeGestures: false,
+      attributionControl: false,
+    });
+
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+
+    map.on('load', function () {
+      // Auto-fit to corridor bounds
+      var coords = planningCorridorData.features[0].geometry.coordinates[0];
+      var bounds = coords.reduce(function (b, c) { return b.extend(c); }, new mapboxgl.LngLatBounds(coords[0], coords[0]));
+      map.fitBounds(bounds, { padding: 40, maxZoom: 11 });
+
+      // Planning corridor
+      map.addSource('planning-corridor', { type: 'geojson', data: planningCorridorData });
+      map.addLayer({ id: 'planning-corridor-fill', type: 'fill', source: 'planning-corridor', paint: { 'fill-color': '#41521F', 'fill-opacity': 0.07 } });
+      map.addLayer({ id: 'planning-corridor-outline', type: 'line', source: 'planning-corridor', paint: { 'line-color': '#41521F', 'line-width': 1.5, 'line-opacity': 0.25, 'line-dasharray': [3, 2] } });
+
+      // Scenic highway
+      map.addSource('scenic-highway', { type: 'geojson', data: scenicHighwayData });
+      map.addLayer({
+        id: 'scenic-highway-glow', type: 'line', source: 'scenic-highway',
+        filter: ['==', ['get', 'Name'], 'Pensacola Scenic Bluffs Highway'],
+        paint: { 'line-color': '#41521F', 'line-width': 10, 'line-opacity': 0.08, 'line-blur': 5 },
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+      });
+      map.addLayer({
+        id: 'scenic-highway-line', type: 'line', source: 'scenic-highway',
+        filter: ['==', ['get', 'Name'], 'Pensacola Scenic Bluffs Highway'],
+        paint: { 'line-color': '#41521F', 'line-width': 3, 'line-opacity': 0.6 },
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+      });
+
+      // Proposed extensions
+      map.addLayer({
+        id: 'scenic-highway-proposed-glow', type: 'line', source: 'scenic-highway',
+        filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
+        paint: { 'line-color': '#41521F', 'line-width': 10, 'line-opacity': 0.08, 'line-blur': 5 },
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+      });
+      map.addLayer({
+        id: 'scenic-highway-proposed-line', type: 'line', source: 'scenic-highway',
+        filter: ['in', ['get', 'Name'], ['literal', ['Northeast Extension', 'Southwest Extension']]],
+        paint: { 'line-color': '#41521F', 'line-width': 4, 'line-opacity': 0.7, 'line-dasharray': [0, 1.5] },
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+      });
+    });
+  };
+  document.head.appendChild(script);
+</script>
