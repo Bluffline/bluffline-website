@@ -4,5 +4,6 @@
   "title": "Board Member",
   "role": "board-member",
   "bio": "COO and CFO of Longleaf Design Build and Places for People, where she leads operational strategy, financial management, and large-scale design projects. With a background in urban planning and entrepreneurship, she has scaled multiple businesses and led redevelopment initiatives. Justine brings design fluency, executive leadership, and a people-centered approach to placemaking.",
-  "order": 12
+  "order": 12,
+  "archived": true
 }

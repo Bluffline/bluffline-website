@@ -1,8 +1,8 @@
 {
   "type": "BoardMember",
   "name": "Dave Kimbell",
-  "title": "Chair Emeritus",
-  "role": "emeritus",
+  "title": "Chair",
+  "role": "chair",
   "bio": "CFO of the Diocese of Pensacola-Tallahassee. MBA from Franciscan University, M.Ed. from Notre Dame. Over 14 years serving the diocese.",
   "order": 1
 }
