@@ -4,7 +4,7 @@ title: "Greenway Project Seeks Input on Future of Jackson Lakes"
 pubDate: 2024-07-22
 summary: "Bluffline, Inc. will host a public open house from 5 to 6:30 p.m. on July 30 at the Lexington Terrace Community Center, inviting residents to help shape a proposed greenway connecting east and west Pensacola through Jackson Lakes."
 contactName: Media Relations
-contactEmail: press@bluffline.org
+contactEmail: press@thebluffline.org
 contactPhone: (850) 776-0436
 draft: false
 ---

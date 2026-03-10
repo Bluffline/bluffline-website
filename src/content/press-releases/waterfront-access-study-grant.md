@@ -4,7 +4,7 @@ title: "Bluffline Secures $1.2 Million Grant from U.S. Department of Transportat
 pubDate: 2025-01-15
 summary: "The U.S. Department of Transportation has awarded Bluffline, Inc. a $1.2 million Reconnecting Communities Grant to fund the Escambia Bay Waterfront Access Study, a master planning initiative focused on restoring community connections to the waterfront."
 contactName: Media Relations
-contactEmail: press@bluffline.org
+contactEmail: press@thebluffline.org
 contactPhone: (850) 776-0436
 draft: false
 ---
