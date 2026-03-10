@@ -23,8 +23,8 @@ const boardMembers = await getCollection('board-members');
 const timelineEntries = await getCollection('timeline');
 const sortedTimeline = timelineEntries.sort((a, b) => a.data.order - b.data.order);
 const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.order);
-const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus');
-const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus');
+const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus' && !m.data.archived);
+const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus' && !m.data.archived);
 
 const values = [
   {

@@ -89,6 +89,7 @@ const boardMembersCollection = defineCollection({
     bio: z.string(),
     photo: z.string().optional(),
     order: z.number(),
+    archived: z.boolean().optional(),
   }),
 });
 
