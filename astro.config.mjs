@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://thebluffline.org',
@@ -7,5 +8,5 @@ export default defineConfig({
   build: {
     format: 'directory'
   },
-  integrations: [react()],
+  integrations: [react(), sitemap()],
 });
