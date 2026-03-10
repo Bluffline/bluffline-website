@@ -1,6 +1,6 @@
 # The Bluffline Website
 
-The digital home for [The Bluffline](https://bluffline.org), a 20-mile multimodal corridor connecting Pensacola neighborhoods to the waterfront. The site serves as the primary public hub for project news, planning documents, community support, and civic engagement.
+The digital home for [The Bluffline](https://thebluffline.org), a 20-mile multimodal corridor connecting Pensacola neighborhoods to the waterfront. The site serves as the primary public hub for project news, planning documents, community support, and civic engagement.
 
 ## Tech Stack
 
@@ -158,7 +158,7 @@ title: "Release Title"
 pubDate: 2025-01-15
 summary: "Brief summary"
 contactName: "Media Relations"
-contactEmail: press@bluffline.org
+contactEmail: press@thebluffline.org
 contactPhone: "(850) 776-0436"
 media:
   - src: "/images/press/photo.jpg"

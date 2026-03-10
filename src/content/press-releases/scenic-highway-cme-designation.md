@@ -4,7 +4,7 @@ title: "Greenville's Mayor Knox White to Speak in Pensacola on Parks, Greenways,
 pubDate: 2025-02-01
 summary: "Bluffline, Inc. is hosting a special salon-style evening event featuring Greenville, South Carolina, Mayor Knox White, a nationally recognized leader in urban revitalization whose transformative projects have made Greenville a model city for sustainable growth."
 contactName: Media Relations
-contactEmail: press@bluffline.org
+contactEmail: press@thebluffline.org
 contactPhone: (850) 776-0436
 draft: false
 ---
