@@ -11,15 +11,17 @@ interface Props {
   currentPath?: string;
 }
 
-const { 
-  title, 
+const {
+  title,
   description = "The Bluffline is a 20-mile multimodal corridor transforming how Pensacola connects neighborhoods, parks, and the waterfront.",
   currentPath = Astro.url.pathname
 } = Astro.props;
 
-const fullTitle = title === 'Home' 
+const fullTitle = title === 'Home'
   ? "The Bluffline | Pensacola's 20-Mile Multimodal Corridor"
   : `${title} | The Bluffline`;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -29,6 +31,7 @@ const fullTitle = title === 'Home'
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{fullTitle}</title>
   <meta name="description" content={description}>
+  <link rel="canonical" href={canonicalURL} />
   <link rel="icon" type="image/svg+xml" href="/images/logos/Bluffline-Logo_Standard.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
