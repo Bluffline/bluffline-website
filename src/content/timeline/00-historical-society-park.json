@@ -1,0 +1,15 @@
+{
+  "type": "TimelineEntry",
+  "date": "1934",
+  "title": "First Push for a Public Park at Galvez Spring",
+  "description": "The federal government asks the Pensacola Historical Society to help identify a picturesque tract near Pensacola for a public park under the FERA beautification project. The society recommends roughly 37 acres on Bayou Chico known as the \"Juan Dominguez Grant\"—the site of Galvez Spring, which feeds today's Jackson Lakes—citing its natural beauty and deep historical layers, from English military headquarters in 1763 to Andrew Jackson's 1821 encampment. It is the earliest documented community effort to protect this landscape as public space.",
+  "order": 0,
+  "images": [
+    {
+      "src": "/images/historic/pnj-1934-galvez-spring-park.jpeg",
+      "alt": "Pensacola News Journal article dated Sept. 10, 1934, headlined “Historical Society Will Help In Locating Tract For Big Public Park Here,” describing a 37-acre tract on Bayou Chico known as the Juan Dominguez Grant.",
+      "caption": "A Sept. 10, 1934, Pensacola News Journal story reports that the Pensacola Historical Society, working with the federal FERA beautification project, has recommended a 37-acre tract on Bayou Chico—home to Galvez Spring and the headwaters of today's Jackson Lakes—as the site for a future public park.",
+      "credit": "Pensacola News Journal"
+    }
+  ]
+}
