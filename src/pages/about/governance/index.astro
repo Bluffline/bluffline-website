@@ -10,7 +10,14 @@ const page = await getEntry('pages', 'governance');
 const d = page.data;
 
 const boardMembers = await getCollection('board-members');
-const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.order);
+// Sort alphabetically by last name, ignoring credential suffixes (e.g. ", PE, PMP", ", MD")
+const lastName = (name: string) => {
+  const parts = name.split(',')[0].trim().split(/\s+/);
+  return parts[parts.length - 1];
+};
+const sortedBoardMembers = boardMembers.sort((a, b) =>
+  lastName(a.data.name).localeCompare(lastName(b.data.name))
+);
 const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus' && !m.data.archived);
 const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus' && !m.data.archived);
 
