@@ -10,13 +10,13 @@ const page = await getEntry('pages', 'governance');
 const d = page.data;
 
 const boardMembers = await getCollection('board-members');
-// Sort alphabetically by last name, ignoring credential suffixes (e.g. ", PE, PMP", ", MD")
-const lastName = (name: string) => {
-  const parts = name.split(',')[0].trim().split(/\s+/);
-  return parts[parts.length - 1];
-};
+// Display name = "First Last", with optional credential suffix (e.g. "PE, PMP", "MD")
+const fullName = (m: typeof boardMembers[number]) =>
+  `${m.data.firstName} ${m.data.lastName}${m.data.suffix ? `, ${m.data.suffix}` : ''}`;
+// Sort alphabetically by last name, then first name
 const sortedBoardMembers = boardMembers.sort((a, b) =>
-  lastName(a.data.name).localeCompare(lastName(b.data.name))
+  a.data.lastName.localeCompare(b.data.lastName) ||
+  a.data.firstName.localeCompare(b.data.firstName)
 );
 const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus' && !m.data.archived);
 const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus' && !m.data.archived);
@@ -74,7 +74,7 @@ const documents = [
       <div class="leadership-grid">
         {activeMembers.map((member) => (
           <BoardMemberCard
-            name={member.data.name}
+            name={fullName(member)}
             title={member.data.title}
             role={member.data.role}
             bio={member.data.bio}
@@ -92,7 +92,7 @@ const documents = [
           <div class="emeritus-grid">
             {emeritusMembers.map((member) => (
               <BoardMemberCard
-                name={member.data.name}
+                name={fullName(member)}
                 title={member.data.title}
                 role={member.data.role}
                 bio={member.data.bio}

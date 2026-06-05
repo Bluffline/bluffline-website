@@ -83,7 +83,9 @@ const boardMembersCollection = defineCollection({
   type: 'data',
   schema: z.object({
     type: z.string().optional(),
-    name: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
+    suffix: z.string().optional(),
     title: z.string(),
     role: z.enum(['chair', 'vice-president', 'treasurer', 'secretary', 'board-member', 'staff', 'emeritus']),
     bio: z.string(),

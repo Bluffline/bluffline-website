@@ -1,6 +1,7 @@
 {
   "type": "BoardMember",
-  "name": "Michael Flores",
+  "firstName": "Michael",
+  "lastName": "Flores",
   "title": "Board Member",
   "role": "board-member",
   "bio": "Assistant Vice President of Procurement at PenAir Credit Union with senior logistics leadership roles previously held in the U.S. Marine Corps. He brings deep expertise in enterprise procurement, policy development, and multimillion-dollar budget oversight. Michael strengthens Bluffline's governance through financial discipline, compliance insight, and systems-building experience.",

@@ -1,6 +1,7 @@
 {
   "type": "BoardMember",
-  "name": "Johnny Crane",
+  "firstName": "Johnny",
+  "lastName": "Crane",
   "title": "Treasurer",
   "role": "treasurer",
   "bio": "Accountant at Sport & Wheat CPAs. Provides tax and accounting services for individuals and small businesses across Northwest Florida."

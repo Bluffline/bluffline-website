@@ -1,6 +1,7 @@
 {
   "type": "BoardMember",
-  "name": "Elise Campagna",
+  "firstName": "Elise",
+  "lastName": "Campagna",
   "title": "Interim Secretary",
   "role": "secretary",
   "bio": "Local Science and Math teacher and community advocate with non-profit experience in California and Wisconsin before moving to Pensacola in 2020."
