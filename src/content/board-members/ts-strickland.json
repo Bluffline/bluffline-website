@@ -1,8 +1,8 @@
 {
   "type": "BoardMember",
   "name": "T.S. Strickland",
-  "title": "Director of Strategy & Communications",
-  "role": "staff",
+  "title": "Interim Chair",
+  "role": "chair",
   "bio": "Co-founder of Bluffline, Inc. Morning Edition host at WUWF. Award-winning journalist with a Gold Medal for Public Service from the Florida Society of News Editors.",
-  "order": 6
+  "order": 1
 }
