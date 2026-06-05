@@ -2,9 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CallToAction from '../../components/ui/CallToAction.astro';
-import BoardMemberCard from '../../components/content/BoardMemberCard.astro';
 import IconCard from '../../components/content/IconCard.astro';
-import DocumentCard from '../../components/content/DocumentCard.astro';
 import TestimonialCard from '../../components/content/TestimonialCard.astro';
 import TimelineItem from '../../components/content/TimelineItem.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
@@ -19,12 +17,8 @@ const topTestimonials = allTestimonials
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   .slice(0, 3);
 
-const boardMembers = await getCollection('board-members');
 const timelineEntries = await getCollection('timeline');
 const sortedTimeline = timelineEntries.sort((a, b) => a.data.order - b.data.order);
-const sortedBoardMembers = boardMembers.sort((a, b) => a.data.order - b.data.order);
-const activeMembers = sortedBoardMembers.filter(m => m.data.role !== 'emeritus' && !m.data.archived);
-const emeritusMembers = sortedBoardMembers.filter(m => m.data.role === 'emeritus' && !m.data.archived);
 
 const values = [
   {
@@ -54,27 +48,6 @@ const values = [
   },
 ];
 
-const documents = [
-  {
-    title: 'IRS Determination Letter',
-    description: '501(c)(3) status',
-    href: '/documents/bluffline-irs-determination-letter.pdf',
-    external: true,
-  },
-  {
-    title: 'Annual Reports',
-    description: 'Yearly organizational updates',
-    href: '/documents/annual-reports',
-    external: false,
-  },
-  {
-    title: 'GuideStar Profile',
-    description: 'Verified nonprofit',
-    href: 'https://www.guidestar.org/profile/shared/c5cc3f03-5a18-4f14-89f3-4b194e00c2de',
-    external: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
-  },
-];
 ---
 
 <BaseLayout 
@@ -167,62 +140,12 @@ const documents = [
     </div>
   </section>
 
-  <section class="section leadership-section">
+  <section class="section governance-section">
     <div class="section-inner">
-      <div class="section-header">
-        <h2>{d.leadershipHeading}</h2>
-        <p>{d.leadershipDescription}</p>
-      </div>
-      <div class="leadership-grid">
-        {activeMembers.map((member) => (
-          <BoardMemberCard
-            name={member.data.name}
-            title={member.data.title}
-            role={member.data.role}
-            bio={member.data.bio}
-            photo={member.data.photo}
-          />
-        ))}
-      </div>
-
-      {emeritusMembers.length > 0 && (
-        <div class="emeritus-section">
-          <div class="emeritus-header">
-            <h3>{d.emeritusHeading}</h3>
-            <p>{d.emeritusDescription}</p>
-          </div>
-          <div class="emeritus-grid">
-            {emeritusMembers.map((member) => (
-              <BoardMemberCard
-                name={member.data.name}
-                title={member.data.title}
-                role={member.data.role}
-                bio={member.data.bio}
-                photo={member.data.photo}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <section class="section documents-section">
-    <div class="section-inner">
-      <div class="section-header">
-        <h2>{d.documentsHeading}</h2>
-        <p>{d.documentsDescription}</p>
-      </div>
-      <div class="documents-grid">
-        {documents.map(doc => (
-          <DocumentCard
-            title={doc.title}
-            description={doc.description}
-            href={doc.href}
-            external={doc.external}
-            icon={doc.icon}
-          />
-        ))}
+      <div class="governance-content">
+        <h2>{d.governanceHeading}</h2>
+        <p>{d.governanceDescription}</p>
+        <a href="/about/governance" class="governance-link">{d.governanceLinkLabel}</a>
       </div>
     </div>
   </section>
@@ -339,49 +262,20 @@ const documents = [
     .values-grid { grid-template-columns: repeat(3, 1fr); }
   }
 
-  /* Leadership Section */
-  .leadership-section { background: var(--mist); }
-  .leadership-grid {
-    display: grid;
-    gap: 1.5rem;
-  }
-  @media (min-width: 640px) {
-    .leadership-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .leadership-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  }
-
-  /* Emeritus Section */
-  .emeritus-section {
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid rgba(45, 48, 71, 0.1);
-  }
-  .emeritus-header {
-    margin-bottom: 2rem;
-  }
-  .emeritus-header h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-  .emeritus-header p {
+  /* Governance Section */
+  .governance-section { background: var(--cream); }
+  .governance-content { max-width: 720px; }
+  .governance-content h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--navy); margin-bottom: 1rem; }
+  .governance-content p { font-size: 1.05rem; color: var(--navy); opacity: 0.85; margin-bottom: 1.5rem; }
+  .governance-link {
     font-size: 1rem;
-    color: var(--navy);
-    opacity: 0.7;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    border-bottom: 2px solid var(--spring);
+    padding-bottom: 2px;
   }
-  .emeritus-grid {
-    display: grid;
-    gap: 1.5rem;
-  }
-  @media (min-width: 640px) {
-    .emeritus-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .emeritus-grid { grid-template-columns: repeat(3, 1fr); }
-  }
+  .governance-link:hover { color: var(--navy); border-color: var(--navy); }
 
   /* Friends Section */
   .friends-section { background: var(--mist); }
@@ -409,13 +303,5 @@ const documents = [
   }
   .friends-link:hover { color: var(--navy); border-color: var(--navy); }
 
-  /* Documents Section */
-  .documents-section { background: var(--cream); }
-  .documents-grid {
-    display: grid;
-    gap: 1rem;
-  }
-  @media (min-width: 768px) {
-    .documents-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  }
+
 </style>

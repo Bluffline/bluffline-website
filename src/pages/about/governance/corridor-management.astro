@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import CallToAction from '../../../components/ui/CallToAction.astro';
+
+// Committee members — update when membership is confirmed
+const members: string[] = [];
+
+const programDocuments = [
+  {
+    title: 'Corridor Management Plan',
+    description: 'Pensacola Scenic Bluffs Scenic Highway (2010)',
+    href: '/documents/pensacola-scenic-bluffs-corridor-management-plan-2010.pdf',
+    external: true,
+  },
+];
+---
+
+<BaseLayout
+  title="Corridor Management Committee"
+  description="The Corridor Management Committee of Bluffline, Inc. serves as the Corridor Management Entity for the Pensacola Scenic Bluffs Scenic Highway under the Florida Scenic Highways Program."
+>
+  <PageHero
+    label="Governance"
+    title="Corridor Management Committee"
+    description="The Corridor Management Committee of Bluffline, Inc. serves as the Corridor Management Entity for the Pensacola Scenic Bluffs Scenic Highway."
+    heroImage="/images/aerial/escambia-bay-bluffs-aerial-2024.jpg"
+    heroImageAlt="Aerial view of the Pensacola Bay bluffs and waterfront corridor"
+    keywords={["Corridor Management Entity", "Scenic Highway", "Florida Scenic Highways Program"]}
+  />
+
+  <section class="section lede-section">
+    <div class="section-inner">
+      <div class="lede-content">
+        <p class="lede">The Corridor Management Committee of Bluffline, Inc. serves as the Corridor Management Entity (CME) for the Pensacola Scenic Bluffs Scenic Highway under the Florida Department of Transportation's Florida Scenic Highways Program.</p>
+        <p>The committee holds responsibility for implementing and updating the Corridor Management Plan, coordinating with state and local partners, and ensuring the long-term stewardship of the designated scenic highway corridor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scope-section">
+    <div class="section-inner">
+      <div class="scope-grid">
+        <div class="scope-content">
+          <h2>Designated Corridor</h2>
+          <p>The currently designated Pensacola Scenic Bluffs Scenic Highway spans approximately 11 miles along the historic bay bluff system in Escambia County.</p>
+          <p>Bluffline, Inc. is actively pursuing an extension of the scenic highway designation in both directions—northeast to the University of West Florida and southwest through downtown Pensacola to Naval Air Station Pensacola—which would unify the full historic bluff system under one continuous designation.</p>
+        </div>
+        <div class="scope-stats">
+          <div class="scope-stat">
+            <div class="scope-stat-value">~11 miles</div>
+            <div class="scope-stat-label">Currently designated scenic highway</div>
+          </div>
+          <div class="scope-stat">
+            <div class="scope-stat-value">~22 miles</div>
+            <div class="scope-stat-label">Full corridor under pursuit</div>
+          </div>
+          <div class="scope-stat">
+            <div class="scope-stat-value">FL Scenic Highway</div>
+            <div class="scope-stat-label">Florida Scenic Highways Program</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section membership-section">
+    <div class="section-inner">
+      <h2>Committee Membership</h2>
+      {members.length > 0 ? (
+        <ul class="member-list">
+          {members.map(member => <li>{member}</li>)}
+        </ul>
+      ) : (
+        <p class="membership-pending">Committee membership will be listed here. Contact <a href="mailto:info@thebluffline.org">info@thebluffline.org</a> for current membership information.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section documents-section">
+    <div class="section-inner">
+      <h2>Program Documents</h2>
+      <p>The Corridor Management Plan is the governing document for the Pensacola Scenic Bluffs Scenic Highway, originally prepared by the Pensacola Scenic Highway Foundation and now administered by this committee.</p>
+      <div class="documents-list">
+        {programDocuments.map(doc => (
+          <a
+            href={doc.href}
+            class="document-item"
+            target={doc.external ? '_blank' : undefined}
+            rel={doc.external ? 'noopener noreferrer' : undefined}
+          >
+            <div class="document-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+            </div>
+            <div class="document-info">
+              <div class="document-title">{doc.title}</div>
+              <div class="document-description">{doc.description}</div>
+            </div>
+            {doc.external && (
+              <svg class="document-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section notices-section">
+    <div class="section-inner">
+      <h2>Meeting Notices</h2>
+      <p>Public meeting notices will be posted here in advance of scheduled committee meetings.</p>
+      <div class="empty-record">
+        <p>No upcoming meetings are currently scheduled.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section minutes-section">
+    <div class="section-inner">
+      <h2>Meeting Minutes</h2>
+      <p>Minutes from past committee meetings will be posted here following approval.</p>
+      <div class="empty-record">
+        <p>No minutes are available at this time.</p>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Learn more about the Bluffline"
+    description="The corridor connects six decades of advocacy with a bold vision for Pensacola's multimodal future."
+    primaryLabel="About Bluffline"
+    primaryHref="/about"
+    secondaryLabel="Governance overview"
+    secondaryHref="/about/governance"
+  />
+</BaseLayout>
+
+<style>
+  .lede-section { background: var(--cream); }
+  .lede-content { max-width: 800px; }
+  .lede {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+  .lede-content p { font-size: 1.05rem; color: var(--navy); opacity: 0.85; margin-bottom: 1rem; }
+
+  .scope-section { background: var(--warm-white); }
+  .scope-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .scope-grid { grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; }
+  }
+  .scope-content h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--navy); margin-bottom: 1rem; }
+  .scope-content p { font-size: 1.05rem; color: var(--navy); opacity: 0.85; margin-bottom: 1rem; }
+  .scope-stats {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(45, 48, 71, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .scope-stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    color: var(--forest);
+    margin-bottom: 0.25rem;
+  }
+  .scope-stat-label { font-size: 0.875rem; color: var(--navy); opacity: 0.7; }
+
+  .membership-section { background: var(--mist); }
+  .membership-section h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--navy); margin-bottom: 1.25rem; }
+  .member-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .member-list li {
+    font-size: 1.05rem;
+    color: var(--navy);
+    padding: 0.75rem 1rem;
+    background: white;
+    border-radius: 8px;
+    border-left: 3px solid var(--spring);
+  }
+  .membership-pending {
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.7;
+    font-style: italic;
+  }
+  .membership-pending a { color: var(--forest); }
+
+  .documents-section { background: var(--cream); }
+  .documents-section h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--navy); margin-bottom: 0.75rem; }
+  .documents-section > .section-inner > p { font-size: 1.05rem; color: var(--navy); opacity: 0.85; margin-bottom: 1.5rem; }
+  .documents-list { display: flex; flex-direction: column; gap: 0.75rem; max-width: 600px; }
+  .document-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    border: 1px solid rgba(45, 48, 71, 0.1);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s ease;
+  }
+  .document-item:hover { box-shadow: 0 4px 16px rgba(45, 48, 71, 0.08); }
+  .document-icon { color: var(--forest); flex-shrink: 0; }
+  .document-icon svg { width: 24px; height: 24px; }
+  .document-info { flex: 1; }
+  .document-title { font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+  .document-description { font-size: 0.85rem; color: var(--navy); opacity: 0.6; margin-top: 0.15rem; }
+  .document-external { width: 16px; height: 16px; color: var(--navy); opacity: 0.4; flex-shrink: 0; }
+
+  .notices-section { background: var(--warm-white); }
+  .minutes-section { background: var(--mist); }
+  .notices-section h2,
+  .minutes-section h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--navy); margin-bottom: 0.75rem; }
+  .notices-section > .section-inner > p,
+  .minutes-section > .section-inner > p { font-size: 1.05rem; color: var(--navy); opacity: 0.85; margin-bottom: 1.5rem; }
+  .empty-record {
+    background: white;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-width: 480px;
+  }
+  .empty-record p { font-size: 0.95rem; color: var(--navy); opacity: 0.55; margin: 0; }
+</style>
