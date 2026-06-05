@@ -88,7 +88,6 @@ const boardMembersCollection = defineCollection({
     role: z.enum(['chair', 'vice-president', 'treasurer', 'secretary', 'board-member', 'staff', 'emeritus']),
     bio: z.string(),
     photo: z.string().optional(),
-    order: z.number(),
     archived: z.boolean().optional(),
   }),
 });

@@ -201,11 +201,13 @@ Board directory. Edit `src/content/board-members/`.
   "role": "chair",
   "bio": "Biography text",
   "photo": "/images/board/person.jpg",
-  "order": 1
+  "archived": false
 }
 ```
 
 `role` options: `chair`, `vice-president`, `treasurer`, `secretary`, `board-member`, `staff`, `emeritus`
+
+Members are listed alphabetically by last name (credential suffixes such as ", PE, PMP" are ignored). Set `"archived": true` to hide a member from the directory.
 
 ### Testimonials
 
