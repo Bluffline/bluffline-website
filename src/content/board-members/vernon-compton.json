@@ -1,8 +1,8 @@
 {
   "type": "BoardMember",
-  "name": "Vernon Compton",
+  "firstName": "Vernon",
+  "lastName": "Compton",
   "title": "Vice President",
   "role": "vice-president",
-  "bio": "Project Director at The Longleaf Alliance (Gulf Coastal Plain Ecosystem Partnership). Former Forest Resource Administrator at Blackwater River State Forest. B.S. from Louisiana State University. Focused on longleaf pine restoration and connecting people to nature.",
-  "order": 2
+  "bio": "Project Director at The Longleaf Alliance (Gulf Coastal Plain Ecosystem Partnership). Former Forest Resource Administrator at Blackwater River State Forest. B.S. from Louisiana State University. Focused on longleaf pine restoration and connecting people to nature."
 }

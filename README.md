@@ -196,16 +196,20 @@ Board directory. Edit `src/content/board-members/`.
 
 ```json
 {
-  "name": "Person Name",
+  "firstName": "Person",
+  "lastName": "Name",
+  "suffix": "PE, PMP",
   "title": "Position Title",
   "role": "chair",
   "bio": "Biography text",
   "photo": "/images/board/person.jpg",
-  "order": 1
+  "archived": false
 }
 ```
 
 `role` options: `chair`, `vice-president`, `treasurer`, `secretary`, `board-member`, `staff`, `emeritus`
+
+The display name is `firstName` + `lastName`, with the optional `suffix` (credentials such as `PE, PMP` or `MD`) appended after a comma. Members are listed alphabetically by `lastName`, so put compound surnames (e.g. `Fisher Hobbs`) in `lastName` to control where a member files. Set `"archived": true` to hide a member from the directory.
 
 ### Testimonials
 

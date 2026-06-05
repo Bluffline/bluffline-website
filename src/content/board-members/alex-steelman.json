@@ -1,9 +1,10 @@
 {
   "type": "BoardMember",
-  "name": "Alex Steelman, PE, PMP",
+  "firstName": "Alex",
+  "lastName": "Steelman",
+  "suffix": "PE, PMP",
   "title": "Board Member",
   "role": "board-member",
   "bio": "Licensed Professional Engineer and Project Management Professional specializing in civil engineering and water resources. She designs stormwater and utility systems and navigates complex regulatory environments across Northwest Florida. With strong nonprofit leadership experience and a passion for community impact, Alex strengthens Bluffline's capacity in infrastructure planning and project delivery.",
-  "order": 10,
   "archived": false
 }
