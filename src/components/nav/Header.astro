@@ -34,6 +34,7 @@ const isActive = (path: string) => {
             <a href="/about/corridor">The Corridor</a>
             <a href="/about/impact">Impact</a>
             <a href="/about/community-support">Our Friends</a>
+            <a href="/about/defender-award">Defender Award</a>
             <a href="/about/governance">Governance</a>
           </div>
         </div>
@@ -77,6 +78,7 @@ const isActive = (path: string) => {
         <a href="/about/corridor" class:list={[{ active: currentPath === '/about/corridor' }]}>The Corridor</a>
         <a href="/about/impact" class:list={[{ active: currentPath === '/about/impact' }]}>Impact</a>
         <a href="/about/community-support" class:list={[{ active: currentPath === '/about/community-support' }]}>Our Friends</a>
+        <a href="/about/defender-award" class:list={[{ active: isActive('/about/defender-award') }]}>Defender Award</a>
         <a href="/about/governance" class:list={[{ active: isActive('/about/governance') }]}>Governance</a>
       </div>
     </div>

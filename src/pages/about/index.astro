@@ -5,6 +5,7 @@ import CallToAction from '../../components/ui/CallToAction.astro';
 import IconCard from '../../components/content/IconCard.astro';
 import TestimonialCard from '../../components/content/TestimonialCard.astro';
 import TimelineItem from '../../components/content/TimelineItem.astro';
+import AwardRecipientCard from '../../components/content/AwardRecipientCard.astro';
 import MediaLightbox from '../../components/ui/MediaLightbox.astro';
 import { getCollection, getEntry } from 'astro:content';
 
@@ -19,6 +20,12 @@ const topTestimonials = allTestimonials
 
 const timelineEntries = await getCollection('timeline');
 const sortedTimeline = timelineEntries.sort((a, b) => a.data.order - b.data.order);
+
+const RECENT_RECIPIENTS_COUNT = 3;
+const allDefenderRecipients = await getCollection('defender-award-recipients', ({ data }) => !data.draft);
+const sortedDefenderRecipients = allDefenderRecipients.sort((a, b) => b.data.year - a.data.year);
+const recentDefenderRecipients = sortedDefenderRecipients.slice(0, RECENT_RECIPIENTS_COUNT);
+const hasMoreDefenderRecipients = sortedDefenderRecipients.length > RECENT_RECIPIENTS_COUNT;
 
 const values = [
   {
@@ -150,6 +157,34 @@ const values = [
     </div>
   </section>
 
+  {recentDefenderRecipients.length > 0 && (
+    <section class="section defender-award-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>The Bluffline Defender Award</h2>
+          <p>An annual tradition honoring individuals who have made exceptional contributions to the vision of a connected Pensacola waterfront.</p>
+        </div>
+        <div class="defender-award-grid">
+          {recentDefenderRecipients.map((recipient) => (
+            <AwardRecipientCard
+              name={recipient.data.name}
+              title={recipient.data.title}
+              year={recipient.data.year}
+              photo={recipient.data.photo}
+              summary={recipient.data.summary}
+              href={`/about/defender-award/${recipient.slug}`}
+            />
+          ))}
+        </div>
+        {hasMoreDefenderRecipients && (
+          <div class="defender-award-more">
+            <a href="/about/defender-award" class="defender-award-link">See all Defender Award recipients →</a>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
   {topTestimonials.length > 0 && (
     <section class="section friends-section">
       <div class="section-inner">
@@ -276,6 +311,32 @@ const values = [
     padding-bottom: 2px;
   }
   .governance-link:hover { color: var(--navy); border-color: var(--navy); }
+
+  /* Defender Award Section */
+  .defender-award-section { background: var(--warm-white); }
+  .defender-award-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .defender-award-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .defender-award-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+  .defender-award-more {
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+  .defender-award-link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    border-bottom: 2px solid var(--spring);
+    padding-bottom: 2px;
+  }
+  .defender-award-link:hover { color: var(--navy); border-color: var(--navy); }
 
   /* Friends Section */
   .friends-section { background: var(--mist); }

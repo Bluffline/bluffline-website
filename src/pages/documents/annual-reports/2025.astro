@@ -390,6 +390,15 @@ const knoxWhiteGallery = [
         >
           <p>This award signals continuity between the Scenic Highway Foundation's legacy and the Bluffline's future. It establishes a tradition of honoring those who walk the long road of civic change.</p>
         </AwardFeature>
+
+        <div class="award-cta">
+          <a href="/about/defender-award" class="award-cta-link">
+            Learn more about the Bluffline Defender Award
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1101,6 +1110,31 @@ const knoxWhiteGallery = [
     color: var(--navy);
     opacity: 0.8;
     line-height: 1.7;
+  }
+
+  .award-cta {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .award-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: gap 0.2s ease;
+  }
+
+  .award-cta-link:hover {
+    gap: 0.75rem;
+  }
+
+  .award-cta-link svg {
+    width: 20px;
+    height: 20px;
   }
 
   /* Impact Grid */
