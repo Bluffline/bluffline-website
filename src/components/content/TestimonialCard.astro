@@ -43,11 +43,11 @@ const { quote, author, title, organization, organizationLink, pdfFile } = Astro.
 
 <style>
   .testimonial-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.04);
-    border: 1px solid rgba(45, 48, 71, 0.06);
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -57,7 +57,7 @@ const { quote, author, title, organization, organizationLink, pdfFile } = Astro.
   }
 
   .testimonial-card:hover {
-    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.08);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 

@@ -6,6 +6,12 @@
   --water: #C9FBFF;
   --cream: #F2ECDF;
   --warm-white: #FDFCFA;
+
+  /* Shared card surface: cards must sit on a tinted section (--mist/--cream) so the fill carries contrast */
+  --card-bg: #FFFFFF;
+  --card-border: 1px solid rgba(45, 48, 71, 0.12);
+  --card-shadow: 0 2px 12px rgba(45, 48, 71, 0.06);
+  --card-shadow-hover: 0 8px 24px rgba(45, 48, 71, 0.12);
 }
 
 * {

@@ -59,10 +59,10 @@ const meta = [format, size, credit].filter(Boolean).join(' · ');
 
 <style>
   .media-item {
-    background: white;
+    background: var(--card-bg);
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(45, 48, 71, 0.08);
+    border: var(--card-border);
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: left;
@@ -70,7 +70,7 @@ const meta = [format, size, credit].filter(Boolean).join(' · ');
   }
 
   .media-item:hover {
-    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.12);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 

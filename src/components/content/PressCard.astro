@@ -35,16 +35,16 @@ const formattedDate = date.toLocaleDateString('en-US', {
     gap: 1.25rem;
     align-items: center;
     padding: 1.25rem 1.5rem;
-    background: white;
+    background: var(--card-bg);
     border-radius: 12px;
     text-decoration: none;
     color: inherit;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.04);
+    box-shadow: var(--card-shadow);
   }
 
   .article-card:hover {
-    box-shadow: 0 4px 16px rgba(45, 48, 71, 0.08);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 

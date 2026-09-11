@@ -42,11 +42,11 @@ const initials = name
   .award-recipient-card {
     display: flex;
     flex-direction: column;
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(45, 48, 71, 0.08);
-    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.04);
+    border: var(--card-border);
+    box-shadow: var(--card-shadow);
     text-decoration: none;
     color: inherit;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -54,7 +54,7 @@ const initials = name
 
   .award-recipient-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(45, 48, 71, 0.12);
+    box-shadow: var(--card-shadow-hover);
   }
 
   .recipient-photo {
