@@ -18,11 +18,14 @@ The digital home for [The Bluffline](https://thebluffline.org), a 20-mile multim
 src/
 ├── components/
 │   ├── content/         # Data-driven cards (UpdateCard, PressCard, PressReleaseCard,
-│   │                    #   BoardMemberCard, DocumentCard, TimelineItem,
-│   │                    #   TestimonialCard, EmptyStateCard, IconCard)
+│   │                    #   BoardMemberCard, AwardRecipientCard, ProjectCard,
+│   │                    #   DocumentCard, TimelineItem, TestimonialCard,
+│   │                    #   MilestoneList, MediaPhotoCard, MediaVideoCard,
+│   │                    #   MediaAudioItem, EmptyStateCard, IconCard)
 │   ├── nav/             # Header (fixed, with dropdowns) and Footer
 │   ├── ui/              # Reusable primitives (Button, Logo, PageHero, CallToAction,
-│   │                    #   PhaseTracker, MediaLightbox, AnnouncementBanner, Tabs)
+│   │                    #   PhaseTracker, MediaLightbox, AnnouncementBanner,
+│   │                    #   CorridorMap, Tabs)
 │   └── report/          # Annual report components (ReportHero, StatCard, StatGrid,
 │                        #   MilestoneCard, PhotoGallery, AwardFeature, BigQuote,
 │                        #   EventHighlight, PartnerCard, ProjectSpotlight)
@@ -32,10 +35,12 @@ src/
 │   ├── press/           # Media coverage (JSON)
 │   ├── press-releases/  # Official press releases (Markdown, supports media attachments)
 │   ├── board-members/   # Board directory (JSON)
+│   ├── defender-award-recipients/ # Bluffline Defender Award honorees (Markdown)
 │   ├── documents/       # Planning docs & studies (JSON)
 │   ├── testimonials/    # Community quotes (JSON)
 │   ├── timeline/        # Project history milestones (JSON)
 │   ├── resources/       # Corridor landmarks & attractions (JSON)
+│   ├── projects/        # Individual project records with milestones (JSON)
 │   └── pages/           # Editable page content (JSON)
 │
 ├── data/                # Static data files for maps and visualizations
@@ -56,20 +61,29 @@ src/
 │   │   ├── index.astro                    # Mission, values, board, timeline (hero image)
 │   │   ├── corridor.astro                 # The corridor itself
 │   │   ├── impact.astro                   # Community impact (hero image)
-│   │   └── community-support.astro        # Letters of support
+│   │   ├── community-support.astro        # Letters of support
+│   │   ├── governance/
+│   │   │   ├── index.astro                # Board, committees, transparency documents (hero image)
+│   │   │   └── corridor-management.astro  # Corridor Management Committee detail
+│   │   └── defender-award/
+│   │       ├── index.astro                # Bluffline Defender Award recipients listing (hero image)
+│   │       └── [slug].astro               # Individual recipient profile
 │   ├── progress/
 │   │   ├── index.astro                    # Phase overview with tracker (hero image)
 │   │   ├── planning.astro                 # Planning documents (hero image)
+│   │   ├── projects/
+│   │   │   └── [slug].astro               # Individual project detail page
 │   │   └── updates/
 │   │       ├── index.astro                # Updates listing
 │   │       └── [slug].astro               # Individual update
 │   ├── press/
 │   │   ├── index.astro                    # Press coverage, media kit, color palette
 │   │   └── [slug].astro                   # Individual press release (with media attachments)
-│   └── documents/
-│       └── annual-reports/
-│           ├── index.astro                # Reports listing
-│           └── 2025.astro                 # 2025 annual report
+│   ├── documents/
+│   │   └── annual-reports/
+│   │       ├── index.astro                # Reports listing
+│   │       └── 2025.astro                 # 2025 annual report
+│   └── legal.astro                        # Privacy policy & terms
 │
 ├── styles/
 │   └── global.css       # CSS variables, typography, utilities, component styles
@@ -211,6 +225,52 @@ Board directory. Edit `src/content/board-members/`.
 
 The display name is `firstName` + `lastName`, with the optional `suffix` (credentials such as `PE, PMP` or `MD`) appended after a comma. Members are listed alphabetically by `lastName`, so put compound surnames (e.g. `Fisher Hobbs`) in `lastName` to control where a member files. Set `"archived": true` to hide a member from the directory.
 
+### Defender Award Recipients
+
+Annual honorees of the Bluffline Defender Award, established in 2025 to recognize individuals who have made exceptional contributions to the vision of a connected Pensacola waterfront. Add Markdown files to `src/content/defender-award-recipients/` (filename convention: `<year>-<name>.md`).
+
+```yaml
+---
+name: "Recipient Name"
+title: "Title / Affiliation"
+year: 2025
+photo: "/images/events/recipient-photo.jpg"   # optional
+summary: "Short blurb shown on recipient cards."
+awardObjectDescription: "Description of the physical award, if any."  # optional
+draft: false
+---
+
+Full recipient story in Markdown, rendered on the individual profile page.
+```
+
+Recipients appear on `/about/defender-award` (full list, newest first) with individual pages at `/about/defender-award/[slug]`. The About page (`/about`) also features the 3 most recent recipients, with a "See all recipients" link that only appears once the full list grows beyond that.
+
+### Projects
+
+Individual infrastructure/planning projects with milestones, used for the Progress page and individual project detail pages. Edit `src/content/projects/`.
+
+```json
+{
+  "title": "Project Title",
+  "shortTitle": "Short Title",
+  "status": "active",
+  "funder": "Funder name or [\"Funder A\", \"Funder B\"]",
+  "partners": ["Partner A", "Partner B"],
+  "program": "Program name",
+  "amount": "$1.2M",
+  "awardDate": "2024-12-01",
+  "description": "Full project description",
+  "featuredImage": "/images/...",
+  "milestones": [
+    { "title": "Milestone", "description": "...", "date": "2025-01-01", "status": "complete" }
+  ],
+  "relatedLinks": [{ "label": "Link label", "href": "https://..." }],
+  "draft": false
+}
+```
+
+`status` options: `active`, `pending`, `complete`, `pursuing`. Each non-draft project gets a detail page at `/progress/projects/[slug]`.
+
 ### Testimonials
 
 Community quotes. Edit `src/content/testimonials/`.
@@ -268,6 +328,8 @@ Pages support optional hero images via the `PageHero` component's `heroImage` pr
 
 - About (`/about`)
 - Impact (`/about/impact`)
+- Governance (`/about/governance`)
+- Bluffline Defender Award (`/about/defender-award`)
 - Progress (`/progress`)
 - Planning (`/progress/planning`)
 
@@ -286,16 +348,20 @@ Favicon links are configured in `BaseLayout.astro` pointing to `public/images/lo
 | Path | Purpose |
 |---|---|
 | `/` | Homepage — hero, challenge, solution, CTA |
-| `/about` | Mission, values, board, timeline |
+| `/about` | Mission, values, board, timeline, recent Defender Award recipients |
 | `/about/corridor` | The corridor route and vision |
 | `/about/impact` | Community impact data |
 | `/about/community-support` | Letters of support |
+| `/about/governance` | Board, committees, organizational transparency documents |
+| `/about/defender-award` | Full list of Bluffline Defender Award recipients |
 | `/progress` | Phase tracker and project overview |
 | `/progress/planning` | Planning documents by government level |
+| `/progress/projects/[slug]` | Individual project detail pages |
 | `/progress/updates` | News listing |
 | `/press` | Media coverage, press releases, media kit (with color palette) |
 | `/documents/annual-reports` | Annual reports |
 | `/support` | Get Involved — email signup (ConvertKit) |
+| `/legal` | Privacy policy and terms of use |
 
 ## Design System
 
