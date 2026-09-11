@@ -1,0 +1,191 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CallToAction from '../../../components/ui/CallToAction.astro';
+
+export async function getStaticPaths() {
+  const recipients = await getCollection('defender-award-recipients', ({ data }) => !data.draft);
+  return recipients.map(recipient => ({
+    params: { slug: recipient.slug },
+    props: { recipient },
+  }));
+}
+
+const { recipient } = Astro.props;
+const { Content } = await recipient.render();
+---
+
+<BaseLayout title={`${recipient.data.name} | Bluffline Defender Award`} description={recipient.data.summary}>
+  <article>
+    <header class="recipient-header">
+      <div class="recipient-header-inner">
+        <a href="/about/defender-award" class="recipient-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          All Recipients
+        </a>
+        <span class="recipient-badge">{recipient.data.year} Bluffline Defender</span>
+
+        {recipient.data.photo && (
+          <div class="recipient-hero-photo">
+            <img src={recipient.data.photo} alt={recipient.data.name} />
+          </div>
+        )}
+
+        <h1>{recipient.data.name}</h1>
+        <p class="recipient-subtitle">{recipient.data.title}</p>
+      </div>
+    </header>
+
+    <div class="recipient-body">
+      <div class="recipient-content">
+        <Content />
+
+        {recipient.data.awardObjectDescription && (
+          <div class="award-object-box">
+            <span class="object-label">The Award</span>
+            <p>{recipient.data.awardObjectDescription}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </article>
+
+  <CallToAction
+    title="Join the movement"
+    description="Community participation directly shapes outcomes. Get involved with the Bluffline."
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+  />
+</BaseLayout>
+
+<style>
+  .recipient-header {
+    background: var(--cream);
+    padding: 3rem 1.5rem;
+    margin-top: calc(73px + var(--banner-height, 0px));
+  }
+
+  @media (min-width: 768px) {
+    .recipient-header {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .recipient-header-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .recipient-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    transition: gap 0.2s ease;
+  }
+
+  .recipient-back:hover {
+    gap: 0.75rem;
+  }
+
+  .recipient-back svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .recipient-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--forest);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+  }
+
+  .recipient-hero-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background: var(--mist);
+  }
+
+  .recipient-hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .recipient-header h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .recipient-subtitle {
+    font-size: 1.15rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.6;
+  }
+
+  .recipient-body {
+    padding: 3rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .recipient-body {
+      padding: 4rem 3rem;
+    }
+  }
+
+  .recipient-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .recipient-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.85;
+  }
+
+  .award-object-box {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: rgba(153, 204, 99, 0.12);
+    border-radius: 12px;
+    border-left: 3px solid var(--spring);
+  }
+
+  .award-object-box .object-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .award-object-box p {
+    font-size: 0.95rem;
+    color: var(--navy);
+    margin: 0;
+    line-height: 1.6;
+  }
+</style>

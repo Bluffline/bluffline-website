@@ -1,0 +1,150 @@
+---
+interface Props {
+  name: string;
+  title: string;
+  year: number;
+  photo?: string;
+  summary: string;
+  href: string;
+}
+
+const { name, title, year, photo, summary, href } = Astro.props;
+
+const initials = name
+  .split(' ')
+  .map(n => n[0])
+  .join('')
+  .toUpperCase()
+  .slice(0, 2);
+---
+
+<article class="award-recipient-card">
+  <div class="recipient-photo">
+    {photo ? (
+      <img src={photo} alt={name} />
+    ) : (
+      <div class="recipient-initials">{initials}</div>
+    )}
+    <span class="recipient-year">{year}</span>
+  </div>
+  <div class="recipient-content">
+    <h3 class="recipient-name">{name}</h3>
+    <p class="recipient-title">{title}</p>
+    <p class="recipient-summary">{summary}</p>
+    <a href={href} class="recipient-link">
+      Learn more
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</article>
+
+<style>
+  .award-recipient-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.04);
+    border: 1px solid rgba(45, 48, 71, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .recipient-photo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    background: var(--mist);
+    flex-shrink: 0;
+  }
+
+  .recipient-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .recipient-initials {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.75rem;
+    color: var(--forest);
+    background: var(--mist);
+  }
+
+  .recipient-year {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--forest);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 1px 4px rgba(45, 48, 71, 0.2);
+  }
+
+  .recipient-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .recipient-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .recipient-title {
+    font-size: 0.9rem;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .recipient-summary {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  .recipient-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+    margin-top: auto;
+  }
+
+  .recipient-link:hover {
+    gap: 0.6rem;
+  }
+
+  .recipient-link svg {
+    width: 16px;
+    height: 16px;
+  }
+</style>

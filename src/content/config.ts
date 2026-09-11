@@ -79,6 +79,20 @@ const pressReleasesCollection = defineCollection({
   }),
 });
 
+const defenderAwardRecipientsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    type: z.string().optional(),
+    name: z.string(),
+    title: z.string(),
+    year: z.number(),
+    photo: z.string().optional(),
+    summary: z.string(),
+    awardObjectDescription: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const boardMembersCollection = defineCollection({
   type: 'data',
   schema: z.object({
@@ -174,6 +188,7 @@ export const collections = {
   'resources': resourcesCollection,
   'press-releases': pressReleasesCollection,
   'board-members': boardMembersCollection,
+  'defender-award-recipients': defenderAwardRecipientsCollection,
   'timeline': timelineCollection,
   'testimonials': testimonialsCollection,
   'pages': pagesCollection,
