@@ -30,18 +30,18 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 <style>
   .release-card {
     display: block;
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     padding: 1.75rem;
     text-decoration: none;
     color: inherit;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.04);
-    border: 1px solid rgba(45, 48, 71, 0.06);
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
   }
 
   .release-card:hover {
-    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.08);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 

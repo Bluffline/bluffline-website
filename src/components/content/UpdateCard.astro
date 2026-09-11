@@ -38,20 +38,20 @@ const formattedDate = date.toLocaleDateString('en-US', {
 
 <style>
   .update-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 12px rgba(45, 48, 71, 0.06);
+    box-shadow: var(--card-shadow);
     display: flex;
     flex-direction: column;
   }
 
   .update-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.1);
+    box-shadow: var(--card-shadow-hover);
   }
 
   .update-card-image {

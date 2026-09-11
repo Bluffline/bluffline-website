@@ -92,13 +92,13 @@ const levelLabels: Record<string, string> = {
     gap: 1rem;
     padding: 1.5rem;
     padding-left: 1.75rem;
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(45, 48, 71, 0.04);
-    border: 1px solid rgba(45, 48, 71, 0.06);
+    box-shadow: var(--card-shadow);
+    border: var(--card-border);
     position: relative;
     overflow: hidden;
   }
@@ -114,7 +114,7 @@ const levelLabels: Record<string, string> = {
   }
 
   .document-card:hover {
-    box-shadow: 0 8px 24px rgba(45, 48, 71, 0.08);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 

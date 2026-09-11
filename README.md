@@ -379,7 +379,18 @@ Defined in `src/styles/global.css` and documented in `src/data/brand-colors.json
 --warm-white: #FDFCFA; /* Page background */
 ```
 
-`--mist` and `--cream` are deliberately a few shades deeper than near-white so that adjacent page sections stay visually distinct on low-contrast displays. When sequencing sections on a page, alternate `--warm-white` with one of the two tints (or a dark `--navy`/`--forest` band) rather than placing two tints or two near-whites side by side.
+`--mist` and `--cream` are deliberately a few shades deeper than near-white so that adjacent page sections stay visually distinct on low-contrast displays.
+
+### Surface Rules
+
+Every card component shares one surface, defined in `global.css` and consumed via `var(--card-bg)`, `var(--card-border)`, `var(--card-shadow)`, and `var(--card-shadow-hover)`. Tune card contrast there, not per component.
+
+When sequencing sections on a page:
+
+1. Alternate `--warm-white` with one of the two tints (or a dark `--navy`/`--forest` band). Never place two near-whites or two of the same tint side by side.
+2. Card grids sit on a tinted section (`--mist` or `--cream`), never on `--warm-white` — the card's white fill is what provides the contrast, not its border.
+
+`npm run audit:surfaces` checks every page against both rules and fails on violations; run it after adding or reordering sections.
 
 ### Typography
 
