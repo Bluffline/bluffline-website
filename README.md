@@ -235,7 +235,7 @@ name: "Recipient Name"
 title: "Title / Affiliation"
 year: 2025
 photo: "/images/events/recipient-photo.jpg"   # optional
-summary: "Short blurb shown on recipient cards."
+summary: "One-sentence summary used for the page's meta description."
 awardObjectDescription: "Description of the physical award, if any."  # optional
 draft: false
 ---
@@ -348,7 +348,7 @@ Favicon links are configured in `BaseLayout.astro` pointing to `public/images/lo
 | Path | Purpose |
 |---|---|
 | `/` | Homepage — hero, challenge, solution, CTA |
-| `/about` | Mission, values, board, timeline, recent Defender Award recipients |
+| `/about` | Purpose, values, history, merger, governance, friends, recent Defender Award recipients |
 | `/about/corridor` | The corridor route and vision |
 | `/about/impact` | Community impact data |
 | `/about/community-support` | Letters of support |
@@ -373,11 +373,13 @@ Defined in `src/styles/global.css` and documented in `src/data/brand-colors.json
 --forest: #41521F;     /* Primary green — buttons, headers */
 --spring: #99CC63;     /* Accent green — highlights, icons */
 --navy: #2D3047;       /* Dark text */
---mist: #EFF7FF;       /* Light blue backgrounds */
+--mist: #DFEAF6;       /* Light blue section background */
 --water: #C9FBFF;      /* Cyan accent — gradients */
---cream: #F8F6F0;      /* Warm background */
---warm-white: #FDFCFA; /* Near-white background */
+--cream: #F2ECDF;      /* Warm section background */
+--warm-white: #FDFCFA; /* Page background */
 ```
+
+`--mist` and `--cream` are deliberately a few shades deeper than near-white so that adjacent page sections stay visually distinct on low-contrast displays. When sequencing sections on a page, alternate `--warm-white` with one of the two tints (or a dark `--navy`/`--forest` band) rather than placing two tints or two near-whites side by side.
 
 ### Typography
 

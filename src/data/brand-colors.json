@@ -23,8 +23,8 @@
   {
     "name": "Mist",
     "variable": "--mist",
-    "hex": "#EFF7FF",
-    "rgb": "239, 247, 255",
+    "hex": "#DFEAF6",
+    "rgb": "223, 234, 246",
     "usage": "Light background. Use for alternate sections and subtle containers."
   },
   {
@@ -37,8 +37,8 @@
   {
     "name": "Cream",
     "variable": "--cream",
-    "hex": "#F8F6F0",
-    "rgb": "248, 246, 240",
+    "hex": "#F2ECDF",
+    "rgb": "242, 236, 223",
     "usage": "Warm background. Use for content sections and article headers."
   },
   {
