@@ -13,39 +13,43 @@ export async function getStaticPaths() {
 
 const { recipient } = Astro.props;
 const { Content } = await recipient.render();
+const { name, title, year, photo, summary, awardObjectDescription } = recipient.data;
 ---
 
-<BaseLayout title={`${recipient.data.name} | Bluffline Defender Award`} description={recipient.data.summary}>
-  <article>
-    <header class="recipient-header">
-      <div class="recipient-header-inner">
-        <a href="/about/defender-award" class="recipient-back">
+<BaseLayout title={`${name} | Bluffline Defender Award`} description={summary}>
+  <article class:list={[{ 'no-featured-image': !photo }]}>
+    {photo && (
+      <div class="article-featured-image">
+        <img src={photo} alt={name} />
+      </div>
+    )}
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <a href="/about/defender-award" class="article-back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
           All Recipients
         </a>
-        <span class="recipient-badge">{recipient.data.year} Bluffline Defender</span>
-
-        {recipient.data.photo && (
-          <div class="recipient-hero-photo">
-            <img src={recipient.data.photo} alt={recipient.data.name} />
-          </div>
-        )}
-
-        <h1>{recipient.data.name}</h1>
-        <p class="recipient-subtitle">{recipient.data.title}</p>
+        <p class="article-meta">
+          <span class="article-meta-award">Bluffline Defender Award</span>
+          <span class="article-meta-sep" aria-hidden="true">·</span>
+          <span>{year} Recipient</span>
+        </p>
+        <h1>{name}</h1>
+        <p class="article-subtitle">{title}</p>
       </div>
     </header>
 
-    <div class="recipient-body">
-      <div class="recipient-content">
+    <div class="article-body">
+      <div class="article-content">
         <Content />
 
-        {recipient.data.awardObjectDescription && (
+        {awardObjectDescription && (
           <div class="award-object-box">
             <span class="object-label">The Award</span>
-            <p>{recipient.data.awardObjectDescription}</p>
+            <p>{awardObjectDescription}</p>
           </div>
         )}
       </div>
@@ -61,24 +65,47 @@ const { Content } = await recipient.render();
 </BaseLayout>
 
 <style>
-  .recipient-header {
+  .article-featured-image {
+    width: 100%;
+    height: 45vh;
+    min-height: 320px;
+    max-height: 560px;
+    margin-top: calc(73px + var(--banner-height, 0px));
+    overflow: hidden;
+  }
+
+  .article-featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .article-header {
     background: var(--cream);
     padding: 3rem 1.5rem;
-    margin-top: calc(73px + var(--banner-height, 0px));
+  }
+
+  .no-featured-image .article-header {
+    padding-top: calc(3rem + 73px + var(--banner-height, 0px));
   }
 
   @media (min-width: 768px) {
-    .recipient-header {
+    .article-header {
       padding: 4rem 3rem;
+    }
+
+    .no-featured-image .article-header {
+      padding-top: calc(4rem + 73px + var(--banner-height, 0px));
     }
   }
 
-  .recipient-header-inner {
-    max-width: 700px;
+  .article-header-inner {
+    max-width: 800px;
     margin: 0 auto;
   }
 
-  .recipient-back {
+  .article-back {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -90,73 +117,66 @@ const { Content } = await recipient.render();
     transition: gap 0.2s ease;
   }
 
-  .recipient-back:hover {
+  .article-back:hover {
     gap: 0.75rem;
   }
 
-  .recipient-back svg {
+  .article-back svg {
     width: 18px;
     height: 18px;
   }
 
-  .recipient-badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: var(--forest);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: rgba(45, 48, 71, 0.6);
+    margin-bottom: 0.75rem;
   }
 
-  .recipient-hero-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-    background: var(--mist);
+  .article-meta-award {
+    color: var(--forest);
   }
 
-  .recipient-hero-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .article-meta-sep {
+    opacity: 0.5;
   }
 
-  .recipient-header h1 {
+  .article-header h1 {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: var(--navy);
     margin-bottom: 0.5rem;
     line-height: 1.2;
   }
 
-  .recipient-subtitle {
+  .article-subtitle {
     font-size: 1.15rem;
     color: var(--navy);
     opacity: 0.75;
     line-height: 1.6;
   }
 
-  .recipient-body {
+  .article-body {
     padding: 3rem 1.5rem;
   }
 
   @media (min-width: 768px) {
-    .recipient-body {
+    .article-body {
       padding: 4rem 3rem;
     }
   }
 
-  .recipient-content {
+  .article-content {
     max-width: 700px;
     margin: 0 auto;
   }
 
-  .recipient-content :global(p) {
+  .article-content :global(p) {
     margin-bottom: 1.5rem;
     line-height: 1.8;
     font-size: 1.05rem;

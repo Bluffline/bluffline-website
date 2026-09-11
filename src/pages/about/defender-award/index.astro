@@ -35,7 +35,6 @@ const recipients = allRecipients.sort((a, b) => b.data.year - a.data.year);
             title={recipient.data.title}
             year={recipient.data.year}
             photo={recipient.data.photo}
-            summary={recipient.data.summary}
             href={`/about/defender-award/${recipient.slug}`}
           />
         ))}
@@ -62,5 +61,8 @@ const recipients = allRecipients.sort((a, b) => b.data.year - a.data.year);
   }
   @media (min-width: 1024px) {
     .recipients-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+  @media (min-width: 1280px) {
+    .recipients-grid { grid-template-columns: repeat(4, 1fr); }
   }
 </style>
