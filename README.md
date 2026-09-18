@@ -301,7 +301,7 @@ The Press page (`/press#media-kit`) includes a comprehensive Media Kit with the 
 | Tab | Content |
 |---|---|
 | Logos | Press-ready logo variants from `public/media-kit/logos/` (separate from site operational logos in `public/images/logos/`) |
-| Photos | High-res photos from `public/media-kit/photos/` + press release attachments |
+| Photos | Web-sized photos from `public/media-kit/photos/`, photos already used across the site (curated in `src/data/media-kit-photos.json`), and press release attachments |
 | Videos | Video files from `public/media-kit/videos/` + press release video attachments |
 | Audio | Audio files from `public/media-kit/audio/` |
 | Color Palette | Brand color swatches with hex/RGB values and usage notes |
@@ -309,6 +309,26 @@ The Press page (`/press#media-kit`) includes a comprehensive Media Kit with the 
 ### Color Palette
 
 The Color Palette section is driven by a single canonical data file at `src/data/brand-colors.json`. This file defines each brand color with its name, CSS variable, hex value, RGB value, and usage notes. The Media Kit reads this file at build time to render visible swatches. To update brand colors, edit `brand-colors.json` and the corresponding CSS variables in `src/styles/global.css`.
+
+### Photos
+
+The Photos tab is assembled from three sources, deduplicated by path:
+
+1. **`public/media-kit/photos/`** — every image file in the folder, with title/caption/credit/date read from embedded EXIF/IPTC at build time.
+2. **Site photos** — photos already used on other pages (heroes, updates, the annual report) listed in `src/data/media-kit-photos.json`. Each entry names the `src` under `/images/` plus a `title`, `description`, `credit`, and optional `date`; dimensions, format and file size come from the file itself. Entries whose `src` is under `/media-kit/photos/` instead act as overrides for files in that folder, so captions can be fixed without re-encoding images.
+3. **Press release attachments** (see Asset Propagation below).
+
+#### Adding photos from a Drive folder
+
+Originals stay in Google Drive (the source of truth). Only web-sized JPEGs are committed. Download a Drive folder locally, then run the import script, which resizes to a 2400px longest edge, re-encodes with mozjpeg, bakes in orientation, keeps the original EXIF (camera date, colour profile), and writes credit/caption/date into EXIF so the Media Kit displays them:
+
+```bash
+npm run import:photos -- ~/Downloads/Knox\ White\ Event --prefix knox-white-event-2025 \
+  --credit "Photographer Name" --date 2025-02-06 \
+  --description "Mayor Knox White of Greenville, S.C., speaks at Bluffline's Greenways as Economic Catalysts event, Pensacola Opera Center."
+```
+
+Add `--dry-run` to preview output names and dimensions first, `--max`/`--quality` to change the target size (defaults 2400px / 85), and `--force` to overwrite. Files are numbered `<prefix>-01.jpg`, `<prefix>-02.jpg`, …; re-running on the same folder skips files that already exist, and `--append` continues the numbering when importing a second batch under the same prefix. Typical output is 300 KB–1 MB per photo versus 10–50 MB originals. Skip folders whose images Bluffline does not own (e.g. historical society photos) unless the credit line and usage terms are settled.
 
 ### Asset Propagation
 

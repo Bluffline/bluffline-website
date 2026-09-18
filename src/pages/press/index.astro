@@ -11,9 +11,12 @@ import MediaPhotoCard from '../../components/content/MediaPhotoCard.astro';
 import MediaVideoCard from '../../components/content/MediaVideoCard.astro';
 import MediaAudioItem from '../../components/content/MediaAudioItem.astro';
 import { getCollection, getEntry } from 'astro:content';
-import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
+import { getMediaAssetsFromDirectory, extractImageMetadata } from '../../utils/media-metadata';
+import type { MediaMetadata } from '../../utils/media-metadata';
 import path from 'node:path';
+import fs from 'node:fs';
 import brandColors from '../../data/brand-colors.json';
+import mediaKitPhotos from '../../data/media-kit-photos.json';
 
 const page = await getEntry('pages', 'press');
 const pd = page.data;
@@ -86,8 +89,43 @@ const primaryTabs = [
   { id: 'media-kit', label: 'Media Kit' },
 ];
 
-// Merge press release photos into photos list
-const allPhotos = [...photos, ...pressReleaseMedia.filter(m => m.type === 'image')];
+// Curated captions/credits for photos in the kit (src/data/media-kit-photos.json).
+// Entries under /images/ pull photos already used across the site into the kit;
+// entries under /media-kit/photos/ override metadata for files in that folder.
+type CuratedPhoto = { src: string; title?: string; description?: string; credit?: string; date?: string };
+const curatedPhotos = mediaKitPhotos as CuratedPhoto[];
+const curatedBySrc = new Map(curatedPhotos.map(p => [p.src, p]));
+
+const applyCurated = (asset: MediaMetadata): MediaMetadata => {
+  const c = curatedBySrc.get(asset.src);
+  if (!c) return asset;
+  return {
+    ...asset,
+    title: c.title || asset.title,
+    description: c.description || asset.description,
+    credit: c.credit || asset.credit,
+    date: c.date || asset.date,
+  };
+};
+
+const sitePhotos = await Promise.all(
+  curatedPhotos
+    .filter(p => !p.src.startsWith('/media-kit/photos/'))
+    .filter(p => fs.existsSync(path.join(publicDir, p.src)))
+    .map(p => extractImageMetadata(path.join(publicDir, p.src), p.src).then(applyCurated))
+);
+
+// Merge media-kit photos, site photos, and press release photos (deduped by src)
+const seenPhotoSrcs = new Set<string>();
+const allPhotos = [
+  ...photos.map(applyCurated),
+  ...sitePhotos,
+  ...pressReleaseMedia.filter(m => m.type === 'image'),
+].filter(m => {
+  if (seenPhotoSrcs.has(m.src)) return false;
+  seenPhotoSrcs.add(m.src);
+  return true;
+});
 const allVideos = [...videos, ...pressReleaseMedia.filter(m => m.type === 'video')];
 
 // Asset type tabs configuration

@@ -8,6 +8,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "audit:surfaces": "node scripts/audit-surfaces.mjs",
+    "import:photos": "node scripts/import-media-kit-photos.mjs",
     "astro": "astro"
   },
   "dependencies": {
