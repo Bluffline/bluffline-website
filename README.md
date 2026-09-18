@@ -44,7 +44,7 @@ src/
 │   └── pages/           # Editable page content (JSON)
 │
 ├── data/                # Static data files for maps and visualizations
-│   ├── brand-colors.json # Canonical color palette (drives Media Kit Color Palette tab)
+│   ├── brand-colors.json # Canonical color palette (drives Brand Kit Colors tab)
 │   ├── crash-incidents.json
 │   ├── planning-corridor.json
 │   └── scenic-highway.json
@@ -77,7 +77,7 @@ src/
 │   │       ├── index.astro                # Updates listing
 │   │       └── [slug].astro               # Individual update
 │   ├── press/
-│   │   ├── index.astro                    # Press coverage, media kit, color palette
+│   │   ├── index.astro                    # Press coverage, press releases, brand kit
 │   │   └── [slug].astro                   # Individual press release (with media attachments)
 │   ├── documents/
 │   │   └── annual-reports/
@@ -117,7 +117,7 @@ Images and media follow a centralized structure under `public/images/` with clea
 - **`public/images/photos/`** — General high-res photography.
 - **`public/images/press/`** — Press release media attachments.
 - **`public/images/video/`** — Video assets.
-- **`public/media-kit/`** — Press-ready downloadable assets organized by type. Scanned at build time for the Media Kit tab. Drop logo variants (color, reverse, etc.) in `logos/`; photos in `photos/`; and so on. Keep separate from `public/images/` — these are curated for journalists, not site operations. Any media attached to press releases is also surfaced in the Media Kit automatically.
+- **`public/media-kit/`** — Downloadable Brand Kit assets organized by type. Scanned at build time for the Brand Kit tab. Drop logo variants (color, reverse, etc.) in `logos/`; photos in `photos/`; icon SVGs in `icons/`; and so on. `bluffline-brand-kit.pdf` is the full guidelines document offered for download. Keep separate from `public/images/` — these are curated for journalists, partners and designers, not site operations. Any media attached to press releases is also surfaced in the Brand Kit automatically.
 
 ## Content Collections
 
@@ -164,7 +164,7 @@ Media coverage entries. Edit `src/content/press/coverage.json`.
 
 Official releases authored by the organization. Add Markdown files to `src/content/press-releases/`.
 
-Press releases support optional media attachments that are displayed on the release page and automatically propagated to the Media Kit asset library:
+Press releases support optional media attachments that are displayed on the release page and automatically propagated to the Brand Kit asset library:
 
 ```yaml
 ---
@@ -294,21 +294,33 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 `qualities` options: `Cultural`, `Historical`, `Archaeological`, `Recreational`, `Natural`, `Scenic`
 
-## Media Kit
+## Brand Kit
 
-The Press page (`/press#media-kit`) includes a comprehensive Media Kit with the following tabs:
+The Press page (`/press#brand-kit`; the older `#media-kit` link still resolves) includes the Brand Kit: the boilerplate, a download of the full guidelines PDF (`public/media-kit/bluffline-brand-kit.pdf`), the media contact, and an asset library with the following tabs:
 
 | Tab | Content |
 |---|---|
-| Logos | Press-ready logo variants from `public/media-kit/logos/` (separate from site operational logos in `public/images/logos/`) |
+| Logos | Logo variants from `public/media-kit/logos/` (separate from site operational logos in `public/images/logos/`) plus clear-space, minimum-size and misuse rules |
+| Colors | Brand color swatches with hex/RGB values and usage notes |
+| Typography | Fraunces and Source Sans 3 samples, weights in use, the type scale, the Google Fonts embed snippet, and download links |
+| Icons | The icon set from `public/media-kit/icons/` (Lucide, ISC) with per-icon SVG download and the stroke/size specification |
 | Photos | Web-sized photos from `public/media-kit/photos/`, photos already used across the site (curated in `src/data/media-kit-photos.json`), and press release attachments |
 | Videos | Video files from `public/media-kit/videos/` + press release video attachments |
 | Audio | Audio files from `public/media-kit/audio/` |
-| Color Palette | Brand color swatches with hex/RGB values and usage notes |
 
-### Color Palette
+The guidelines PDF is the source for the usage rules shown on the Logos, Typography and Icons tabs. When the PDF is revised, replace the file and update those notes in `src/pages/press/index.astro`.
 
-The Color Palette section is driven by a single canonical data file at `src/data/brand-colors.json`. This file defines each brand color with its name, CSS variable, hex value, RGB value, and usage notes. The Media Kit reads this file at build time to render visible swatches. To update brand colors, edit `brand-colors.json` and the corresponding CSS variables in `src/styles/global.css`.
+### Colors
+
+The Colors tab is driven by a single canonical data file at `src/data/brand-colors.json`. This file defines each brand color with its name, CSS variable, hex value, RGB value, and usage notes. The Brand Kit reads this file at build time to render visible swatches. To update brand colors, edit `brand-colors.json` and the corresponding CSS variables in `src/styles/global.css`.
+
+### Typography
+
+Fonts load from Google Fonts in `src/layouts/BaseLayout.astro`. The Typography tab's samples use those same loaded fonts, and its embed snippet, weights and type scale are defined at the top of `src/pages/press/index.astro`; keep them in step with the layout and the guidelines PDF. Font files are not hosted here; the tab links to Google Fonts for download (SIL Open Font License).
+
+### Icons
+
+Every `.svg` in `public/media-kit/icons/` appears on the Icons tab with a download link, previewed inline. The files are unmodified Lucide icons (`LICENSE.txt` in the same folder). To add one, copy it from https://lucide.dev or the `lucide-static` npm package into the folder; the filename becomes its label.
 
 ### Photos
 
@@ -320,7 +332,7 @@ The Photos tab is assembled from three sources, deduplicated by path:
 
 #### Adding photos from a Drive folder
 
-Originals stay in Google Drive (the source of truth). Only web-sized JPEGs are committed. Download a Drive folder locally, then run the import script, which resizes to a 2400px longest edge, re-encodes with mozjpeg, bakes in orientation, keeps the original EXIF (camera date, colour profile), and writes credit/caption/date into EXIF so the Media Kit displays them:
+Originals stay in Google Drive (the source of truth). Only web-sized JPEGs are committed. Download a Drive folder locally, then run the import script, which resizes to a 2400px longest edge, re-encodes with mozjpeg, bakes in orientation, keeps the original EXIF (camera date, colour profile), and writes credit/caption/date into EXIF so the Brand Kit displays them:
 
 ```bash
 npm run import:photos -- ~/Downloads/Knox\ White\ Event --prefix knox-white-event-2025 \
@@ -332,7 +344,7 @@ Add `--dry-run` to preview output names and dimensions first, `--max`/`--quality
 
 ### Asset Propagation
 
-Media files attached to press releases (via the `media` frontmatter field) are automatically included in the Media Kit's Photos and Videos tabs. This ensures the asset library stays current without manual duplication.
+Media files attached to press releases (via the `media` frontmatter field) are automatically included in the Brand Kit's Photos and Videos tabs. This ensures the asset library stays current without manual duplication.
 
 ## Site Architecture
 

@@ -82,11 +82,83 @@ const audio = await getMediaAssetsFromDirectory(
   'audio'
 );
 
+// Brand Kit: downloadable guidelines PDF
+const brandKitPdf = '/media-kit/bluffline-brand-kit.pdf';
+const brandKitPdfSize = (() => {
+  try {
+    return `${(fs.statSync(path.join(publicDir, brandKitPdf)).size / (1024 * 1024)).toFixed(1)} MB`;
+  } catch {
+    return '';
+  }
+})();
+
+// Brand Kit: icon set (Lucide, ISC) from public/media-kit/icons
+const iconsDir = path.join(publicDir, 'media-kit', 'icons');
+const brandIcons = fs.existsSync(iconsDir)
+  ? fs.readdirSync(iconsDir)
+      .filter(f => f.endsWith('.svg'))
+      .sort()
+      .map(file => {
+        const raw = fs.readFileSync(path.join(iconsDir, file), 'utf8');
+        const svg = raw.replace(/<!--[\s\S]*?-->/g, '').replace(/\s*class="[^"]*"/, '').trim();
+        return { name: file.replace(/\.svg$/, ''), src: `/media-kit/icons/${file}`, svg };
+      })
+  : [];
+
+// Brand Kit: typography (mirrors the Brand Kit PDF and the fonts loaded in BaseLayout)
+const typefaces = [
+  {
+    name: 'Fraunces',
+    role: 'Display serif',
+    description: 'Every headline and every big number. Set light, set tight, and let it breathe. Sentence case always. Never used for body copy, captions, buttons, or UI labels.',
+    family: "'Fraunces', serif",
+    fallback: 'Georgia, Times New Roman, serif',
+    sample: 'Reconnecting',
+    weights: [
+      { label: 'Light 300', use: 'Heroes, H1, H2', weight: 300, italic: false },
+      { label: 'Regular 400', use: 'H3, pull quotes', weight: 400, italic: false },
+      { label: 'Medium 500', use: 'Stat figures, H4', weight: 500, italic: false },
+      { label: 'Italic 400', use: 'The keyword flourish', weight: 400, italic: true },
+    ],
+    downloadUrl: 'https://fonts.google.com/specimen/Fraunces',
+  },
+  {
+    name: 'Source Sans 3',
+    role: 'Body sans',
+    description: 'Body copy, UI, and every label. Generous line-height, light to semibold, nothing heavier. Uppercase only for small eyebrow labels, letter-spaced 0.15em.',
+    family: "'Source Sans 3', sans-serif",
+    fallback: 'system-ui, Segoe UI, sans-serif',
+    sample: 'Corridor',
+    weights: [
+      { label: 'Light 300', use: 'Lead paragraphs', weight: 300, italic: false },
+      { label: 'Regular 400', use: 'Body copy, captions', weight: 400, italic: false },
+      { label: 'Medium 500', use: 'Buttons, nav', weight: 500, italic: false },
+      { label: 'Semibold 600', use: 'Eyebrow labels, emphasis', weight: 600, italic: false },
+    ],
+    downloadUrl: 'https://fonts.google.com/specimen/Source+Sans+3',
+  },
+];
+
+const typeScale = [
+  { name: 'Hero headline', spec: '32–56 px · Fraunces 300 · line-height 1.2' },
+  { name: 'Section heading', spec: '28–40 px · Fraunces 300 · line-height 1.2' },
+  { name: 'Card heading', spec: '18 px · Fraunces 500 · line-height 1.35' },
+  { name: 'Lead paragraph', spec: '18.4 px · Source Sans 300 · line-height 1.7' },
+  { name: 'Body copy', spec: '16 px · Source Sans 400 · line-height 1.7' },
+  { name: 'Caption / metadata', spec: '14.4 px · Source Sans 400 · line-height 1.5' },
+  { name: 'Eyebrow label', spec: '13.6 px · Source Sans 600 · uppercase · +0.15em tracking' },
+  { name: 'Display stat', spec: '32 px · Fraunces 500 · line-height 1.0' },
+];
+
+const fontEmbedCode = `<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">`;
+
 // Primary tabs configuration
 const primaryTabs = [
   { id: 'news', label: 'In the News' },
   { id: 'releases', label: 'Press Releases' },
-  { id: 'media-kit', label: 'Media Kit' },
+  { id: 'brand-kit', label: 'Brand Kit' },
 ];
 
 // Curated captions/credits for photos in the kit (src/data/media-kit-photos.json).
@@ -131,10 +203,12 @@ const allVideos = [...videos, ...pressReleaseMedia.filter(m => m.type === 'video
 // Asset type tabs configuration
 const assetTabs = [
   { id: 'logos', label: 'Logos' },
+  { id: 'colors', label: 'Colors' },
+  { id: 'typography', label: 'Typography' },
+  { id: 'icons', label: 'Icons' },
   { id: 'photos', label: 'Photos' },
   { id: 'videos', label: 'Videos' },
   { id: 'audio', label: 'Audio' },
-  { id: 'colors', label: 'Color Palette' },
 ];
 ---
 
@@ -147,6 +221,11 @@ const assetTabs = [
     title={pd.heroTitle}
     description={pd.heroDescription}
   />
+
+  <script is:inline>
+    // The kit was previously linked as #media-kit; keep old links working.
+    if (window.location.hash === '#media-kit') history.replaceState(null, '', '#brand-kit');
+  </script>
 
   <section class="tabs-section">
     <div class="section-inner">
@@ -189,10 +268,17 @@ const assetTabs = [
           )}
         </div>
 
-        <!-- Media Kit Panel -->
-        <div data-tab-panel="media-kit" hidden>
+        <!-- Brand Kit Panel -->
+        <div data-tab-panel="brand-kit" hidden>
           <div class="media-kit-intro">
-            <p>Download official Bluffline assets for media use. All materials are free to use with proper attribution.</p>
+            <p>The Bluffline visual identity, drawn from the live site: logos, colors, type, icons, and photography, with the rules for using them. Use it for anything that carries the Bluffline name. Logos and photos are free for editorial and partner use with attribution to Bluffline, Inc.</p>
+            <div class="kit-actions">
+              <a class="kit-download" href={brandKitPdf} download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+                Download the full Brand Kit{brandKitPdfSize && ` (PDF, ${brandKitPdfSize})`}
+              </a>
+              <span class="kit-actions-note">Guidelines for logo use, color, type, voice, photography, and layout. Anything that bends a rule, ask <a href={`mailto:${pd.mediaContactEmail}`}>{pd.mediaContactEmail}</a> before you publish.</span>
+            </div>
           </div>
 
           <!-- Boilerplate Section -->
@@ -203,7 +289,7 @@ const assetTabs = [
                 <p>{pd.boilerplate}</p>
               </div>
               <div class="boilerplate-actions">
-                <button class="copy-boilerplate" aria-label="Copy boilerplate text">
+                <button class="copy-boilerplate" data-copy-target=".boilerplate p" aria-label="Copy boilerplate text">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
@@ -217,7 +303,7 @@ const assetTabs = [
           <!-- Assets Section with Sub-tabs -->
           <div class="media-kit-section">
             <h3 class="media-kit-section-title">Assets</h3>
-            <p class="media-kit-section-desc">High-quality media assets for editorial and promotional use.</p>
+            <p class="media-kit-section-desc">Logos, colors, type, icons, and media for editorial, partner, and design use.</p>
 
             <Tabs id="assets" tabs={assetTabs} defaultTab="logos" variant="pills">
               <!-- Logos Panel -->
@@ -266,6 +352,108 @@ const assetTabs = [
                     icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`}
                   />
                 )}
+                <div class="kit-notes">
+                  <h4 class="kit-notes-title">Using the logo</h4>
+                  <ul>
+                    <li>Two arcs trace the bluffs above the bay, spring green rising into forest green, over a navy wordmark. It is the only Bluffline mark. Never redraw it or set the name in another typeface.</li>
+                    <li>Keep clear space on all four sides equal to the height of the wordmark.</li>
+                    <li>Minimum size: 120 px wide on screen, 1.5 in wide in print.</li>
+                    <li>Use the standard lockup on warm white, cream, mist, or a light photo scrim. Use the reverse lockup on navy, forest, or dark photography.</li>
+                    <li>Never stretch, rotate, recolor, or add shadows, outlines, or gradients to the mark.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Typography Panel -->
+              <div data-tab-panel="typography" hidden>
+                <div class="color-palette-intro">
+                  <p>Two open-licensed typefaces from Google Fonts. Fraunces carries every headline; Source Sans 3 carries everything else.</p>
+                </div>
+                <div class="type-grid">
+                  {typefaces.map(face => (
+                    <div class="type-card">
+                      <div class="type-sample" style={`font-family: ${face.family};`} aria-hidden="true">Aa</div>
+                      <div class="type-info">
+                        <span class="type-role">{face.role}</span>
+                        <span class="type-name">{face.name}</span>
+                        <p class="type-desc">{face.description}</p>
+                        <ul class="type-weights">
+                          {face.weights.map(w => (
+                            <li>
+                              <span class="type-weight-sample" style={`font-family: ${face.family}; font-weight: ${w.weight}; font-style: ${w.italic ? 'italic' : 'normal'};`}>{face.sample}</span>
+                              <span class="type-weight-meta"><strong>{w.label}</strong> · {w.use}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <span class="type-fallback"><strong>Fallback:</strong> {face.fallback}</span>
+                        <a class="kit-download kit-download-small" href={face.downloadUrl} target="_blank" rel="noopener noreferrer">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                          Download from Google Fonts
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="type-scale-card">
+                  <h4 class="kit-notes-title">Type scale</h4>
+                  <dl class="type-scale">
+                    {typeScale.map(row => (
+                      <div class="type-scale-row">
+                        <dt>{row.name}</dt>
+                        <dd>{row.spec}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+
+                <div class="type-embed-card">
+                  <div class="type-embed-header">
+                    <h4 class="kit-notes-title">Web embed</h4>
+                    <button class="copy-boilerplate" data-copy-target="#font-embed-code" aria-label="Copy font embed code">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                      </svg>
+                      Copy to clipboard
+                    </button>
+                  </div>
+                  <pre class="type-embed"><code id="font-embed-code">{fontEmbedCode}</code></pre>
+                  <p class="type-embed-note">Both typefaces are licensed under the SIL Open Font License. For print and offline decks, download the font files from Google Fonts and embed them.</p>
+                </div>
+              </div>
+
+              <!-- Icons Panel -->
+              <div data-tab-panel="icons" hidden>
+                <div class="color-palette-intro">
+                  <p>Line-drawn, evenly weighted, quietly functional. Icons label things; they never decorate. The set is <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer">Lucide</a> (ISC license): take new icons from there rather than drawing them.</p>
+                </div>
+                {brandIcons.length > 0 ? (
+                  <div class="icon-grid">
+                    {brandIcons.map(icon => (
+                      <a class="icon-tile" href={icon.src} download title={`Download ${icon.name}.svg`}>
+                        <span class="icon-tile-glyph" set:html={icon.svg} />
+                        <span class="icon-tile-name">{icon.name}</span>
+                        <span class="icon-tile-hint">SVG</span>
+                      </a>
+                    ))}
+                  </div>
+                ) : (
+                  <EmptyStateCard
+                    title="No icons available"
+                    description="Icon files will be available here when uploaded."
+                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>`}
+                  />
+                )}
+                <div class="kit-notes">
+                  <h4 class="kit-notes-title">Specification</h4>
+                  <ul>
+                    <li>24 × 24 viewBox, 2 px stroke, no fill, round caps and joins. Colored with <code>currentColor</code> so they inherit the text around them.</li>
+                    <li>Rendered at 12–24 px. Never scale an icon above 24 px; enlarge the container instead.</li>
+                    <li>Never fill an icon, mix filled and outlined glyphs, change the stroke weight, or use an icon as decoration where a label would do.</li>
+                    <li>No icon fonts, no filled glyphs, no emoji anywhere in the product.</li>
+                  </ul>
+                </div>
               </div>
 
               <!-- Photos Panel -->
@@ -397,14 +585,18 @@ const assetTabs = [
 </BaseLayout>
 
 <script>
-  function initCopyBoilerplate() {
-    const copyBtn = document.querySelector('.copy-boilerplate');
-    const boilerplate = document.querySelector('.boilerplate p');
+  function initCopyButtons() {
+    document.querySelectorAll<HTMLButtonElement>('.copy-boilerplate[data-copy-target]').forEach(copyBtn => {
+      const source = document.querySelector(copyBtn.dataset.copyTarget || '');
+      initCopyButton(copyBtn, source);
+    });
+  }
 
-    copyBtn?.addEventListener('click', async () => {
-      if (!boilerplate) return;
+  function initCopyButton(copyBtn: HTMLButtonElement, source: Element | null) {
+    copyBtn.addEventListener('click', async () => {
+      if (!source) return;
 
-      const text = boilerplate.textContent || '';
+      const text = source.textContent || '';
 
       try {
         await navigator.clipboard.writeText(text);
@@ -435,7 +627,7 @@ const assetTabs = [
     });
   }
 
-  initCopyBoilerplate();
+  initCopyButtons();
 </script>
 
 <style>
@@ -500,6 +692,310 @@ const assetTabs = [
     color: var(--navy);
     opacity: 0.7;
     margin-bottom: 1.5rem;
+  }
+
+  .kit-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .kit-actions-note {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    flex: 1 1 320px;
+  }
+
+  .kit-actions-note a {
+    color: var(--forest);
+    text-decoration: underline;
+  }
+
+  .kit-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.25rem;
+    background: var(--forest);
+    color: white;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .kit-download:hover {
+    background: var(--navy);
+    transform: translateY(-1px);
+  }
+
+  .kit-download svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .kit-download-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .kit-notes {
+    margin-top: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .kit-notes-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin: 0 0 0.75rem;
+  }
+
+  .kit-notes ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .kit-notes li {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.85;
+    line-height: 1.55;
+  }
+
+  .kit-notes code {
+    font-size: 0.85em;
+    background: var(--mist);
+    padding: 0.05em 0.35em;
+    border-radius: 4px;
+  }
+
+  /* Typography */
+  .type-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-bottom: 1.25rem;
+  }
+
+  .type-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+  }
+
+  .type-sample {
+    background: var(--mist);
+    color: var(--forest);
+    font-size: 5rem;
+    line-height: 1;
+    padding: 1.5rem;
+    font-weight: 300;
+  }
+
+  .type-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .type-role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+
+  .type-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+  }
+
+  .type-desc {
+    font-size: 0.9rem;
+    color: var(--navy);
+    opacity: 0.75;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .type-weights {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .type-weights li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+    padding-top: 0.35rem;
+  }
+
+  .type-weight-sample {
+    font-size: 1.5rem;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .type-weight-meta {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.7;
+    text-align: right;
+  }
+
+  .type-fallback {
+    font-size: 0.8rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+  }
+
+  .type-scale-card,
+  .type-embed-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    margin-bottom: 1.25rem;
+  }
+
+  .type-scale {
+    margin: 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .type-scale-row {
+    display: grid;
+    grid-template-columns: minmax(140px, 1fr) 2fr;
+    gap: 1rem;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(45, 48, 71, 0.08);
+    padding-top: 0.4rem;
+  }
+
+  .type-scale-row dt {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .type-scale-row dd {
+    margin: 0;
+    color: var(--navy);
+    opacity: 0.75;
+  }
+
+  .type-embed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .type-embed-header .kit-notes-title {
+    margin: 0;
+  }
+
+  .type-embed {
+    background: var(--mist);
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--navy);
+  }
+
+  .type-embed-note {
+    font-size: 0.85rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin: 0.75rem 0 0;
+    line-height: 1.5;
+  }
+
+  /* Icons */
+  .icon-grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .icon-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1.25rem 0.75rem 1rem;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(45, 48, 71, 0.08);
+    color: var(--navy);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .icon-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .icon-tile:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
+  .icon-tile-glyph {
+    display: flex;
+    color: var(--forest);
+  }
+
+  .icon-tile-glyph :global(svg) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .icon-tile-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .icon-tile-hint {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.55;
   }
 
   /* Boilerplate Card */
@@ -660,6 +1156,11 @@ const assetTabs = [
   }
 
   .contact-item a:hover {
+    text-decoration: underline;
+  }
+
+  .color-palette-intro a {
+    color: var(--forest);
     text-decoration: underline;
   }
 
