@@ -77,7 +77,9 @@ src/
 │   │       ├── index.astro                # Updates listing
 │   │       └── [slug].astro               # Individual update
 │   ├── press/
-│   │   ├── index.astro                    # Press coverage, press releases, brand kit
+│   │   ├── index.astro                    # In the News (press coverage)
+│   │   ├── releases.astro                 # Press releases list
+│   │   ├── brand-kit.astro                # Brand Kit (logos, colors, type, icons, media)
 │   │   └── [slug].astro                   # Individual press release (with media attachments)
 │   ├── documents/
 │   │   └── annual-reports/
@@ -296,7 +298,9 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 ## Brand Kit
 
-The Press page (`/press#brand-kit`; the older `#media-kit` link still resolves) includes the Brand Kit: the boilerplate, the media contact, and an asset library with the following tabs:
+The Press section is three pages sharing `src/layouts/PressLayout.astro` (hero, section links, call to action): `/press` for coverage, `/press/releases` for press releases, and `/press/brand-kit` for the Brand Kit. The section links in `src/components/press/PressNav.astro` are real links, so each section has its own URL, title and history entry. Old hash links (`/press#releases`, `/press#brand-kit`, `/press#media-kit`) redirect to the new pages.
+
+The Brand Kit page holds the boilerplate, the media contact, and an asset library with the following tabs (in-page tabs; each writes a hash, so `/press/brand-kit#typography` deep-links and Back/Forward step through them):
 
 | Tab | Content |
 |---|---|
@@ -308,15 +312,15 @@ The Press page (`/press#brand-kit`; the older `#media-kit` link still resolves) 
 | Videos | Video files from `public/media-kit/videos/` + press release video attachments |
 | Audio | Audio files from `public/media-kit/audio/` |
 
-The internal Brand Kit PDF (not published; kept in Drive) is the source for the usage rules shown on the Logos, Typography and Icons tabs. When it is revised, update those notes in `src/pages/press/index.astro`. Do not commit the PDF to `public/`.
+The internal Brand Kit PDF (not published; kept in Drive) is the source for the usage rules shown on the Logos, Typography and Icons tabs. When it is revised, update those notes in `src/pages/press/brand-kit.astro`. Do not commit the PDF to `public/`.
 
 ### Colors
 
-The Colors tab is driven by a single canonical data file at `src/data/brand-colors.json`. This file defines each brand color with its name, CSS variable, hex value, RGB value, and usage notes. The Brand Kit reads this file at build time to render visible swatches. To update brand colors, edit `brand-colors.json` and the corresponding CSS variables in `src/styles/global.css`.
+The Colors tab is driven by a single canonical data file at `src/data/brand-colors.json`. This file defines each brand color with its name, CSS variable, hex value, RGB value, and usage notes. The Brand Kit page reads this file at build time to render visible swatches. To update brand colors, edit `brand-colors.json` and the corresponding CSS variables in `src/styles/global.css`.
 
 ### Typography
 
-Fonts load from Google Fonts in `src/layouts/BaseLayout.astro`. The Typography tab's samples use those same loaded fonts, and its embed snippet, weights and type scale are defined at the top of `src/pages/press/index.astro`; keep them in step with the layout and the guidelines PDF. Font files are not hosted here; the tab links to Google Fonts for download (SIL Open Font License).
+Fonts load from Google Fonts in `src/layouts/BaseLayout.astro`. The Typography tab's samples use those same loaded fonts, and its embed snippet, weights and type scale are defined at the top of `src/pages/press/brand-kit.astro`; keep them in step with the layout and the guidelines PDF. Font files are not hosted here; the tab links to Google Fonts for download (SIL Open Font License).
 
 ### Icons
 

@@ -1,0 +1,54 @@
+---
+import PressLayout from '../../layouts/PressLayout.astro';
+import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'press');
+const pd = page.data;
+
+// Fetch press releases
+const pressReleases = await getCollection('press-releases', ({ data }) => !data.draft);
+const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<PressLayout
+  section="releases"
+  title="Press Releases"
+  description="Official announcements from Bluffline, Inc."
+  heroTitle={pd.sections.releases.title}
+  heroDescription={pd.sections.releases.description}
+>
+  {sortedReleases.length > 0 ? (
+    <div class="releases-grid">
+      {sortedReleases.map(release => (
+        <PressReleaseCard
+          title={release.data.title}
+          pubDate={release.data.pubDate}
+          summary={release.data.summary}
+          slug={release.slug}
+        />
+      ))}
+    </div>
+  ) : (
+    <p class="empty-state">No press releases available yet.</p>
+  )}
+</PressLayout>
+
+<style>
+  .releases-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: rgba(45, 48, 71, 0.6);
+    font-size: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .releases-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

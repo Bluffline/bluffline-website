@@ -1,0 +1,85 @@
+---
+/**
+ * Section navigation for the Press area. Rendered as real links so each
+ * section has its own URL, page title and history entry.
+ */
+export type PressSection = 'news' | 'releases' | 'brand-kit';
+
+interface Props {
+  active: PressSection;
+}
+
+const { active } = Astro.props;
+
+const sections: { id: PressSection; href: string; label: string }[] = [
+  { id: 'news', href: '/press', label: 'In the News' },
+  { id: 'releases', href: '/press/releases', label: 'Press Releases' },
+  { id: 'brand-kit', href: '/press/brand-kit', label: 'Brand Kit' },
+];
+---
+
+<nav class="press-nav" aria-label="Press sections">
+  {sections.map(section => (
+    <a
+      href={section.href}
+      class:list={['press-nav-link', { active: section.id === active }]}
+      aria-current={section.id === active ? 'page' : undefined}
+    >
+      {section.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .press-nav {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid rgba(45, 48, 71, 0.1);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .press-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .press-nav-link {
+    position: relative;
+    padding: 0.875rem 1.25rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(45, 48, 71, 0.6);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+  }
+
+  .press-nav-link:hover {
+    color: var(--navy);
+  }
+
+  .press-nav-link.active {
+    color: var(--forest);
+  }
+
+  .press-nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--forest);
+  }
+
+  .press-nav-link:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+</style>
