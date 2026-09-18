@@ -117,7 +117,7 @@ Images and media follow a centralized structure under `public/images/` with clea
 - **`public/images/photos/`** — General high-res photography.
 - **`public/images/press/`** — Press release media attachments.
 - **`public/images/video/`** — Video assets.
-- **`public/media-kit/`** — Downloadable Brand Kit assets organized by type. Scanned at build time for the Brand Kit tab. Drop logo variants (color, reverse, etc.) in `logos/`; photos in `photos/`; icon SVGs in `icons/`; and so on. `bluffline-brand-kit.pdf` is the full guidelines document offered for download. Keep separate from `public/images/` — these are curated for journalists, partners and designers, not site operations. Any media attached to press releases is also surfaced in the Brand Kit automatically.
+- **`public/media-kit/`** — Downloadable Brand Kit assets organized by type. Scanned at build time for the Brand Kit tab. Drop logo variants (color, reverse, etc.) in `logos/`; photos in `photos/`; icon SVGs in `icons/`; and so on. Keep separate from `public/images/` — these are curated for journalists, partners and designers, not site operations. Any media attached to press releases is also surfaced in the Brand Kit automatically.
 
 ## Content Collections
 
@@ -296,7 +296,7 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 ## Brand Kit
 
-The Press page (`/press#brand-kit`; the older `#media-kit` link still resolves) includes the Brand Kit: the boilerplate, a download of the full guidelines PDF (`public/media-kit/bluffline-brand-kit.pdf`), the media contact, and an asset library with the following tabs:
+The Press page (`/press#brand-kit`; the older `#media-kit` link still resolves) includes the Brand Kit: the boilerplate, the media contact, and an asset library with the following tabs:
 
 | Tab | Content |
 |---|---|
@@ -308,7 +308,7 @@ The Press page (`/press#brand-kit`; the older `#media-kit` link still resolves) 
 | Videos | Video files from `public/media-kit/videos/` + press release video attachments |
 | Audio | Audio files from `public/media-kit/audio/` |
 
-The guidelines PDF is the source for the usage rules shown on the Logos, Typography and Icons tabs. When the PDF is revised, replace the file and update those notes in `src/pages/press/index.astro`.
+The internal Brand Kit PDF (not published; kept in Drive) is the source for the usage rules shown on the Logos, Typography and Icons tabs. When it is revised, update those notes in `src/pages/press/index.astro`. Do not commit the PDF to `public/`.
 
 ### Colors
 
