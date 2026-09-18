@@ -46,7 +46,7 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={['tabs-container', `tabs-${variant}`, className]} data-tabs={id} data-hash-prefix={hashPrefix}>
+<div class:list={['tabs-container', `tabs-${variant}`, className]} data-tabs={id} data-hash-prefix={hashPrefix} data-default-tab={defaultTab}>
   <div class="tabs" role="tablist" aria-label="Tab navigation">
     {tabs.map((tab, index) => (
       <button
@@ -78,11 +78,12 @@ const {
   function initTabs(container: HTMLElement) {
     const tabsId = container.dataset.tabs;
     const hashPrefix = container.dataset.hashPrefix;
+    const defaultTab = container.dataset.defaultTab;
     // Only select direct children to avoid conflicts with nested tabs
     const tabButtons = container.querySelectorAll(':scope > .tabs > [role="tab"]');
     const panels = container.querySelectorAll(':scope > .tab-panels > [data-tab-panel]');
 
-    // Build hash maps
+    // Every tab is addressable by URL hash: #tab, or #prefix-tab when a prefix is set
     const hashToTabId: Record<string, string> = {};
     const tabIdToHash: Record<string, string> = {};
 
@@ -95,11 +96,25 @@ const {
       }
     });
 
-    // Check URL hash on load
-    const hash = window.location.hash;
-    if (hash && hashToTabId[hash]) {
-      activateTab(hashToTabId[hash]);
+    // Deep link on load: activate the tab and bring the tab strip into view
+    const initialTab = hashToTabId[window.location.hash];
+    if (initialTab) {
+      activateTab(initialTab, { updateHistory: false });
+      const scrollToTabs = () => container.scrollIntoView({ block: 'start' });
+      // Wait for fonts and images so the layout has settled before scrolling
+      if (document.readyState === 'complete') scrollToTabs();
+      else window.addEventListener('load', scrollToTabs, { once: true });
     }
+
+    // Back/forward: follow the hash in the history entry
+    window.addEventListener('popstate', () => {
+      const tabId = hashToTabId[window.location.hash];
+      if (tabId) {
+        activateTab(tabId, { updateHistory: false });
+      } else if (!window.location.hash && defaultTab) {
+        activateTab(defaultTab, { updateHistory: false });
+      }
+    });
 
     // Click handlers
     tabButtons.forEach((btn) => {
@@ -128,7 +143,7 @@ const {
       });
     });
 
-    function activateTab(tabId: string) {
+    function activateTab(tabId: string, options: { updateHistory: boolean } = { updateHistory: true }) {
       // Update tab buttons
       tabButtons.forEach((btn) => {
         const isSelected = (btn as HTMLElement).dataset.tabId === tabId;
@@ -148,9 +163,10 @@ const {
         }
       });
 
-      // Update URL hash (without scrolling)
-      if (hashPrefix && tabIdToHash[tabId]) {
-        history.replaceState(null, '', tabIdToHash[tabId]);
+      // Add a history entry so Back/Forward step through tabs and the URL is shareable
+      const hash = tabIdToHash[tabId];
+      if (options.updateHistory && hash && window.location.hash !== hash) {
+        history.pushState({ tabs: tabsId, tabId }, '', hash);
       }
     }
   }
@@ -166,6 +182,7 @@ const {
 <style>
   .tabs-container {
     width: 100%;
+    scroll-margin-top: 6rem; /* clear the fixed header when deep-linked by hash */
   }
 
   .tabs {

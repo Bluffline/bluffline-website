@@ -1,19 +1,7 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/ui/PageHero.astro';
+import PressLayout from '../../layouts/PressLayout.astro';
 import PressCard from '../../components/content/PressCard.astro';
-import PressReleaseCard from '../../components/content/PressReleaseCard.astro';
-import CallToAction from '../../components/ui/CallToAction.astro';
-import MediaLightbox from '../../components/ui/MediaLightbox.astro';
-import Tabs from '../../components/ui/Tabs.astro';
-import EmptyStateCard from '../../components/content/EmptyStateCard.astro';
-import MediaPhotoCard from '../../components/content/MediaPhotoCard.astro';
-import MediaVideoCard from '../../components/content/MediaVideoCard.astro';
-import MediaAudioItem from '../../components/content/MediaAudioItem.astro';
 import { getCollection, getEntry } from 'astro:content';
-import { getMediaAssetsFromDirectory } from '../../utils/media-metadata';
-import path from 'node:path';
-import brandColors from '../../data/brand-colors.json';
 
 const page = await getEntry('pages', 'press');
 const pd = page.data;
@@ -31,380 +19,64 @@ const pressByYear = sortedPress.reduce((acc, item) => {
 }, {} as Record<number, typeof sortedPress>);
 
 const years = Object.keys(pressByYear).sort((a, b) => Number(b) - Number(a));
-
-// Fetch press releases
-const pressReleases = await getCollection('press-releases', ({ data }) => !data.draft);
-const sortedReleases = pressReleases.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-
-// Collect media from press releases for asset propagation (8.4)
-const pressReleaseMedia = sortedReleases
-  .filter(r => r.data.media && r.data.media.length > 0)
-  .flatMap(r => (r.data.media || []).map((m: { src: string; alt?: string; caption?: string; credit?: string; type: string }) => ({
-    src: m.src,
-    title: m.alt || m.caption || 'Press release media',
-    type: m.type === 'video' ? 'video' as const : 'image' as const,
-    description: m.caption || '',
-    credit: m.credit || 'Bluffline, Inc.',
-    format: m.src.split('.').pop()?.toUpperCase() || '',
-    size: '',
-    dimensions: '',
-    date: '',
-    videoType: m.type === 'video' ? (() => { const ext = m.src.split('.').pop()?.toLowerCase() || ''; return ext === 'webm' ? 'video/webm' : ext === 'mov' ? 'video/quicktime' : 'video/mp4'; })() : undefined,
-  })));
-
-// Load media kit assets with embedded metadata extraction
-const publicDir = path.join(process.cwd(), 'public');
-
-const logos = await getMediaAssetsFromDirectory(
-  path.join(publicDir, 'media-kit', 'logos'),
-  '/media-kit/logos',
-  'image'
-);
-
-const photos = await getMediaAssetsFromDirectory(
-  path.join(publicDir, 'media-kit', 'photos'),
-  '/media-kit/photos',
-  'image'
-);
-
-const videos = await getMediaAssetsFromDirectory(
-  path.join(publicDir, 'media-kit', 'videos'),
-  '/media-kit/videos',
-  'video'
-);
-
-const audio = await getMediaAssetsFromDirectory(
-  path.join(publicDir, 'media-kit', 'audio'),
-  '/media-kit/audio',
-  'audio'
-);
-
-// Primary tabs configuration
-const primaryTabs = [
-  { id: 'news', label: 'In the News' },
-  { id: 'releases', label: 'Press Releases' },
-  { id: 'media-kit', label: 'Media Kit' },
-];
-
-// Merge press release photos into photos list
-const allPhotos = [...photos, ...pressReleaseMedia.filter(m => m.type === 'image')];
-const allVideos = [...videos, ...pressReleaseMedia.filter(m => m.type === 'video')];
-
-// Asset type tabs configuration
-const assetTabs = [
-  { id: 'logos', label: 'Logos' },
-  { id: 'photos', label: 'Photos' },
-  { id: 'videos', label: 'Videos' },
-  { id: 'audio', label: 'Audio' },
-  { id: 'colors', label: 'Color Palette' },
-];
 ---
 
-<BaseLayout
+<PressLayout
+  section="news"
   title="Press"
-  description="Media coverage, press releases, and press resources for the Bluffline — Pensacola's 20-mile multimodal corridor."
+  description="Media coverage of the Bluffline, Pensacola's 20-mile multimodal corridor."
+  heroTitle={pd.sections.news.title}
+  heroDescription={pd.sections.news.description}
 >
-  <PageHero
-    label={pd.heroLabel}
-    title={pd.heroTitle}
-    description={pd.heroDescription}
-  />
+  <script is:inline slot="head">
+    // The three press sections used to be tabs on this page addressed by hash.
+    (function () {
+      var moved = { '#releases': '/press/releases', '#brand-kit': '/press/brand-kit', '#media-kit': '/press/brand-kit' };
+      var target = moved[window.location.hash];
+      if (target) window.location.replace(target);
+    })();
+  </script>
 
-  <section class="tabs-section">
-    <div class="section-inner">
-      <Tabs id="press" tabs={primaryTabs} defaultTab="news" variant="primary" hashPrefix="">
-        <!-- News Panel -->
-        <div data-tab-panel="news" class="active">
-          {years.map(year => (
-            <div class="year-group">
-              <h3 class="year-label">{year}</h3>
-              <div class="articles-grid">
-                {pressByYear[Number(year)].map(item => (
-                  <PressCard
-                    outlet={item.data.outlet}
-                    title={item.data.title}
-                    date={item.data.date}
-                    link={item.data.link}
-                    type={item.data.mediaType}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <!-- Releases Panel -->
-        <div data-tab-panel="releases" hidden>
-          {sortedReleases.length > 0 ? (
-            <div class="releases-grid">
-              {sortedReleases.map(release => (
-                <PressReleaseCard
-                  title={release.data.title}
-                  pubDate={release.data.pubDate}
-                  summary={release.data.summary}
-                  slug={release.slug}
-                />
-              ))}
-            </div>
-          ) : (
-            <p class="empty-state">No press releases available yet.</p>
-          )}
-        </div>
-
-        <!-- Media Kit Panel -->
-        <div data-tab-panel="media-kit" hidden>
-          <div class="media-kit-intro">
-            <p>Download official Bluffline assets for media use. All materials are free to use with proper attribution.</p>
-          </div>
-
-          <!-- Boilerplate Section -->
-          <div class="media-kit-section">
-            <h3 class="media-kit-section-title">About the Bluffline</h3>
-            <div class="boilerplate-card">
-              <div class="boilerplate">
-                <p>{pd.boilerplate}</p>
-              </div>
-              <div class="boilerplate-actions">
-                <button class="copy-boilerplate" aria-label="Copy boilerplate text">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                  </svg>
-                  Copy to clipboard
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Assets Section with Sub-tabs -->
-          <div class="media-kit-section">
-            <h3 class="media-kit-section-title">Assets</h3>
-            <p class="media-kit-section-desc">High-quality media assets for editorial and promotional use.</p>
-
-            <Tabs id="assets" tabs={assetTabs} defaultTab="logos" variant="pills">
-              <!-- Logos Panel -->
-              <div data-tab-panel="logos" class="active">
-                {logos.length > 0 ? (
-                  <div class="media-grid media-grid-logos">
-                    {logos.map((asset) => (
-                      <button
-                        class="media-item"
-                        data-lightbox-trigger
-                        data-media-src={asset.src}
-                        data-media-type={asset.type}
-                        data-media-title={asset.title}
-                        data-media-description={asset.description}
-                        data-media-format={asset.format}
-                        data-media-dimensions={asset.dimensions}
-                        data-media-size={asset.size}
-                        data-media-credit={asset.credit}
-                        data-media-date={asset.date}
-                        data-media-download={asset.src}
-                        data-media-filename={asset.src.split('/').pop()}
-                      >
-                        <div class="media-item-preview logo-preview">
-                          <img src={asset.src} alt={asset.title} loading="lazy" />
-                        </div>
-                        <div class="media-item-info">
-                          <span class="media-item-title">{asset.title}</span>
-                          <span class="media-item-meta">{asset.format}{asset.size && ` · ${asset.size}`}</span>
-                        </div>
-                        <div class="media-item-actions">
-                          <span class="preview-hint">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                              <circle cx="12" cy="12" r="3"/>
-                            </svg>
-                            Preview
-                          </span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                ) : (
-                  <EmptyStateCard
-                    title="No logos available"
-                    description="Logo files will be available here when uploaded."
-                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`}
-                  />
-                )}
-              </div>
-
-              <!-- Photos Panel -->
-              <div data-tab-panel="photos" hidden>
-                {allPhotos.length > 0 ? (
-                  <div class="media-grid media-grid-photos">
-                    {allPhotos.map((asset) => (
-                      <MediaPhotoCard
-                        src={asset.src}
-                        title={asset.title}
-                        description={asset.description}
-                        format={asset.format}
-                        dimensions={asset.dimensions}
-                        size={asset.size}
-                        credit={asset.credit || 'Bluffline, Inc.'}
-                        date={asset.date}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <EmptyStateCard
-                    title="No photos available"
-                    description="Photos will be available here when uploaded."
-                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`}
-                  />
-                )}
-              </div>
-
-              <!-- Videos Panel -->
-              <div data-tab-panel="videos" hidden>
-                {allVideos.length > 0 ? (
-                  <div class="media-grid media-grid-videos">
-                    {allVideos.map((asset) => (
-                      <MediaVideoCard
-                        src={asset.src}
-                        title={asset.title}
-                        description={asset.description}
-                        videoType={asset.videoType}
-                        format={asset.format}
-                        size={asset.size}
-                        credit={asset.credit || 'Bluffline, Inc.'}
-                        date={asset.date}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <EmptyStateCard
-                    title="No videos available"
-                    description="Videos will be available here when uploaded."
-                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>`}
-                  />
-                )}
-              </div>
-
-              <!-- Audio Panel -->
-              <div data-tab-panel="audio" hidden>
-                {audio.length > 0 ? (
-                  <div class="audio-list">
-                    {audio.map((asset) => (
-                      <MediaAudioItem
-                        src={asset.src}
-                        title={asset.title}
-                        audioType={asset.audioType}
-                        format={asset.format}
-                        size={asset.size}
-                        credit={asset.credit}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <EmptyStateCard
-                    title="No audio files available"
-                    description="Audio files will be available here when uploaded."
-                    icon={`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`}
-                  />
-                )}
-              </div>
-              <!-- Color Palette Panel -->
-              <div data-tab-panel="colors" hidden>
-                <div class="color-palette-intro">
-                  <p>Official Bluffline brand colors. Values are sourced directly from the site's design tokens.</p>
-                </div>
-                <div class="color-palette-grid">
-                  {brandColors.map((color: { name: string; variable: string; hex: string; rgb: string; usage: string }) => (
-                    <div class="color-swatch-card">
-                      <div class="color-swatch" style={`background-color: ${color.hex};`}></div>
-                      <div class="color-info">
-                        <span class="color-name">{color.name}</span>
-                        <div class="color-values">
-                          <span class="color-value"><strong>Hex:</strong> {color.hex}</span>
-                          <span class="color-value"><strong>RGB:</strong> {color.rgb}</span>
-                          <span class="color-value"><strong>CSS:</strong> var({color.variable})</span>
-                        </div>
-                        <span class="color-usage">{color.usage}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Tabs>
-          </div>
-
-          <!-- Media Contact Section -->
-          <div class="media-kit-section">
-            <h3 class="media-kit-section-title">Media Contact</h3>
-            <div class="contact-card">
-              <p>For press inquiries, interviews, or additional information:</p>
-              <div class="contact-info">
-                <div class="contact-item">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  <a href={`mailto:${pd.mediaContactEmail}`}>{pd.mediaContactEmail}</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Tabs>
+  {years.map(year => (
+    <div class="year-group">
+      <h3 class="year-label">{year}</h3>
+      <div class="articles-grid">
+        {pressByYear[Number(year)].map(item => (
+          <PressCard
+            outlet={item.data.outlet}
+            title={item.data.title}
+            date={item.data.date}
+            link={item.data.link}
+            type={item.data.mediaType}
+          />
+        ))}
+      </div>
     </div>
-  </section>
-
-  <CallToAction
-    title={pd.ctaTitle}
-    description={pd.ctaDescription}
-    primaryLabel="Get Involved"
-    primaryHref="/support"
-  />
-
-  <MediaLightbox />
-</BaseLayout>
-
-<script>
-  function initCopyBoilerplate() {
-    const copyBtn = document.querySelector('.copy-boilerplate');
-    const boilerplate = document.querySelector('.boilerplate p');
-
-    copyBtn?.addEventListener('click', async () => {
-      if (!boilerplate) return;
-
-      const text = boilerplate.textContent || '';
-
-      try {
-        await navigator.clipboard.writeText(text);
-
-        // Update button to show success
-        const originalHTML = copyBtn.innerHTML;
-        copyBtn.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-          Copied!
-        `;
-        copyBtn.classList.add('copied');
-
-        setTimeout(() => {
-          copyBtn.innerHTML = originalHTML;
-          copyBtn.classList.remove('copied');
-        }, 2000);
-      } catch {
-        // Fallback for older browsers
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-      }
-    });
-  }
-
-  initCopyBoilerplate();
-</script>
+  ))}
+</PressLayout>
 
 <style>
-  .tabs-section { padding: 0 0 4rem; background: var(--cream); }
-
   .year-group { margin-bottom: 3rem; }
   .year-group:last-child { margin-bottom: 0; }
+  .year-label {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--spring);
+    display: inline-block;
+  }
+  .year-group:last-child { margin-bottom: 0; }
+  .year-label {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--spring);
+    display: inline-block;
+  }
   .year-label {
     font-family: 'Fraunces', serif;
     font-size: 1.5rem;
@@ -419,274 +91,5 @@ const assetTabs = [
   .releases-grid {
     display: grid;
     gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .releases-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 3rem;
-    color: rgba(45, 48, 71, 0.6);
-    font-size: 1rem;
-  }
-
-  /* Media Kit Styles */
-  .media-kit-intro {
-    margin-bottom: 2.5rem;
-    font-size: 1.05rem;
-    color: var(--navy);
-    opacity: 0.85;
-  }
-
-  .media-kit-section {
-    margin-bottom: 3rem;
-  }
-
-  .media-kit-section:last-child {
-    margin-bottom: 0;
-  }
-
-  .media-kit-section-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.35rem;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-  }
-
-  .media-kit-section-desc {
-    font-size: 0.95rem;
-    color: var(--navy);
-    opacity: 0.7;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Boilerplate Card */
-  .boilerplate-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid rgba(45, 48, 71, 0.08);
-  }
-
-  .boilerplate {
-    background: var(--mist);
-    border-radius: 8px;
-    padding: 1.25rem;
-    font-size: 0.9rem;
-    color: var(--navy);
-    line-height: 1.7;
-  }
-
-  .boilerplate p {
-    margin: 0;
-  }
-
-  .boilerplate-actions {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .copy-boilerplate {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    background: var(--forest);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .copy-boilerplate:hover {
-    background: #364519;
-  }
-
-  .copy-boilerplate.copied {
-    background: var(--spring);
-    color: var(--forest);
-  }
-
-  .copy-boilerplate svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .preview-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--forest);
-  }
-
-  .preview-hint svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Media Grid */
-  .media-grid {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  .media-grid-logos {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-
-  .media-grid-photos {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-
-  .media-grid-videos {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-
-  .media-grid-audio {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .logo-preview {
-    aspect-ratio: 3 / 2;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #f8f8f8 25%, #e8e8e8 25%, #e8e8e8 50%, #f8f8f8 50%, #f8f8f8 75%, #e8e8e8 75%);
-    background-size: 20px 20px;
-  }
-
-  .logo-preview img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  /* Audio list */
-  .audio-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* Contact Card in Media Kit */
-  .contact-card {
-    max-width: 500px;
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid rgba(45, 48, 71, 0.08);
-  }
-
-  .contact-card p {
-    font-size: 0.95rem;
-    color: var(--navy);
-    opacity: 0.75;
-    margin-bottom: 1rem;
-  }
-
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-    color: var(--navy);
-  }
-
-  .contact-item svg {
-    width: 20px;
-    height: 20px;
-    color: var(--forest);
-    flex-shrink: 0;
-  }
-
-  .contact-item a {
-    color: var(--forest);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .contact-item a:hover {
-    text-decoration: underline;
-  }
-
-  /* Color Palette */
-  .color-palette-intro {
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-    color: var(--navy);
-    opacity: 0.75;
-  }
-
-  .color-palette-grid {
-    display: grid;
-    gap: 1.25rem;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
-
-  .color-swatch-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(45, 48, 71, 0.08);
-  }
-
-  .color-swatch {
-    height: 80px;
-    width: 100%;
-  }
-
-  .color-info {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .color-name {
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: var(--navy);
-  }
-
-  .color-values {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .color-value {
-    font-size: 0.8rem;
-    color: var(--navy);
-    opacity: 0.7;
-    font-family: 'Source Sans 3', monospace;
-  }
-
-  .color-value strong {
-    font-weight: 600;
-    opacity: 1;
-  }
-
-  .color-usage {
-    font-size: 0.85rem;
-    color: var(--navy);
-    opacity: 0.6;
-    line-height: 1.5;
-    margin-top: 0.25rem;
   }
 </style>

@@ -1,0 +1,56 @@
+---
+/**
+ * Shared frame for the Press section pages (/press, /press/releases,
+ * /press/brand-kit): hero, section navigation, page content, call to action.
+ */
+import BaseLayout from './BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import PressNav from '../components/press/PressNav.astro';
+import type { PressSection } from '../components/press/PressNav.astro';
+import CallToAction from '../components/ui/CallToAction.astro';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  section: PressSection;
+  title: string;
+  description: string;
+  heroTitle: string;
+  heroDescription?: string;
+}
+
+const { section, title, description, heroTitle, heroDescription } = Astro.props;
+
+const page = await getEntry('pages', 'press');
+const pd = page.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <slot name="head" slot="head" />
+
+  <PageHero
+    label={pd.heroLabel}
+    title={heroTitle}
+    description={heroDescription}
+  />
+
+  <section class="press-section">
+    <div class="section-inner">
+      <PressNav active={section} />
+      <slot />
+    </div>
+  </section>
+
+  <CallToAction
+    title={pd.ctaTitle}
+    description={pd.ctaDescription}
+    primaryLabel="Get Involved"
+    primaryHref="/support"
+  />
+</BaseLayout>
+
+<style>
+  .press-section {
+    padding: 0 0 4rem;
+    background: var(--cream);
+  }
+</style>
