@@ -74,9 +74,20 @@ const values = [
   <section class="section purpose-section">
     <div class="section-inner">
       <div class="purpose-content">
+        <p class="section-label">{d.purposeLabel}</p>
         <p class="purpose-statement">{d.purposeStatement}</p>
         <p>{d.purposeBody1}</p>
-        <p>{d.purposeBody2}</p>
+      </div>
+      <div class="identity-grid">
+        <div class="identity-block">
+          <p class="section-label">{d.missionLabel}</p>
+          <p class="identity-statement">{d.missionStatement}</p>
+        </div>
+        <div class="identity-block">
+          <p class="section-label">{d.visionLabel}</p>
+          <p class="identity-statement">{d.visionStatement}</p>
+          <p class="identity-body">{d.visionBody}</p>
+        </div>
       </div>
     </div>
   </section>
@@ -223,14 +234,45 @@ const values = [
 <style>
   .purpose-section { background: var(--warm-white); }
   .purpose-content { max-width: 800px; }
-  .purpose-statement {
+  .purpose-content .purpose-statement {
     font-family: 'Fraunces', serif;
     font-size: clamp(1.5rem, 3vw, 2rem);
     color: var(--navy);
     margin-bottom: 1.5rem;
     line-height: 1.4;
+    opacity: 1;
   }
   .purpose-content p { font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--navy); opacity: 0.85; }
+  .purpose-content .section-label { font-size: 0.85rem; opacity: 1; margin-bottom: 1rem; }
+
+  .identity-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  @media (min-width: 900px) {
+    .identity-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+  .identity-block {
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+  }
+  .identity-block .section-label { margin-bottom: 0.75rem; }
+  .identity-statement {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--navy);
+    line-height: 1.45;
+  }
+  .identity-body {
+    font-size: 1.05rem;
+    color: var(--navy);
+    opacity: 0.85;
+    margin-top: 1rem;
+  }
 
   .history-section { background: var(--warm-white); }
   .timeline {
