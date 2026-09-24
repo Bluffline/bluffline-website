@@ -2,13 +2,26 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHero from '../../../components/ui/PageHero.astro';
 import CallToAction from '../../../components/ui/CallToAction.astro';
+import { getEntry } from 'astro:content';
 
-// Committee members — the officers of the Bluffline board serve as the Corridor Management Committee
-const members: string[] = [
-  'Elise Campagna — Interim Secretary',
-  'Johnny Crane — Treasurer',
-  'T.S. Strickland — Interim Chair',
-];
+// Committee members — the officers of the Bluffline board serve as the Corridor Management Committee.
+// Each id is a board-members entry, so names and headshots stay in sync with the board page.
+const committee = [
+  { id: 'elise-campagna', role: 'Interim Secretary' },
+  { id: 'johnny-crane', role: 'Treasurer' },
+  { id: 'ts-strickland', role: 'Interim Chair' },
+] as const;
+
+const members = await Promise.all(
+  committee.map(async ({ id, role }) => {
+    const entry = await getEntry('board-members', id);
+    if (!entry) throw new Error(`Unknown board member: ${id}`);
+    const { firstName, lastName, photo } = entry.data;
+    const name = `${firstName} ${lastName}`;
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    return { name, role, photo, initials };
+  })
+);
 
 const programDocuments = [
   {
@@ -73,7 +86,18 @@ const programDocuments = [
       <h2>Committee Membership</h2>
       {members.length > 0 ? (
         <ul class="member-list">
-          {members.map(member => <li>{member}</li>)}
+          {members.map(member => (
+            <li>
+              <span class="member-avatar">
+                {member.photo ? (
+                  <img src={member.photo} alt="" />
+                ) : (
+                  <span aria-hidden="true">{member.initials}</span>
+                )}
+              </span>
+              <span>{member.name} — {member.role}</span>
+            </li>
+          ))}
         </ul>
       ) : (
         <p class="membership-pending">Committee membership will be listed here. Contact <a href="mailto:info@thebluffline.org">info@thebluffline.org</a> for current membership information.</p>
@@ -201,6 +225,29 @@ const programDocuments = [
     background: white;
     border-radius: 8px;
     border-left: 3px solid var(--spring);
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  .member-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 0.95rem;
+    color: var(--forest);
+  }
+  .member-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 25%;
   }
   .membership-pending {
     font-size: 1rem;
