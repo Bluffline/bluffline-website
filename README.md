@@ -307,10 +307,17 @@ Non-developers can edit content at `/admin` (https://thebluffline.org/admin). It
 
 ### Signing in
 
-Editors need a GitHub account with write access to this repository. Either:
+Login is handled by `netlify/functions/cms-auth.mjs` (served at `/api/auth`), a small GitHub OAuth proxy. Editors need a GitHub account with **write access to this repository**; GitHub enforces that, so anyone else can sign in but cannot save.
 
-1. **GitHub login via Netlify** (one-time setup): in Netlify, go to Site configuration > Access & security > OAuth, install a GitHub OAuth provider (create a GitHub OAuth app whose callback URL is `https://api.netlify.com/auth/done`), then use "Sign in with GitHub" at `/admin`.
-2. **Personal access token**: at `/admin`, choose the token sign-in and paste a fine-grained GitHub token with Contents read/write on this repository only.
+**One-time setup**
+
+1. Create a GitHub OAuth app (GitHub > Settings > Developer settings > OAuth Apps, or under the Bluffline organization's settings):
+   - Homepage URL: `https://thebluffline.org`
+   - Authorization callback URL: `https://thebluffline.org/api/auth/callback`
+2. In Netlify (Site configuration > Environment variables) add `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from that app. Optional: `CMS_ALLOWED_ORIGINS` (comma-separated) to allow login from a deploy-preview URL.
+3. Redeploy, open `/admin`, and choose "Sign in with GitHub".
+
+If the Bluffline organization restricts OAuth apps, an owner must approve the app under the organization's third-party access settings.
 
 To edit locally without GitHub, run `npm run dev` and use the "Work with Local Repository" option at `/admin` (Chromium-based browsers).
 

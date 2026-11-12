@@ -6,10 +6,10 @@ backend:
   name: github
   repo: Bluffline/bluffline-website
   branch: main
-  # Sign-in works two ways: GitHub OAuth through Netlify's OAuth provider
-  # (see README "Content editing"), or a GitHub personal access token.
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  # GitHub sign-in is handled by netlify/functions/cms-auth.mjs
+  # (served at /api/auth). See README "Content Editing".
+  base_url: https://thebluffline.org
+  auth_endpoint: api/auth
 
 site_url: https://thebluffline.org
 display_url: https://thebluffline.org

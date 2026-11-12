@@ -11,6 +11,17 @@
   to = "/.netlify/functions/chatkit-session"
   status = 200
 
+# GitHub OAuth proxy for the /admin CMS login
+[[redirects]]
+  from = "/api/auth/callback"
+  to = "/.netlify/functions/cms-auth"
+  status = 200
+
+[[redirects]]
+  from = "/api/auth"
+  to = "/.netlify/functions/cms-auth"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/404"
