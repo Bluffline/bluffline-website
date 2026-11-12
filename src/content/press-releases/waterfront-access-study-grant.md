@@ -1,17 +1,17 @@
 ---
 type: PressRelease
-title: "Bluffline Secures $1.2 Million Grant from U.S. Department of Transportation"
+title: Bluffline Secures $1.2 Million Grant from U.S. Department of Transportation
 pubDate: 2025-01-15
-summary: "The U.S. Department of Transportation has awarded Bluffline, Inc. a $1.2 million Reconnecting Communities Grant to fund the Escambia Bay Waterfront Access Study, a master planning initiative focused on restoring community connections to the waterfront."
+summary: The U.S. Department of Transportation has awarded Bluffline, Inc. a $1.2 million Reconnecting Communities Grant to fund the Escambia Bay Waterfront Access Study, a master planning initiative focused on restoring community connections to the waterfront.
 contactName: Media Relations
 contactEmail: press@thebluffline.org
 contactPhone: (850) 776-0436
 draft: false
 ---
 
-*Escambia Bay Waterfront Access Study will fund master planning, feasibility studies and preliminary designs*
+_Escambia Bay Waterfront Access Study will fund master planning, feasibility studies and preliminary designs_
 
-Pensacola, FL – Bluffline, Inc. is proud to announce the award of a $1.2 million Reconnecting Communities Grant from the U.S. Department of Transportation. This funding will support the Escambia Bay Waterfront Access Study, a transformative master planning initiative focused on restoring community connections to the waterfront.
+Pensacola, FL – Bluffline, Inc. is proud to announce the award of a $1.2 million Reconnecting Communities Grant from the U.S. Department of Transportation. This funding will support the Escambia Bay Waterfront Access Study, a transformative master planning effort focused on restoring community connections to the waterfront.
 
 "This grant allows us to take meaningful steps toward fulfilling our mission of reuniting people with their environment and one another," said T.S. Strickland, Director of Strategy for Bluffline, Inc. "By reconnecting Pensacola's communities to the waterfront, we're not only addressing decades of physical and social division but also creating pathways to opportunity, sustainability and equity for generations to come."
 
