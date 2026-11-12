@@ -313,6 +313,10 @@ After saving, the entry shows "waiting on preview" until Netlify finishes buildi
 - Every collection and page has a `preview_path` in `config.yml` that tells the CMS which page to link. A new collection needs one.
 - `omit_empty_optional_fields` is on so empty optional fields don't fail the Zod schemas. Keep it on.
 
+### PDFs
+
+Letters of support (and the optional file on plans & documents) are uploaded with a file field. Uploaded PDFs are saved to `public/documents/letters/` (letters) or `public/documents/` (plans), and the CMS stores the matching public path. Existing PDFs can be picked again from the same dialog.
+
 ### Images
 
 The media library covers all of `public/images/` (including subfolders). Uploads are converted to WebP (max 2400 px) and capped at 10 MB; SVGs are optimized. Adjust under `media_libraries` in `config.yml`.
