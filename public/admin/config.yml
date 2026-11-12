@@ -10,20 +10,59 @@ backend:
   # (served at /api/auth). See README "Content Editing".
   base_url: https://thebluffline.org
   auth_endpoint: api/auth
+  commit_messages:
+    create: 'Content: create {{collection}} "{{slug}}"'
+    update: 'Content: update {{collection}} "{{slug}}"'
+    delete: 'Content: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Content: upload "{{path}}"'
+    deleteMedia: 'Content: delete "{{path}}"'
 
 site_url: https://thebluffline.org
 display_url: https://thebluffline.org
 
-# Uploads go here; existing images elsewhere in /images keep working as paths.
-media_folder: public/images/uploads
-public_folder: /images/uploads
+# Media library covers all of public/images (including subfolders), so existing
+# images show thumbnails. New uploads land in the folder chosen in the picker.
+media_folder: public/images
+public_folder: /images
 
-# Drafts are controlled by each entry's own "draft" field, not editorial workflow.
-publish_mode: simple
+# Preview workflow: each save becomes a branch + pull request. Netlify builds a
+# deploy preview that the CMS links to; "Publish" merges it into main.
+publish_mode: preview
+
+# Branding
+app_title: Bluffline Content Manager
+logo:
+  src: /images/logos/favicon.svg
+  show_in_header: true
+
+# Our Zod schemas use .optional(), which rejects empty strings. Omit empty
+# optional fields so saving a partly filled entry can't break the build.
+output:
+  omit_empty_optional_fields: true
+
+# The built-in preview pane only shows a generic field readout, not the real
+# page, so it is hidden. Use the deploy-preview link instead.
+editor:
+  preview: false
+
+# Keep upload sizes sane (the repo already holds ~80 MB of media).
+media_libraries:
+  default:
+    config:
+      max_file_size: 10485760 # 10 MB
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2400
+          height: 2400
+        svg:
+          optimize: true
 
 collections:
   - name: updates
     label: Progress updates
+    preview_path: "/progress/updates/{{slug}}"
     folder: src/content/updates
     extension: md
     format: frontmatter
@@ -47,6 +86,7 @@ collections:
 
   - name: press-releases
     label: Press releases
+    preview_path: "/press/{{slug}}"
     folder: src/content/press-releases
     extension: md
     format: frontmatter
@@ -77,6 +117,7 @@ collections:
 
   - name: defender-award-recipients
     label: Defender Award recipients
+    preview_path: "/about/defender-award/{{slug}}"
     folder: src/content/defender-award-recipients
     extension: md
     format: frontmatter
@@ -95,6 +136,7 @@ collections:
 
   - name: board-members
     label: Board & staff
+    preview_path: "/about/governance"
     folder: src/content/board-members
     extension: json
     format: json
@@ -114,6 +156,7 @@ collections:
 
   - name: testimonials
     label: Letters of support
+    preview_path: "/about/community-support"
     folder: src/content/testimonials
     extension: json
     format: json
@@ -133,6 +176,7 @@ collections:
 
   - name: press
     label: Press coverage
+    preview_path: "/press"
     folder: src/content/press
     extension: json
     format: json
@@ -149,6 +193,7 @@ collections:
 
   - name: documents
     label: Plans & documents
+    preview_path: "/progress/planning"
     folder: src/content/documents
     extension: json
     format: json
@@ -167,6 +212,7 @@ collections:
 
   - name: resources
     label: Corridor resources
+    preview_path: "/about/corridor"
     folder: src/content/resources
     extension: json
     format: json
@@ -187,6 +233,7 @@ collections:
 
   - name: timeline
     label: History timeline
+    preview_path: "/about"
     folder: src/content/timeline
     extension: json
     format: json
@@ -217,6 +264,7 @@ collections:
     - name: "about"
       label: "About page"
       file: "src/content/pages/about.json"
+      preview_path: "/about"
       format: "json"
       fields:
         - label: "Type"
@@ -319,6 +367,7 @@ collections:
     - name: "community-support"
       label: "Community-Support page"
       file: "src/content/pages/community-support.json"
+      preview_path: "/about/community-support"
       format: "json"
       fields:
         - label: "Type"
@@ -343,6 +392,7 @@ collections:
     - name: "corridor"
       label: "Corridor page"
       file: "src/content/pages/corridor.json"
+      preview_path: "/about/corridor"
       format: "json"
       fields:
         - label: "Type"
@@ -418,6 +468,7 @@ collections:
     - name: "governance"
       label: "Governance page"
       file: "src/content/pages/governance.json"
+      preview_path: "/about/governance"
       format: "json"
       fields:
         - label: "Type"
@@ -466,6 +517,7 @@ collections:
     - name: "home"
       label: "Home page"
       file: "src/content/pages/home.json"
+      preview_path: "/"
       format: "json"
       fields:
         - label: "Type"
@@ -577,6 +629,7 @@ collections:
     - name: "impact"
       label: "Impact page"
       file: "src/content/pages/impact.json"
+      preview_path: "/about/impact"
       format: "json"
       fields:
         - label: "Type"
@@ -773,6 +826,7 @@ collections:
     - name: "planning"
       label: "Planning page"
       file: "src/content/pages/planning.json"
+      preview_path: "/progress/planning"
       format: "json"
       fields:
         - label: "Type"
@@ -806,6 +860,7 @@ collections:
     - name: "press"
       label: "Press page"
       file: "src/content/pages/press.json"
+      preview_path: "/press"
       format: "json"
       fields:
         - label: "Type"
@@ -864,6 +919,7 @@ collections:
     - name: "progress"
       label: "Progress page"
       file: "src/content/pages/progress.json"
+      preview_path: "/progress"
       format: "json"
       fields:
         - label: "Type"
@@ -891,6 +947,7 @@ collections:
     - name: "support"
       label: "Support page"
       file: "src/content/pages/support.json"
+      preview_path: "/support"
       format: "json"
       fields:
         - label: "Type"
