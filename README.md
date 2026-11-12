@@ -298,16 +298,26 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 ## Content Editing (Sveltia CMS)
 
-Non-developers can edit content at `/admin` (https://thebluffline.org/admin). It is [Sveltia CMS](https://github.com/sveltia/sveltia-cms): a static page that edits the files in `src/content/` and commits each save to the `main` branch on GitHub. Netlify then rebuilds the site. There is no database and no extra server.
+Non-developers can edit content at `/admin` (https://thebluffline.org/admin). It is [Sveltia CMS](https://github.com/sveltia/sveltia-cms): a static page that edits the files in `src/content/` and saves each change to GitHub. There is no database and no extra server.
 
 - `public/admin/index.html` loads the CMS (pinned version).
 - `public/admin/config.yml` defines the editable fields. **When you change a schema in `src/content/config.ts`, update this file too**, or the new field will not appear in the editor.
 - Not editable in the CMS: `projects` (they embed large GeoJSON map data). Edit those in Git.
-- Image uploads go to `public/images/uploads/`. Existing images elsewhere keep working.
+
+### How saving works (preview workflow)
+
+Saving an entry does **not** publish it. The CMS commits it to its own branch and opens a pull request; Netlify builds a deploy preview, and the entry shows a link to it. Check the real page there, then press **Publish** in the CMS to merge into `main` and go live. The built-in preview pane is turned off because it can't render Astro pages.
+
+- Every collection and page has a `preview_path` in `config.yml` that tells the CMS which page to link. A new collection needs one.
+- `omit_empty_optional_fields` is on so empty optional fields don't fail the Zod schemas. Keep it on.
+
+### Images
+
+The media library covers all of `public/images/` (including subfolders). Uploads are converted to WebP (max 2400 px) and capped at 10 MB; SVGs are optimized. Adjust under `media_libraries` in `config.yml`.
 
 ### Signing in
 
-Login is handled by `netlify/functions/cms-auth.mjs` (served at `/api/auth`), a small GitHub OAuth proxy. Editors need a GitHub account with **write access to this repository**; GitHub enforces that, so anyone else can sign in but cannot save.
+Login is handled by `netlify/functions/cms-auth.mjs` (served at `/api/auth`), a small GitHub OAuth proxy. Editors need a GitHub account with **write access to this repository**; GitHub enforces that. The login grants the `repo` scope, which also covers the pull requests the preview workflow opens. (Sveltia also offers a "Sign In with Token" button: a fine-grained GitHub token with Contents and Pull requests read/write on this repo.)
 
 **One-time setup**
 
