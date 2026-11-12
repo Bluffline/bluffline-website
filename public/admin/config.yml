@@ -1,0 +1,923 @@
+# Sveltia CMS configuration for thebluffline.org
+# Edits JSON/Markdown files in src/content/ and commits them to GitHub.
+# Keep fields in sync with the Zod schemas in src/content/config.ts.
+
+backend:
+  name: github
+  repo: Bluffline/bluffline-website
+  branch: main
+  # Sign-in works two ways: GitHub OAuth through Netlify's OAuth provider
+  # (see README "Content editing"), or a GitHub personal access token.
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+site_url: https://thebluffline.org
+display_url: https://thebluffline.org
+
+# Uploads go here; existing images elsewhere in /images keep working as paths.
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+# Drafts are controlled by each entry's own "draft" field, not editorial workflow.
+publish_mode: simple
+
+collections:
+  - name: updates
+    label: Progress updates
+    folder: src/content/updates
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{pubDate}})"
+    sortable_fields: [pubDate, title]
+    fields:
+      - {label: Type, name: type, widget: hidden, default: Update}
+      - {label: Title, name: title, widget: string}
+      - {label: Publish date, name: pubDate, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+      - {label: Description, name: description, widget: text}
+      - {label: Author, name: author, widget: string, required: false}
+      - {label: Author title, name: authorTitle, widget: string, required: false}
+      - {label: Featured image, name: featuredImage, widget: image, required: false}
+      - {label: Featured image alt text, name: featuredImageAlt, widget: string, required: false}
+      - {label: Tags, name: tags, widget: list, required: false, field: {label: Tag, name: tag, widget: string}}
+      - {label: Project status, name: status, widget: select, required: false, options: [planning, funded, engagement, construction, complete]}
+      - {label: Draft (hide from site), name: draft, widget: boolean, default: false}
+      - {label: Body, name: body, widget: markdown}
+
+  - name: press-releases
+    label: Press releases
+    folder: src/content/press-releases
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{pubDate}})"
+    sortable_fields: [pubDate, title]
+    fields:
+      - {label: Type, name: type, widget: hidden, default: PressRelease}
+      - {label: Title, name: title, widget: string}
+      - {label: Publish date, name: pubDate, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+      - {label: Summary, name: summary, widget: text}
+      - {label: Contact name, name: contactName, widget: string, required: false}
+      - {label: Contact email, name: contactEmail, widget: string, required: false}
+      - {label: Contact phone, name: contactPhone, widget: string, required: false}
+      - {label: Draft (hide from site), name: draft, widget: boolean, default: false}
+      - label: Media
+        name: media
+        widget: list
+        required: false
+        fields:
+          - {label: File path, name: src, widget: image}
+          - {label: Alt text, name: alt, widget: string, required: false}
+          - {label: Caption, name: caption, widget: string, required: false}
+          - {label: Credit, name: credit, widget: string, required: false}
+          - {label: Media type, name: type, widget: select, options: [image, video, audio], default: image}
+      - {label: Body, name: body, widget: markdown}
+
+  - name: defender-award-recipients
+    label: Defender Award recipients
+    folder: src/content/defender-award-recipients
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{year}}-{{slug}}"
+    fields:
+      - {label: Type, name: type, widget: hidden, default: DefenderAwardRecipient}
+      - {label: Name, name: name, widget: string}
+      - {label: Title, name: title, widget: string}
+      - {label: Year, name: year, widget: number, value_type: int}
+      - {label: Photo, name: photo, widget: image, required: false}
+      - {label: Summary, name: summary, widget: text}
+      - {label: Award object description, name: awardObjectDescription, widget: text, required: false}
+      - {label: Draft (hide from site), name: draft, widget: boolean, default: false}
+      - {label: Body, name: body, widget: markdown}
+
+  - name: board-members
+    label: Board & staff
+    folder: src/content/board-members
+    extension: json
+    format: json
+    create: true
+    slug: "{{firstName}}-{{lastName}}"
+    summary: "{{firstName}} {{lastName}} ({{role}})"
+    fields:
+      - {label: Type, name: type, widget: hidden, default: BoardMember}
+      - {label: First name, name: firstName, widget: string}
+      - {label: Last name, name: lastName, widget: string}
+      - {label: Suffix, name: suffix, widget: string, required: false}
+      - {label: Title, name: title, widget: string}
+      - {label: Role, name: role, widget: select, options: [chair, vice-president, treasurer, secretary, board-member, staff, emeritus]}
+      - {label: Bio, name: bio, widget: text}
+      - {label: Photo, name: photo, widget: image, required: false}
+      - {label: Archived (hide from site), name: archived, widget: boolean, required: false}
+
+  - name: testimonials
+    label: Letters of support
+    folder: src/content/testimonials
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    summary: "{{author}}, {{organization}}"
+    fields:
+      - {label: Type, name: type, widget: hidden, default: Testimonial}
+      - {label: Quote, name: quote, widget: text}
+      - {label: Author, name: author, widget: string}
+      - {label: Title, name: title, widget: string}
+      - {label: Organization, name: organization, widget: string}
+      - {label: Organization link, name: organizationLink, widget: string, required: false, hint: "Full URL, starting with https://"}
+      - {label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false}
+      - {label: Letter PDF path, name: pdfFile, widget: string, hint: "e.g. /documents/letters/Example.pdf"}
+      - {label: Order, name: order, widget: number, value_type: int, required: false}
+
+  - name: press
+    label: Press coverage
+    folder: src/content/press
+    extension: json
+    format: json
+    create: true
+    slug: "press-{{outlet}}-{{date}}"
+    summary: "{{outlet}}: {{title}}"
+    fields:
+      - {label: Type, name: type, widget: hidden, default: Press}
+      - {label: Outlet, name: outlet, widget: string}
+      - {label: Title, name: title, widget: string}
+      - {label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+      - {label: Link, name: link, widget: string, hint: "Full URL, starting with https://"}
+      - {label: Media type, name: mediaType, widget: select, options: [article, radio, tv, podcast], default: article}
+
+  - name: documents
+    label: Plans & documents
+    folder: src/content/documents
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: Type, name: type, widget: hidden, default: Document}
+      - {label: Title, name: title, widget: string}
+      - {label: Agency, name: agency, widget: string}
+      - {label: Year, name: year, widget: number, value_type: int}
+      - {label: Document type, name: documentType, widget: select, options: [plan, study, policy, report]}
+      - {label: Level, name: level, widget: select, required: false, options: [federal, state, regional, county, city]}
+      - {label: Link, name: link, widget: string, required: false, hint: "Full URL, starting with https://"}
+      - {label: File path, name: file, widget: string, required: false}
+      - {label: Description, name: description, widget: text, required: false}
+
+  - name: resources
+    label: Corridor resources
+    folder: src/content/resources
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: Type, name: type, widget: hidden, default: Resource}
+      - {label: Name, name: name, widget: string}
+      - {label: Description, name: description, widget: text}
+      - {label: Qualities, name: qualities, widget: select, multiple: true, options: [Cultural, Historical, Archaeological, Recreational, Natural, Scenic]}
+      - label: Coordinates
+        name: coordinates
+        widget: object
+        required: false
+        fields:
+          - {label: Latitude, name: lat, widget: number, value_type: float}
+          - {label: Longitude, name: lng, widget: number, value_type: float}
+
+  - name: timeline
+    label: History timeline
+    folder: src/content/timeline
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [order, title]
+    fields:
+      - {label: Type, name: type, widget: hidden, default: TimelineEntry}
+      - {label: Date, name: date, widget: string, hint: "Free text, e.g. 2021"}
+      - {label: Title, name: title, widget: string}
+      - {label: Description, name: description, widget: text}
+      - {label: Order, name: order, widget: number, value_type: int}
+      - label: Images
+        name: images
+        widget: list
+        required: false
+        fields:
+          - {label: Image, name: src, widget: image}
+          - {label: Alt text, name: alt, widget: string}
+          - {label: Caption, name: caption, widget: string, required: false}
+          - {label: Credit, name: credit, widget: string, required: false}
+
+  # Page copy (headings, intros, CTAs). Projects are intentionally not listed:
+  # they embed large GeoJSON map data that is safer to edit in Git.
+  - name: pages
+    label: Page text
+    files:
+    - name: "about"
+      label: "About page"
+      file: "src/content/pages/about.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "AboutPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Purpose Label"
+          name: "purposeLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Purpose Statement"
+          name: "purposeStatement"
+          widget: "text"
+        - label: "Purpose Body1"
+          name: "purposeBody1"
+          widget: "text"
+        - label: "Mission Label"
+          name: "missionLabel"
+          widget: "string"
+        - label: "Mission Statement"
+          name: "missionStatement"
+          widget: "text"
+        - label: "Vision Label"
+          name: "visionLabel"
+          widget: "string"
+        - label: "Vision Statement"
+          name: "visionStatement"
+          widget: "text"
+        - label: "Vision Body"
+          name: "visionBody"
+          widget: "text"
+        - label: "History Heading"
+          name: "historyHeading"
+          widget: "string"
+        - label: "History Description"
+          name: "historyDescription"
+          widget: "text"
+        - label: "Merger Heading"
+          name: "mergerHeading"
+          widget: "string"
+        - label: "Merger Body1"
+          name: "mergerBody1"
+          widget: "text"
+        - label: "Merger Body2"
+          name: "mergerBody2"
+          widget: "text"
+        - label: "Merger Body3"
+          name: "mergerBody3"
+          widget: "text"
+        - label: "Merger Highlight Title"
+          name: "mergerHighlightTitle"
+          widget: "string"
+        - label: "Merger Stat1 Value"
+          name: "mergerStat1Value"
+          widget: "string"
+        - label: "Merger Stat1 Label"
+          name: "mergerStat1Label"
+          widget: "string"
+        - label: "Merger Stat2 Value"
+          name: "mergerStat2Value"
+          widget: "string"
+        - label: "Merger Stat2 Label"
+          name: "mergerStat2Label"
+          widget: "string"
+        - label: "Merger Stat3 Value"
+          name: "mergerStat3Value"
+          widget: "string"
+        - label: "Merger Stat3 Label"
+          name: "mergerStat3Label"
+          widget: "string"
+        - label: "Values Heading"
+          name: "valuesHeading"
+          widget: "string"
+        - label: "Values Description"
+          name: "valuesDescription"
+          widget: "text"
+        - label: "Governance Heading"
+          name: "governanceHeading"
+          widget: "string"
+        - label: "Governance Description"
+          name: "governanceDescription"
+          widget: "text"
+        - label: "Governance Link Label"
+          name: "governanceLinkLabel"
+          widget: "string"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "community-support"
+      label: "Community-Support page"
+      file: "src/content/pages/community-support.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "CommunitySupportPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "corridor"
+      label: "Corridor page"
+      file: "src/content/pages/corridor.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "CorridorPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Overview Heading"
+          name: "overviewHeading"
+          widget: "string"
+        - label: "Overview Body1"
+          name: "overviewBody1"
+          widget: "text"
+        - label: "Overview Body2"
+          name: "overviewBody2"
+          widget: "text"
+        - label: "Overview Body3"
+          name: "overviewBody3"
+          widget: "text"
+        - label: "Sidebar Title"
+          name: "sidebarTitle"
+          widget: "string"
+        - label: "Stat Total Length"
+          name: "statTotalLength"
+          widget: "string"
+        - label: "Stat Existing Highway"
+          name: "statExistingHighway"
+          widget: "string"
+        - label: "Stat Northeast Extension"
+          name: "statNortheastExtension"
+          widget: "string"
+        - label: "Stat Southwest Extension"
+          name: "statSouthwestExtension"
+          widget: "string"
+        - label: "Stat Intrinsic Resources"
+          name: "statIntrinsicResources"
+          widget: "string"
+        - label: "Stat Designation"
+          name: "statDesignation"
+          widget: "string"
+        - label: "Greenway Heading"
+          name: "greenwayHeading"
+          widget: "string"
+        - label: "Greenway Body1"
+          name: "greenwayBody1"
+          widget: "text"
+        - label: "Greenway Body2"
+          name: "greenwayBody2"
+          widget: "text"
+        - label: "Greenway Body3"
+          name: "greenwayBody3"
+          widget: "text"
+        - label: "Resources Heading"
+          name: "resourcesHeading"
+          widget: "string"
+        - label: "Resources Description"
+          name: "resourcesDescription"
+          widget: "text"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "governance"
+      label: "Governance page"
+      file: "src/content/pages/governance.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "GovernancePage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Leadership Heading"
+          name: "leadershipHeading"
+          widget: "string"
+        - label: "Leadership Description"
+          name: "leadershipDescription"
+          widget: "text"
+        - label: "Emeritus Heading"
+          name: "emeritusHeading"
+          widget: "string"
+        - label: "Emeritus Description"
+          name: "emeritusDescription"
+          widget: "text"
+        - label: "Committees Heading"
+          name: "committeesHeading"
+          widget: "string"
+        - label: "Committees Description"
+          name: "committeesDescription"
+          widget: "text"
+        - label: "Documents Heading"
+          name: "documentsHeading"
+          widget: "string"
+        - label: "Documents Description"
+          name: "documentsDescription"
+          widget: "text"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "home"
+      label: "Home page"
+      file: "src/content/pages/home.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "HomePage"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Subtitle"
+          name: "heroSubtitle"
+          widget: "string"
+        - label: "Hero Image"
+          name: "heroImage"
+          widget: "image"
+        - label: "Hero Image Alt"
+          name: "heroImageAlt"
+          widget: "string"
+        - label: "About Heading"
+          name: "aboutHeading"
+          widget: "string"
+        - label: "About Body1"
+          name: "aboutBody1"
+          widget: "text"
+        - label: "About Body2"
+          name: "aboutBody2"
+          widget: "text"
+        - label: "About Body3"
+          name: "aboutBody3"
+          widget: "text"
+        - label: "About Image"
+          name: "aboutImage"
+          widget: "image"
+        - label: "About Image Alt"
+          name: "aboutImageAlt"
+          widget: "string"
+        - label: "Challenge Heading"
+          name: "challengeHeading"
+          widget: "string"
+        - label: "Challenge Body"
+          name: "challengeBody"
+          widget: "text"
+        - label: "Challenge Image"
+          name: "challengeImage"
+          widget: "image"
+        - label: "Challenge Image Alt"
+          name: "challengeImageAlt"
+          widget: "string"
+        - label: "Challenge Stat1 Value"
+          name: "challengeStat1Value"
+          widget: "string"
+        - label: "Challenge Stat1 Description"
+          name: "challengeStat1Description"
+          widget: "text"
+        - label: "Challenge Stat2 Value"
+          name: "challengeStat2Value"
+          widget: "string"
+        - label: "Challenge Stat2 Description"
+          name: "challengeStat2Description"
+          widget: "text"
+        - label: "Challenge Stat3 Value"
+          name: "challengeStat3Value"
+          widget: "string"
+        - label: "Challenge Stat3 Description"
+          name: "challengeStat3Description"
+          widget: "text"
+        - label: "Challenge Stat4 Value"
+          name: "challengeStat4Value"
+          widget: "string"
+        - label: "Challenge Stat4 Description"
+          name: "challengeStat4Description"
+          widget: "text"
+        - label: "Solution Heading"
+          name: "solutionHeading"
+          widget: "string"
+        - label: "Solution Body"
+          name: "solutionBody"
+          widget: "text"
+        - label: "Solution Map Image"
+          name: "solutionMapImage"
+          widget: "image"
+        - label: "Solution Map Image Alt"
+          name: "solutionMapImageAlt"
+          widget: "string"
+        - label: "Solution Component1 Title"
+          name: "solutionComponent1Title"
+          widget: "string"
+        - label: "Solution Component1 Description"
+          name: "solutionComponent1Description"
+          widget: "text"
+        - label: "Solution Component2 Title"
+          name: "solutionComponent2Title"
+          widget: "string"
+        - label: "Solution Component2 Description"
+          name: "solutionComponent2Description"
+          widget: "text"
+        - label: "Solution Component3 Title"
+          name: "solutionComponent3Title"
+          widget: "string"
+        - label: "Solution Component3 Description"
+          name: "solutionComponent3Description"
+          widget: "text"
+        - label: "Cta Heading"
+          name: "ctaHeading"
+          widget: "string"
+        - label: "Cta Body"
+          name: "ctaBody"
+          widget: "text"
+    - name: "impact"
+      label: "Impact page"
+      file: "src/content/pages/impact.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "ImpactPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Safety Label"
+          name: "safetyLabel"
+          widget: "string"
+        - label: "Safety Heading"
+          name: "safetyHeading"
+          widget: "string"
+        - label: "Safety Body"
+          name: "safetyBody"
+          widget: "text"
+        - label: "Safety Stats"
+          name: "safetyStats"
+          widget: "list"
+          fields:
+            - label: "Value"
+              name: "value"
+              widget: "string"
+            - label: "Description"
+              name: "description"
+              widget: "text"
+            - label: "Source Url"
+              name: "sourceUrl"
+              widget: "string"
+            - label: "Source Label"
+              name: "sourceLabel"
+              widget: "string"
+        - label: "Map Caption"
+          name: "mapCaption"
+          widget: "text"
+        - label: "Map Source Text"
+          name: "mapSourceText"
+          widget: "string"
+        - label: "Map Source Url"
+          name: "mapSourceUrl"
+          widget: "string"
+        - label: "Map Source Agency"
+          name: "mapSourceAgency"
+          widget: "string"
+        - label: "Context Problem Heading"
+          name: "contextProblemHeading"
+          widget: "string"
+        - label: "Context Problem Body1"
+          name: "contextProblemBody1"
+          widget: "text"
+        - label: "Context Problem Body2"
+          name: "contextProblemBody2"
+          widget: "text"
+        - label: "Context Problem Body3"
+          name: "contextProblemBody3"
+          widget: "text"
+        - label: "Context Solution Heading"
+          name: "contextSolutionHeading"
+          widget: "string"
+        - label: "Context Solution Body1"
+          name: "contextSolutionBody1"
+          widget: "text"
+        - label: "Context Solution Body2"
+          name: "contextSolutionBody2"
+          widget: "text"
+        - label: "Context Solution Body3"
+          name: "contextSolutionBody3"
+          widget: "text"
+        - label: "Economic Label"
+          name: "economicLabel"
+          widget: "string"
+        - label: "Economic Heading"
+          name: "economicHeading"
+          widget: "string"
+        - label: "Economic Body"
+          name: "economicBody"
+          widget: "text"
+        - label: "Research Highlights"
+          name: "researchHighlights"
+          widget: "list"
+          fields:
+            - label: "Value"
+              name: "value"
+              widget: "string"
+            - label: "Description"
+              name: "description"
+              widget: "text"
+            - label: "Source Url"
+              name: "sourceUrl"
+              widget: "string"
+            - label: "Source Label"
+              name: "sourceLabel"
+              widget: "string"
+        - label: "Pillar Cards"
+          name: "pillarCards"
+          widget: "list"
+          fields:
+            - label: "Title"
+              name: "title"
+              widget: "string"
+            - label: "Description"
+              name: "description"
+              widget: "text"
+            - label: "Detail"
+              name: "detail"
+              widget: "text"
+            - label: "Stats"
+              name: "stats"
+              widget: "list"
+              fields:
+                - label: "Value"
+                  name: "value"
+                  widget: "string"
+                - label: "Label"
+                  name: "label"
+                  widget: "string"
+                - label: "Source Url"
+                  name: "sourceUrl"
+                  widget: "string"
+                - label: "Source Label"
+                  name: "sourceLabel"
+                  widget: "string"
+        - label: "Evidence Heading"
+          name: "evidenceHeading"
+          widget: "string"
+        - label: "Evidence Body"
+          name: "evidenceBody"
+          widget: "text"
+        - label: "Evidence Cards"
+          name: "evidenceCards"
+          widget: "list"
+          fields:
+            - label: "Title"
+              name: "title"
+              widget: "string"
+            - label: "Location"
+              name: "location"
+              widget: "string"
+            - label: "Source Url"
+              name: "sourceUrl"
+              widget: "string"
+            - label: "Source Label"
+              name: "sourceLabel"
+              widget: "string"
+            - label: "Stats"
+              name: "stats"
+              widget: "list"
+              fields:
+                - label: "Value"
+                  name: "value"
+                  widget: "string"
+                - label: "Description"
+                  name: "description"
+                  widget: "text"
+        - label: "Quality Label"
+          name: "qualityLabel"
+          widget: "string"
+        - label: "Quality Heading"
+          name: "qualityHeading"
+          widget: "string"
+        - label: "Quality Body"
+          name: "qualityBody"
+          widget: "text"
+        - label: "Quality Cards"
+          name: "qualityCards"
+          widget: "list"
+          fields:
+            - label: "Title"
+              name: "title"
+              widget: "string"
+            - label: "Description"
+              name: "description"
+              widget: "text"
+            - label: "Source Url"
+              name: "sourceUrl"
+              widget: "string"
+            - label: "Source Label"
+              name: "sourceLabel"
+              widget: "string"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "planning"
+      label: "Planning page"
+      file: "src/content/pages/planning.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "PlanningPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Intro Body1"
+          name: "introBody1"
+          widget: "text"
+        - label: "Intro Body2"
+          name: "introBody2"
+          widget: "text"
+        - label: "Plans Heading"
+          name: "plansHeading"
+          widget: "string"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "press"
+      label: "Press page"
+      file: "src/content/pages/press.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "PressPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Sections"
+          name: "sections"
+          widget: "object"
+          fields:
+            - label: "News"
+              name: "news"
+              widget: "object"
+              fields:
+                - label: "Title"
+                  name: "title"
+                  widget: "string"
+                - label: "Description"
+                  name: "description"
+                  widget: "text"
+            - label: "Releases"
+              name: "releases"
+              widget: "object"
+              fields:
+                - label: "Title"
+                  name: "title"
+                  widget: "string"
+                - label: "Description"
+                  name: "description"
+                  widget: "text"
+            - label: "Brand Kit"
+              name: "brandKit"
+              widget: "object"
+              fields:
+                - label: "Title"
+                  name: "title"
+                  widget: "string"
+                - label: "Description"
+                  name: "description"
+                  widget: "text"
+        - label: "Boilerplate"
+          name: "boilerplate"
+          widget: "text"
+        - label: "Media Contact Email"
+          name: "mediaContactEmail"
+          widget: "string"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "progress"
+      label: "Progress page"
+      file: "src/content/pages/progress.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "ProgressPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Updates Heading"
+          name: "updatesHeading"
+          widget: "string"
+        - label: "Cta Title"
+          name: "ctaTitle"
+          widget: "string"
+        - label: "Cta Description"
+          name: "ctaDescription"
+          widget: "text"
+    - name: "support"
+      label: "Support page"
+      file: "src/content/pages/support.json"
+      format: "json"
+      fields:
+        - label: "Type"
+          name: "type"
+          widget: "hidden"
+          default: "SupportPage"
+        - label: "Hero Label"
+          name: "heroLabel"
+          widget: "string"
+        - label: "Hero Title"
+          name: "heroTitle"
+          widget: "string"
+        - label: "Hero Description"
+          name: "heroDescription"
+          widget: "text"
+        - label: "Membership Heading"
+          name: "membershipHeading"
+          widget: "string"
+        - label: "Membership Description"
+          name: "membershipDescription"
+          widget: "text"
+        - label: "Tax Note"
+          name: "taxNote"
+          widget: "text"
+        - label: "Other Ways Heading"
+          name: "otherWaysHeading"
+          widget: "string"
+        - label: "Other Ways Description"
+          name: "otherWaysDescription"
+          widget: "text"

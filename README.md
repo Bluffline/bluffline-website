@@ -296,6 +296,24 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 `qualities` options: `Cultural`, `Historical`, `Archaeological`, `Recreational`, `Natural`, `Scenic`
 
+## Content Editing (Sveltia CMS)
+
+Non-developers can edit content at `/admin` (https://thebluffline.org/admin). It is [Sveltia CMS](https://github.com/sveltia/sveltia-cms): a static page that edits the files in `src/content/` and commits each save to the `main` branch on GitHub. Netlify then rebuilds the site. There is no database and no extra server.
+
+- `public/admin/index.html` loads the CMS (pinned version).
+- `public/admin/config.yml` defines the editable fields. **When you change a schema in `src/content/config.ts`, update this file too**, or the new field will not appear in the editor.
+- Not editable in the CMS: `projects` (they embed large GeoJSON map data). Edit those in Git.
+- Image uploads go to `public/images/uploads/`. Existing images elsewhere keep working.
+
+### Signing in
+
+Editors need a GitHub account with write access to this repository. Either:
+
+1. **GitHub login via Netlify** (one-time setup): in Netlify, go to Site configuration > Access & security > OAuth, install a GitHub OAuth provider (create a GitHub OAuth app whose callback URL is `https://api.netlify.com/auth/done`), then use "Sign in with GitHub" at `/admin`.
+2. **Personal access token**: at `/admin`, choose the token sign-in and paste a fine-grained GitHub token with Contents read/write on this repository only.
+
+To edit locally without GitHub, run `npm run dev` and use the "Work with Local Repository" option at `/admin` (Chromium-based browsers).
+
 ## Brand Kit
 
 The Press section is three pages sharing `src/layouts/PressLayout.astro` (hero, section links, call to action): `/press` for coverage, `/press/releases` for press releases, and `/press/brand-kit` for the Brand Kit. The section links in `src/components/press/PressNav.astro` are real links, so each section has its own URL, title and history entry. Old hash links (`/press#releases`, `/press#brand-kit`, `/press#media-kit`) redirect to the new pages.
