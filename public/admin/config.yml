@@ -27,12 +27,15 @@ public_folder: /images
 
 # Preview workflow: each save becomes a branch + pull request. Netlify builds a
 # deploy preview that the CMS links to; "Publish" merges it into main.
-publish_mode: preview
+publish_mode:
+  type: preview
+  # Adds a "Save and Publish" option for quick fixes that don't need a preview.
+  direct_publish: true
 
 # Branding
 app_title: Bluffline Content Manager
 logo:
-  src: /images/logos/favicon.svg
+  src: /admin/logo.svg
   show_in_header: true
 
 # Our Zod schemas use .optional(), which rejects empty strings. Omit empty
