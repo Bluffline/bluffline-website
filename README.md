@@ -300,13 +300,15 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 Non-developers can edit content at `/admin` (https://thebluffline.org/admin). It is [Sveltia CMS](https://github.com/sveltia/sveltia-cms): a static page that edits the files in `src/content/` and saves each change to GitHub. There is no database and no extra server.
 
-- `public/admin/index.html` loads the CMS (pinned version).
+- `public/admin/index.html` loads the CMS (pinned version). `public/admin/logo.svg` is the admin logo (the standard Bluffline logo on a white tile so it reads in dark mode).
 - `public/admin/config.yml` defines the editable fields. **When you change a schema in `src/content/config.ts`, update this file too**, or the new field will not appear in the editor.
 - Not editable in the CMS: `projects` (they embed large GeoJSON map data). Edit those in Git.
 
 ### How saving works (preview workflow)
 
 Saving an entry does **not** publish it. The CMS commits it to its own branch and opens a pull request; Netlify builds a deploy preview, and the entry shows a link to it. Check the real page there, then press **Publish** in the CMS to merge into `main` and go live. The built-in preview pane is turned off because it can't render Astro pages.
+
+After saving, the entry shows "waiting on preview" until Netlify finishes building the deploy preview (about a minute), then a preview link appears. For a quick fix that doesn't need a preview (a typo, a phone number), use **Save and Publish** from the Save button's menu to publish straight to `main`.
 
 - Every collection and page has a `preview_path` in `config.yml` that tells the CMS which page to link. A new collection needs one.
 - `omit_empty_optional_fields` is on so empty optional fields don't fail the Zod schemas. Keep it on.
