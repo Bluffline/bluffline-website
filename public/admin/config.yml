@@ -174,7 +174,7 @@ collections:
       - {label: Organization, name: organization, widget: string}
       - {label: Organization link, name: organizationLink, widget: string, required: false, hint: "Full URL, starting with https://"}
       - {label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", required: false}
-      - {label: Letter PDF path, name: pdfFile, widget: string, hint: "e.g. /documents/letters/Example.pdf"}
+      - {label: Letter PDF, name: pdfFile, widget: file, accept: application/pdf, media_folder: /public/documents/letters, public_folder: /documents/letters, hint: "Upload the signed letter (PDF, max 10 MB) or pick one already uploaded."}
       - {label: Order, name: order, widget: number, value_type: int, required: false}
 
   - name: press
@@ -210,7 +210,7 @@ collections:
       - {label: Document type, name: documentType, widget: select, options: [plan, study, policy, report]}
       - {label: Level, name: level, widget: select, required: false, options: [federal, state, regional, county, city]}
       - {label: Link, name: link, widget: string, required: false, hint: "Full URL, starting with https://"}
-      - {label: File path, name: file, widget: string, required: false}
+      - {label: PDF file, name: file, widget: file, accept: application/pdf, required: false, media_folder: /public/documents, public_folder: /documents, hint: "Optional. Upload a PDF if there's no web link."}
       - {label: Description, name: description, widget: text, required: false}
 
   - name: resources
