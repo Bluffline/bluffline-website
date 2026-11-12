@@ -296,6 +296,31 @@ Corridor landmarks and attractions with map coordinates. Edit `src/content/resou
 
 `qualities` options: `Cultural`, `Historical`, `Archaeological`, `Recreational`, `Natural`, `Scenic`
 
+## Content Editing (Sveltia CMS)
+
+Non-developers can edit content at `/admin` (https://thebluffline.org/admin). It is [Sveltia CMS](https://github.com/sveltia/sveltia-cms): a static page that edits the files in `src/content/` and commits each save to the `main` branch on GitHub. Netlify then rebuilds the site. There is no database and no extra server.
+
+- `public/admin/index.html` loads the CMS (pinned version).
+- `public/admin/config.yml` defines the editable fields. **When you change a schema in `src/content/config.ts`, update this file too**, or the new field will not appear in the editor.
+- Not editable in the CMS: `projects` (they embed large GeoJSON map data). Edit those in Git.
+- Image uploads go to `public/images/uploads/`. Existing images elsewhere keep working.
+
+### Signing in
+
+Login is handled by `netlify/functions/cms-auth.mjs` (served at `/api/auth`), a small GitHub OAuth proxy. Editors need a GitHub account with **write access to this repository**; GitHub enforces that, so anyone else can sign in but cannot save.
+
+**One-time setup**
+
+1. Create a GitHub OAuth app (GitHub > Settings > Developer settings > OAuth Apps, or under the Bluffline organization's settings):
+   - Homepage URL: `https://thebluffline.org`
+   - Authorization callback URL: `https://thebluffline.org/api/auth/callback`
+2. In Netlify (Site configuration > Environment variables) add `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from that app. Optional: `CMS_ALLOWED_ORIGINS` (comma-separated) to allow login from a deploy-preview URL.
+3. Redeploy, open `/admin`, and choose "Sign in with GitHub".
+
+If the Bluffline organization restricts OAuth apps, an owner must approve the app under the organization's third-party access settings.
+
+To edit locally without GitHub, run `npm run dev` and use the "Work with Local Repository" option at `/admin` (Chromium-based browsers).
+
 ## Brand Kit
 
 The Press section is three pages sharing `src/layouts/PressLayout.astro` (hero, section links, call to action): `/press` for coverage, `/press/releases` for press releases, and `/press/brand-kit` for the Brand Kit. The section links in `src/components/press/PressNav.astro` are real links, so each section has its own URL, title and history entry. Old hash links (`/press#releases`, `/press#brand-kit`, `/press#media-kit`) redirect to the new pages.
